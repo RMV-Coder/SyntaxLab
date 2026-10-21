@@ -1,7 +1,7 @@
 # SyntaxLab Architecture
 
-Status: **English analyzer (Phases 1–3) and Algorithm Lab (Phase 7) implemented.** Filipino,
-Compare and Learn are designed but not built. Last updated 2026-10-21.
+Status: **English analyzer (Phases 1–3), Practice (Phase 6) and Algorithm Lab (Phase 7)
+implemented.** Filipino and Compare are designed but not built. Last updated 2026-10-21.
 
 ## 1. Principles that shape the architecture
 
@@ -161,6 +161,32 @@ Full reference in [api.md](api.md). Key decisions:
   rule and may derive ε.
 - Full description: [parsing-algorithms.md](parsing-algorithms.md).
 
+## 9b. Practice (Learn)
+
+- `data/exercises/*.yaml`:
+  - POS and dependency exercises are generated from UD English-EWT gold by
+    `scripts/build_learning_exercises.py`, using deterministic selection rules.
+  - Tree exercises name a preset grammar and a sentence.
+  - All are validated at startup: gold trees must be well-formed, and grammars must generate
+    their sentences.
+- `learning/checking.py`:
+  - POS and dependency answers are compared per word with gold. A base relation matching a
+    subtype counts as partial.
+  - Constituency answers are nested by containment (identical spans: earlier dominates) and
+    compared exactly with every Earley parse, with ε removed. The closest parse by labelled-span
+    F1 drives the feedback, and every node is checked against the grammar's rules (nullable
+    symbols may be omitted).
+- The exercise detail endpoint never includes the answer key. The check response does.
+- Frontend (`/learn`):
+  - Native selects for tags, heads and relations.
+  - A live dependency graph reusing the Analyzer renderer.
+  - A span-based tree builder (`tree-builder-model.ts`: crossing and duplicate prevention,
+    unary-chain reordering, undo) with a live preview using the Lab's derivation layout.
+  - Progress kept in `localStorage` only (no accounts, D6).
+- `/learn/[id]` reads its param inside `<Suspense>` and the header's active-link navigation is
+  in its own Suspense boundary, as `cacheComponents` requires. The route is partially
+  prerendered.
+
 ## 10. Security
 
 - Input: NFC normalization; control, surrogate and bidi-override characters are rejected;
@@ -192,3 +218,5 @@ Full reference in [api.md](api.md). Key decisions:
 | D12 | Earley trace recorded server-side, replayed client-side | Step back/forward is exact; the UI cannot show states the parser was never in |
 | D13 | Derivation links per item (packed forest), not Earley's original tree recovery | The original procedure can yield spurious trees; links give exact counts and enumeration |
 | D14 | Cyclic grammars rejected | A ⇒⁺ A gives infinitely many trees; counting/enumeration must terminate |
+| D15 | Exercise answer keys: treebank gold or all grammar parses, never parser output | Parser output is not authoritative; all parses avoid rejecting valid alternatives |
+| D16 | Span-based tree builder (bracketing) instead of free-form node dragging | Works with keyboard, touch and screen readers; nesting is always well-formed, so feedback can focus on linguistics |

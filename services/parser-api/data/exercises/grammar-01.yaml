@@ -1,0 +1,9 @@
+id: grammar-01
+kind: constituency
+title: The student reads a book
+difficulty: 1
+grammar: pp-attachment
+sentence: the student reads a book
+instructions: >-
+  Build the phrase-structure tree. Start with a category for each word, then group them into
+  phrases, and finish with S over the whole sentence.

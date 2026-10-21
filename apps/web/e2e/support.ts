@@ -71,3 +71,33 @@ export async function mockLabApi(page: Page) {
       : json(route, JSON.stringify({ error: { code: "engine_failure", message: "No fixture." } }), 500);
   });
 }
+
+/** The correct tree for grammar-01 ("the student reads a book"), as label:start-end. */
+export const GRAMMAR_01_TREE = [
+  "S:0-5", "NP:0-2", "Det:0-1", "N:1-2", "VP:2-5", "V:2-3", "NP:3-5", "Det:3-4", "N:4-5",
+];
+
+/** Practice endpoints, answered with responses recorded from the real API. */
+export async function mockLearnApi(page: Page, posted: unknown[] = []) {
+  await page.route(`${API}/api/v1/schemes/*`, (route) => {
+    const id = route.request().url().split("/").pop()!;
+    return json(route, fixture(`scheme-${id}`));
+  });
+  await page.route(`${API}/api/v1/learning/exercises`, (route) => json(route, fixture("learn-exercises")));
+  await page.route(`${API}/api/v1/learning/exercises/*`, (route) => {
+    const id = route.request().url().split("/").pop()!;
+    return json(route, fixture(`learn-${id}`));
+  });
+  await page.route(`${API}/api/v1/learning/exercises/*/check`, (route) => {
+    const body = route.request().postDataJSON() as {
+      answer: { kind: string; constituents?: { label: string; start: number; end: number }[] };
+    };
+    posted.push(body);
+    const { answer } = body;
+    if (answer.kind === "pos") return json(route, fixture("learn-check-pos-mixed"));
+    if (answer.kind === "dependency") return json(route, fixture("learn-check-dependency"));
+    const given = (answer.constituents ?? []).map((c) => `${c.label}:${c.start}-${c.end}`).sort();
+    const correct = JSON.stringify(given) === JSON.stringify([...GRAMMAR_01_TREE].sort());
+    return json(route, fixture(correct ? "learn-check-tree-correct" : "learn-check-tree-partial"));
+  });
+}

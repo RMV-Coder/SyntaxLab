@@ -1,0 +1,86 @@
+{
+ "id": "grammar-02",
+ "kind": "constituency",
+ "title": "I saw the man with a telescope",
+ "difficulty": 2,
+ "language": null,
+ "instructions": "This sentence is ambiguous under the grammar. Build either reading: the telescope can be how you saw, or something the man has. Both are accepted.",
+ "tokens": [
+  {
+   "id": 1,
+   "form": "I"
+  },
+  {
+   "id": 2,
+   "form": "saw"
+  },
+  {
+   "id": 3,
+   "form": "the"
+  },
+  {
+   "id": 4,
+   "form": "man"
+  },
+  {
+   "id": 5,
+   "form": "with"
+  },
+  {
+   "id": 6,
+   "form": "a"
+  },
+  {
+   "id": 7,
+   "form": "telescope"
+  }
+ ],
+ "options": [
+  {
+   "value": "S",
+   "name": null
+  },
+  {
+   "value": "NP",
+   "name": null
+  },
+  {
+   "value": "VP",
+   "name": null
+  },
+  {
+   "value": "PP",
+   "name": null
+  },
+  {
+   "value": "Pronoun",
+   "name": null
+  },
+  {
+   "value": "Det",
+   "name": null
+  },
+  {
+   "value": "N",
+   "name": null
+  },
+  {
+   "value": "V",
+   "name": null
+  },
+  {
+   "value": "P",
+   "name": null
+  }
+ ],
+ "grammar": "# An educational fragment of English, not a grammar of the language.\nS       -> NP VP\nNP      -> Pronoun | Det N | NP PP\nVP      -> V NP | VP PP\nPP      -> P NP\nPronoun -> \"I\" | \"she\"\nDet     -> \"the\" | \"a\"\nN       -> \"man\" | \"telescope\" | \"hill\" | \"park\" | \"student\" | \"book\"\nV       -> \"saw\" | \"reads\"\nP       -> \"with\" | \"on\" | \"in\"\n",
+ "grammar_name": "Prepositional-phrase attachment",
+ "answer_key": {
+  "kind": "grammar_parses",
+  "description": "Every parse the Earley parser finds for this sentence under the “Prepositional-phrase attachment” grammar. Any of them is accepted.",
+  "treebank": null,
+  "release": null,
+  "sent_id": null,
+  "license": null
+ }
+}

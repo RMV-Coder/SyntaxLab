@@ -174,10 +174,79 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/learning/exercises": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** All exercises */
+        get: operations["list_exercises_api_v1_learning_exercises_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/learning/exercises/{exercise_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** One exercise, without its answer key */
+        get: operations["get_exercise_api_v1_learning_exercises__exercise_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/learning/exercises/{exercise_id}/check": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Check an answer and get feedback (including the answer key) */
+        post: operations["check_answer_api_v1_learning_exercises__exercise_id__check_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** AnswerKeySource */
+        AnswerKeySource: {
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "gold_annotation" | "grammar_parses";
+            /** Description */
+            description: string;
+            /** Treebank */
+            treebank: string | null;
+            /** Release */
+            release: string | null;
+            /** Sent Id */
+            sent_id: string | null;
+            /** License */
+            license: string | null;
+        };
         /**
          * Capability
          * @description What an engine can produce for a language.
@@ -207,6 +276,18 @@ export interface components {
              */
             step: number;
         };
+        /** CheckRequest */
+        CheckRequest: {
+            /** Answer */
+            answer: components["schemas"]["PosAnswer"] | components["schemas"]["DependencyAnswer"] | components["schemas"]["ConstituencyAnswer"];
+        };
+        /** CheckResponse */
+        CheckResponse: {
+            /** Exercise */
+            exercise: string;
+            /** Feedback */
+            feedback: components["schemas"]["PosFeedback"] | components["schemas"]["DependencyFeedback"] | components["schemas"]["ConstituencyFeedback"];
+        };
         /** ComponentInfo */
         ComponentInfo: {
             capability: components["schemas"]["Capability"];
@@ -229,6 +310,56 @@ export interface components {
             root: string;
             /** Nodes */
             nodes: components["schemas"]["ConstituencyNode"][];
+        };
+        /** ConstituencyAnswer */
+        ConstituencyAnswer: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            kind: "constituency";
+            /**
+             * Constituents
+             * @description In creation order; for identical spans, earlier entries dominate later ones.
+             */
+            constituents: components["schemas"]["ConstituentIn"][];
+        };
+        /** ConstituencyFeedback */
+        ConstituencyFeedback: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            kind: "constituency";
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "matches" | "partial" | "invalid";
+            /**
+             * Parse Count
+             * @description Number of parses the grammar allows for the sentence.
+             */
+            parse_count: number;
+            /** Parses Compared */
+            parses_compared: number;
+            /**
+             * Matched Parse
+             * @description 1-based index of the parse matched exactly.
+             */
+            matched_parse: number | null;
+            /** Closest Parse */
+            closest_parse: number | null;
+            /** Precision */
+            precision: number;
+            /** Recall */
+            recall: number;
+            /** Constituents */
+            constituents: components["schemas"]["ConstituentFeedback"][];
+            /** Problems */
+            problems: components["schemas"]["StructureProblem"][];
+            /** @description The matched or closest parse, with empty constituents removed. */
+            reference: components["schemas"]["DerivationTree"] | null;
         };
         /** ConstituencyNode */
         ConstituencyNode: {
@@ -255,6 +386,35 @@ export interface components {
                 number
             ];
         };
+        /** ConstituentFeedback */
+        ConstituentFeedback: {
+            /** Label */
+            label: string;
+            /** Start */
+            start: number;
+            /** End */
+            end: number;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "correct" | "missing" | "other_reading" | "unlicensed";
+        };
+        /** ConstituentIn */
+        ConstituentIn: {
+            /** Label */
+            label: string;
+            /**
+             * Start
+             * @description First word (0-based).
+             */
+            start: number;
+            /**
+             * End
+             * @description One past the last word.
+             */
+            end: number;
+        };
         /** DependencyAnalysis */
         DependencyAnalysis: {
             /**
@@ -264,6 +424,28 @@ export interface components {
             scheme: string;
             /** Arcs */
             arcs: components["schemas"]["DependencyArc"][];
+        };
+        /** DependencyAnswer */
+        DependencyAnswer: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            kind: "dependency";
+            /** Arcs */
+            arcs: components["schemas"]["DependencyAnswerArc"][];
+        };
+        /** DependencyAnswerArc */
+        DependencyAnswerArc: {
+            /** Dependent */
+            dependent: number;
+            /**
+             * Head
+             * @description 0 = root; null = not answered.
+             */
+            head: number | null;
+            /** Relation */
+            relation: string | null;
         };
         /** DependencyArc */
         DependencyArc: {
@@ -276,6 +458,43 @@ export interface components {
             head: number;
             /** Relation */
             relation: string;
+        };
+        /** DependencyFeedback */
+        DependencyFeedback: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            kind: "dependency";
+            /** Heads Correct */
+            heads_correct: number;
+            /** Relations Correct */
+            relations_correct: number;
+            /** Total */
+            total: number;
+            /** Items */
+            items: components["schemas"]["DependencyItem"][];
+        };
+        /** DependencyItem */
+        DependencyItem: {
+            /** Token */
+            token: number;
+            /** Given Head */
+            given_head: number | null;
+            /** Given Relation */
+            given_relation: string | null;
+            /** Expected Head */
+            expected_head: number;
+            /** Expected Relation */
+            expected_relation: string;
+            /** Head Correct */
+            head_correct: boolean;
+            /**
+             * Relation Status
+             * @description partial = right base relation, but the annotation uses a subtype (or vice versa).
+             * @enum {string}
+             */
+            relation_status: "correct" | "incorrect" | "partial" | "unanswered";
         };
         /** DerivationTree */
         DerivationTree: {
@@ -311,6 +530,73 @@ export interface components {
         /** ErrorResponse */
         ErrorResponse: {
             error: components["schemas"]["ErrorBody"];
+        };
+        /**
+         * ExerciseDetail
+         * @description An exercise *without* its answer key.
+         */
+        ExerciseDetail: {
+            /** Id */
+            id: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "pos" | "dependency" | "constituency";
+            /** Title */
+            title: string;
+            /** Difficulty */
+            difficulty: number;
+            /** Language */
+            language: string | null;
+            /** Instructions */
+            instructions: string;
+            /** Tokens */
+            tokens: components["schemas"]["ExerciseToken"][];
+            /**
+             * Options
+             * @description POS tags (pos), relations (dependency) or categories (constituency).
+             */
+            options: components["schemas"]["LabelOption"][];
+            /**
+             * Grammar
+             * @description Grammar text, for constituency exercises.
+             */
+            grammar: string | null;
+            /** Grammar Name */
+            grammar_name: string | null;
+            answer_key: components["schemas"]["AnswerKeySource"];
+        };
+        /** ExerciseList */
+        ExerciseList: {
+            /** Exercises */
+            exercises: components["schemas"]["ExerciseSummary"][];
+        };
+        /** ExerciseSummary */
+        ExerciseSummary: {
+            /** Id */
+            id: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "pos" | "dependency" | "constituency";
+            /** Title */
+            title: string;
+            /** Difficulty */
+            difficulty: number;
+            /** Language */
+            language: string | null;
+        };
+        /** ExerciseToken */
+        ExerciseToken: {
+            /**
+             * Id
+             * @description 1-based word position.
+             */
+            id: number;
+            /** Form */
+            form: string;
         };
         /** ExpectedOutcome */
         ExpectedOutcome: {
@@ -479,6 +765,16 @@ export interface components {
             set: number;
             /** Index */
             index: number;
+        };
+        /** LabelOption */
+        LabelOption: {
+            /** Value */
+            value: string;
+            /**
+             * Name
+             * @description Plain-language name from the curated glossary, if any.
+             */
+            name: string | null;
         };
         /** LanguageDetail */
         LanguageDetail: {
@@ -654,12 +950,53 @@ export interface components {
             /** Notices */
             notices: components["schemas"]["Notice"][];
         };
+        /** PosAnswer */
+        PosAnswer: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            kind: "pos";
+            /**
+             * Tags
+             * @description One tag per word (null = not answered).
+             */
+            tags: (string | null)[];
+        };
         /**
          * PosFamily
          * @description Coarse grouping of POS tags, used for consistent colouring across schemes.
          * @enum {string}
          */
         PosFamily: "nominal" | "verbal" | "modifier" | "function" | "other";
+        /** PosFeedback */
+        PosFeedback: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            kind: "pos";
+            /** Correct */
+            correct: number;
+            /** Total */
+            total: number;
+            /** Items */
+            items: components["schemas"]["PosItem"][];
+        };
+        /** PosItem */
+        PosItem: {
+            /** Token */
+            token: number;
+            /** Given */
+            given: string | null;
+            /** Expected */
+            expected: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "correct" | "incorrect" | "partial" | "unanswered";
+        };
         /** Provenance */
         Provenance: {
             /** Engine */
@@ -724,6 +1061,28 @@ export interface components {
          * @enum {string}
          */
         StructureKind: "dependency" | "constituency";
+        /** StructureProblem */
+        StructureProblem: {
+            /**
+             * Code
+             * @enum {string}
+             */
+            code: "out_of_range" | "crossing" | "no_root" | "several_roots" | "uncovered_word" | "unknown_category" | "no_rule";
+            /**
+             * Constituent
+             * @description Index in the submitted list, if specific.
+             */
+            constituent: number | null;
+            /** Label */
+            label: string | null;
+            /**
+             * Rule
+             * @description For no_rule: the rule the tree would need.
+             */
+            rule: string | null;
+            /** Words */
+            words: string | null;
+        };
         /** Token */
         Token: {
             /**
@@ -1167,6 +1526,155 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ParseGrammarResponse"];
+                };
+            };
+            /** @description Unsupported language */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Request body too large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Invalid input or unsupported structure */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Engine failure or invalid engine output */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Models unavailable or analyzer overloaded */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Analysis timed out */
+            504: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    list_exercises_api_v1_learning_exercises_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExerciseList"];
+                };
+            };
+        };
+    };
+    get_exercise_api_v1_learning_exercises__exercise_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                exercise_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExerciseDetail"];
+                };
+            };
+            /** @description Unsupported language */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    check_answer_api_v1_learning_exercises__exercise_id__check_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                exercise_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CheckRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CheckResponse"];
                 };
             };
             /** @description Unsupported language */

@@ -41,3 +41,17 @@ export type ChartItem = Schemas["ChartItemOut"];
 export type ItemRef = Schemas["ItemRefOut"];
 export type TraceEvent = Schemas["TraceEventOut"];
 export type DerivationTree = Schemas["DerivationTree"];
+
+// Learn
+export type ExerciseKind = Schemas["ExerciseSummary"]["kind"];
+export type ExerciseSummary = Schemas["ExerciseSummary"];
+export type ExerciseList = Schemas["ExerciseList"];
+export type ExerciseDetail = Schemas["ExerciseDetail"];
+export type LabelOption = Schemas["LabelOption"];
+export type CheckRequest = Schemas["CheckRequest"];
+export type CheckResponse = Schemas["CheckResponse"];
+export type PosFeedback = Schemas["PosFeedback"];
+export type DependencyFeedback = Schemas["DependencyFeedback"];
+export type ConstituencyFeedback = Schemas["ConstituencyFeedback"];
+export type ConstituentFeedback = Schemas["ConstituentFeedback"];
+export type StructureProblem = Schemas["StructureProblem"];

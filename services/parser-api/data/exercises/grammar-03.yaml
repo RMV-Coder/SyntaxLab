@@ -1,0 +1,9 @@
+id: grammar-03
+kind: constituency
+title: Old men and women left
+difficulty: 2
+grammar: coordination
+sentence: old men and women left
+instructions: >-
+  Decide what "old" modifies: only "men", or "men and women"? Either structure the grammar
+  allows is accepted.

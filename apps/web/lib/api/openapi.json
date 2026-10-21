@@ -498,10 +498,266 @@
           }
         }
       }
+    },
+    "/api/v1/learning/exercises": {
+      "get": {
+        "tags": [
+          "learning"
+        ],
+        "summary": "All exercises",
+        "operationId": "list_exercises_api_v1_learning_exercises_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExerciseList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/learning/exercises/{exercise_id}": {
+      "get": {
+        "tags": [
+          "learning"
+        ],
+        "summary": "One exercise, without its answer key",
+        "operationId": "get_exercise_api_v1_learning_exercises__exercise_id__get",
+        "parameters": [
+          {
+            "name": "exercise_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Exercise Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExerciseDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unsupported language",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/learning/exercises/{exercise_id}/check": {
+      "post": {
+        "tags": [
+          "learning"
+        ],
+        "summary": "Check an answer and get feedback (including the answer key)",
+        "operationId": "check_answer_api_v1_learning_exercises__exercise_id__check_post",
+        "parameters": [
+          {
+            "name": "exercise_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Exercise Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unsupported language",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request body too large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input or unsupported structure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Engine failure or invalid engine output",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Models unavailable or analyzer overloaded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Analysis timed out",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "AnswerKeySource": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "gold_annotation",
+              "grammar_parses"
+            ],
+            "title": "Kind"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "treebank": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Treebank"
+          },
+          "release": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Release"
+          },
+          "sent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sent Id"
+          },
+          "license": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "kind",
+          "description",
+          "treebank",
+          "release",
+          "sent_id",
+          "license"
+        ],
+        "title": "AnswerKeySource"
+      },
       "Capability": {
         "type": "string",
         "enum": [
@@ -579,6 +835,75 @@
         ],
         "title": "ChartItemOut"
       },
+      "CheckRequest": {
+        "properties": {
+          "answer": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PosAnswer"
+              },
+              {
+                "$ref": "#/components/schemas/DependencyAnswer"
+              },
+              {
+                "$ref": "#/components/schemas/ConstituencyAnswer"
+              }
+            ],
+            "title": "Answer",
+            "discriminator": {
+              "propertyName": "kind",
+              "mapping": {
+                "constituency": "#/components/schemas/ConstituencyAnswer",
+                "dependency": "#/components/schemas/DependencyAnswer",
+                "pos": "#/components/schemas/PosAnswer"
+              }
+            }
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "answer"
+        ],
+        "title": "CheckRequest"
+      },
+      "CheckResponse": {
+        "properties": {
+          "exercise": {
+            "type": "string",
+            "title": "Exercise"
+          },
+          "feedback": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PosFeedback"
+              },
+              {
+                "$ref": "#/components/schemas/DependencyFeedback"
+              },
+              {
+                "$ref": "#/components/schemas/ConstituencyFeedback"
+              }
+            ],
+            "title": "Feedback",
+            "discriminator": {
+              "propertyName": "kind",
+              "mapping": {
+                "constituency": "#/components/schemas/ConstituencyFeedback",
+                "dependency": "#/components/schemas/DependencyFeedback",
+                "pos": "#/components/schemas/PosFeedback"
+              }
+            }
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "exercise",
+          "feedback"
+        ],
+        "title": "CheckResponse"
+      },
       "ComponentInfo": {
         "properties": {
           "capability": {
@@ -638,6 +963,130 @@
         ],
         "title": "ConstituencyAnalysis"
       },
+      "ConstituencyAnswer": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "const": "constituency",
+            "title": "Kind"
+          },
+          "constituents": {
+            "items": {
+              "$ref": "#/components/schemas/ConstituentIn"
+            },
+            "type": "array",
+            "maxItems": 200,
+            "title": "Constituents",
+            "description": "In creation order; for identical spans, earlier entries dominate later ones."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "kind",
+          "constituents"
+        ],
+        "title": "ConstituencyAnswer"
+      },
+      "ConstituencyFeedback": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "const": "constituency",
+            "title": "Kind"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "matches",
+              "partial",
+              "invalid"
+            ],
+            "title": "Status"
+          },
+          "parse_count": {
+            "type": "integer",
+            "title": "Parse Count",
+            "description": "Number of parses the grammar allows for the sentence."
+          },
+          "parses_compared": {
+            "type": "integer",
+            "title": "Parses Compared"
+          },
+          "matched_parse": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Matched Parse",
+            "description": "1-based index of the parse matched exactly."
+          },
+          "closest_parse": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Closest Parse"
+          },
+          "precision": {
+            "type": "number",
+            "title": "Precision"
+          },
+          "recall": {
+            "type": "number",
+            "title": "Recall"
+          },
+          "constituents": {
+            "items": {
+              "$ref": "#/components/schemas/ConstituentFeedback"
+            },
+            "type": "array",
+            "title": "Constituents"
+          },
+          "problems": {
+            "items": {
+              "$ref": "#/components/schemas/StructureProblem"
+            },
+            "type": "array",
+            "title": "Problems"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DerivationTree"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The matched or closest parse, with empty constituents removed."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "kind",
+          "status",
+          "parse_count",
+          "parses_compared",
+          "matched_parse",
+          "closest_parse",
+          "precision",
+          "recall",
+          "constituents",
+          "problems",
+          "reference"
+        ],
+        "title": "ConstituencyFeedback"
+      },
       "ConstituencyNode": {
         "properties": {
           "id": {
@@ -695,6 +1144,71 @@
         ],
         "title": "ConstituencyNode"
       },
+      "ConstituentFeedback": {
+        "properties": {
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "start": {
+            "type": "integer",
+            "title": "Start"
+          },
+          "end": {
+            "type": "integer",
+            "title": "End"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "correct",
+              "missing",
+              "other_reading",
+              "unlicensed"
+            ],
+            "title": "Status"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "label",
+          "start",
+          "end",
+          "status"
+        ],
+        "title": "ConstituentFeedback"
+      },
+      "ConstituentIn": {
+        "properties": {
+          "label": {
+            "type": "string",
+            "maxLength": 32,
+            "minLength": 1,
+            "title": "Label"
+          },
+          "start": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Start",
+            "description": "First word (0-based)."
+          },
+          "end": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "End",
+            "description": "One past the last word."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "label",
+          "start",
+          "end"
+        ],
+        "title": "ConstituentIn"
+      },
       "DependencyAnalysis": {
         "properties": {
           "scheme": {
@@ -717,6 +1231,70 @@
           "arcs"
         ],
         "title": "DependencyAnalysis"
+      },
+      "DependencyAnswer": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "const": "dependency",
+            "title": "Kind"
+          },
+          "arcs": {
+            "items": {
+              "$ref": "#/components/schemas/DependencyAnswerArc"
+            },
+            "type": "array",
+            "title": "Arcs"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "kind",
+          "arcs"
+        ],
+        "title": "DependencyAnswer"
+      },
+      "DependencyAnswerArc": {
+        "properties": {
+          "dependent": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Dependent"
+          },
+          "head": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Head",
+            "description": "0 = root; null = not answered."
+          },
+          "relation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Relation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "dependent",
+          "head",
+          "relation"
+        ],
+        "title": "DependencyAnswerArc"
       },
       "DependencyArc": {
         "properties": {
@@ -744,6 +1322,109 @@
           "relation"
         ],
         "title": "DependencyArc"
+      },
+      "DependencyFeedback": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "const": "dependency",
+            "title": "Kind"
+          },
+          "heads_correct": {
+            "type": "integer",
+            "title": "Heads Correct"
+          },
+          "relations_correct": {
+            "type": "integer",
+            "title": "Relations Correct"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DependencyItem"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "kind",
+          "heads_correct",
+          "relations_correct",
+          "total",
+          "items"
+        ],
+        "title": "DependencyFeedback"
+      },
+      "DependencyItem": {
+        "properties": {
+          "token": {
+            "type": "integer",
+            "title": "Token"
+          },
+          "given_head": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Given Head"
+          },
+          "given_relation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Given Relation"
+          },
+          "expected_head": {
+            "type": "integer",
+            "title": "Expected Head"
+          },
+          "expected_relation": {
+            "type": "string",
+            "title": "Expected Relation"
+          },
+          "head_correct": {
+            "type": "boolean",
+            "title": "Head Correct"
+          },
+          "relation_status": {
+            "type": "string",
+            "enum": [
+              "correct",
+              "incorrect",
+              "partial",
+              "unanswered"
+            ],
+            "title": "Relation Status",
+            "description": "partial = right base relation, but the annotation uses a subtype (or vice versa)."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "token",
+          "given_head",
+          "given_relation",
+          "expected_head",
+          "expected_relation",
+          "head_correct",
+          "relation_status"
+        ],
+        "title": "DependencyItem"
       },
       "DerivationTree": {
         "properties": {
@@ -854,6 +1535,187 @@
           "error"
         ],
         "title": "ErrorResponse"
+      },
+      "ExerciseDetail": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "pos",
+              "dependency",
+              "constituency"
+            ],
+            "title": "Kind"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "difficulty": {
+            "type": "integer",
+            "title": "Difficulty"
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Language"
+          },
+          "instructions": {
+            "type": "string",
+            "title": "Instructions"
+          },
+          "tokens": {
+            "items": {
+              "$ref": "#/components/schemas/ExerciseToken"
+            },
+            "type": "array",
+            "title": "Tokens"
+          },
+          "options": {
+            "items": {
+              "$ref": "#/components/schemas/LabelOption"
+            },
+            "type": "array",
+            "title": "Options",
+            "description": "POS tags (pos), relations (dependency) or categories (constituency)."
+          },
+          "grammar": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Grammar",
+            "description": "Grammar text, for constituency exercises."
+          },
+          "grammar_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Grammar Name"
+          },
+          "answer_key": {
+            "$ref": "#/components/schemas/AnswerKeySource"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "title",
+          "difficulty",
+          "language",
+          "instructions",
+          "tokens",
+          "options",
+          "grammar",
+          "grammar_name",
+          "answer_key"
+        ],
+        "title": "ExerciseDetail",
+        "description": "An exercise *without* its answer key."
+      },
+      "ExerciseList": {
+        "properties": {
+          "exercises": {
+            "items": {
+              "$ref": "#/components/schemas/ExerciseSummary"
+            },
+            "type": "array",
+            "title": "Exercises"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "exercises"
+        ],
+        "title": "ExerciseList"
+      },
+      "ExerciseSummary": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "pos",
+              "dependency",
+              "constituency"
+            ],
+            "title": "Kind"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "difficulty": {
+            "type": "integer",
+            "title": "Difficulty"
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Language"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "title",
+          "difficulty",
+          "language"
+        ],
+        "title": "ExerciseSummary"
+      },
+      "ExerciseToken": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id",
+            "description": "1-based word position."
+          },
+          "form": {
+            "type": "string",
+            "title": "Form"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "form"
+        ],
+        "title": "ExerciseToken"
       },
       "ExpectedOutcome": {
         "properties": {
@@ -1345,6 +2207,33 @@
         ],
         "title": "ItemRefOut"
       },
+      "LabelOption": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "title": "Value"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name",
+            "description": "Plain-language name from the curated glossary, if any."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "value",
+          "name"
+        ],
+        "title": "LabelOption"
+      },
       "LanguageDetail": {
         "properties": {
           "code": {
@@ -1832,6 +2721,37 @@
         ],
         "title": "ParseResponse"
       },
+      "PosAnswer": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "const": "pos",
+            "title": "Kind"
+          },
+          "tags": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Tags",
+            "description": "One tag per word (null = not answered)."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "kind",
+          "tags"
+        ],
+        "title": "PosAnswer"
+      },
       "PosFamily": {
         "type": "string",
         "enum": [
@@ -1843,6 +2763,81 @@
         ],
         "title": "PosFamily",
         "description": "Coarse grouping of POS tags, used for consistent colouring across schemes."
+      },
+      "PosFeedback": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "const": "pos",
+            "title": "Kind"
+          },
+          "correct": {
+            "type": "integer",
+            "title": "Correct"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PosItem"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "kind",
+          "correct",
+          "total",
+          "items"
+        ],
+        "title": "PosFeedback"
+      },
+      "PosItem": {
+        "properties": {
+          "token": {
+            "type": "integer",
+            "title": "Token"
+          },
+          "given": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Given"
+          },
+          "expected": {
+            "type": "string",
+            "title": "Expected"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "correct",
+              "incorrect",
+              "partial",
+              "unanswered"
+            ],
+            "title": "Status"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "token",
+          "given",
+          "expected",
+          "status"
+        ],
+        "title": "PosItem"
       },
       "Provenance": {
         "properties": {
@@ -2065,6 +3060,79 @@
         ],
         "title": "StructureKind",
         "description": "Structural analyses a client can request. Token-level annotations come with every parse."
+      },
+      "StructureProblem": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "out_of_range",
+              "crossing",
+              "no_root",
+              "several_roots",
+              "uncovered_word",
+              "unknown_category",
+              "no_rule"
+            ],
+            "title": "Code"
+          },
+          "constituent": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Constituent",
+            "description": "Index in the submitted list, if specific."
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label"
+          },
+          "rule": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rule",
+            "description": "For no_rule: the rule the tree would need."
+          },
+          "words": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Words"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "constituent",
+          "label",
+          "rule",
+          "words"
+        ],
+        "title": "StructureProblem"
       },
       "Token": {
         "properties": {

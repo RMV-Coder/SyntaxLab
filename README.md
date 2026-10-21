@@ -9,9 +9,9 @@ Every analysis comes from an identified, evaluated parser. Nothing is generated 
 and nothing is hand-drawn for particular sentences. When a model can't do something, the
 interface says so instead of substituting something else.
 
-> **Status:** English analysis and visualization, and the Algorithm Lab (Earley parser),
-> are implemented and tested. Filipino (Tagalog), comparison and learning exercises are
-> researched or planned. See [Roadmap](docs/roadmap.md) and [Progress](docs/progress.md).
+> **Status:** English analysis and visualization, practice exercises, and the Algorithm Lab
+> (Earley parser) are implemented and tested. Filipino (Tagalog) and comparison are researched
+> or planned. See [Roadmap](docs/roadmap.md) and [Progress](docs/progress.md).
 
 ## Features (implemented)
 
@@ -28,6 +28,13 @@ interface says so instead of substituting something else.
 - **Provenance.** Engine, model files, annotation scheme per layer, and processing time are
   shown for every analysis. No invented confidence scores.
 - **Export.** SVG (with embedded fonts) and PNG of the whole diagram as displayed.
+- **Practice.**
+  - Tag parts of speech and connect word relations in real sentences, checked against the
+    expert annotation of UD English-EWT.
+  - Build phrase-structure trees by bracketing words. Any tree an explicit grammar allows is
+    accepted, so both readings of an ambiguous sentence count as correct.
+  - Feedback separates constituents that are missing, valid only in another reading, or not
+    allowed by the grammar, and names the rule a tree would need.
 - **Algorithm Lab.** An Earley parser implemented from scratch runs on small, explicit
   grammars (presets or your own). You can replay every predict, scan and complete step
   forward and backward, with plain-language explanations, a chart view, every parse tree of

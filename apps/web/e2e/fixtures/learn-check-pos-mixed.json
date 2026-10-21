@@ -1,0 +1,40 @@
+{
+ "exercise": "ud-en-pos-01",
+ "feedback": {
+  "kind": "pos",
+  "correct": 1,
+  "total": 5,
+  "items": [
+   {
+    "token": 1,
+    "given": "NOUN",
+    "expected": "PRON",
+    "status": "incorrect"
+   },
+   {
+    "token": 2,
+    "given": "NOUN",
+    "expected": "VERB",
+    "status": "incorrect"
+   },
+   {
+    "token": 3,
+    "given": "NOUN",
+    "expected": "DET",
+    "status": "incorrect"
+   },
+   {
+    "token": 4,
+    "given": "NOUN",
+    "expected": "NOUN",
+    "status": "correct"
+   },
+   {
+    "token": 5,
+    "given": "NOUN",
+    "expected": "PUNCT",
+    "status": "incorrect"
+   }
+  ]
+ }
+}

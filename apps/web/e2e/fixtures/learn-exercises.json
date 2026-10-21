@@ -1,0 +1,144 @@
+{
+ "exercises": [
+  {
+   "id": "ud-en-pos-01",
+   "kind": "pos",
+   "title": "There is no delivery.",
+   "difficulty": 1,
+   "language": "en"
+  },
+  {
+   "id": "ud-en-pos-02",
+   "kind": "pos",
+   "title": "The Roma deal looks much better.",
+   "difficulty": 2,
+   "language": "en"
+  },
+  {
+   "id": "ud-en-pos-03",
+   "kind": "pos",
+   "title": "Why is the city called Miramar?",
+   "difficulty": 2,
+   "language": "en"
+  },
+  {
+   "id": "ud-en-pos-04",
+   "kind": "pos",
+   "title": "I would hesitate to recommend anyone.",
+   "difficulty": 2,
+   "language": "en"
+  },
+  {
+   "id": "ud-en-pos-05",
+   "kind": "pos",
+   "title": "Eurostar runs from London St Pancras station.",
+   "difficulty": 2,
+   "language": "en"
+  },
+  {
+   "id": "ud-en-pos-06",
+   "kind": "pos",
+   "title": "I ran across this item on the Internet.",
+   "difficulty": 3,
+   "language": "en"
+  },
+  {
+   "id": "ud-en-pos-07",
+   "kind": "pos",
+   "title": "My old bed got tossed in a dumpster.",
+   "difficulty": 3,
+   "language": "en"
+  },
+  {
+   "id": "ud-en-pos-08",
+   "kind": "pos",
+   "title": "If you do would you send me a copy?",
+   "difficulty": 3,
+   "language": "en"
+  },
+  {
+   "id": "ud-en-dependency-01",
+   "kind": "dependency",
+   "title": "We hope you do!",
+   "difficulty": 1,
+   "language": "en"
+  },
+  {
+   "id": "ud-en-dependency-02",
+   "kind": "dependency",
+   "title": "Where do we vote?",
+   "difficulty": 1,
+   "language": "en"
+  },
+  {
+   "id": "ud-en-dependency-03",
+   "kind": "dependency",
+   "title": "Hyatt web site improved.",
+   "difficulty": 1,
+   "language": "en"
+  },
+  {
+   "id": "ud-en-dependency-04",
+   "kind": "dependency",
+   "title": "Power be where power lies.",
+   "difficulty": 1,
+   "language": "en"
+  },
+  {
+   "id": "ud-en-dependency-05",
+   "kind": "dependency",
+   "title": "They are taking delivery in the U.S.",
+   "difficulty": 2,
+   "language": "en"
+  },
+  {
+   "id": "ud-en-dependency-06",
+   "kind": "dependency",
+   "title": "What foods do you eat in Miramar?",
+   "difficulty": 2,
+   "language": "en"
+  },
+  {
+   "id": "ud-en-dependency-07",
+   "kind": "dependency",
+   "title": "I have lots of containers in there.",
+   "difficulty": 2,
+   "language": "en"
+  },
+  {
+   "id": "ud-en-dependency-08",
+   "kind": "dependency",
+   "title": "They have good sushi for a good price.",
+   "difficulty": 3,
+   "language": "en"
+  },
+  {
+   "id": "grammar-01",
+   "kind": "constituency",
+   "title": "The student reads a book",
+   "difficulty": 1,
+   "language": null
+  },
+  {
+   "id": "grammar-02",
+   "kind": "constituency",
+   "title": "I saw the man with a telescope",
+   "difficulty": 2,
+   "language": null
+  },
+  {
+   "id": "grammar-03",
+   "kind": "constituency",
+   "title": "Old men and women left",
+   "difficulty": 2,
+   "language": null
+  },
+  {
+   "id": "grammar-04",
+   "kind": "constituency",
+   "title": "She saw the man on the hill",
+   "difficulty": 3,
+   "language": null
+  }
+ ]
+}

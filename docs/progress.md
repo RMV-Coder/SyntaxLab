@@ -2,11 +2,47 @@
 
 ## Current status
 
-**Phases 1–3 (English) and Phase 7 (Algorithm Lab) are complete and verified.** Filipino is
-deferred by product decision. Next: Phase 6 (Learn), then deployment and Compare. See the
-[implementation plan](implementation-plan.md).
+**Phases 1–3 (English), 6 (Practice) and 7 (Algorithm Lab) are complete and verified.**
+Filipino is deferred by product decision. Next: Phase 8 (deployment and production readiness),
+then Compare once a second language is enabled. See the [implementation plan](implementation-plan.md).
 
 ## Completed
+
+### 2026-10-21: Phase 6 (Practice), branch `phase-6-learn`
+
+- **Exercise bank** (`data/exercises/`):
+  - 8 part-of-speech and 8 dependency exercises generated from UD English-EWT r2.18 dev
+    gold. The script uses deterministic rules (complete clauses, 5–10 words, no typos,
+    abbreviations or special relations) and the files carry CC BY-SA 4.0 attribution.
+  - 4 tree-building exercises on the preset grammars, two of them ambiguous.
+  - All validated at startup.
+- **Checking** (`learning/checking.py`):
+  - POS and dependency answers compared per word with gold; a matching base relation counts
+    as partial.
+  - Trees compared with **every** Earley parse (ε removed). Feedback is relative to the
+    closest parse and separates missing, other-reading and unlicensed constituents. Each node
+    is checked against the grammar's rules, and the exact missing rule is named.
+- **API:** list exercises, exercise detail (never includes the answer key), check.
+- **Frontend** (`/learn`, header "Practice"):
+  - An exercise list with per-browser progress.
+  - Tagging with native selects and definitions in the feedback.
+  - Word relations with a live graph and the annotated graph for comparison.
+  - A span-based tree builder: crossing prevention, unary-chain reordering, undo, live
+    preview, and a correct tree on request.
+- **Verified:**
+  - 237 backend tests, including every parse of every tree exercise being accepted (in
+    shuffled order) and every feedback category.
+  - 68 Vitest and 46 Playwright tests (2 skipped by design); manual browser checks against
+    the live API.
+- **Issues found and fixed:**
+  - Next 16 `cacheComponents` requires request-time data (`params`, `usePathname`) inside
+    Suspense. The header navigation and the exercise page were restructured, and the build
+    now partially prerenders `/learn/[id]`.
+  - The first selection of UD sentences included web-text fragments; the selection rules were
+    tightened.
+  - Rule feedback was withheld whenever any problem existed; now only crossing brackets block
+    it.
+
 
 ### 2026-10-21: Phase 7 (Algorithm Lab), branch `phase-7-algorithm-lab`
 
@@ -90,7 +126,8 @@ See `docs/research/*` and `implementation-plan.md`.
 
 ## Next steps
 
-1. Phase 6: Learn. POS and dependency exercises from UD gold; bracketing checked against all
-   Earley parses.
-2. Phase 5: Compare (meaningful once a second language is enabled).
-3. Phase 8: Docker image, Hugging Face Space, Vercel, host measurements, accessibility audit.
+1. Phase 8: Docker image, Hugging Face Space, Vercel, host measurements, accessibility audit,
+   first CI run on a remote repository.
+2. Phase 4: Filipino (Tagalog) via a spaCy engine plug-in for calamanCy, when a reviewer is
+   available.
+3. Phase 5: Compare (meaningful once a second language is enabled).

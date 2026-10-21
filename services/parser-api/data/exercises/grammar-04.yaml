@@ -1,0 +1,9 @@
+id: grammar-04
+kind: constituency
+title: She saw the man on the hill
+difficulty: 3
+grammar: pp-attachment
+sentence: She saw the man on the hill
+instructions: >-
+  A pronoun on its own is a noun phrase in this grammar (NP -> Pronoun). As with the telescope,
+  "on the hill" can attach in two places; either reading is accepted.

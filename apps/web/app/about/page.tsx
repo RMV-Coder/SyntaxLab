@@ -48,9 +48,17 @@ export default function AboutPage() {
         against an independent, brute-force parser in the test-suite.
       </p>
 
+      <h2 className="mt-10 font-data text-2xl font-bold">Practice</h2>
+      <p className="mt-3">
+        Practice exercises never use a parser&rsquo;s output as the answer key. Tagging and word-relation
+        exercises use sentences annotated by experts (the UD English Web Treebank). Your answer is
+        compared with that annotation, and where another analysis could also be defended, the
+        feedback says what the annotators chose rather than calling you wrong. Tree-building
+        exercises accept every tree a small, explicit grammar allows.
+      </p>
+
       <h2 className="mt-10 font-data text-2xl font-bold">Planned</h2>
       <ul className="mt-3 list-disc space-y-1.5 pl-5">
-        <li>Practice exercises checked against expert-annotated treebank sentences.</li>
         <li>Side-by-side comparison of sentences in two languages.</li>
       </ul>
     </article>

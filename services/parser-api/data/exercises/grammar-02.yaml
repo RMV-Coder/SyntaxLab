@@ -1,0 +1,9 @@
+id: grammar-02
+kind: constituency
+title: I saw the man with a telescope
+difficulty: 2
+grammar: pp-attachment
+sentence: I saw the man with a telescope
+instructions: >-
+  This sentence is ambiguous under the grammar. Build either reading: the telescope can be how
+  you saw, or something the man has. Both are accepted.

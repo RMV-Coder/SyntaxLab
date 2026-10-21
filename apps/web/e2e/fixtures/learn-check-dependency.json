@@ -1,0 +1,56 @@
+{
+ "exercise": "ud-en-dependency-01",
+ "feedback": {
+  "kind": "dependency",
+  "heads_correct": 4,
+  "relations_correct": 4,
+  "total": 5,
+  "items": [
+   {
+    "token": 1,
+    "given_head": 2,
+    "given_relation": "nsubj",
+    "expected_head": 2,
+    "expected_relation": "nsubj",
+    "head_correct": true,
+    "relation_status": "correct"
+   },
+   {
+    "token": 2,
+    "given_head": 0,
+    "given_relation": "root",
+    "expected_head": 0,
+    "expected_relation": "root",
+    "head_correct": true,
+    "relation_status": "correct"
+   },
+   {
+    "token": 3,
+    "given_head": 2,
+    "given_relation": "obj",
+    "expected_head": 4,
+    "expected_relation": "nsubj",
+    "head_correct": false,
+    "relation_status": "incorrect"
+   },
+   {
+    "token": 4,
+    "given_head": 2,
+    "given_relation": "ccomp",
+    "expected_head": 2,
+    "expected_relation": "ccomp",
+    "head_correct": true,
+    "relation_status": "correct"
+   },
+   {
+    "token": 5,
+    "given_head": 2,
+    "given_relation": "punct",
+    "expected_head": 2,
+    "expected_relation": "punct",
+    "head_correct": true,
+    "relation_status": "correct"
+   }
+  ]
+ }
+}

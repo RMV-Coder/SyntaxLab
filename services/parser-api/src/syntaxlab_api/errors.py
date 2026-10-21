@@ -53,6 +53,11 @@ class InvalidGrammar(InvalidInput):
     code = "invalid_grammar"
 
 
+class UnknownExercise(ApiError):
+    status_code = 404
+    code = "unknown_exercise"
+
+
 class UnknownGrammar(ApiError):
     status_code = 404
     code = "unknown_grammar"

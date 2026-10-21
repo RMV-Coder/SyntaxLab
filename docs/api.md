@@ -18,8 +18,41 @@ types are generated from it (`pnpm api:types`), and CI fails if they are stale.
 | GET | `/api/v1/grammar/presets/{id}` | A preset with its example sentences and their verified outcomes |
 | POST | `/api/v1/grammar/validate` | Check a grammar; diagnostics with line numbers |
 | POST | `/api/v1/grammar/parse` | Run the Earley parser: outcome, exact tree count, trees, chart and full trace |
+| GET | `/api/v1/learning/exercises` | Practice exercises (parts of speech, word relations, tree building) |
+| GET | `/api/v1/learning/exercises/{id}` | One exercise **without** its answer key, plus how answers are checked |
+| POST | `/api/v1/learning/exercises/{id}/check` | Check an answer; feedback includes the answer key |
 
-Endpoints for comparison and learning will be added with those features, and only then.
+Endpoints for comparison will be added with that feature, and only then.
+
+## POST /api/v1/learning/exercises/{id}/check
+
+The answer's `kind` must match the exercise:
+
+```jsonc
+{ "answer": { "kind": "pos", "tags": ["DET", "NOUN", null] } }               // null = unanswered
+{ "answer": { "kind": "dependency", "arcs": [{ "dependent": 1, "head": 2, "relation": "nsubj" }] } }
+{ "answer": { "kind": "constituency",
+              "constituents": [{ "label": "S", "start": 0, "end": 5 }] } }  // word spans, end exclusive
+```
+
+Answer keys:
+
+- **pos / dependency**: the gold annotation from UD English-EWT, which the exercise detail
+  names. Per-word status is `correct`, `incorrect`, `partial` or `unanswered`. `partial`
+  means the right base relation where the annotation uses a subtype, e.g. `obl` vs
+  `obl:unmarked`.
+- **constituency**: **every** parse the Earley parser finds under the exercise's grammar, with
+  ε-constituents removed.
+  - `status` is `matches` (equals some parse; `matched_parse` says which), `partial`, or
+    `invalid` (crossing brackets, no root, uncovered words).
+  - Each constituent is `correct`, `missing`, `other_reading` (valid in another parse, but not
+    together with the rest of the tree) or `unlicensed` (in no parse).
+  - `problems` lists rule violations, e.g. `no_rule` with the rule the tree would need, such as
+    `VP → V Det N`.
+  - `reference` is the matched or closest parse.
+
+Errors: **404 `unknown_exercise`**, and **422 `invalid_input`** (wrong kind, or wrong number of
+entries).
 
 ## POST /api/v1/grammar/parse
 
@@ -111,6 +144,7 @@ All errors share one shape:
 | 404 | `unsupported_language` | Unknown language code/alias (`details.supported` lists codes) |
 | 404 | `unknown_scheme` | No glossary for that scheme |
 | 404 | `unknown_grammar` | No preset grammar with that id |
+| 404 | `unknown_exercise` | No exercise with that id |
 | 422 | `invalid_grammar` | The grammar has errors (`details.diagnostics`) |
 | 413 | `payload_too_large` | Body over 16 KB |
 | 422 | `invalid_request` | Malformed JSON or fields (submitted values are never echoed) |

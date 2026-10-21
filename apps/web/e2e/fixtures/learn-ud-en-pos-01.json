@@ -1,0 +1,110 @@
+{
+ "id": "ud-en-pos-01",
+ "kind": "pos",
+ "title": "There is no delivery.",
+ "difficulty": 1,
+ "language": "en",
+ "instructions": "Choose the part of speech of every word, using the Universal Dependencies tag set.",
+ "tokens": [
+  {
+   "id": 1,
+   "form": "There"
+  },
+  {
+   "id": 2,
+   "form": "is"
+  },
+  {
+   "id": 3,
+   "form": "no"
+  },
+  {
+   "id": 4,
+   "form": "delivery"
+  },
+  {
+   "id": 5,
+   "form": "."
+  }
+ ],
+ "options": [
+  {
+   "value": "ADJ",
+   "name": "adjective"
+  },
+  {
+   "value": "ADP",
+   "name": "adposition"
+  },
+  {
+   "value": "ADV",
+   "name": "adverb"
+  },
+  {
+   "value": "AUX",
+   "name": "auxiliary"
+  },
+  {
+   "value": "CCONJ",
+   "name": "coordinating conjunction"
+  },
+  {
+   "value": "DET",
+   "name": "determiner"
+  },
+  {
+   "value": "INTJ",
+   "name": "interjection"
+  },
+  {
+   "value": "NOUN",
+   "name": "noun"
+  },
+  {
+   "value": "NUM",
+   "name": "numeral"
+  },
+  {
+   "value": "PART",
+   "name": "particle"
+  },
+  {
+   "value": "PRON",
+   "name": "pronoun"
+  },
+  {
+   "value": "PROPN",
+   "name": "proper noun"
+  },
+  {
+   "value": "PUNCT",
+   "name": "punctuation"
+  },
+  {
+   "value": "SCONJ",
+   "name": "subordinating conjunction"
+  },
+  {
+   "value": "SYM",
+   "name": "symbol"
+  },
+  {
+   "value": "VERB",
+   "name": "verb"
+  },
+  {
+   "value": "X",
+   "name": "other"
+  }
+ ],
+ "grammar": null,
+ "grammar_name": null,
+ "answer_key": {
+  "kind": "gold_annotation",
+  "description": "The expert annotation of this sentence in the treebank. Answers are compared with that one annotation; another analysis may sometimes also be defensible.",
+  "treebank": "UD_English-EWT",
+  "release": "r2.18",
+  "sent_id": "reviews-014629-0001",
+  "license": "CC BY-SA 4.0"
+ }
+}

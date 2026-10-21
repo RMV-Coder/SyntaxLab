@@ -1,0 +1,142 @@
+{
+ "id": "ud-en-dependency-01",
+ "kind": "dependency",
+ "title": "We hope you do!",
+ "difficulty": 1,
+ "language": "en",
+ "instructions": "For every word, choose the word it depends on (its head) and the relation. Exactly one word is the root of the sentence.",
+ "tokens": [
+  {
+   "id": 1,
+   "form": "We"
+  },
+  {
+   "id": 2,
+   "form": "hope"
+  },
+  {
+   "id": 3,
+   "form": "you"
+  },
+  {
+   "id": 4,
+   "form": "do"
+  },
+  {
+   "id": 5,
+   "form": "!"
+  }
+ ],
+ "options": [
+  {
+   "value": "acl",
+   "name": "adnominal clause"
+  },
+  {
+   "value": "acl:relcl",
+   "name": "relative clause modifier"
+  },
+  {
+   "value": "advcl",
+   "name": "adverbial clause modifier"
+  },
+  {
+   "value": "advmod",
+   "name": "adverbial modifier"
+  },
+  {
+   "value": "amod",
+   "name": "adjectival modifier"
+  },
+  {
+   "value": "aux",
+   "name": "auxiliary"
+  },
+  {
+   "value": "aux:pass",
+   "name": "passive auxiliary"
+  },
+  {
+   "value": "case",
+   "name": "case marking"
+  },
+  {
+   "value": "cc",
+   "name": "coordinating conjunction"
+  },
+  {
+   "value": "ccomp",
+   "name": "clausal complement"
+  },
+  {
+   "value": "compound",
+   "name": "compound"
+  },
+  {
+   "value": "conj",
+   "name": "conjunct"
+  },
+  {
+   "value": "cop",
+   "name": "copula"
+  },
+  {
+   "value": "det",
+   "name": "determiner"
+  },
+  {
+   "value": "iobj",
+   "name": "indirect object"
+  },
+  {
+   "value": "mark",
+   "name": "marker"
+  },
+  {
+   "value": "nmod",
+   "name": "nominal modifier"
+  },
+  {
+   "value": "nmod:poss",
+   "name": "possessive nominal modifier"
+  },
+  {
+   "value": "nsubj",
+   "name": "nominal subject"
+  },
+  {
+   "value": "nsubj:pass",
+   "name": "passive nominal subject"
+  },
+  {
+   "value": "nummod",
+   "name": "numeric modifier"
+  },
+  {
+   "value": "obj",
+   "name": "object"
+  },
+  {
+   "value": "obl",
+   "name": "oblique nominal"
+  },
+  {
+   "value": "punct",
+   "name": "punctuation"
+  },
+  {
+   "value": "xcomp",
+   "name": "open clausal complement"
+  }
+ ],
+ "grammar": null,
+ "grammar_name": null,
+ "answer_key": {
+  "kind": "gold_annotation",
+  "description": "The expert annotation of this sentence in the treebank. Answers are compared with that one annotation; another analysis may sometimes also be defensible.",
+  "treebank": "UD_English-EWT",
+  "release": "r2.18",
+  "sent_id": "email-enronsent01_01-0021",
+  "license": "CC BY-SA 4.0"
+ }
+}

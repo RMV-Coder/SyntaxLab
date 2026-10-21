@@ -1,4 +1,8 @@
 import type {
+  CheckRequest,
+  CheckResponse,
+  ExerciseDetail,
+  ExerciseList,
   GrammarPresetDetail,
   GrammarPresetList,
   ParseGrammarRequest,
@@ -94,6 +98,17 @@ export const api = {
     }),
   parseWithGrammar: (request: ParseGrammarRequest, signal?: AbortSignal) =>
     apiRequest<ParseGrammarResponse>("/api/v1/grammar/parse", {
+      method: "POST",
+      body: JSON.stringify(request),
+      signal,
+    }),
+
+  exercises: (signal?: AbortSignal) =>
+    apiRequest<ExerciseList>("/api/v1/learning/exercises", { signal }),
+  exercise: (id: string, signal?: AbortSignal) =>
+    apiRequest<ExerciseDetail>(`/api/v1/learning/exercises/${encodeURIComponent(id)}`, { signal }),
+  checkAnswer: (id: string, request: CheckRequest, signal?: AbortSignal) =>
+    apiRequest<CheckResponse>(`/api/v1/learning/exercises/${encodeURIComponent(id)}/check`, {
       method: "POST",
       body: JSON.stringify(request),
       signal,

@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     models_dir: Path = SERVICE_ROOT / ".models"
     glossary_dir: Path = SERVICE_ROOT / "data" / "glossary"
     grammar_dir: Path = SERVICE_ROOT / "data" / "grammars"
+    exercises_dir: Path = SERVICE_ROOT / "data" / "exercises"
     enabled_languages: list[str] | None = Field(
         default=None, description="Restrict to these language codes (default: all enabled)."
     )

@@ -1,0 +1,78 @@
+{
+ "id": "grammar-01",
+ "kind": "constituency",
+ "title": "The student reads a book",
+ "difficulty": 1,
+ "language": null,
+ "instructions": "Build the phrase-structure tree. Start with a category for each word, then group them into phrases, and finish with S over the whole sentence.",
+ "tokens": [
+  {
+   "id": 1,
+   "form": "the"
+  },
+  {
+   "id": 2,
+   "form": "student"
+  },
+  {
+   "id": 3,
+   "form": "reads"
+  },
+  {
+   "id": 4,
+   "form": "a"
+  },
+  {
+   "id": 5,
+   "form": "book"
+  }
+ ],
+ "options": [
+  {
+   "value": "S",
+   "name": null
+  },
+  {
+   "value": "NP",
+   "name": null
+  },
+  {
+   "value": "VP",
+   "name": null
+  },
+  {
+   "value": "PP",
+   "name": null
+  },
+  {
+   "value": "Pronoun",
+   "name": null
+  },
+  {
+   "value": "Det",
+   "name": null
+  },
+  {
+   "value": "N",
+   "name": null
+  },
+  {
+   "value": "V",
+   "name": null
+  },
+  {
+   "value": "P",
+   "name": null
+  }
+ ],
+ "grammar": "# An educational fragment of English, not a grammar of the language.\nS       -> NP VP\nNP      -> Pronoun | Det N | NP PP\nVP      -> V NP | VP PP\nPP      -> P NP\nPronoun -> \"I\" | \"she\"\nDet     -> \"the\" | \"a\"\nN       -> \"man\" | \"telescope\" | \"hill\" | \"park\" | \"student\" | \"book\"\nV       -> \"saw\" | \"reads\"\nP       -> \"with\" | \"on\" | \"in\"\n",
+ "grammar_name": "Prepositional-phrase attachment",
+ "answer_key": {
+  "kind": "grammar_parses",
+  "description": "Every parse the Earley parser finds for this sentence under the “Prepositional-phrase attachment” grammar. Any of them is accepted.",
+  "treebank": null,
+  "release": null,
+  "sent_id": null,
+  "license": null
+ }
+}

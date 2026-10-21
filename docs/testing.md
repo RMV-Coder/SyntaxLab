@@ -6,11 +6,11 @@ Results below are from the last local run (2026-10-21, Windows 11, CPU only).
 
 | Layer | Tool | Location | Needs models | Count |
 |---|---|---|---|---|
-| Backend unit (validators, normalization, config, glossaries, input, rate limiting, grammars, Earley) | pytest | `services/parser-api/tests/unit` | no | 163 |
-| Backend HTTP (every error code, back-pressure, caching, readiness, CORS, extensibility, Algorithm Lab) | pytest + TestClient | `services/parser-api/tests/api` | no | 46 |
+| Backend unit (validators, normalization, config, glossaries, input, rate limiting, grammars, Earley, exercises and answer checking) | pytest | `services/parser-api/tests/unit` | no | 185 |
+| Backend HTTP (every error code, back-pressure, caching, readiness, CORS, extensibility, Algorithm Lab, Practice) | pytest + TestClient | `services/parser-api/tests/api` | no | 52 |
 | Linguistic regression | pytest `-m models` | `services/parser-api/tests/integration` | yes | 5 |
-| Frontend unit (layouts, glossary lookup, selection, export, API client, Lab replay and explanations) | Vitest + jsdom | `apps/web/**/*.test.ts` | no | 55 |
-| End-to-end (desktop and mobile) | Playwright | `apps/web/e2e` | no¹ | 18 × 2 viewports |
+| Frontend unit (layouts, glossary lookup, selection, export, API client, Lab replay and explanations, tree builder, feedback wording, progress) | Vitest + jsdom | `apps/web/**/*.test.ts` | no | 68 |
+| End-to-end (desktop and mobile) | Playwright | `apps/web/e2e` | no¹ | 24 × 2 viewports |
 
 ¹ E2E runs the real Next.js app. API calls are answered with **responses recorded from the
 real parser** (`apps/web/e2e/fixtures`), so the suite is deterministic and needs no models. The
@@ -35,6 +35,16 @@ integrity of the trace, and the expected outcome declared for every preset examp
 [parsing-algorithms.md](parsing-algorithms.md#how-correctness-is-checked).
 
 E2E also checks that neither page scrolls sideways on a phone.
+
+## Practice answer checking
+
+`tests/unit/test_learning.py` builds an answer from **every** Earley parse of every tree
+exercise, shuffles it, and requires each to be accepted, so a valid alternative reading can
+never be rejected. It then exercises each feedback category with a minimal case: missing,
+other reading, unlicensed, crossing, no root, uncovered word, unknown category, out of range,
+a missing rule, and a unary chain in the wrong order. Empty rules are covered too: students may
+leave out ε constituents. The E2E tree test's mock only returns "correct" if the UI posts
+exactly the right labelled spans.
 
 ## Linguistic regression
 

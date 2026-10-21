@@ -1,0 +1,205 @@
+{
+ "exercise": "grammar-01",
+ "feedback": {
+  "kind": "constituency",
+  "status": "matches",
+  "parse_count": 1,
+  "parses_compared": 1,
+  "matched_parse": 1,
+  "closest_parse": 1,
+  "precision": 1.0,
+  "recall": 1.0,
+  "constituents": [
+   {
+    "label": "S",
+    "start": 0,
+    "end": 5,
+    "status": "correct"
+   },
+   {
+    "label": "NP",
+    "start": 0,
+    "end": 2,
+    "status": "correct"
+   },
+   {
+    "label": "Det",
+    "start": 0,
+    "end": 1,
+    "status": "correct"
+   },
+   {
+    "label": "N",
+    "start": 1,
+    "end": 2,
+    "status": "correct"
+   },
+   {
+    "label": "VP",
+    "start": 2,
+    "end": 5,
+    "status": "correct"
+   },
+   {
+    "label": "V",
+    "start": 2,
+    "end": 3,
+    "status": "correct"
+   },
+   {
+    "label": "NP",
+    "start": 3,
+    "end": 5,
+    "status": "correct"
+   },
+   {
+    "label": "Det",
+    "start": 3,
+    "end": 4,
+    "status": "correct"
+   },
+   {
+    "label": "N",
+    "start": 4,
+    "end": 5,
+    "status": "correct"
+   }
+  ],
+  "problems": [],
+  "reference": {
+   "symbol": "S",
+   "kind": "nonterminal",
+   "start": 0,
+   "end": 5,
+   "rule": 1,
+   "token": null,
+   "children": [
+    {
+     "symbol": "NP",
+     "kind": "nonterminal",
+     "start": 0,
+     "end": 2,
+     "rule": 3,
+     "token": null,
+     "children": [
+      {
+       "symbol": "Det",
+       "kind": "nonterminal",
+       "start": 0,
+       "end": 1,
+       "rule": 10,
+       "token": null,
+       "children": [
+        {
+         "symbol": "the",
+         "kind": "terminal",
+         "start": 0,
+         "end": 1,
+         "rule": null,
+         "token": 0,
+         "children": []
+        }
+       ]
+      },
+      {
+       "symbol": "N",
+       "kind": "nonterminal",
+       "start": 1,
+       "end": 2,
+       "rule": 16,
+       "token": null,
+       "children": [
+        {
+         "symbol": "student",
+         "kind": "terminal",
+         "start": 1,
+         "end": 2,
+         "rule": null,
+         "token": 1,
+         "children": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "symbol": "VP",
+     "kind": "nonterminal",
+     "start": 2,
+     "end": 5,
+     "rule": 5,
+     "token": null,
+     "children": [
+      {
+       "symbol": "V",
+       "kind": "nonterminal",
+       "start": 2,
+       "end": 3,
+       "rule": 19,
+       "token": null,
+       "children": [
+        {
+         "symbol": "reads",
+         "kind": "terminal",
+         "start": 2,
+         "end": 3,
+         "rule": null,
+         "token": 2,
+         "children": []
+        }
+       ]
+      },
+      {
+       "symbol": "NP",
+       "kind": "nonterminal",
+       "start": 3,
+       "end": 5,
+       "rule": 3,
+       "token": null,
+       "children": [
+        {
+         "symbol": "Det",
+         "kind": "nonterminal",
+         "start": 3,
+         "end": 4,
+         "rule": 11,
+         "token": null,
+         "children": [
+          {
+           "symbol": "a",
+           "kind": "terminal",
+           "start": 3,
+           "end": 4,
+           "rule": null,
+           "token": 3,
+           "children": []
+          }
+         ]
+        },
+        {
+         "symbol": "N",
+         "kind": "nonterminal",
+         "start": 4,
+         "end": 5,
+         "rule": 17,
+         "token": null,
+         "children": [
+          {
+           "symbol": "book",
+           "kind": "terminal",
+           "start": 4,
+           "end": 5,
+           "rule": null,
+           "token": 4,
+           "children": []
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ }
+}
