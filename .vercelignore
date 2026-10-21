@@ -9,3 +9,6 @@ docs/
 **/.next
 **/test-results
 **/playwright-report
+**/.env
+**/.env.*
+.vercel/
