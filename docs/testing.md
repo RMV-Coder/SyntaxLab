@@ -7,10 +7,10 @@ Results below are from the last local run (2026-10-21, Windows 11, CPU only).
 | Layer | Tool | Location | Needs models | Count |
 |---|---|---|---|---|
 | Backend unit (validators, normalization, config, glossaries, input, rate limiting, grammars, Earley, exercises and answer checking) | pytest | `services/parser-api/tests/unit` | no | 185 |
-| Backend HTTP (every error code, back-pressure, caching, readiness, CORS, extensibility, Algorithm Lab, Practice) | pytest + TestClient | `services/parser-api/tests/api` | no | 52 |
+| Backend HTTP (every error code, back-pressure, caching, readiness, CORS, security and cache headers, extensibility, Algorithm Lab, Practice) | pytest + TestClient | `services/parser-api/tests/api` | no | 53 |
 | Linguistic regression | pytest `-m models` | `services/parser-api/tests/integration` | yes | 5 |
-| Frontend unit (layouts, glossary lookup, selection, export, API client, Lab replay and explanations, tree builder, feedback wording, progress) | Vitest + jsdom | `apps/web/**/*.test.ts` | no | 68 |
-| End-to-end (desktop and mobile) | Playwright | `apps/web/e2e` | no¹ | 24 × 2 viewports |
+| Frontend unit (layouts, glossary lookup, selection, export, API client, Lab replay and explanations, tree builder, feedback wording, progress) | Vitest + jsdom | `apps/web/**/*.test.ts` | no | 69 |
+| End-to-end (desktop and mobile), including the accessibility audit and security headers | Playwright | `apps/web/e2e` | no¹ | 30 × 2 viewports |
 
 ¹ E2E runs the real Next.js app. API calls are answered with **responses recorded from the
 real parser** (`apps/web/e2e/fixtures`), so the suite is deterministic and needs no models. The
@@ -45,6 +45,35 @@ other reading, unlicensed, crossing, no root, uncovered word, unknown category, 
 a missing rule, and a unary chain in the wrong order. Empty rules are covered too: students may
 leave out ε constituents. The E2E tree test's mock only returns "correct" if the UI posts
 exactly the right labelled spans.
+
+## Accessibility
+
+`e2e/a11y.spec.ts` runs axe-core (`@axe-core/playwright`) against WCAG 2.0, 2.1 and 2.2 levels A
+and AA. It audits every page in the states that matter, on desktop and phone sizes:
+
+- the Analyzer when empty, with a node selected, and in the dependency view;
+- the Lab with a grammar loaded, in the middle of a replay, and at the outcome;
+- the Practice list and one exercise of each kind;
+- About.
+
+Any violation fails the test, and the failure lists each rule and element. The audit found
+these issues, all now fixed:
+
+- tab semantics without panels, replaced by a toggle group with `aria-pressed`;
+- low contrast on inactive views and on text over the highlighter;
+- dependency tokens whose accessible name did not include their visible text;
+- scrollable side panels that the keyboard could not reach.
+
+Automated checks cover part of WCAG. Keyboard paths (tree and graph navigation, Lab
+shortcuts) have their own E2E tests. A screen-reader pass by a person has not been done yet.
+
+## Security headers
+
+`e2e/security.spec.ts` checks the web app's response headers (CSP, `nosniff`,
+`Referrer-Policy`). It also records `securitypolicyviolation` events while analyzing, exporting
+a PNG and opening the Lab, and requires there to be none. A probe confirmed that the recorder
+catches real violations (an external image and an external `fetch`). The API's headers and its
+cache rules (errors are never cacheable) are tested in `tests/api/test_api.py`.
 
 ## Linguistic regression
 

@@ -13,13 +13,13 @@ import {
 import { useId, useMemo, useRef, useState, type ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import type { SentenceAnalysis, StructureKind } from "@/lib/api/types";
 import { exportFileName, exportPngFile, exportSvgFile } from "@/lib/export/svg-export";
 import { layoutConstituency, toBracketNotation } from "@/lib/syntax/constituency-layout";
 import { layoutDependency } from "@/lib/syntax/dependency-layout";
 import { theme } from "@/lib/theme";
+import { cn } from "@/lib/utils";
 
 import { ConstituencyDiagram } from "./constituency-diagram";
 import { ARROW_DEFS, DependencyDiagram } from "./dependency-diagram";
@@ -148,15 +148,23 @@ export function DiagramPanel({
     <div className="flex h-full min-h-0 flex-col">
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-rule px-3 py-2">
         {views.length > 1 ? (
-          <Tabs value={view} onValueChange={(v) => onViewChange(v as StructureKind)}>
-            <TabsList>
-              {views.map((v) => (
-                <TabsTrigger key={v} value={v}>
-                  {VIEW_NAMES[v] ?? v}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
+          // A view switcher, not tabs: both views render into the same canvas below.
+          <div role="group" aria-label="Diagram view" className="inline-flex rounded-md bg-muted p-0.5">
+            {views.map((v) => (
+              <button
+                key={v}
+                type="button"
+                aria-pressed={view === v}
+                onClick={() => onViewChange(v)}
+                className={cn(
+                  "rounded px-3 py-1 text-sm font-medium",
+                  view === v ? "bg-sheet text-ink shadow-sm" : "text-ink-soft hover:text-ink",
+                )}
+              >
+                {VIEW_NAMES[v] ?? v}
+              </button>
+            ))}
+          </div>
         ) : (
           <h2 className="px-1 text-sm font-semibold">{VIEW_NAMES[view] ?? view}</h2>
         )}

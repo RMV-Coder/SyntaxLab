@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Gentium_Book_Plus, IBM_Plex_Sans } from "next/font/google";
 
 import { SiteHeader } from "@/components/site-header";
-import { TooltipProvider } from "@/components/ui/tooltip";
 
 import "./globals.css";
 
@@ -40,10 +39,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <TooltipProvider delayDuration={300}>
-          <SiteHeader />
-          <main id="main">{children}</main>
-        </TooltipProvider>
+        <SiteHeader />
+        <main id="main">{children}</main>
       </body>
     </html>
   );

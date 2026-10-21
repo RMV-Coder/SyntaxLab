@@ -14,10 +14,14 @@ limitations recorded, and no unsupported claims.
   grammar validation, four preset grammars, and correctness checked against an independent
   oracle.
 
+- **Production readiness:** Docker image with baked-in models, deployment guide (Hugging
+  Face Space, Vercel, alternatives), security headers, WCAG 2.2 AA audit in E2E, error
+  boundaries.
+
 ## Next
 
-1. **Deployment.** API Docker image on Hugging Face Spaces, web app on Vercel, latency and
-   memory measured on the host.
+1. **Go live.** Create the repository, Space and Vercel project ([deployment.md](deployment.md)).
+   Run the image job in CI, and measure cold start, latency and memory on the host.
 
 ## Later
 

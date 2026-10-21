@@ -79,7 +79,12 @@ export function ChartView({ response, step, event }: ChartViewProps) {
                       )}
                     >
                       {dottedRule(view.rule, view.item.dot)}
-                      <span className="ml-1.5 align-middle font-sans text-[0.6875rem] font-normal text-graphite no-underline">
+                      <span
+                        className={cn(
+                          "ml-1.5 align-middle font-sans text-[0.6875rem] font-normal no-underline",
+                          current ? "text-ink" : "text-graphite",
+                        )}
+                      >
                         from {view.item.origin}
                       </span>
                     </li>

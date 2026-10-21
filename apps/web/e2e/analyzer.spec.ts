@@ -90,9 +90,9 @@ test("keyboard navigation follows the branches of the tree", async ({ page, brow
 test("shows the dependency graph and explains a relation", async ({ page }) => {
   await page.goto("/");
   await analyze(page, "The child is eating rice.");
-  await page.getByRole("tab", { name: "Word relations" }).click();
+  await page.getByRole("button", { name: "Word relations", exact: true }).click();
   const canvas = page.getByTestId("diagram-canvas");
-  await expect(canvas.getByRole("button", { name: "child, NOUN, nsubj" })).toBeVisible();
+  await expect(canvas.getByRole("button", { name: "child NOUN" })).toBeVisible();
   await canvas.getByText("nsubj", { exact: true }).click();
   await openPanel(page, "Details");
   await expect(page.getByText(/A nominal that is the syntactic subject/)).toBeVisible();

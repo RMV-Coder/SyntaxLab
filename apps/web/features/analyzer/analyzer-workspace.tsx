@@ -14,7 +14,7 @@ import { highlightFor, type Selection } from "./selection";
 import { SentenceForm } from "./sentence-form";
 
 type Panel = "input" | "diagram" | "details";
-const RETRYABLE = new Set(["network_error", "overloaded", "analysis_timeout", "model_unavailable", "rate_limited"]);
+const RETRYABLE = new Set(["network_error", "unexpected_response", "overloaded", "analysis_timeout", "model_unavailable", "rate_limited"]);
 
 function ErrorMessage({ error, onRetry }: { error: ApiError; onRetry?: () => void }) {
   return (
@@ -259,6 +259,8 @@ export function AnalyzerWorkspace() {
 
         <aside
           aria-label="Details"
+          // Focusable so keyboard users can scroll it even when it holds only text.
+          tabIndex={0}
           className={cn(
             "min-h-0 overflow-y-auto border-rule bg-sheet p-5 lg:block lg:border-l",
             panel !== "details" && "hidden",

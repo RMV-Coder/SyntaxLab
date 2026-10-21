@@ -90,19 +90,18 @@ class RateLimiter:
 
     _MAX_CLIENTS = 10_000
 
-    def __init__(self, per_minute: int, burst: int, *, trust_proxy_headers: bool) -> None:
+    def __init__(self, per_minute: int, burst: int) -> None:
         self.rate = per_minute / 60.0
         self.burst = float(burst)
         self.enabled = per_minute > 0
-        self.trust_proxy_headers = trust_proxy_headers
         self._buckets: dict[str, _Bucket] = {}
         self._lock = threading.Lock()
 
-    def client_key(self, request: Request) -> str:
-        if self.trust_proxy_headers:
-            forwarded = request.headers.get("x-forwarded-for")
-            if forwarded:
-                return forwarded.split(",")[0].strip()
+    @staticmethod
+    def client_key(request: Request) -> str:
+        # Behind a proxy, uvicorn (--proxy-headers, FORWARDED_ALLOW_IPS) has already replaced the
+        # peer address with the client's, trusting only the configured proxies. Reading
+        # X-Forwarded-For here would let clients pick their own key.
         return request.client.host if request.client else "unknown"
 
     def check(self, request: Request) -> None:

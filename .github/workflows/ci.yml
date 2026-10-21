@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -85,7 +86,7 @@ jobs:
   models:
     name: Linguistic regression (real models)
     # Downloads ~430 MB of models; runs on main and on demand, not on every PR.
-    if: github.event_name == 'push'
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -103,3 +104,38 @@ jobs:
           key: models-${{ hashFiles('services/parser-api/config/languages.yaml', 'services/parser-api/uv.lock') }}
       - run: uv run syntaxlab-api download-models
       - run: uv run pytest -m models -s
+
+  image:
+    name: API image builds and serves
+    # The production image bakes in the models: build it, start it, and parse one sentence.
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: services/parser-api
+          tags: syntaxlab-api:ci
+          load: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Start the container (2 CPUs, 4 GB, as on the host)
+        run: docker run -d --name api -p 7860:7860 --cpus 2 --memory 4g syntaxlab-api:ci
+      - name: Wait for the models to load
+        run: |
+          for i in $(seq 1 60); do
+            if curl -fsS localhost:7860/ready; then echo; exit 0; fi
+            sleep 5
+          done
+          docker logs api
+          exit 1
+      - name: Parse a sentence
+        run: |
+          curl -fsS -X POST localhost:7860/api/v1/parse             -H 'Content-Type: application/json'             -d '{"language": "en", "text": "The child is eating rice."}'             | python3 -c 'import json, sys; s = json.load(sys.stdin)["sentences"][0]; print([t["form"] for t in s["tokens"]]); assert s["dependency"] and s["constituency"]'
+      - name: Image size and memory
+        if: always()
+        run: |
+          docker image ls syntaxlab-api:ci
+          docker stats --no-stream api || true
+          docker logs api | tail -20

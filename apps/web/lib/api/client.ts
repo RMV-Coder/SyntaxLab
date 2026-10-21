@@ -68,6 +68,15 @@ export async function apiRequest<T>(
       Number.isFinite(retry) && retry > 0 ? retry : null,
     );
   }
+  if (body === null) {
+    // A 2xx that is not JSON is not from the API: typically a hosting platform's page while the
+    // service starts up.
+    throw new ApiError(
+      "The analysis service sent an unexpected response. It may still be starting; try again in a minute.",
+      "unexpected_response",
+      response.status,
+    );
+  }
   return body as T;
 }
 

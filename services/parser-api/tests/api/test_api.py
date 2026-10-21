@@ -272,3 +272,17 @@ class TestSchemes:
     def test_undeclared_scheme_never_read_from_disk(self, make_client: ClientFactory) -> None:
         response = make_client().get("/api/v1/schemes/..%2F..%2Fconfig%2Flanguages")
         assert response.status_code == 404
+
+
+def test_security_and_cache_headers(make_client: ClientFactory) -> None:
+    client = make_client()
+    parse_response = parse(client, "a b")
+    assert parse_response.headers["x-content-type-options"] == "nosniff"
+    assert parse_response.headers["cache-control"] == "no-store"
+    assert client.get("/api/v1/languages").headers["cache-control"] == "no-store"
+    presets = client.get("/api/v1/grammar/presets")
+    assert presets.headers["cache-control"] == "public, max-age=300"
+    missing = client.get("/api/v1/grammar/presets/nope")
+    assert missing.status_code == 404
+    assert missing.headers["cache-control"] == "no-store"
+    assert missing.headers["x-frame-options"] == "DENY"

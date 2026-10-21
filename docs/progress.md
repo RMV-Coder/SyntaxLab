@@ -2,11 +2,57 @@
 
 ## Current status
 
-**Phases 1–3 (English), 6 (Practice) and 7 (Algorithm Lab) are complete and verified.**
-Filipino is deferred by product decision. Next: Phase 8 (deployment and production readiness),
-then Compare once a second language is enabled. See the [implementation plan](implementation-plan.md).
+**Phases 1–3 (English), 6 (Practice), 7 (Algorithm Lab) and 8 (production readiness) are
+complete and verified locally.** Going live needs accounts and decisions (repository, Hugging
+Face plan, Vercel project): see [deployment.md](deployment.md). Filipino is deferred by product
+decision; Compare follows once a second language is enabled. See the
+[implementation plan](implementation-plan.md).
 
 ## Completed
+
+### 2026-10-21: Phase 8 (production readiness), branch `phase-8-production`
+
+- **API image** (`services/parser-api/Dockerfile`):
+  - Two stages; dependencies from `uv.lock`; CPU-only torch.
+  - Models are baked in at build time and checked by `syntaxlab-api check`.
+  - Runs as non-root uid 1000 with one worker and a `/health` HEALTHCHECK.
+- **Deployment** ([deployment.md](deployment.md)):
+  - Hugging Face Space template (`deploy/huggingface/`). `prepare-space.sh` copies only
+    tracked service files; tested locally, it produced a 759 KB checkout with no venv or
+    models.
+  - Vercel settings, post-deploy checks, and Cloud Run / Fly alternatives.
+  - Measured web bundle sizes.
+  - Hugging Face facts were checked against its current docs. **Creating Docker Spaces now
+    needs a paid plan.**
+- **Security:**
+  - Web: static CSP, `nosniff`, `Referrer-Policy`, `X-Frame-Options`, `Permissions-Policy`.
+  - API: `nosniff`, `no-referrer`, `X-Frame-Options`, explicit `Cache-Control` (errors never
+    cacheable).
+  - **Bug found:** with `--forwarded-allow-ips='*'`, uvicorn takes the client-written
+    leftmost `X-Forwarded-For` entry, so the rate limit could be bypassed (reproduced). The
+    image now trusts only private proxy ranges, and the API's own `X-Forwarded-For` option,
+    which had the same flaw, was removed.
+- **Accessibility:** axe audit (WCAG 2.2 A/AA) of every page in its main states, desktop and
+  phone. Fixed:
+  - tabs without panels, now toggle buttons;
+  - contrast of inactive views and of text on the highlighter;
+  - dependency-token names that did not match their visible text;
+  - scrollable panels the keyboard could not reach.
+- **Errors:** route and global error boundaries and a not-found page. Lab grammar-check and
+  preset failures are now shown, where before they were silently dropped. A 2xx response
+  that is not JSON is now an error rather than data.
+- **Performance:** Radix Tooltip moved out of the root layout. About drops from 207 to 188 KB
+  gzip and Practice from 239 to 222 KB.
+- **CI:** `workflow_dispatch` added. A new `image` job builds the image, waits for `/ready`,
+  parses a sentence, and reports image size and memory. actionlint is clean.
+- **Verified:**
+  - 238 backend tests; ruff and mypy --strict clean; 5 real-model regression tests.
+  - 69 Vitest tests.
+  - Playwright: 58 of 60 pass (30 × 2 viewports) against the production build with the CSP
+    active. The other 2 are keyboard tests skipped on the phone by design.
+  - In each of the last two full runs, one different test failed once and passed on retry.
+    Both failures were runner-level (`Unexpected end of JSON input` with no stack, after a
+    mocked response). Neither could be reproduced in 74 targeted repeats.
 
 ### 2026-10-21: Phase 6 (Practice), branch `phase-6-learn`
 
@@ -119,15 +165,22 @@ See `docs/research/*` and `implementation-plan.md`.
 - Stanza memory figures are Windows working-set values; re-measure as private bytes or USS.
 - `next/font` preloads italic and extended-Latin font files that are not needed at first paint
   (dev console warnings only).
-- CI workflow is written but has not run yet (no remote repository).
-- Deployment (Dockerfile, Hugging Face Space, Vercel) is not done yet.
+- CI workflow is written and linted but has not run yet (no remote repository).
+- The Docker image has not been built locally (Docker was not running). The CI `image` job
+  builds and smoke-tests it.
+- Nothing is deployed yet. That needs a GitHub repository, a Hugging Face account with a
+  paid plan (or another container host), and a Vercel project.
+- Occasional one-off E2E failure inside the Playwright runner under heavy local load (see
+  Phase 8). It passes on retry, and CI allows one retry. Investigate if it shows up in CI.
+- A screen-reader pass by a person has not been done. Automated audits cover only part of
+  WCAG.
 - UD_Tagalog-NewsCrawl is not in an official UD release. Recheck its status before enabling
   Filipino.
 
 ## Next steps
 
-1. Phase 8: Docker image, Hugging Face Space, Vercel, host measurements, accessibility audit,
-   first CI run on a remote repository.
+1. Go live: push to GitHub (first CI run, including the image job), create the Space and
+   the Vercel project, and measure on the host.
 2. Phase 4: Filipino (Tagalog) via a spaCy engine plug-in for calamanCy, when a reviewer is
    available.
 3. Phase 5: Compare (meaningful once a second language is enabled).

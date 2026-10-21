@@ -199,7 +199,6 @@ export function DependencyDiagram({
             role="button"
             tabIndex={laid.id === activeId ? 0 : -1}
             aria-pressed={selected}
-            aria-label={`${token.form}, ${token.upos ?? "no tag"}${arc ? `, ${arc.relation}` : ""}`}
             className="cursor-pointer outline-none [&:focus-visible>rect]:stroke-[var(--ink)]"
             onClick={(e) => {
               e.stopPropagation();
@@ -241,6 +240,9 @@ export function DependencyDiagram({
             >
               {token.upos ?? ""}
             </text>
+            {/* The accessible name comes from the visible text ("child NOUN", WCAG 2.5.3);
+                the relation is the description. */}
+            {arc ? <desc>{arc.head === 0 ? "root of the sentence" : `${arc.relation} of ${tokenById.get(arc.head)?.form ?? ""}`}</desc> : null}
           </g>
         );
       })}

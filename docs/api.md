@@ -168,5 +168,16 @@ All errors share one shape:
 | `CACHE_SIZE` (LRU entries per language) | 256 |
 | `CPU_THREADS` (torch intra-op threads) | number of CPUs |
 | `CORS_ORIGINS` | `["http://localhost:3000","http://127.0.0.1:3000"]` |
-| `TRUST_PROXY_HEADERS` | false (enable only behind a trusted proxy) |
 | `PRELOAD` | true (load models at startup) |
+
+Behind a reverse proxy, the client address comes from uvicorn's `--proxy-headers`, trusting
+only the proxies listed in `FORWARDED_ALLOW_IPS` (no prefix; the Docker image trusts private
+ranges). See [deployment.md](deployment.md#client-addresses-behind-a-proxy).
+
+## Response headers
+
+Every response carries `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer` and
+`X-Frame-Options: DENY`. Successful `GET`s of reference data (`/api/v1/schemes/…`,
+`/api/v1/grammar/presets…`, `/api/v1/learning/exercises…`) are `Cache-Control: public,
+max-age=300`; everything else, including errors and `/api/v1/languages` (its status changes
+while models load), is `no-store`.

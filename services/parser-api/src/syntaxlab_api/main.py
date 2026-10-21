@@ -21,6 +21,7 @@ from syntaxlab_api.languages.config import load_languages_file
 from syntaxlab_api.languages.registry import LanguageRegistry
 from syntaxlab_api.learning.exercises import load_exercises
 from syntaxlab_api.middleware import BodySizeLimitMiddleware, RateLimiter
+from syntaxlab_api.security_headers import SecurityHeadersMiddleware
 from syntaxlab_api.settings import Settings, get_settings
 
 logger = logging.getLogger("syntaxlab_api")
@@ -56,11 +57,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         lifespan=lifespan,
     )
     app.state.settings = settings
-    app.state.rate_limiter = RateLimiter(
-        settings.rate_limit_per_minute,
-        settings.rate_limit_burst,
-        trust_proxy_headers=settings.trust_proxy_headers,
-    )
+    app.state.rate_limiter = RateLimiter(settings.rate_limit_per_minute, settings.rate_limit_burst)
 
     app.add_middleware(
         CORSMiddleware,
@@ -69,6 +66,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         allow_headers=["Content-Type"],
     )
     app.add_middleware(BodySizeLimitMiddleware, max_bytes=settings.max_body_bytes)
+    app.add_middleware(SecurityHeadersMiddleware)
 
     @app.exception_handler(ApiError)
     async def _api_error(_: Request, exc: ApiError) -> JSONResponse:

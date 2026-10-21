@@ -15,7 +15,7 @@ def request(host: str = "1.2.3.4", forwarded: str | None = None) -> Any:
 
 
 def test_burst_then_limited_with_retry_after() -> None:
-    limiter = RateLimiter(per_minute=60, burst=3, trust_proxy_headers=False)
+    limiter = RateLimiter(per_minute=60, burst=3)
     for _ in range(3):
         limiter.check(request())
     with pytest.raises(errors.RateLimited) as info:
@@ -25,22 +25,21 @@ def test_burst_then_limited_with_retry_after() -> None:
 
 
 def test_clients_are_independent() -> None:
-    limiter = RateLimiter(per_minute=60, burst=1, trust_proxy_headers=False)
+    limiter = RateLimiter(per_minute=60, burst=1)
     limiter.check(request("1.1.1.1"))
     limiter.check(request("2.2.2.2"))
     with pytest.raises(errors.RateLimited):
         limiter.check(request("1.1.1.1"))
 
 
-def test_forwarded_for_only_trusted_when_configured() -> None:
-    untrusted = RateLimiter(per_minute=60, burst=1, trust_proxy_headers=False)
-    assert untrusted.client_key(request("10.0.0.1", "9.9.9.9")) == "10.0.0.1"
-    trusted = RateLimiter(per_minute=60, burst=1, trust_proxy_headers=True)
-    assert trusted.client_key(request("10.0.0.1", "9.9.9.9, 10.0.0.1")) == "9.9.9.9"
+def test_forwarded_for_is_ignored() -> None:
+    # A client-supplied header must not choose the bucket; proxies are resolved by uvicorn.
+    limiter = RateLimiter(per_minute=60, burst=1)
+    assert limiter.client_key(request("10.0.0.1", "9.9.9.9")) == "10.0.0.1"
 
 
 def test_disabled_when_zero() -> None:
-    limiter = RateLimiter(per_minute=0, burst=1, trust_proxy_headers=False)
+    limiter = RateLimiter(per_minute=0, burst=1)
     for _ in range(100):
         limiter.check(request())
 
@@ -48,7 +47,7 @@ def test_disabled_when_zero() -> None:
 def test_refill_over_time(monkeypatch: pytest.MonkeyPatch) -> None:
     clock = [1000.0]
     monkeypatch.setattr("syntaxlab_api.middleware.time.monotonic", lambda: clock[0])
-    limiter = RateLimiter(per_minute=60, burst=1, trust_proxy_headers=False)
+    limiter = RateLimiter(per_minute=60, burst=1)
     limiter.check(request())
     with pytest.raises(errors.RateLimited):
         limiter.check(request())

@@ -91,7 +91,8 @@ Codes and aliases are unique and case-insensitive.
 - Warm latency is 0.9–4.7 s per sentence.
 - Cold load is 6–80 s.
 
-Deployment-host numbers are still to be measured.
+Deployment-host numbers are still to be measured. The CI `image` job builds the production
+image, runs it with 2 CPUs and 4 GB, and reports memory ([deployment.md](deployment.md)).
 
 ## 7. Analysis schema
 
@@ -140,6 +141,16 @@ Full reference in [api.md](api.md). Key decisions:
   - The interlinear strip is a real `<table>`, plus a bracket-notation text alternative.
   - `lang` is set from the analyzed language.
   - Reduced motion is respected, and focus is always visible.
+  - Every page is audited with axe in E2E (WCAG 2.2 A/AA, desktop and phone) in its main
+    states. View switches are toggle buttons (`aria-pressed`), not tabs without panels.
+    Scrollable panels are keyboard-focusable.
+- Errors:
+  - API errors are handled where they happen, with specific messages and a retry for
+    transient ones. A 2xx that is not JSON (a platform page while the API starts) is a typed
+    `unexpected_response` error, never data.
+  - Route-level `error.tsx` catches unexpected rendering errors, and `global-error.tsx` catches
+    errors in the root layout (inline styles, its own document). `not-found.tsx` links back
+    to the three tools.
 - Export serializes the full diagram, independent of zoom. Only the font subsets covering the
   diagram's characters are embedded. PNG is rendered at 2×.
 - Responsive: three columns at ≥1024 px; below that, Sentence / Diagram / Details panels.
@@ -195,8 +206,14 @@ Full reference in [api.md](api.md). Key decisions:
   which escapes it.
 - CORS is restricted to configured origins. Validation errors never echo submitted values;
   error messages never contain exception text.
-- Rate limiting is per client. `X-Forwarded-For` is honoured only if
-  `TRUST_PROXY_HEADERS=true`.
+- Rate limiting is per client address. Behind a proxy, uvicorn resolves the address and trusts
+  `X-Forwarded-For` only from the proxies in `FORWARDED_ALLOW_IPS`; the image never trusts
+  `*`, since that would let clients choose their own address and dodge the limit.
+- Security headers. The web app sends a static Content-Security-Policy (no nonces, so pages
+  stay prerendered; `connect-src` allows only the site and the API origin, `frame-ancestors
+  'none'`, `object-src 'none'`), plus `nosniff`, `Referrer-Policy` and `Permissions-Policy`.
+  The API sends `nosniff`, `no-referrer`, `X-Frame-Options` and explicit `Cache-Control`. An
+  E2E test checks that the policy blocks nothing the app uses, PNG export included.
 - Glossaries are served only for schemes declared in configuration. Ids are pattern-checked,
   so there is no path traversal.
 
@@ -220,3 +237,6 @@ Full reference in [api.md](api.md). Key decisions:
 | D14 | Cyclic grammars rejected | A ⇒⁺ A gives infinitely many trees; counting/enumeration must terminate |
 | D15 | Exercise answer keys: treebank gold or all grammar parses, never parser output | Parser output is not authoritative; all parses avoid rejecting valid alternatives |
 | D16 | Span-based tree builder (bracketing) instead of free-form node dragging | Works with keyboard, touch and screen readers; nesting is always well-formed, so feedback can focus on linguistics |
+| D17 | Static CSP without nonces (`'unsafe-inline'` scripts) | Nonces force every page to render per request, losing prerendering. User text is never HTML, so inline-script injection has no entry point; `connect-src`, `object-src`, `frame-ancestors` still constrain the page |
+| D18 | Models baked into the API image | No runtime downloads; a cold start costs only the model load; the image is reproducible from `uv.lock` |
+| D19 | Client address resolved by uvicorn from trusted proxies only (`FORWARDED_ALLOW_IPS`, never `*`) | Rate limits keyed on a client-supplied header could be bypassed |

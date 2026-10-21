@@ -43,6 +43,14 @@ describe("apiRequest", () => {
     });
   });
 
+  it("rejects a successful response that is not JSON", async () => {
+    const fetcher = vi.fn().mockResolvedValue(new Response("<html>Starting…</html>", { status: 200 }));
+    await expect(apiRequest("/x", {}, fetcher)).rejects.toMatchObject({
+      code: "unexpected_response",
+      status: 200,
+    });
+  });
+
   it("reports transport failures as network_error", async () => {
     const fetcher = vi.fn().mockRejectedValue(new TypeError("Failed to fetch"));
     await expect(apiRequest("/x", {}, fetcher)).rejects.toMatchObject({

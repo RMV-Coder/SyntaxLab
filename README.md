@@ -10,8 +10,9 @@ and nothing is hand-drawn for particular sentences. When a model can't do someth
 interface says so instead of substituting something else.
 
 > **Status:** English analysis and visualization, practice exercises, and the Algorithm Lab
-> (Earley parser) are implemented and tested. Filipino (Tagalog) and comparison are researched
-> or planned. See [Roadmap](docs/roadmap.md) and [Progress](docs/progress.md).
+> (Earley parser) are implemented and tested. Each page is audited for WCAG 2.2 AA (axe), and
+> the production setup is ready to deploy. Filipino (Tagalog) and comparison are researched or
+> planned. See [Roadmap](docs/roadmap.md) and [Progress](docs/progress.md).
 
 ## Features (implemented)
 
@@ -85,11 +86,19 @@ pnpm dev:web     # web app on http://localhost:3000
 
 More: [docs/development.md](docs/development.md)
 
+## Deployment
+
+The API ships as a Docker image with the models baked in
+(`services/parser-api/Dockerfile`). It targets a Hugging Face Space and runs on any container
+platform. The web app deploys to Vercel with `apps/web` as its root directory. Steps,
+configuration, security headers and measured bundle sizes are in
+[docs/deployment.md](docs/deployment.md).
+
 ## Testing
 
 ```bash
 pnpm test                                          # web unit tests + API unit/HTTP tests
-pnpm test:e2e                                      # Playwright, desktop and mobile
+pnpm test:e2e                                      # Playwright, desktop and mobile, incl. a11y audit
 cd services/parser-api && uv run pytest -m models  # linguistic regression on real models
 ```
 

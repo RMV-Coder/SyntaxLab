@@ -59,22 +59,29 @@ function usePresets() {
 
 /** Validates the grammar as the user types (debounced). */
 function useValidation(grammar: string) {
-  const [result, setResult] = useState<ValidateGrammarResponse | null>(null);
+  const [state, setState] = useState<{
+    grammar: string;
+    result: ValidateGrammarResponse | null;
+    error: string | null;
+  }>({ grammar: "", result: null, error: null });
   useEffect(() => {
     if (!grammar.trim()) return;
     const controller = new AbortController();
     const timer = setTimeout(() => {
       api
         .validateGrammar(grammar, controller.signal)
-        .then(setResult)
-        .catch(() => undefined);
+        .then((result) => setState({ grammar, result, error: null }))
+        .catch((e: unknown) => {
+          if (e instanceof ApiError) setState({ grammar, result: null, error: e.message });
+        });
     }, 350);
     return () => {
       clearTimeout(timer);
       controller.abort();
     };
   }, [grammar]);
-  return grammar.trim() ? result : null;
+  const current = grammar.trim() && state.grammar === grammar;
+  return { validation: current ? state.result : null, validationError: current ? state.error : null };
 }
 
 // ------------------------------------------------------------------ grammar panel
@@ -85,6 +92,7 @@ function GrammarPanel({
   grammar,
   edited,
   validation,
+  validationError,
   sentence,
   busy,
   onPreset,
@@ -97,6 +105,7 @@ function GrammarPanel({
   grammar: string;
   edited: boolean;
   validation: ValidateGrammarResponse | null;
+  validationError: string | null;
   sentence: string;
   busy: boolean;
   onPreset: (id: string) => void;
@@ -161,6 +170,9 @@ function GrammarPanel({
           className="w-full resize-y rounded-md border border-input bg-sheet px-3 py-2 font-mono text-[0.8125rem] leading-relaxed text-ink"
         />
         <div id={ids.problems} aria-live="polite" className="space-y-1 text-xs">
+          {validationError ? (
+            <p className="text-destructive">The grammar could not be checked: {validationError}</p>
+          ) : null}
           {errors.map((d, i) => (
             <button key={`e${i}`} type="button" onClick={() => goToLine(d.line)} className="block text-left text-destructive">
               {d.line ? `Line ${d.line}: ` : ""}
@@ -377,16 +389,22 @@ export function LabWorkspace() {
   const [speed, setSpeed] = useState<Speed>("normal");
   const [revealed, setRevealed] = useState(false);
   const [panel, setPanel] = useState<Panel>("grammar");
-  const validation = useValidation(grammar);
+  const { validation, validationError } = useValidation(grammar);
   const edited = preset != null && grammar !== preset.grammar;
 
   const loadPreset = useCallback((id: string) => {
-    void api.grammarPreset(id).then((detail) => {
-      setPreset(detail);
-      setGrammar(detail.grammar);
-      setSentence(detail.examples[0]?.text ?? "");
-      setResponse(null);
-    });
+    api
+      .grammarPreset(id)
+      .then((detail) => {
+        setPreset(detail);
+        setGrammar(detail.grammar);
+        setSentence(detail.examples[0]?.text ?? "");
+        setResponse(null);
+        setError(null);
+      })
+      .catch((e: unknown) => {
+        if (e instanceof ApiError) setError(e);
+      });
   }, []);
 
   // Load the first preset once the list arrives.
@@ -506,6 +524,7 @@ export function LabWorkspace() {
               grammar={grammar}
               edited={edited}
               validation={validation}
+              validationError={validationError}
               sentence={sentence}
               busy={busy}
               onPreset={loadPreset}
@@ -583,6 +602,7 @@ export function LabWorkspace() {
 
         <aside
           aria-label="Result"
+          tabIndex={0}
           className={cn("min-h-0 overflow-y-auto border-rule bg-sheet p-5 lg:block lg:border-l", panel !== "result" && "hidden")}
         >
           {response ? (

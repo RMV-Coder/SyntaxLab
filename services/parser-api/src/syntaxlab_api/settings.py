@@ -38,9 +38,6 @@ class Settings(BaseSettings):
     cors_origins: list[str] = ["http://localhost:3000", "http://127.0.0.1:3000"]
     rate_limit_per_minute: int = Field(default=60, ge=0, description="0 disables rate limiting.")
     rate_limit_burst: int = Field(default=10, ge=1)
-    trust_proxy_headers: bool = Field(
-        default=False, description="Use X-Forwarded-For for client IPs (only behind a proxy)."
-    )
 
 
 @lru_cache
