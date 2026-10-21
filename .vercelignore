@@ -1,0 +1,11 @@
+# The web app builds from apps/web plus the pnpm workspace files at the root.
+# Nothing else is uploaded to Vercel.
+services/
+deploy/
+docs/
+**/.venv
+**/.models
+**/node_modules
+**/.next
+**/test-results
+**/playwright-report

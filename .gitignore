@@ -38,3 +38,6 @@ stanza_resources/
 .env
 .env.*
 !.env.example
+
+# Vercel (local project link)
+.vercel/
