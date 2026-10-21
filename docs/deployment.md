@@ -4,17 +4,18 @@ SyntaxLab deploys as two independent pieces:
 
 | Piece | Where (decided) | Artifact |
 |---|---|---|
-| Parser API | Hugging Face Space, Docker SDK | `services/parser-api/Dockerfile` |
-| Web app | Vercel | `apps/web` (Next.js) |
+| Parser API | Oracle Cloud Always Free Arm VM, Docker Compose behind Caddy | `deploy/oracle/`, `services/parser-api/Dockerfile` |
+| Web app | Vercel, live at https://syntaxlab-nine.vercel.app | `apps/web` (Next.js) |
 
 The web app is a static-first Next.js site. Every analysis comes from the API, called directly
 from the browser, so the API origin must be known when the web app is built (CSP and client
 config), and the web origin must be allowed by the API (CORS).
 
-> **Cost note (checked 2026-10-21 against the Hugging Face docs).** Creating a Docker Space now
-> requires a paid Hugging Face plan (PRO for a personal account). The default *CPU Basic*
-> hardware (2 vCPU, 16 GB RAM) has no hourly cost once you have that plan. If a paid plan is
-> not an option, use one of the [alternatives](#alternatives): the image is the same.
+> **Why Oracle (checked 2026-10-21/22).** It is the only free host found with enough memory
+> for the models. Hugging Face Docker Spaces now need a paid plan, Fly.io has no free tier for
+> new organizations, and the free tiers of Render and Koyeb (about 512 MB) are too small.
+> Cloud Run's free allowance needs a billing account. The image is the same on every host:
+> the other options are kept below.
 
 ## 1. The API image
 
@@ -69,7 +70,86 @@ each time. If the platform's proxies use public addresses, every request would l
 came from the proxy and share one rate-limit bucket. In that case list the proxy ranges the
 platform publishes.
 
-## 2. Hugging Face Space (API)
+## 2. Oracle Cloud Always Free Arm VM (API, chosen)
+
+`deploy/oracle/` runs the API image behind [Caddy](https://caddyserver.com/), which gets and
+renews a Let's Encrypt certificate. HTTPS is required: the web app is served over HTTPS, and
+browsers block calls from it to a plain-HTTP API. The API itself is not published; only Caddy
+listens on ports 80 and 443. CI's `oracle-stack` job runs this exact stack on an Arm runner and
+checks:
+
+- readiness through Caddy over HTTPS;
+- a parse from the web origin, with its CORS and security headers;
+- that a forged `X-Forwarded-For` does not escape the rate limit.
+
+### What the free tier gives, and the catch
+
+From Oracle's Always Free documentation (checked 2026-10-22):
+
+- **Arm (Ampere A1):** 2 OCPUs and 12 GB of memory in total (1,500 OCPU-hours and
+  9,000 GB-hours a month). Instances must be in the account's **home region**, which is
+  chosen at sign-up and cannot be changed.
+- **Storage and traffic:** 200 GB of boot and block storage, and 10 TB of outbound traffic a
+  month.
+- **Idle reclamation:** Oracle may reclaim an Always Free instance when, over 7 days, its
+  95th-percentile CPU, its network use and (on A1) its memory use are **all** below 20%. A
+  teaching API is idle most of the time, so CPU and network will usually be below 20%. Size
+  the VM so the API's normal memory use stays above that line: **2 OCPUs with 4 GB**. The API
+  uses about 0.9 GB (measured in CI). With Ubuntu, Docker and Caddy (a few hundred MB, an
+  estimate), that should be around 30% of 4 GB. After the first week, check the instance's memory metric in the console.
+  Oracle's page does not say whether Pay As You Go accounts are exempt.
+- **Capacity:** "Out of host capacity" errors for A1 are common in busy regions. Retry later
+  or try another availability domain.
+
+### Your steps (accounts and the console)
+
+1. **Oracle account.** Sign up at oracle.com/cloud/free. It needs a card for identity
+   verification. Choose the home region carefully: the VM must live there.
+2. **Hostname.** Get a free subdomain at [duckdns.org](https://www.duckdns.org) (sign in with
+   GitHub or Google), e.g. `syntaxlab-api.duckdns.org`. `duckdns.org` is on the Public Suffix
+   List, so Let's Encrypt rate limits apply per subdomain. sslip.io and nip.io are not, and
+   share limits with every other user. A domain you own works the same way.
+3. **Create the instance** (Compute → Instances → Create):
+   - Image: **Canonical Ubuntu 24.04**. Shape: **VM.Standard.A1.Flex**, **2 OCPUs, 4 GB**.
+   - Networking: a public subnet with **Assign a public IPv4 address** checked.
+   - SSH keys: upload or generate a key, and keep the private key.
+   - Advanced options → Management → **Initialization script**: paste
+     `deploy/oracle/cloud-init.yaml` after setting `SYNTAXLAB_API_HOST` in it.
+4. **Open ports 80 and 443 in the VCN.** Networking → Virtual cloud networks → your VCN →
+   Security Lists → Default → Add Ingress Rules. Add source `0.0.0.0/0`, TCP, destination ports
+   `80` and `443` (and UDP `443` for HTTP/3, optional). The cloud-init script opens the same
+   ports in the VM's own firewall; both layers are needed.
+5. **Point the hostname at the VM.** Copy the instance's public IP into DuckDNS. An
+   ephemeral public IP stays with the instance until it is terminated. To keep the address
+   even then, reserve one (Networking → IP management) and assign it.
+6. **Wait for the first build.** It takes several minutes: Docker install, image build,
+   model download (not yet timed on the VM). Watch it with `ssh ubuntu@<ip> sudo tail -f /var/log/cloud-init-output.log`.
+   When it is done, `curl https://<host>/ready` returns `{"ready": true, …}`.
+7. **Point the web app at it.** In Vercel, set `NEXT_PUBLIC_SYNTAXLAB_API_URL` to
+   `https://<host>` for Production, then redeploy (the value is read at build time):
+   `vercel env add NEXT_PUBLIC_SYNTAXLAB_API_URL production`, then `vercel deploy --prod`, or
+   push to `main`.
+
+### Updating the API
+
+```bash
+ssh ubuntu@<ip> sudo /opt/syntaxlab/deploy/oracle/update.sh
+```
+
+It pulls `main`, rebuilds the image, restarts the container, removes the superseded image,
+and waits for `/ready`. Expect a minute or two of unavailability while the models load. That
+is acceptable for this service; zero-downtime updates would need a second container.
+
+### If something is wrong
+
+| Symptom | Check |
+|---|---|
+| `curl https://<host>` times out | VCN ingress rules (step 4); `sudo iptables -L INPUT -n` shows ACCEPT for 80/443 before REJECT |
+| Certificate errors | `docker compose logs caddy` (run in `/opt/syntaxlab/deploy/oracle`): the hostname must resolve to this VM and port 80 must be reachable |
+| `/ready` stays 503 | `docker compose logs api` |
+| Browser shows CORS errors | `SYNTAXLAB_CORS_ORIGINS` in `deploy/oracle/.env` must list the exact web origin; then `docker compose up -d` |
+
+## 2b. Hugging Face Space (API, alternative; needs a paid plan)
 
 The Space is a separate git repository on huggingface.co. `deploy/huggingface/prepare-space.sh`
 fills a checkout of it with `services/parser-api` (files git tracks; `.venv` and `.models` are
@@ -153,7 +233,7 @@ present and that the policy blocks nothing the app uses, including PNG export (`
 
 ## Alternatives
 
-The same image runs on any container platform. Budget **≥ 2 GB memory**: Stanza English uses
+Besides Oracle and Hugging Face above, the same image runs on any container platform. Budget **≥ 2 GB memory**: Stanza English uses
 about 650 MB of working set on top of Python and torch. Use at least 2 vCPU for acceptable
 latency.
 

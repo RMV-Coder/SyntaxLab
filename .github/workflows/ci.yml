@@ -139,3 +139,52 @@ jobs:
           docker image ls syntaxlab-api:ci
           docker stats --no-stream api || true
           docker logs api | tail -20
+
+  oracle-stack:
+    name: Oracle deploy stack (arm64, through Caddy)
+    # deploy/oracle exactly as the VM runs it, on an Arm runner like the Ampere A1 VM.
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04-arm
+    defaults:
+      run:
+        working-directory: deploy/oracle
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure for localhost (Caddy uses its own CA instead of Let's Encrypt)
+        run: |
+          printf '%s\n' 'SYNTAXLAB_API_HOST=localhost' \
+            'SYNTAXLAB_CORS_ORIGINS=["https://syntaxlab-nine.vercel.app"]' > .env
+      - run: docker compose up -d --build
+      - name: Wait for the API through Caddy
+        run: |
+          for i in $(seq 1 60); do
+            if curl -fsSk https://localhost/ready; then echo; exit 0; fi
+            sleep 5
+          done
+          docker compose logs
+          exit 1
+      - name: Parse a sentence from the web origin
+        run: |
+          curl -fsSk -D headers.txt -o body.json -X POST https://localhost/api/v1/parse \
+            -H 'Origin: https://syntaxlab-nine.vercel.app' -H 'Content-Type: application/json' \
+            -d '{"language": "en", "text": "The child is eating rice."}'
+          grep -i '^access-control-allow-origin: https://syntaxlab-nine.vercel.app' headers.txt
+          grep -i '^x-content-type-options: nosniff' headers.txt
+          python3 -c 'import json; s = json.load(open("body.json"))["sentences"][0]; assert s["dependency"] and s["constituency"]; print([t["form"] for t in s["tokens"]])'
+      - name: A forged X-Forwarded-For does not escape the rate limit
+        run: |
+          limited=0
+          for i in $(seq 1 15); do
+            code=$(curl -sk -o /dev/null -w '%{http_code}' -X POST https://localhost/api/v1/parse \
+              -H "X-Forwarded-For: 203.0.113.$i" -H 'Content-Type: application/json' \
+              -d '{"language": "en", "text": "The child is eating rice."}')
+            echo "request $i: $code"
+            [ "$code" = 429 ] && limited=$((limited + 1))
+          done
+          [ "$limited" -gt 0 ]
+      - name: Image size and memory
+        if: always()
+        run: |
+          docker image ls syntaxlab-api
+          docker stats --no-stream || true
+          docker compose logs --tail 20

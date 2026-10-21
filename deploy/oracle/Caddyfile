@@ -1,0 +1,5 @@
+# Caddy obtains and renews a Let's Encrypt certificate for this host automatically.
+{$SYNTAXLAB_API_HOST} {
+	encode zstd gzip
+	reverse_proxy api:7860
+}

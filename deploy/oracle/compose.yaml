@@ -1,0 +1,38 @@
+# SyntaxLab parser API on a single VM: the API container behind Caddy (automatic HTTPS).
+#
+#   cp .env.example .env    # set SYNTAXLAB_API_HOST and SYNTAXLAB_CORS_ORIGINS
+#   docker compose up -d --build
+#
+# See docs/deployment.md, "Oracle Cloud (Always Free Arm VM)".
+
+services:
+  api:
+    build: ../../services/parser-api
+    image: syntaxlab-api:local
+    restart: unless-stopped
+    environment:
+      SYNTAXLAB_CORS_ORIGINS: ${SYNTAXLAB_CORS_ORIGINS:?set SYNTAXLAB_CORS_ORIGINS in .env}
+    # Not published: only Caddy reaches it. Caddy's address on this network is in the image's
+    # FORWARDED_ALLOW_IPS (private ranges), so client addresses come from Caddy's headers.
+    expose:
+      - "7860"
+
+  caddy:
+    image: caddy:2.11.6
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "80:80" # ACME HTTP challenge and redirect to HTTPS
+      - "443:443"
+      - "443:443/udp" # HTTP/3
+    environment:
+      SYNTAXLAB_API_HOST: ${SYNTAXLAB_API_HOST:?set SYNTAXLAB_API_HOST in .env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data # certificates: keep them across restarts (rate limits)
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

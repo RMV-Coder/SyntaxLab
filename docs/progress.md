@@ -165,8 +165,13 @@ See `docs/research/*` and `implementation-plan.md`.
 - Stanza memory figures are Windows working-set values; re-measure as private bytes or USS.
 - `next/font` preloads italic and extended-Latin font files that are not needed at first paint
   (dev console warnings only).
-- API host not chosen yet. The web app is live at https://syntaxlab-nine.vercel.app, but it
-  cannot analyze until `NEXT_PUBLIC_SYNTAXLAB_API_URL` points at a hosted API.
+- The API is not live yet. Host chosen: Oracle Cloud Always Free Arm VM (`deploy/oracle/`,
+  steps in [deployment.md](deployment.md#2-oracle-cloud-always-free-arm-vm-api-chosen)).
+  The account, VM, DuckDNS hostname and VCN rules are manual steps. Until they are done, the
+  live web app at https://syntaxlab-nine.vercel.app cannot analyze.
+- Oracle may reclaim idle Always Free instances. The VM is sized (2 OCPU / 4 GB) so the
+  API's memory use stays above the 20% idle line. Check the memory metric after the first
+  week.
 - Occasional one-off E2E failure inside the Playwright runner under heavy local load (see
   Phase 8). It passes on retry, and CI allows one retry. Investigate if it shows up in CI.
 - A screen-reader pass by a person has not been done. Automated audits cover only part of

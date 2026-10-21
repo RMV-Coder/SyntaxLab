@@ -1,0 +1,49 @@
+#cloud-config
+# Paste into "Show advanced options → Management → Initialization script" when creating the
+# instance (image: Canonical Ubuntu 24.04, shape VM.Standard.A1.Flex). First change
+# SYNTAXLAB_API_HOST below. Progress: `sudo tail -f /var/log/cloud-init-output.log` on the VM.
+#
+# What it does: installs Docker, opens ports 80/443 in the VM's firewall, clones the
+# repository to /opt/syntaxlab, writes deploy/oracle/.env, then builds and starts the API
+# behind Caddy. If the hostname does not resolve to this VM yet, Caddy keeps retrying the
+# certificate, so DNS can be set up before or after boot.
+
+package_update: true
+packages:
+  - docker.io
+  - docker-compose-v2
+  - git
+
+write_files:
+  # CHANGE ME: SYNTAXLAB_API_HOST (a hostname you control that points at this VM).
+  - path: /etc/syntaxlab/env
+    permissions: "0644"
+    content: |
+      SYNTAXLAB_API_HOST=your-name.duckdns.org
+      SYNTAXLAB_CORS_ORIGINS=["https://syntaxlab-nine.vercel.app"]
+
+  # Oracle's Ubuntu images reject all inbound traffic except SSH at the host firewall
+  # (/etc/iptables/rules.v4), in addition to the VCN security list. Accept HTTP and HTTPS
+  # now and on every boot. The saved file is edited instead of `netfilter-persistent save`,
+  # which would also persist Docker's own chains.
+  - path: /etc/syntaxlab/open-web-ports.sh
+    permissions: "0755"
+    content: |
+      #!/bin/sh
+      set -eu
+      rules=/etc/iptables/rules.v4
+      for spec in "tcp 80" "tcp 443" "udp 443"; do
+        set -- $spec
+        rule="-A INPUT -p $1 -m $1 --dport $2 -j ACCEPT"
+        grep -qxF -- "$rule" "$rules" || sed -i "0,/^-A INPUT -j REJECT/s//$rule\n&/" "$rules"
+        iptables -C INPUT -p "$1" -m "$1" --dport "$2" -j ACCEPT 2>/dev/null ||
+          iptables -I INPUT -p "$1" -m "$1" --dport "$2" -j ACCEPT
+      done
+
+runcmd:
+  - /etc/syntaxlab/open-web-ports.sh
+  - systemctl enable --now docker
+  - usermod -aG docker ubuntu
+  - git clone --depth 1 https://github.com/RMV-Coder/SyntaxLab.git /opt/syntaxlab
+  - cp /etc/syntaxlab/env /opt/syntaxlab/deploy/oracle/.env
+  - docker compose -f /opt/syntaxlab/deploy/oracle/compose.yaml up -d --build
