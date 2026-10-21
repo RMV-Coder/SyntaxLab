@@ -2,12 +2,42 @@
 
 ## Current status
 
-**Phases 1–3 for English are complete and verified.** That covers the foundation, English
-analysis, and interactive visualization. Filipino is deferred by product decision. Next:
-Phase 7 (Earley Algorithm Lab engine), then Learn and Compare. See the
+**Phases 1–3 (English) and Phase 7 (Algorithm Lab) are complete and verified.** Filipino is
+deferred by product decision. Next: Phase 6 (Learn), then deployment and Compare. See the
 [implementation plan](implementation-plan.md).
 
 ## Completed
+
+### 2026-10-21: Phase 7 (Algorithm Lab), branch `phase-7-algorithm-lab`
+
+- **Backend** (`syntaxlab_api/grammar/`):
+  - Grammar notation with line-numbered diagnostics, including cycle detection (infinite
+    ambiguity), undefined, unproductive and unreachable symbols, and limits.
+  - Earley parser with Aycock–Horspool nullable handling, a full event trace, and derivation
+    links forming a packed forest. Exact tree counts by dynamic programming; lazy tree
+    enumeration.
+  - Four data-driven preset grammars whose example outcomes are verified by tests.
+  - Endpoints for presets, validate and parse.
+- **Frontend** (`/lab`):
+  - Grammar editor with live validation, and examples showing their verified outcomes.
+  - Replay controls: reset, step back and forward, play/pause, speed, scrubber, and keyboard
+    shortcuts that keep working when the focused control is disabled.
+  - Plain-language explanation of every event. Chart view with the new item highlighted, its
+    cause outlined, and dead ends struck through.
+  - The outcome is revealed at the end of the replay. Every parse tree is shown, and each node
+    links to the step that completed it. Mobile panels.
+- **Verified:**
+  - 209 backend tests, including an independent brute-force oracle that must produce exactly
+    the same trees, Catalan-number counts, exhaustive ε-rule cases, and trace replay integrity.
+  - 55 Vitest tests and 34 Playwright tests (desktop and mobile; 2 skipped by design).
+  - Manually exercised in the browser on desktop and phone sizes.
+- **Bugs found and fixed while verifying:**
+  - The root of an all-empty parse kept a placeholder position (caught by the oracle).
+  - Shortcuts stopped working after the focused button became disabled.
+  - The step slider's accessible name was "0".
+  - Phone layouts scrolled sideways because the grid column grew to the chart's width (also
+    latent in the Analyzer; now covered by an E2E check).
+
 
 ### 2026-10-21: Phases 1–3 (English)
 
@@ -60,9 +90,7 @@ See `docs/research/*` and `implementation-plan.md`.
 
 ## Next steps
 
-1. Phase 7: Earley engine (Python) with trace, packed forest, grammar validator; then the
-   Algorithm Lab UI.
-2. Phase 6: Learn. POS and dependency exercises from UD gold; bracketing checked against all
+1. Phase 6: Learn. POS and dependency exercises from UD gold; bracketing checked against all
    Earley parses.
-3. Phase 5: Compare (meaningful once a second language is enabled).
-4. Phase 8: Docker image, Hugging Face Space, Vercel, host measurements, accessibility audit.
+2. Phase 5: Compare (meaningful once a second language is enabled).
+3. Phase 8: Docker image, Hugging Face Space, Vercel, host measurements, accessibility audit.

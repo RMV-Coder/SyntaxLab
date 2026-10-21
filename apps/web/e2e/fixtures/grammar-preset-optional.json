@@ -1,0 +1,40 @@
+{
+ "id": "optional-elements",
+ "name": "Optional elements (empty rules)",
+ "description": "Determiners and adjectives are optional here, written with ε (the empty string). The parser handles empty rules with the Aycock and Horspool technique: when it predicts a symbol that can be empty, it also moves past it straight away.",
+ "grammar": "# An educational fragment of English, not a grammar of the language.\nS    -> NP VP\nNP   -> Det AdjP N\nDet  -> \"the\" | \"a\" | ε\nAdjP -> Adj AdjP | ε\nAdj  -> \"big\" | \"old\" | \"red\"\nN    -> \"dog\" | \"dogs\" | \"cat\"\nVP   -> V NP | V\nV    -> \"chased\" | \"sleep\" | \"sleeps\"\n",
+ "examples": [
+  {
+   "text": "the big old dog chased a cat",
+   "note": null,
+   "expect": {
+    "accepted": true,
+    "parses": 1
+   }
+  },
+  {
+   "text": "dogs sleep",
+   "note": "Accepted with an empty determiner and an empty adjective phrase.",
+   "expect": {
+    "accepted": true,
+    "parses": 1
+   }
+  },
+  {
+   "text": "big red dogs chased the cat",
+   "note": null,
+   "expect": {
+    "accepted": true,
+    "parses": 1
+   }
+  },
+  {
+   "text": "the the dog sleeps",
+   "note": "Rejected. Only one determiner is allowed.",
+   "expect": {
+    "accepted": false,
+    "parses": 0
+   }
+  }
+ ]
+}

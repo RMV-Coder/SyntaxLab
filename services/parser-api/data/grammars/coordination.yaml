@@ -1,0 +1,27 @@
+id: coordination
+order: 2
+name: Coordination and modifier scope
+description: >-
+  Does "old" describe only the men, or the men and the women? The rule NP -> NP Conj NP lets
+  a coordination sit inside or outside a modified noun phrase, so the grammar finds both scopes.
+grammar: |
+  # An educational fragment of English, not a grammar of the language.
+  S    -> NP VP
+  NP   -> NP Conj NP | Adj NP | N
+  VP   -> V NP | V
+  Conj -> "and" | "or"
+  Adj  -> "old" | "young"
+  N    -> "men" | "women" | "children" | "books"
+  V    -> "read" | "left"
+examples:
+  - text: old men and women left
+    note: Two readings. [old men] and women, or old [men and women].
+    expect: {accepted: true, parses: 2}
+  - text: men and women and children left
+    note: Two readings of the bracketing, as the rule is binary.
+    expect: {accepted: true, parses: 2}
+  - text: young children read books
+    expect: {accepted: true, parses: 1}
+  - text: men and left
+    note: Rejected. The coordination is incomplete.
+    expect: {accepted: false, parses: 0}

@@ -9,9 +9,9 @@ Every analysis comes from an identified, evaluated parser. Nothing is generated 
 and nothing is hand-drawn for particular sentences. When a model can't do something, the
 interface says so instead of substituting something else.
 
-> **Status:** English analysis and visualization are implemented and tested. Filipino
-> (Tagalog), comparison, learning exercises and the parsing-algorithm lab are researched or
-> planned. See [Roadmap](docs/roadmap.md) and [Progress](docs/progress.md).
+> **Status:** English analysis and visualization, and the Algorithm Lab (Earley parser),
+> are implemented and tested. Filipino (Tagalog), comparison and learning exercises are
+> researched or planned. See [Roadmap](docs/roadmap.md) and [Progress](docs/progress.md).
 
 ## Features (implemented)
 
@@ -28,6 +28,12 @@ interface says so instead of substituting something else.
 - **Provenance.** Engine, model files, annotation scheme per layer, and processing time are
   shown for every analysis. No invented confidence scores.
 - **Export.** SVG (with embedded fonts) and PNG of the whole diagram as displayed.
+- **Algorithm Lab.** An Earley parser implemented from scratch runs on small, explicit
+  grammars (presets or your own). You can replay every predict, scan and complete step
+  forward and backward, with plain-language explanations, a chart view, every parse tree of
+  an ambiguous sentence, and links from each tree node to the step that built it. Its
+  correctness is checked against an independent brute-force parser. See
+  [docs/parsing-algorithms.md](docs/parsing-algorithms.md).
 - **Pluggable languages.** Languages are YAML configuration; engines are plug-ins. See
   [Adding a language](docs/adding-a-language.md).
 

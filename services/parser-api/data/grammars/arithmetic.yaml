@@ -1,0 +1,21 @@
+id: arithmetic
+order: 4
+name: Ambiguous arithmetic
+description: >-
+  A classic from computer science. Without precedence rules, "n + n * n" has two trees, one
+  for (n + n) * n and one for n + (n * n). Grammars of programming languages avoid this
+  ambiguity; natural language cannot.
+grammar: |
+  E -> E "+" E | E "*" E | "(" E ")" | "n"
+examples:
+  - text: n + n * n
+    note: Two trees, one per grouping.
+    expect: {accepted: true, parses: 2}
+  - text: n + n + n + n
+    note: Five trees (the Catalan number C3).
+    expect: {accepted: true, parses: 5}
+  - text: ( n + n ) * n
+    note: Brackets leave one tree.
+    expect: {accepted: true, parses: 1}
+  - text: n + * n
+    expect: {accepted: false, parses: 0}

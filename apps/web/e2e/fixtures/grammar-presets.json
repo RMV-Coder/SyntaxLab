@@ -1,0 +1,24 @@
+{
+ "presets": [
+  {
+   "id": "pp-attachment",
+   "name": "Prepositional-phrase attachment",
+   "description": "A small English fragment where a prepositional phrase can modify either a noun phrase (NP -> NP PP) or a verb phrase (VP -> VP PP). Both rules are left-recursive. Each extra PP multiplies the readings: 1 PP gives 2 parses, 2 PPs give 5, 3 PPs give 14 (Catalan numbers)."
+  },
+  {
+   "id": "coordination",
+   "name": "Coordination and modifier scope",
+   "description": "Does \"old\" describe only the men, or the men and the women? The rule NP -> NP Conj NP lets a coordination sit inside or outside a modified noun phrase, so the grammar finds both scopes."
+  },
+  {
+   "id": "optional-elements",
+   "name": "Optional elements (empty rules)",
+   "description": "Determiners and adjectives are optional here, written with ε (the empty string). The parser handles empty rules with the Aycock and Horspool technique: when it predicts a symbol that can be empty, it also moves past it straight away."
+  },
+  {
+   "id": "arithmetic",
+   "name": "Ambiguous arithmetic",
+   "description": "A classic from computer science. Without precedence rules, \"n + n * n\" has two trees, one for (n + n) * n and one for n + (n * n). Grammars of programming languages avoid this ambiguity; natural language cannot."
+  }
+ ]
+}

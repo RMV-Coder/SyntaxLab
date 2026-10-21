@@ -25,3 +25,19 @@ export type Provenance = Schemas["Provenance"];
 export type Glossary = Schemas["Glossary"];
 export type GlossaryEntry = Schemas["GlossaryEntry"];
 export type ErrorBody = Schemas["ErrorBody"];
+
+// Algorithm Lab
+export type GrammarPresetList = Schemas["GrammarPresetList"];
+export type GrammarPresetSummary = Schemas["GrammarPresetSummary"];
+export type GrammarPresetDetail = Schemas["GrammarPresetDetail"];
+export type GrammarExample = Schemas["GrammarExample"];
+export type GrammarSummary = Schemas["GrammarSummary"];
+export type GrammarRule = Schemas["GrammarRule"];
+export type GrammarDiagnostic = Schemas["GrammarDiagnostic"];
+export type ValidateGrammarResponse = Schemas["ValidateGrammarResponse"];
+export type ParseGrammarRequest = Schemas["ParseGrammarRequest"];
+export type ParseGrammarResponse = Schemas["ParseGrammarResponse"];
+export type ChartItem = Schemas["ChartItemOut"];
+export type ItemRef = Schemas["ItemRefOut"];
+export type TraceEvent = Schemas["TraceEventOut"];
+export type DerivationTree = Schemas["DerivationTree"];

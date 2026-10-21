@@ -6,11 +6,11 @@ Results below are from the last local run (2026-10-21, Windows 11, CPU only).
 
 | Layer | Tool | Location | Needs models | Count |
 |---|---|---|---|---|
-| Backend unit (validators, normalization, config, glossaries, input, rate limiting) | pytest | `services/parser-api/tests/unit` | no | 104 |
-| Backend HTTP (every error code, back-pressure, caching, readiness, CORS, extensibility) | pytest + TestClient | `services/parser-api/tests/api` | no | 34 |
+| Backend unit (validators, normalization, config, glossaries, input, rate limiting, grammars, Earley) | pytest | `services/parser-api/tests/unit` | no | 163 |
+| Backend HTTP (every error code, back-pressure, caching, readiness, CORS, extensibility, Algorithm Lab) | pytest + TestClient | `services/parser-api/tests/api` | no | 46 |
 | Linguistic regression | pytest `-m models` | `services/parser-api/tests/integration` | yes | 5 |
-| Frontend unit (layouts, glossary lookup, selection, export, API client) | Vitest + jsdom | `apps/web/**/*.test.ts` | no | 38 |
-| End-to-end (desktop and mobile) | Playwright | `apps/web/e2e` | no¹ | 10 × 2 viewports |
+| Frontend unit (layouts, glossary lookup, selection, export, API client, Lab replay and explanations) | Vitest + jsdom | `apps/web/**/*.test.ts` | no | 55 |
+| End-to-end (desktop and mobile) | Playwright | `apps/web/e2e` | no¹ | 18 × 2 viewports |
 
 ¹ E2E runs the real Next.js app. API calls are answered with **responses recorded from the
 real parser** (`apps/web/e2e/fixtures`), so the suite is deterministic and needs no models. The
@@ -25,6 +25,16 @@ assertions.
 
 Stanza normalization is unit-tested with hand-built Stanza `Document`/`Tree` objects, including
 multiword tokens and malformed trees that must be rejected.
+
+## Algorithm Lab correctness
+
+`tests/unit/test_earley.py` checks the Earley parser against an **independent brute-force
+oracle**, which enumerates all derivations over spans. It also checks known Catalan-number
+ambiguity counts, ε-rule edge cases (exhaustively for all strings of up to 4 words), replay
+integrity of the trace, and the expected outcome declared for every preset example. Details:
+[parsing-algorithms.md](parsing-algorithms.md#how-correctness-is-checked).
+
+E2E also checks that neither page scrolls sideways on a phone.
 
 ## Linguistic regression
 
@@ -64,7 +74,9 @@ cd apps/web && pnpm build && CI=1 pnpm test:e2e         # Playwright against a p
 ```
 
 On heavily loaded machines Vitest's default fork pool can time out starting workers. The
-config therefore uses `pool: "threads"`.
+config therefore uses `pool: "threads"`. Even so, a run on an overloaded machine can
+occasionally report "no tests". That run exits non-zero, so it can never pass silently; rerun
+it.
 
 ## CI
 

@@ -29,7 +29,7 @@ from syntaxlab_api.schemas.api import (
 
 router = APIRouter(prefix="/api/v1", tags=["v1"])
 
-_ERRORS: dict[int | str, dict[str, Any]] = {
+ERROR_RESPONSES: dict[int | str, dict[str, Any]] = {
     404: {"model": ErrorResponse, "description": "Unsupported language"},
     413: {"model": ErrorResponse, "description": "Request body too large"},
     422: {"model": ErrorResponse, "description": "Invalid input or unsupported structure"},
@@ -91,7 +91,7 @@ def list_languages(registry: Registry) -> LanguageList:
 @router.get(
     "/languages/{code}",
     response_model=LanguageDetail,
-    responses={404: _ERRORS[404]},
+    responses={404: ERROR_RESPONSES[404]},
     summary="Describe one language: capabilities, schemes, limits, samples",
 )
 def get_language(code: str, registry: Registry) -> LanguageDetail:
@@ -113,7 +113,7 @@ def get_language(code: str, registry: Registry) -> LanguageDetail:
 @router.post(
     "/parse",
     response_model=ParseResponse,
-    responses=_ERRORS,
+    responses=ERROR_RESPONSES,
     dependencies=[Depends(rate_limited)],
     summary="Analyze a sentence",
 )
@@ -138,7 +138,7 @@ async def parse(body: ParseRequest, registry: Registry) -> ParseResponse:
 @router.get(
     "/schemes/{scheme_id}",
     response_model=Glossary,
-    responses={404: _ERRORS[404]},
+    responses={404: ERROR_RESPONSES[404]},
     summary="Curated explanations of the labels of an annotation scheme",
 )
 def get_scheme_glossary(scheme_id: str, request: Request) -> Glossary:

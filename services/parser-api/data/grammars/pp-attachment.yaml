@@ -1,0 +1,34 @@
+id: pp-attachment
+order: 1
+name: Prepositional-phrase attachment
+description: >-
+  A small English fragment where a prepositional phrase can modify either a noun phrase
+  (NP -> NP PP) or a verb phrase (VP -> VP PP). Both rules are left-recursive. Each extra PP
+  multiplies the readings: 1 PP gives 2 parses, 2 PPs give 5, 3 PPs give 14 (Catalan numbers).
+grammar: |
+  # An educational fragment of English, not a grammar of the language.
+  S       -> NP VP
+  NP      -> Pronoun | Det N | NP PP
+  VP      -> V NP | VP PP
+  PP      -> P NP
+  Pronoun -> "I" | "she"
+  Det     -> "the" | "a"
+  N       -> "man" | "telescope" | "hill" | "park" | "student" | "book"
+  V       -> "saw" | "reads"
+  P       -> "with" | "on" | "in"
+examples:
+  - text: I saw the man with a telescope
+    note: Two readings. Who has the telescope?
+    expect: {accepted: true, parses: 2}
+  - text: She saw the man on the hill with a telescope
+    note: Two PPs, five readings.
+    expect: {accepted: true, parses: 5}
+  - text: the student reads a book
+    note: No ambiguity, one parse.
+    expect: {accepted: true, parses: 1}
+  - text: I saw the man with
+    note: Rejected. The PP is missing its noun phrase.
+    expect: {accepted: false, parses: 0}
+  - text: saw the man
+    note: Rejected. S needs a subject NP first.
+    expect: {accepted: false, parses: 0}

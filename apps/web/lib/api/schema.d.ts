@@ -106,6 +106,74 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/grammar/presets": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Preset educational grammars */
+        get: operations["list_presets_api_v1_grammar_presets_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/grammar/presets/{preset_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A preset grammar with example sentences and their expected outcomes */
+        get: operations["get_preset_api_v1_grammar_presets__preset_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/grammar/validate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Check a grammar and report problems with line numbers */
+        post: operations["validate_grammar_api_v1_grammar_validate_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/grammar/parse": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Run the Earley parser and return its full execution trace and parse trees */
+        post: operations["parse_with_grammar_api_v1_grammar_parse_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -122,6 +190,22 @@ export interface components {
             scheme: components["schemas"]["SchemeInfo"] | null;
             /** Component */
             component: string;
+        };
+        /** ChartItemOut */
+        ChartItemOut: {
+            /** Rule */
+            rule: number;
+            /** Dot */
+            dot: number;
+            /** Origin */
+            origin: number;
+            /** End */
+            end: number;
+            /**
+             * Step
+             * @description Trace step at which the item was added.
+             */
+            step: number;
         };
         /** ComponentInfo */
         ComponentInfo: {
@@ -193,6 +277,26 @@ export interface components {
             /** Relation */
             relation: string;
         };
+        /** DerivationTree */
+        DerivationTree: {
+            /** Symbol */
+            symbol: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "nonterminal" | "terminal";
+            /** Start */
+            start: number;
+            /** End */
+            end: number;
+            /** Rule */
+            rule: number | null;
+            /** Token */
+            token: number | null;
+            /** Children */
+            children: components["schemas"]["DerivationTree"][];
+        };
         /** ErrorBody */
         ErrorBody: {
             /** Code */
@@ -207,6 +311,13 @@ export interface components {
         /** ErrorResponse */
         ErrorResponse: {
             error: components["schemas"]["ErrorBody"];
+        };
+        /** ExpectedOutcome */
+        ExpectedOutcome: {
+            /** Accepted */
+            accepted: boolean;
+            /** Parses */
+            parses: number;
         };
         /** Glossary */
         Glossary: {
@@ -264,6 +375,94 @@ export interface components {
              */
             gloss_standard: boolean;
         };
+        /** GrammarDiagnostic */
+        GrammarDiagnostic: {
+            /**
+             * Severity
+             * @enum {string}
+             */
+            severity: "error" | "warning";
+            /** Code */
+            code: string;
+            /** Message */
+            message: string;
+            /** Line */
+            line: number | null;
+        };
+        /** GrammarExample */
+        GrammarExample: {
+            /** Text */
+            text: string;
+            /** Note */
+            note: string | null;
+            expect: components["schemas"]["ExpectedOutcome"];
+        };
+        /** GrammarPresetDetail */
+        GrammarPresetDetail: {
+            /** Id */
+            id: string;
+            /** Name */
+            name: string;
+            /** Description */
+            description: string;
+            /** Grammar */
+            grammar: string;
+            /** Examples */
+            examples: components["schemas"]["GrammarExample"][];
+        };
+        /** GrammarPresetList */
+        GrammarPresetList: {
+            /** Presets */
+            presets: components["schemas"]["GrammarPresetSummary"][];
+        };
+        /** GrammarPresetSummary */
+        GrammarPresetSummary: {
+            /** Id */
+            id: string;
+            /** Name */
+            name: string;
+            /** Description */
+            description: string;
+        };
+        /** GrammarRule */
+        GrammarRule: {
+            /**
+             * Index
+             * @description 0 is the augmented rule γ → start added by the parser.
+             */
+            index: number;
+            /** Lhs */
+            lhs: string;
+            /** Rhs */
+            rhs: components["schemas"]["GrammarSymbol"][];
+            /** Text */
+            text: string;
+            /** Line */
+            line: number | null;
+        };
+        /** GrammarSummary */
+        GrammarSummary: {
+            /** Start */
+            start: string;
+            /** Rules */
+            rules: components["schemas"]["GrammarRule"][];
+            /** Nonterminals */
+            nonterminals: string[];
+            /** Terminals */
+            terminals: string[];
+            /** Nullable */
+            nullable: string[];
+        };
+        /** GrammarSymbol */
+        GrammarSymbol: {
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "nonterminal" | "terminal";
+            /** Value */
+            value: string;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
@@ -273,6 +472,13 @@ export interface components {
         HealthResponse: {
             /** Status */
             status: string;
+        };
+        /** ItemRefOut */
+        ItemRefOut: {
+            /** Set */
+            set: number;
+            /** Index */
+            index: number;
         };
         /** LanguageDetail */
         LanguageDetail: {
@@ -373,6 +579,48 @@ export interface components {
             code: string;
             /** Message */
             message: string;
+        };
+        /** ParseGrammarRequest */
+        ParseGrammarRequest: {
+            /** Grammar */
+            grammar: string;
+            /** Sentence */
+            sentence: string;
+            /**
+             * Max Trees
+             * @default 20
+             */
+            max_trees: number;
+        };
+        /** ParseGrammarResponse */
+        ParseGrammarResponse: {
+            grammar: components["schemas"]["GrammarSummary"];
+            /** Diagnostics */
+            diagnostics: components["schemas"]["GrammarDiagnostic"][];
+            /** Tokens */
+            tokens: string[];
+            /**
+             * Unknown Tokens
+             * @description Positions of words that no rule produces.
+             */
+            unknown_tokens: number[];
+            /** Accepted */
+            accepted: boolean;
+            /**
+             * Tree Count
+             * @description Exact number of parse trees, capped at tree_count_cap.
+             */
+            tree_count: number;
+            /** Tree Count Capped */
+            tree_count_capped: boolean;
+            /** Trees */
+            trees: components["schemas"]["DerivationTree"][];
+            /** Chart */
+            chart: components["schemas"]["ChartItemOut"][][];
+            /** Trace */
+            trace: components["schemas"]["TraceEventOut"][];
+            /** Trace Truncated */
+            trace_truncated: boolean;
         };
         /** ParseRequest */
         ParseRequest: {
@@ -508,6 +756,45 @@ export interface components {
             start_char: number | null;
             /** End Char */
             end_char: number | null;
+        };
+        /** TraceEventOut */
+        TraceEventOut: {
+            /** Step */
+            step: number;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "init" | "predict" | "nullable" | "scan" | "scan_fail" | "complete" | "accept" | "reject";
+            /** Set */
+            set: number;
+            item: components["schemas"]["ItemRefOut"] | null;
+            /**
+             * Added
+             * @description False if the item was already in the chart.
+             */
+            added: boolean;
+            cause: components["schemas"]["ItemRefOut"] | null;
+            completed: components["schemas"]["ItemRefOut"] | null;
+            /** Symbol */
+            symbol: string | null;
+            /** Token */
+            token: number | null;
+            /** Rule */
+            rule: number | null;
+        };
+        /** ValidateGrammarRequest */
+        ValidateGrammarRequest: {
+            /** Grammar */
+            grammar: string;
+        };
+        /** ValidateGrammarResponse */
+        ValidateGrammarResponse: {
+            /** Valid */
+            valid: boolean;
+            /** Diagnostics */
+            diagnostics: components["schemas"]["GrammarDiagnostic"][];
+            grammar: components["schemas"]["GrammarSummary"] | null;
         };
         /** ValidationError */
         ValidationError: {
@@ -763,6 +1050,186 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_presets_api_v1_grammar_presets_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GrammarPresetList"];
+                };
+            };
+        };
+    };
+    get_preset_api_v1_grammar_presets__preset_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                preset_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GrammarPresetDetail"];
+                };
+            };
+            /** @description Unsupported language */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    validate_grammar_api_v1_grammar_validate_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ValidateGrammarRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ValidateGrammarResponse"];
+                };
+            };
+            /** @description Invalid input or unsupported structure */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    parse_with_grammar_api_v1_grammar_parse_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ParseGrammarRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ParseGrammarResponse"];
+                };
+            };
+            /** @description Unsupported language */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Request body too large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Invalid input or unsupported structure */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Engine failure or invalid engine output */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Models unavailable or analyzer overloaded */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Analysis timed out */
+            504: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
                 };
             };
         };

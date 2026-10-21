@@ -1,4 +1,9 @@
 import type {
+  GrammarPresetDetail,
+  GrammarPresetList,
+  ParseGrammarRequest,
+  ParseGrammarResponse,
+  ValidateGrammarResponse,
   Glossary,
   LanguageDetail,
   LanguageList,
@@ -74,4 +79,23 @@ export const api = {
     }),
   glossary: (schemeId: string, signal?: AbortSignal) =>
     apiRequest<Glossary>(`/api/v1/schemes/${encodeURIComponent(schemeId)}`, { signal }),
+
+  grammarPresets: (signal?: AbortSignal) =>
+    apiRequest<GrammarPresetList>("/api/v1/grammar/presets", { signal }),
+  grammarPreset: (id: string, signal?: AbortSignal) =>
+    apiRequest<GrammarPresetDetail>(`/api/v1/grammar/presets/${encodeURIComponent(id)}`, {
+      signal,
+    }),
+  validateGrammar: (grammar: string, signal?: AbortSignal) =>
+    apiRequest<ValidateGrammarResponse>("/api/v1/grammar/validate", {
+      method: "POST",
+      body: JSON.stringify({ grammar }),
+      signal,
+    }),
+  parseWithGrammar: (request: ParseGrammarRequest, signal?: AbortSignal) =>
+    apiRequest<ParseGrammarResponse>("/api/v1/grammar/parse", {
+      method: "POST",
+      body: JSON.stringify(request),
+      signal,
+    }),
 };

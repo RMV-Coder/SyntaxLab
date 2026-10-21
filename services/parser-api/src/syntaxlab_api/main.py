@@ -13,9 +13,10 @@ from fastapi.responses import JSONResponse
 
 from syntaxlab_api import __version__
 from syntaxlab_api.api import health
-from syntaxlab_api.api.v1 import routes
+from syntaxlab_api.api.v1 import grammar_routes, routes
 from syntaxlab_api.errors import ApiError
 from syntaxlab_api.glossary import load_glossaries
+from syntaxlab_api.grammar.presets import load_presets
 from syntaxlab_api.languages.config import load_languages_file
 from syntaxlab_api.languages.registry import LanguageRegistry
 from syntaxlab_api.middleware import BodySizeLimitMiddleware, RateLimiter
@@ -33,6 +34,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         registry = LanguageRegistry.from_config(languages_file, settings)
         app.state.registry = registry
         app.state.glossaries = load_glossaries(settings.glossary_dir, languages_file.schemes)
+        app.state.grammar_presets = load_presets(settings.grammar_dir)
         if settings.preload:
             for runtime in registry:
                 runtime.start_loading()  # background, on each engine's own thread
@@ -105,4 +107,5 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     app.include_router(health.router)
     app.include_router(routes.router)
+    app.include_router(grammar_routes.router)
     return app

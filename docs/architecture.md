@@ -1,7 +1,7 @@
 # SyntaxLab Architecture
 
-Status: **English analyzer implemented (Phases 1–3).** Filipino, Compare, Learn and Algorithm
-Lab are designed but not built. Last updated 2026-10-21.
+Status: **English analyzer (Phases 1–3) and Algorithm Lab (Phase 7) implemented.** Filipino,
+Compare and Learn are designed but not built. Last updated 2026-10-21.
 
 ## 1. Principles that shape the architecture
 
@@ -144,6 +144,23 @@ Full reference in [api.md](api.md). Key decisions:
   diagram's characters are embedded. PNG is rendered at 2×.
 - Responsive: three columns at ≥1024 px; below that, Sentence / Diagram / Details panels.
 
+## 9a. Algorithm Lab
+
+- `syntaxlab_api/grammar/`:
+  - `grammar.py`: notation, parsing, validation (cycles, undefined/unproductive/unreachable
+    symbols, limits), nullable set.
+  - `earley.py`: recognizer with Aycock–Horspool nullable handling, trace events, derivation
+    links (packed forest), exact counting, lazy enumeration.
+  - `presets.py`: data-driven preset grammars with verified example outcomes.
+- The parse endpoint is a sync handler, so it runs in FastAPI's thread pool. Bounded inputs
+  keep it fast (the largest preset example takes under 200 events). It is rate-limited like
+  `/parse`.
+- The frontend replays the trace (`features/lab/replay.ts`) without simulating anything.
+  Chart, explanations, controls and trees are separate components. Derivation trees have their
+  own layout (`lib/syntax/derivation-layout.ts`), because grammars may place words inside any
+  rule and may derive ε.
+- Full description: [parsing-algorithms.md](parsing-algorithms.md).
+
 ## 10. Security
 
 - Input: NFC normalization; control, surrogate and bidi-override characters are rejected;
@@ -172,3 +189,6 @@ Full reference in [api.md](api.md). Key decisions:
 | D9 | Glossaries keyed by scheme, served by the API | Explanations follow the annotation scheme, not the language; new languages reuse them |
 | D10 | Test engine and recorded fixtures for non-model tests | Deterministic CI without 430 MB downloads; linguistic behaviour tested on real models separately |
 | D11 | API on port 8710 | Avoids collisions with the common 8000 |
+| D12 | Earley trace recorded server-side, replayed client-side | Step back/forward is exact; the UI cannot show states the parser was never in |
+| D13 | Derivation links per item (packed forest), not Earley's original tree recovery | The original procedure can yield spurious trees; links give exact counts and enumeration |
+| D14 | Cyclic grammars rejected | A ⇒⁺ A gives infinitely many trees; counting/enumeration must terminate |

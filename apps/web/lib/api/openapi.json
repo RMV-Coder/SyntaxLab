@@ -283,6 +283,221 @@
           }
         }
       }
+    },
+    "/api/v1/grammar/presets": {
+      "get": {
+        "tags": [
+          "algorithm-lab"
+        ],
+        "summary": "Preset educational grammars",
+        "operationId": "list_presets_api_v1_grammar_presets_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrammarPresetList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/grammar/presets/{preset_id}": {
+      "get": {
+        "tags": [
+          "algorithm-lab"
+        ],
+        "summary": "A preset grammar with example sentences and their expected outcomes",
+        "operationId": "get_preset_api_v1_grammar_presets__preset_id__get",
+        "parameters": [
+          {
+            "name": "preset_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Preset Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrammarPresetDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unsupported language",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/grammar/validate": {
+      "post": {
+        "tags": [
+          "algorithm-lab"
+        ],
+        "summary": "Check a grammar and report problems with line numbers",
+        "operationId": "validate_grammar_api_v1_grammar_validate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateGrammarRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateGrammarResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input or unsupported structure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/grammar/parse": {
+      "post": {
+        "tags": [
+          "algorithm-lab"
+        ],
+        "summary": "Run the Earley parser and return its full execution trace and parse trees",
+        "operationId": "parse_with_grammar_api_v1_grammar_parse_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParseGrammarRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParseGrammarResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unsupported language",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request body too large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input or unsupported structure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Engine failure or invalid engine output",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Models unavailable or analyzer overloaded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Analysis timed out",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -328,6 +543,41 @@
           "component"
         ],
         "title": "CapabilityInfo"
+      },
+      "ChartItemOut": {
+        "properties": {
+          "rule": {
+            "type": "integer",
+            "title": "Rule"
+          },
+          "dot": {
+            "type": "integer",
+            "title": "Dot"
+          },
+          "origin": {
+            "type": "integer",
+            "title": "Origin"
+          },
+          "end": {
+            "type": "integer",
+            "title": "End"
+          },
+          "step": {
+            "type": "integer",
+            "title": "Step",
+            "description": "Trace step at which the item was added."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "rule",
+          "dot",
+          "origin",
+          "end",
+          "step"
+        ],
+        "title": "ChartItemOut"
       },
       "ComponentInfo": {
         "properties": {
@@ -495,6 +745,71 @@
         ],
         "title": "DependencyArc"
       },
+      "DerivationTree": {
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "Symbol"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "nonterminal",
+              "terminal"
+            ],
+            "title": "Kind"
+          },
+          "start": {
+            "type": "integer",
+            "title": "Start"
+          },
+          "end": {
+            "type": "integer",
+            "title": "End"
+          },
+          "rule": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rule"
+          },
+          "token": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Token"
+          },
+          "children": {
+            "items": {
+              "$ref": "#/components/schemas/DerivationTree"
+            },
+            "type": "array",
+            "title": "Children"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "symbol",
+          "kind",
+          "start",
+          "end",
+          "rule",
+          "token",
+          "children"
+        ],
+        "title": "DerivationTree"
+      },
       "ErrorBody": {
         "properties": {
           "code": {
@@ -539,6 +854,26 @@
           "error"
         ],
         "title": "ErrorResponse"
+      },
+      "ExpectedOutcome": {
+        "properties": {
+          "accepted": {
+            "type": "boolean",
+            "title": "Accepted"
+          },
+          "parses": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Parses"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "accepted",
+          "parses"
+        ],
+        "title": "ExpectedOutcome"
       },
       "Glossary": {
         "properties": {
@@ -701,6 +1036,269 @@
         ],
         "title": "GlossaryValue"
       },
+      "GrammarDiagnostic": {
+        "properties": {
+          "severity": {
+            "type": "string",
+            "enum": [
+              "error",
+              "warning"
+            ],
+            "title": "Severity"
+          },
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "line": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Line"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "severity",
+          "code",
+          "message",
+          "line"
+        ],
+        "title": "GrammarDiagnostic"
+      },
+      "GrammarExample": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Text"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          },
+          "expect": {
+            "$ref": "#/components/schemas/ExpectedOutcome"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "text",
+          "note",
+          "expect"
+        ],
+        "title": "GrammarExample"
+      },
+      "GrammarPresetDetail": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "grammar": {
+            "type": "string",
+            "title": "Grammar"
+          },
+          "examples": {
+            "items": {
+              "$ref": "#/components/schemas/GrammarExample"
+            },
+            "type": "array",
+            "title": "Examples"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "description",
+          "grammar",
+          "examples"
+        ],
+        "title": "GrammarPresetDetail"
+      },
+      "GrammarPresetList": {
+        "properties": {
+          "presets": {
+            "items": {
+              "$ref": "#/components/schemas/GrammarPresetSummary"
+            },
+            "type": "array",
+            "title": "Presets"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "presets"
+        ],
+        "title": "GrammarPresetList"
+      },
+      "GrammarPresetSummary": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "description"
+        ],
+        "title": "GrammarPresetSummary"
+      },
+      "GrammarRule": {
+        "properties": {
+          "index": {
+            "type": "integer",
+            "title": "Index",
+            "description": "0 is the augmented rule γ → start added by the parser."
+          },
+          "lhs": {
+            "type": "string",
+            "title": "Lhs"
+          },
+          "rhs": {
+            "items": {
+              "$ref": "#/components/schemas/GrammarSymbol"
+            },
+            "type": "array",
+            "title": "Rhs"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "line": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Line"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "index",
+          "lhs",
+          "rhs",
+          "text",
+          "line"
+        ],
+        "title": "GrammarRule"
+      },
+      "GrammarSummary": {
+        "properties": {
+          "start": {
+            "type": "string",
+            "title": "Start"
+          },
+          "rules": {
+            "items": {
+              "$ref": "#/components/schemas/GrammarRule"
+            },
+            "type": "array",
+            "title": "Rules"
+          },
+          "nonterminals": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Nonterminals"
+          },
+          "terminals": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Terminals"
+          },
+          "nullable": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Nullable"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "start",
+          "rules",
+          "nonterminals",
+          "terminals",
+          "nullable"
+        ],
+        "title": "GrammarSummary"
+      },
+      "GrammarSymbol": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "nonterminal",
+              "terminal"
+            ],
+            "title": "Kind"
+          },
+          "value": {
+            "type": "string",
+            "title": "Value"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "kind",
+          "value"
+        ],
+        "title": "GrammarSymbol"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -727,6 +1325,25 @@
           "status"
         ],
         "title": "HealthResponse"
+      },
+      "ItemRefOut": {
+        "properties": {
+          "set": {
+            "type": "integer",
+            "title": "Set"
+          },
+          "index": {
+            "type": "integer",
+            "title": "Index"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "set",
+          "index"
+        ],
+        "title": "ItemRefOut"
       },
       "LanguageDetail": {
         "properties": {
@@ -1016,6 +1633,121 @@
         ],
         "title": "Notice",
         "description": "A warning or limitation the user should see alongside an analysis."
+      },
+      "ParseGrammarRequest": {
+        "properties": {
+          "grammar": {
+            "type": "string",
+            "maxLength": 12000,
+            "title": "Grammar"
+          },
+          "sentence": {
+            "type": "string",
+            "maxLength": 400,
+            "minLength": 1,
+            "title": "Sentence"
+          },
+          "max_trees": {
+            "type": "integer",
+            "maximum": 50.0,
+            "minimum": 1.0,
+            "title": "Max Trees",
+            "default": 20
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "grammar",
+          "sentence"
+        ],
+        "title": "ParseGrammarRequest"
+      },
+      "ParseGrammarResponse": {
+        "properties": {
+          "grammar": {
+            "$ref": "#/components/schemas/GrammarSummary"
+          },
+          "diagnostics": {
+            "items": {
+              "$ref": "#/components/schemas/GrammarDiagnostic"
+            },
+            "type": "array",
+            "title": "Diagnostics"
+          },
+          "tokens": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tokens"
+          },
+          "unknown_tokens": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Unknown Tokens",
+            "description": "Positions of words that no rule produces."
+          },
+          "accepted": {
+            "type": "boolean",
+            "title": "Accepted"
+          },
+          "tree_count": {
+            "type": "integer",
+            "title": "Tree Count",
+            "description": "Exact number of parse trees, capped at tree_count_cap."
+          },
+          "tree_count_capped": {
+            "type": "boolean",
+            "title": "Tree Count Capped"
+          },
+          "trees": {
+            "items": {
+              "$ref": "#/components/schemas/DerivationTree"
+            },
+            "type": "array",
+            "title": "Trees"
+          },
+          "chart": {
+            "items": {
+              "items": {
+                "$ref": "#/components/schemas/ChartItemOut"
+              },
+              "type": "array"
+            },
+            "type": "array",
+            "title": "Chart"
+          },
+          "trace": {
+            "items": {
+              "$ref": "#/components/schemas/TraceEventOut"
+            },
+            "type": "array",
+            "title": "Trace"
+          },
+          "trace_truncated": {
+            "type": "boolean",
+            "title": "Trace Truncated"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "grammar",
+          "diagnostics",
+          "tokens",
+          "unknown_tokens",
+          "accepted",
+          "tree_count",
+          "tree_count_capped",
+          "trees",
+          "chart",
+          "trace",
+          "trace_truncated"
+        ],
+        "title": "ParseGrammarResponse"
       },
       "ParseRequest": {
         "properties": {
@@ -1427,6 +2159,163 @@
           "end_char"
         ],
         "title": "Token"
+      },
+      "TraceEventOut": {
+        "properties": {
+          "step": {
+            "type": "integer",
+            "title": "Step"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "init",
+              "predict",
+              "nullable",
+              "scan",
+              "scan_fail",
+              "complete",
+              "accept",
+              "reject"
+            ],
+            "title": "Kind"
+          },
+          "set": {
+            "type": "integer",
+            "title": "Set"
+          },
+          "item": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ItemRefOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "added": {
+            "type": "boolean",
+            "title": "Added",
+            "description": "False if the item was already in the chart."
+          },
+          "cause": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ItemRefOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "completed": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ItemRefOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "symbol": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Symbol"
+          },
+          "token": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Token"
+          },
+          "rule": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rule"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "step",
+          "kind",
+          "set",
+          "item",
+          "added",
+          "cause",
+          "completed",
+          "symbol",
+          "token",
+          "rule"
+        ],
+        "title": "TraceEventOut"
+      },
+      "ValidateGrammarRequest": {
+        "properties": {
+          "grammar": {
+            "type": "string",
+            "maxLength": 12000,
+            "title": "Grammar"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "grammar"
+        ],
+        "title": "ValidateGrammarRequest"
+      },
+      "ValidateGrammarResponse": {
+        "properties": {
+          "valid": {
+            "type": "boolean",
+            "title": "Valid"
+          },
+          "diagnostics": {
+            "items": {
+              "$ref": "#/components/schemas/GrammarDiagnostic"
+            },
+            "type": "array",
+            "title": "Diagnostics"
+          },
+          "grammar": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GrammarSummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "valid",
+          "diagnostics",
+          "grammar"
+        ],
+        "title": "ValidateGrammarResponse"
       },
       "ValidationError": {
         "properties": {

@@ -66,6 +66,8 @@ line-length = 100
 target-version = "py312"
 
 [tool.ruff.lint]
+# γ is the conventional augmented start symbol of Earley parsing (Jurafsky & Martin).
+allowed-confusables = ["γ"]
 select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF", "N", "S", "PT"]
 ignore = [
     "S101",  # assert is fine in tests and internal invariants

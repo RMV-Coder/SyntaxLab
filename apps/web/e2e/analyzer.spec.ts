@@ -154,3 +154,10 @@ test("validates input before sending it", async ({ page }) => {
   await expect(page.getByText(/Keep it under 300 characters/)).toBeVisible();
   await expect(page.getByRole("button", { name: "Analyze", exact: true })).toBeDisabled();
 });
+
+test("never scrolls the page sideways", async ({ page }) => {
+  await page.goto("/");
+  await analyze(page, "Did the students not read the book that the professor recommended?");
+  const widths = await page.evaluate(() => [document.documentElement.scrollWidth, window.innerWidth]);
+  expect(widths[0]).toBeLessThanOrEqual(widths[1]);
+});

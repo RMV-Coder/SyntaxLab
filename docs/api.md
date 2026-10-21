@@ -14,9 +14,33 @@ types are generated from it (`pnpm api:types`), and CI fails if they are stale.
 | GET | `/api/v1/languages/{code}` | One language (code or alias): capabilities, schemes, limits, samples, notes |
 | POST | `/api/v1/parse` | Analyze a sentence |
 | GET | `/api/v1/schemes/{scheme_id}` | Curated explanations of the labels of an annotation scheme |
+| GET | `/api/v1/grammar/presets` | Algorithm Lab: preset teaching grammars |
+| GET | `/api/v1/grammar/presets/{id}` | A preset with its example sentences and their verified outcomes |
+| POST | `/api/v1/grammar/validate` | Check a grammar; diagnostics with line numbers |
+| POST | `/api/v1/grammar/parse` | Run the Earley parser: outcome, exact tree count, trees, chart and full trace |
 
-Endpoints for comparison, learning and grammar parsing will be added with those features, and
-only then.
+Endpoints for comparison and learning will be added with those features, and only then.
+
+## POST /api/v1/grammar/parse
+
+```json
+{ "grammar": "S -> NP VP
+…", "sentence": "I saw the man with a telescope", "max_trees": 20 }
+```
+
+The response contains:
+
+- `tokens` and `unknown_tokens` (positions of words no rule produces).
+- `accepted`, plus `tree_count` (exact, capped at 10¹² with `tree_count_capped`).
+- `trees`: up to `max_trees` derivation trees, each node with `symbol`, `kind`, `start`, `end`,
+  `rule` and `children`.
+- `chart`: per position, items as `{rule, dot, origin, end, step}`.
+- `trace`: every recorded operation, with references to chart items as `{set, index}`.
+- `grammar`: the normalized rules; rule 0 is `γ → start`.
+
+Errors: **422 `invalid_grammar`** (with `details.diagnostics`), **422 `too_many_words`**
+(> 20), **422 `empty_text`**, and **422 `invalid_request`** (grammar > 12,000 characters).
+Details are in [parsing-algorithms.md](parsing-algorithms.md).
 
 ## POST /api/v1/parse
 
@@ -86,6 +110,8 @@ All errors share one shape:
 |---|---|---|
 | 404 | `unsupported_language` | Unknown language code/alias (`details.supported` lists codes) |
 | 404 | `unknown_scheme` | No glossary for that scheme |
+| 404 | `unknown_grammar` | No preset grammar with that id |
+| 422 | `invalid_grammar` | The grammar has errors (`details.diagnostics`) |
 | 413 | `payload_too_large` | Body over 16 KB |
 | 422 | `invalid_request` | Malformed JSON or fields (submitted values are never echoed) |
 | 422 | `empty_text`, `text_too_long`, `too_many_words`, `too_many_sentences`, `invalid_input` | Input limits; control or bidirectional-override characters |

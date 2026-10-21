@@ -178,7 +178,7 @@ export function AnalyzerWorkspace() {
         ))}
       </nav>
 
-      <div className="grid min-h-0 flex-1 lg:grid-cols-[21rem_minmax(0,1fr)_23rem]">
+      <div className="grid min-h-0 flex-1 grid-cols-[minmax(0,1fr)] lg:grid-cols-[21rem_minmax(0,1fr)_23rem]">
         <aside
           aria-label="Sentence input"
           className={cn(

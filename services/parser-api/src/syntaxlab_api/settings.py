@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     languages_file: Path = SERVICE_ROOT / "config" / "languages.yaml"
     models_dir: Path = SERVICE_ROOT / ".models"
     glossary_dir: Path = SERVICE_ROOT / "data" / "glossary"
+    grammar_dir: Path = SERVICE_ROOT / "data" / "grammars"
     enabled_languages: list[str] | None = Field(
         default=None, description="Restrict to these language codes (default: all enabled)."
     )

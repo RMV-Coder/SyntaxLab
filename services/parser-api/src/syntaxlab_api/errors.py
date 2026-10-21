@@ -49,6 +49,15 @@ class TooManySentences(InvalidInput):
     code = "too_many_sentences"
 
 
+class InvalidGrammar(InvalidInput):
+    code = "invalid_grammar"
+
+
+class UnknownGrammar(ApiError):
+    status_code = 404
+    code = "unknown_grammar"
+
+
 class UnsupportedLanguage(ApiError):
     status_code = 404
     code = "unsupported_language"

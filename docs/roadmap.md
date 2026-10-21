@@ -8,17 +8,16 @@ limitations recorded, and no unsupported claims.
 - **Analyzer (English):** dependency + constituency analysis, interactive diagrams,
   explanations, provenance, export, mobile layout.
 - **Pluggable languages:** configuration-only language addition, engine plug-ins.
+- **Algorithm Lab:** Earley parser with a replayable trace, a packed parse forest, ε-rules,
+  grammar validation, four preset grammars, and correctness checked against an independent
+  oracle.
 
 ## Next
 
-1. **Algorithm Lab.** An Earley parser implemented from scratch on small, explicit grammars,
-   with a step-by-step execution view: predict, scan, complete; pause, step back, reset. Includes
-   ambiguity through a packed parse forest, ε-rules and cycle detection. Design in
-   [research/parsing-strategies.md](research/parsing-strategies.md).
-2. **Learn.** Part-of-speech and dependency exercises on expert-annotated UD sentences, and
+1. **Learn.** Part-of-speech and dependency exercises on expert-annotated UD sentences, and
    bracketing exercises checked against *every* parse an explicit grammar allows. No exercise
    uses parser output as its answer key.
-3. **Deployment.** API Docker image on Hugging Face Spaces, web app on Vercel, latency and
+2. **Deployment.** API Docker image on Hugging Face Spaces, web app on Vercel, latency and
    memory measured on the host.
 
 ## Later
