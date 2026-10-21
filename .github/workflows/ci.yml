@@ -1,0 +1,105 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  api:
+    name: Parser API (lint, types, tests)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: services/parser-api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: services/parser-api/uv.lock
+      - run: uv sync --extra stanza --group dev --locked
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run mypy
+      # Unit + API tests run without NLP models (the test engine and hand-built Stanza docs).
+      - run: uv run pytest --cov=syntaxlab_api --cov-report=term-missing
+
+  contract:
+    name: API contract is in sync
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: services/parser-api/uv.lock
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: cd services/parser-api && uv sync --locked
+      - run: pnpm api:types
+      - name: Fail if generated OpenAPI/TypeScript types are stale
+        run: git diff --exit-code -- apps/web/lib/api/
+
+  web:
+    name: Web (lint, types, unit tests, build, E2E)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+        env:
+          NEXT_PUBLIC_SYNTAXLAB_API_URL: http://api.syntaxlab.test
+      - run: pnpm exec playwright install --with-deps chromium
+      # E2E intercepts API calls with responses recorded from the real parser (e2e/fixtures).
+      - run: pnpm test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: apps/web/playwright-report
+          retention-days: 7
+
+  models:
+    name: Linguistic regression (real models)
+    # Downloads ~430 MB of models; runs on main and on demand, not on every PR.
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: services/parser-api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: services/parser-api/uv.lock
+      - run: uv sync --extra stanza --group dev --locked
+      - uses: actions/cache@v4
+        with:
+          path: services/parser-api/.models
+          key: models-${{ hashFiles('services/parser-api/config/languages.yaml', 'services/parser-api/uv.lock') }}
+      - run: uv run syntaxlab-api download-models
+      - run: uv run pytest -m models -s

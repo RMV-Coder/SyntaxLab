@@ -1,0 +1,1473 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SyntaxLab Parser API",
+    "description": "Syntactic analysis from identified parsers, normalized to a language-independent schema. Languages and engines are configured, not hard-coded: see `GET /api/v1/languages` for what this deployment supports.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Liveness: the process serves HTTP",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ready": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Readiness: configured models are usable",
+        "operationId": "ready_ready_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadinessResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Not ready",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadinessResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/languages": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "List supported languages",
+        "operationId": "list_languages_api_v1_languages_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LanguageList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/languages/{code}": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Describe one language: capabilities, schemes, limits, samples",
+        "operationId": "get_language_api_v1_languages__code__get",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Code"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LanguageDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unsupported language",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/parse": {
+      "post": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Analyze a sentence",
+        "operationId": "parse_api_v1_parse_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParseRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParseResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unsupported language",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request body too large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input or unsupported structure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Engine failure or invalid engine output",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Models unavailable or analyzer overloaded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Analysis timed out",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/schemes/{scheme_id}": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Curated explanations of the labels of an annotation scheme",
+        "operationId": "get_scheme_glossary_api_v1_schemes__scheme_id__get",
+        "parameters": [
+          {
+            "name": "scheme_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Scheme Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Glossary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unsupported language",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Capability": {
+        "type": "string",
+        "enum": [
+          "tokenization",
+          "pos",
+          "lemma",
+          "morphology",
+          "dependency",
+          "constituency"
+        ],
+        "title": "Capability",
+        "description": "What an engine can produce for a language."
+      },
+      "CapabilityInfo": {
+        "properties": {
+          "capability": {
+            "$ref": "#/components/schemas/Capability"
+          },
+          "scheme": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SchemeInfo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "component": {
+            "type": "string",
+            "title": "Component"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "capability",
+          "scheme",
+          "component"
+        ],
+        "title": "CapabilityInfo"
+      },
+      "ComponentInfo": {
+        "properties": {
+          "capability": {
+            "$ref": "#/components/schemas/Capability"
+          },
+          "scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme"
+          },
+          "component": {
+            "type": "string",
+            "title": "Component",
+            "description": "Engine component that produced this layer."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "capability",
+          "scheme",
+          "component"
+        ],
+        "title": "ComponentInfo"
+      },
+      "ConstituencyAnalysis": {
+        "properties": {
+          "scheme": {
+            "type": "string",
+            "title": "Scheme",
+            "description": "Annotation scheme id, e.g. 'ptb-revised'."
+          },
+          "root": {
+            "type": "string",
+            "title": "Root"
+          },
+          "nodes": {
+            "items": {
+              "$ref": "#/components/schemas/ConstituencyNode"
+            },
+            "type": "array",
+            "title": "Nodes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "scheme",
+          "root",
+          "nodes"
+        ],
+        "title": "ConstituencyAnalysis"
+      },
+      "ConstituencyNode": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "children": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Children",
+            "description": "Child node ids, in surface order."
+          },
+          "token_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Token Id",
+            "description": "Set on pre-terminal nodes: the word this node dominates. Such nodes have no children."
+          },
+          "span": {
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "type": "array",
+            "maxItems": 2,
+            "minItems": 2,
+            "title": "Span",
+            "description": "Inclusive word-id span [first, last]."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "children",
+          "token_id",
+          "span"
+        ],
+        "title": "ConstituencyNode"
+      },
+      "DependencyAnalysis": {
+        "properties": {
+          "scheme": {
+            "type": "string",
+            "title": "Scheme",
+            "description": "Annotation scheme id, e.g. 'ud-2'."
+          },
+          "arcs": {
+            "items": {
+              "$ref": "#/components/schemas/DependencyArc"
+            },
+            "type": "array",
+            "title": "Arcs"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "scheme",
+          "arcs"
+        ],
+        "title": "DependencyAnalysis"
+      },
+      "DependencyArc": {
+        "properties": {
+          "dependent": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Dependent"
+          },
+          "head": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Head",
+            "description": "0 denotes the artificial root."
+          },
+          "relation": {
+            "type": "string",
+            "title": "Relation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "dependent",
+          "head",
+          "relation"
+        ],
+        "title": "DependencyArc"
+      },
+      "ErrorBody": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "details": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Details"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "details"
+        ],
+        "title": "ErrorBody"
+      },
+      "ErrorResponse": {
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorBody"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "title": "ErrorResponse"
+      },
+      "Glossary": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source"
+          },
+          "entries": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/GlossaryEntry"
+            },
+            "type": "object",
+            "title": "Entries"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "url",
+          "kind",
+          "source",
+          "entries"
+        ],
+        "title": "Glossary"
+      },
+      "GlossaryEntry": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "definition": {
+            "type": "string",
+            "title": "Definition"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "textbook": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Textbook",
+            "description": "Closest category in introductory textbooks (reading aid only)."
+          },
+          "family": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PosFamily"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "values": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/GlossaryValue"
+            },
+            "type": "object",
+            "title": "Values"
+          },
+          "language_notes": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Language Notes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "definition",
+          "url",
+          "textbook",
+          "family",
+          "values",
+          "language_notes"
+        ],
+        "title": "GlossaryEntry"
+      },
+      "GlossaryValue": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "gloss": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gloss",
+            "description": "Leipzig-style gloss abbreviation."
+          },
+          "gloss_standard": {
+            "type": "boolean",
+            "title": "Gloss Standard",
+            "description": "False if the abbreviation is not in the Leipzig Glossing Rules list.",
+            "default": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "gloss",
+          "gloss_standard"
+        ],
+        "title": "GlossaryValue"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "HealthResponse"
+      },
+      "LanguageDetail": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "native_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Native Name"
+          },
+          "aliases": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Aliases"
+          },
+          "status": {
+            "$ref": "#/components/schemas/LanguageStatus"
+          },
+          "capabilities": {
+            "items": {
+              "$ref": "#/components/schemas/CapabilityInfo"
+            },
+            "type": "array",
+            "title": "Capabilities"
+          },
+          "structures": {
+            "items": {
+              "$ref": "#/components/schemas/StructureKind"
+            },
+            "type": "array",
+            "title": "Structures",
+            "description": "Structural analyses that can be requested for this language."
+          },
+          "engine": {
+            "type": "string",
+            "title": "Engine"
+          },
+          "samples": {
+            "items": {
+              "$ref": "#/components/schemas/SampleSentence"
+            },
+            "type": "array",
+            "title": "Samples"
+          },
+          "notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Notes"
+          },
+          "limits": {
+            "$ref": "#/components/schemas/LanguageLimits"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "name",
+          "native_name",
+          "aliases",
+          "status",
+          "capabilities",
+          "structures",
+          "engine",
+          "samples",
+          "notes",
+          "limits"
+        ],
+        "title": "LanguageDetail"
+      },
+      "LanguageLimits": {
+        "properties": {
+          "max_chars": {
+            "type": "integer",
+            "title": "Max Chars"
+          },
+          "max_words": {
+            "type": "integer",
+            "title": "Max Words"
+          },
+          "max_sentences": {
+            "type": "integer",
+            "title": "Max Sentences"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "max_chars",
+          "max_words",
+          "max_sentences"
+        ],
+        "title": "LanguageLimits"
+      },
+      "LanguageList": {
+        "properties": {
+          "languages": {
+            "items": {
+              "$ref": "#/components/schemas/LanguageSummary"
+            },
+            "type": "array",
+            "title": "Languages"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "languages"
+        ],
+        "title": "LanguageList"
+      },
+      "LanguageRef": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "name"
+        ],
+        "title": "LanguageRef"
+      },
+      "LanguageStatus": {
+        "type": "string",
+        "enum": [
+          "not_loaded",
+          "loading",
+          "ready",
+          "failed"
+        ],
+        "title": "LanguageStatus"
+      },
+      "LanguageSummary": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "native_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Native Name"
+          },
+          "aliases": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Aliases"
+          },
+          "status": {
+            "$ref": "#/components/schemas/LanguageStatus"
+          },
+          "capabilities": {
+            "items": {
+              "$ref": "#/components/schemas/CapabilityInfo"
+            },
+            "type": "array",
+            "title": "Capabilities"
+          },
+          "structures": {
+            "items": {
+              "$ref": "#/components/schemas/StructureKind"
+            },
+            "type": "array",
+            "title": "Structures",
+            "description": "Structural analyses that can be requested for this language."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "name",
+          "native_name",
+          "aliases",
+          "status",
+          "capabilities",
+          "structures"
+        ],
+        "title": "LanguageSummary"
+      },
+      "MultiwordToken": {
+        "properties": {
+          "first": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "First",
+            "description": "First word id covered by this orthographic token."
+          },
+          "last": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Last",
+            "description": "Last word id covered (inclusive)."
+          },
+          "form": {
+            "type": "string",
+            "title": "Form"
+          },
+          "start_char": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start Char"
+          },
+          "end_char": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End Char"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "first",
+          "last",
+          "form",
+          "start_char",
+          "end_char"
+        ],
+        "title": "MultiwordToken"
+      },
+      "Notice": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "Notice",
+        "description": "A warning or limitation the user should see alongside an analysis."
+      },
+      "ParseRequest": {
+        "properties": {
+          "language": {
+            "type": "string",
+            "maxLength": 32,
+            "minLength": 1,
+            "title": "Language",
+            "examples": [
+              "en"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Text",
+            "examples": [
+              "I saw the man with a telescope."
+            ]
+          },
+          "structures": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/StructureKind"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Structures",
+            "description": "Structural analyses to produce. Omit to get every structure the language supports. Requesting an unsupported structure is an error, never a fallback."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "language",
+          "text"
+        ],
+        "title": "ParseRequest"
+      },
+      "ParseResponse": {
+        "properties": {
+          "language": {
+            "$ref": "#/components/schemas/LanguageRef"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text",
+            "description": "The analyzed text after Unicode NFC normalization."
+          },
+          "sentences": {
+            "items": {
+              "$ref": "#/components/schemas/SentenceAnalysis"
+            },
+            "type": "array",
+            "title": "Sentences"
+          },
+          "provenance": {
+            "$ref": "#/components/schemas/Provenance"
+          },
+          "notices": {
+            "items": {
+              "$ref": "#/components/schemas/Notice"
+            },
+            "type": "array",
+            "title": "Notices"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "language",
+          "text",
+          "sentences",
+          "provenance",
+          "notices"
+        ],
+        "title": "ParseResponse"
+      },
+      "PosFamily": {
+        "type": "string",
+        "enum": [
+          "nominal",
+          "verbal",
+          "modifier",
+          "function",
+          "other"
+        ],
+        "title": "PosFamily",
+        "description": "Coarse grouping of POS tags, used for consistent colouring across schemes."
+      },
+      "Provenance": {
+        "properties": {
+          "engine": {
+            "type": "string",
+            "title": "Engine"
+          },
+          "engine_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Engine Version"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "components": {
+            "items": {
+              "$ref": "#/components/schemas/ComponentInfo"
+            },
+            "type": "array",
+            "title": "Components"
+          },
+          "processing_ms": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Processing Ms"
+          },
+          "cached": {
+            "type": "boolean",
+            "title": "Cached",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "engine",
+          "engine_version",
+          "model",
+          "components",
+          "processing_ms",
+          "cached"
+        ],
+        "title": "Provenance"
+      },
+      "ReadinessResponse": {
+        "properties": {
+          "ready": {
+            "type": "boolean",
+            "title": "Ready"
+          },
+          "languages": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/LanguageStatus"
+            },
+            "type": "object",
+            "title": "Languages"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "ready",
+          "languages"
+        ],
+        "title": "ReadinessResponse"
+      },
+      "SampleSentence": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "text",
+          "note"
+        ],
+        "title": "SampleSentence"
+      },
+      "SchemeInfo": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "url"
+        ],
+        "title": "SchemeInfo"
+      },
+      "SentenceAnalysis": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "start_char": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start Char"
+          },
+          "end_char": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End Char"
+          },
+          "tokens": {
+            "items": {
+              "$ref": "#/components/schemas/Token"
+            },
+            "type": "array",
+            "title": "Tokens"
+          },
+          "multiword_tokens": {
+            "items": {
+              "$ref": "#/components/schemas/MultiwordToken"
+            },
+            "type": "array",
+            "title": "Multiword Tokens"
+          },
+          "dependency": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DependencyAnalysis"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "constituency": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ConstituencyAnalysis"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "text",
+          "start_char",
+          "end_char",
+          "tokens",
+          "multiword_tokens",
+          "dependency",
+          "constituency"
+        ],
+        "title": "SentenceAnalysis"
+      },
+      "StructureKind": {
+        "type": "string",
+        "enum": [
+          "dependency",
+          "constituency"
+        ],
+        "title": "StructureKind",
+        "description": "Structural analyses a client can request. Token-level annotations come with every parse."
+      },
+      "Token": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Id",
+            "description": "1-based syntactic word index within the sentence."
+          },
+          "form": {
+            "type": "string",
+            "title": "Form"
+          },
+          "lemma": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lemma"
+          },
+          "upos": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Upos",
+            "description": "Universal POS tag, when available."
+          },
+          "xpos": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Xpos",
+            "description": "Language/treebank-specific POS tag."
+          },
+          "feats": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Feats",
+            "description": "Morphological features."
+          },
+          "start_char": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start Char"
+          },
+          "end_char": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End Char"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "form",
+          "lemma",
+          "upos",
+          "xpos",
+          "feats",
+          "start_char",
+          "end_char"
+        ],
+        "title": "Token"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

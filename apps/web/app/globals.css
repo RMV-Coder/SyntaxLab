@@ -1,0 +1,131 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/*
+ * SyntaxLab design tokens.
+ * Paper and ink: a cool, neutral page with fountain-pen navy text.
+ * Colour carries information only: POS families (nominal, verbal, modifier, function, other)
+ * and the highlighter used for the current selection. Values are mirrored for SVG drawing
+ * (and export) in lib/theme.ts; keep the two in sync.
+ */
+:root {
+  --paper: #f6f7f9;
+  --sheet: #ffffff;
+  --ink: #18233a;
+  --ink-soft: #3a4660;
+  --graphite: #5b6577;
+  --rule: #d5dae2;
+  --rule-strong: #b7bfcc;
+  --highlight: #f5cf4a;
+  --highlight-soft: #fbeab0;
+
+  --pos-nominal: #1f5fa8;
+  --pos-verbal: #a23b24;
+  --pos-modifier: #2e7d4f;
+  --pos-function: #6b4fa0;
+  --pos-other: #5b6577;
+
+  /* shadcn/ui semantic variables, mapped onto the tokens above */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--sheet);
+  --card-foreground: var(--ink);
+  --popover: var(--sheet);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: #ffffff;
+  --secondary: #e9ecf1;
+  --secondary-foreground: var(--ink);
+  --muted: #eef0f4;
+  --muted-foreground: var(--graphite);
+  --accent: #e9ecf1;
+  --accent-foreground: var(--ink);
+  --destructive: #b42318;
+  --border: var(--rule);
+  --input: var(--rule-strong);
+  --ring: var(--ink);
+  --radius: 0.375rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-paper: var(--paper);
+  --color-sheet: var(--sheet);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-graphite: var(--graphite);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-highlight: var(--highlight);
+  --color-highlight-soft: var(--highlight-soft);
+  --color-pos-nominal: var(--pos-nominal);
+  --color-pos-verbal: var(--pos-verbal);
+  --color-pos-modifier: var(--pos-modifier);
+  --color-pos-function: var(--pos-function);
+  --color-pos-other: var(--pos-other);
+
+  --font-sans: var(--font-ui);
+  --font-data: var(--font-data-face);
+  --font-heading: var(--font-data-face);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+}
+
+/* Grammatical category labels are set in small capitals, as in linguistics typesetting. */
+.small-caps {
+  font-variant-caps: all-small-caps;
+  font-feature-settings: "c2sc", "smcp";
+  letter-spacing: 0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

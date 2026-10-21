@@ -1,0 +1,122 @@
+# Curated definitions: Universal POS tags (UD v2).
+# Source: https://universaldependencies.org/u/pos/ (definitions paraphrased and condensed).
+id: ud-upos
+kind: pos
+source: https://universaldependencies.org/u/pos/
+entries:
+  ADJ:
+    name: adjective
+    definition: >-
+      A word that typically modifies a noun and describes a property of its referent, such as
+      size, colour, age or quality. Adjectives can also be predicates ("The car is red").
+    url: https://universaldependencies.org/u/pos/ADJ.html
+    family: modifier
+  ADP:
+    name: adposition
+    definition: >-
+      A preposition or postposition: a word that combines with a noun phrase and marks its
+      relation to the rest of the clause (English "in", "of", "by").
+    url: https://universaldependencies.org/u/pos/ADP.html
+    family: function
+  ADV:
+    name: adverb
+    definition: >-
+      A word that typically modifies a verb, an adjective or another adverb, expressing time,
+      place, manner, degree and similar notions ("quickly", "very", "here").
+    url: https://universaldependencies.org/u/pos/ADV.html
+    family: modifier
+  AUX:
+    name: auxiliary
+    definition: >-
+      A function word that accompanies a lexical verb to express tense, aspect, mood, voice or
+      polarity ("is eating", "has eaten", "will go", "can swim"). In UD, copulas are also AUX.
+    url: https://universaldependencies.org/u/pos/AUX_.html
+    family: verbal
+  CCONJ:
+    name: coordinating conjunction
+    definition: >-
+      A word that links two units of equal syntactic status without making one depend on the
+      other ("and", "or", "but").
+    url: https://universaldependencies.org/u/pos/CCONJ.html
+    family: function
+  DET:
+    name: determiner
+    definition: >-
+      A word that modifies a noun phrase and expresses its reference or quantity rather than a
+      descriptive property: articles, demonstratives and many quantifiers ("the", "this", "every").
+    url: https://universaldependencies.org/u/pos/DET.html
+    family: function
+  INTJ:
+    name: interjection
+    definition: >-
+      A word used as an exclamation or reaction, typically outside the syntax of the clause
+      ("oh", "wow", "yes").
+    url: https://universaldependencies.org/u/pos/INTJ.html
+    family: other
+  NOUN:
+    name: noun
+    definition: >-
+      A word that typically denotes a person, place, thing, animal or idea and can head a noun
+      phrase ("child", "rice", "idea").
+    url: https://universaldependencies.org/u/pos/NOUN.html
+    family: nominal
+  NUM:
+    name: numeral
+    definition: >-
+      A word expressing a number, written in letters or digits ("three", "3", "2026").
+    url: https://universaldependencies.org/u/pos/NUM.html
+    family: other
+  PART:
+    name: particle
+    definition: >-
+      A function word that does not fit the other classes and marks a grammatical notion such as
+      negation or possession. In English, "not"/"n't", infinitival "to" and possessive "'s" are PART.
+    url: https://universaldependencies.org/u/pos/PART.html
+    family: function
+  PRON:
+    name: pronoun
+    definition: >-
+      A word that substitutes for a noun phrase and whose reference depends on context
+      ("she", "it", "who", "themselves").
+    url: https://universaldependencies.org/u/pos/PRON.html
+    family: nominal
+  PROPN:
+    name: proper noun
+    definition: >-
+      A noun that is the name of a specific individual, place or organization ("Mary", "Manila",
+      "Google").
+    url: https://universaldependencies.org/u/pos/PROPN.html
+    family: nominal
+  PUNCT:
+    name: punctuation
+    definition: A non-alphabetic character that delimits linguistic units in written text.
+    url: https://universaldependencies.org/u/pos/PUNCT.html
+    family: other
+  SCONJ:
+    name: subordinating conjunction
+    definition: >-
+      A conjunction that introduces a subordinate clause and marks it as dependent on another
+      clause ("because", "if", "that" introducing a complement clause).
+    url: https://universaldependencies.org/u/pos/SCONJ.html
+    family: function
+  SYM:
+    name: symbol
+    definition: >-
+      A word-like unit written with symbols rather than letters, such as "$", "%", "+" or an
+      emoji, used like a word rather than as punctuation.
+    url: https://universaldependencies.org/u/pos/SYM.html
+    family: other
+  VERB:
+    name: verb
+    definition: >-
+      A word that typically denotes an event or state and can head a clause, taking arguments
+      such as a subject and an object ("eat", "know", "arrive").
+    url: https://universaldependencies.org/u/pos/VERB.html
+    family: verbal
+  X:
+    name: other
+    definition: >-
+      A word that cannot be assigned a real part-of-speech category, such as a foreign-language
+      fragment or a word that is cut off.
+    url: https://universaldependencies.org/u/pos/X.html
+    family: other

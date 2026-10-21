@@ -1,0 +1,1 @@
+{"error":{"code":"too_many_sentences","message":"Found 2 sentences; analyze up to 1 at a time.","details":{"sentences":2,"max_sentences":1}}}

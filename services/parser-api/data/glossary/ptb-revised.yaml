@@ -1,0 +1,173 @@
+# Curated definitions: Penn Treebank labels (as produced by Stanza's "ptb3-revised" model).
+# Sources: Bies et al. (1995) "Bracketing Guidelines for Treebank II Style";
+# Santorini (1990) "Part-of-Speech Tagging Guidelines for the Penn Treebank Project".
+# `textbook` gives the closest category used in introductory syntax textbooks, where one
+# exists. It is a reading aid, not a claim that the two analyses are equivalent.
+id: ptb-revised
+kind: constituency
+source: https://catalog.ldc.upenn.edu/docs/LDC99T42/
+entries:
+  # ---------------------------------------------------------------- clause and phrase labels
+  ROOT:
+    name: root
+    definition: The artificial top node added by the parser above the sentence.
+  S:
+    name: simple declarative clause
+    definition: >-
+      A clause, typically a subject noun phrase followed by a verb phrase. Not used for clauses
+      introduced by a complementizer (see SBAR) or for inverted questions (see SQ).
+    textbook: S (TP/IP in X-bar theory)
+  SBAR:
+    name: subordinate clause
+    definition: >-
+      A clause introduced by a (possibly empty) subordinating word such as "that", "because",
+      "if" or a relative pronoun.
+    textbook: S′ / CP
+  SBARQ:
+    name: direct wh-question
+    definition: A direct question introduced by a wh-word or wh-phrase ("What did you see?").
+    textbook: CP
+  SINV:
+    name: inverted declarative clause
+    definition: >-
+      A declarative clause in which the subject follows the verb or auxiliary, e.g. after a
+      fronted phrase or in quotation inversion ("'Hi,' said Mary").
+  SQ:
+    name: inverted question
+    definition: >-
+      An inverted yes/no question, or the main clause of a wh-question after the wh-phrase
+      ("Did the students read the book?").
+  NP:
+    name: noun phrase
+    definition: A phrase headed by a noun or pronoun ("the child", "she", "rice").
+    textbook: NP (DP in some theories)
+  NML:
+    name: nominal modifier phrase
+    definition: >-
+      Marks a sub-constituent inside a noun phrase, typically a pre-modifier made of several
+      words ("[NML New York] lawyer"). Added in the revised Penn Treebank.
+  NX:
+    name: head of a complex noun phrase
+    definition: Marks the head noun group in certain complex noun phrases, e.g. under coordination.
+    textbook: N′ (N-bar), roughly
+  VP:
+    name: verb phrase
+    definition: >-
+      A phrase headed by a verb, including its objects and complements. Auxiliaries take a VP
+      complement, which is why "is eating rice" contains a VP inside a VP.
+    textbook: VP
+  PP:
+    name: prepositional phrase
+    definition: A preposition and its complement ("with a telescope").
+    textbook: PP
+  ADJP:
+    name: adjective phrase
+    definition: A phrase headed by an adjective ("very tall", "proud of her work").
+    textbook: AP / AdjP
+  ADVP:
+    name: adverb phrase
+    definition: A phrase headed by an adverb ("very quickly").
+    textbook: AdvP
+  QP:
+    name: quantifier phrase
+    definition: A complex measure or amount inside a noun phrase ("about 5 %", "more than three").
+  PRT:
+    name: particle
+    definition: The particle of a phrasal verb ("pick [up] the book").
+  CONJP:
+    name: conjunction phrase
+    definition: A multiword conjunction ("as well as", "rather than").
+  UCP:
+    name: unlike coordinated phrase
+    definition: A coordination of phrases of different categories ("old and in pain").
+  PRN:
+    name: parenthetical
+    definition: A parenthetical insertion ("[PRN , I think ,]").
+  FRAG:
+    name: fragment
+    definition: A fragment that is not a complete clause, such as a heading or an elliptical answer.
+  INTJ:
+    name: interjection phrase
+    definition: An interjection ("oh", "yes").
+  LST:
+    name: list marker
+    definition: A list marker such as "1." or "a)".
+  RRC:
+    name: reduced relative clause
+    definition: A relative clause without a relative pronoun or verb in certain constructions.
+  WHNP:
+    name: wh-noun phrase
+    definition: A noun phrase containing a wh-word, often a relative or interrogative pronoun ("which book", "that", "who").
+  WHADVP:
+    name: wh-adverb phrase
+    definition: An adverb phrase containing a wh-adverb ("why", "when", "how").
+  WHADJP:
+    name: wh-adjective phrase
+    definition: An adjective phrase containing a wh-word ("how tall").
+  WHPP:
+    name: wh-prepositional phrase
+    definition: A prepositional phrase containing a wh-noun phrase ("of which", "by whom").
+  NAC:
+    name: not a constituent
+    definition: Groups words inside a noun phrase that do not form a true constituent, e.g. in some names.
+  X:
+    name: unknown or uncertain
+    definition: A constituent the annotation could not classify.
+
+  # ---------------------------------------------------------------- part-of-speech tags
+  CC: {name: coordinating conjunction, definition: '"and", "or", "but".', textbook: Conj}
+  CD: {name: cardinal number, definition: '"three", "2026".', textbook: Num}
+  DT: {name: determiner, definition: '"the", "a", "this", "every".', textbook: Det (D)}
+  EX: {name: existential "there", definition: '"there" in "There is a problem".'}
+  FW: {name: foreign word, definition: A word from another language.}
+  IN:
+    name: preposition or subordinating conjunction
+    definition: >-
+      Prepositions ("in", "with") and subordinating conjunctions ("because", "if"); the Penn
+      Treebank does not distinguish them by tag.
+    textbook: P, or C for complementizers
+  JJ: {name: adjective, definition: '"red", "tall".', textbook: Adj (A)}
+  JJR: {name: comparative adjective, definition: '"taller", "better".', textbook: Adj (A)}
+  JJS: {name: superlative adjective, definition: '"tallest", "best".', textbook: Adj (A)}
+  LS: {name: list item marker, definition: '"1.", "a)".'}
+  MD: {name: modal verb, definition: '"can", "will", "should", "must".', textbook: Aux (T)}
+  NN: {name: "noun, singular or mass", definition: '"child", "rice".', textbook: N}
+  NNS: {name: "noun, plural", definition: '"children", "books".', textbook: N}
+  NNP: {name: "proper noun, singular", definition: '"Mary", "Manila".', textbook: N}
+  NNPS: {name: "proper noun, plural", definition: '"the Philippines", "Americans".', textbook: N}
+  PDT: {name: predeterminer, definition: '"all" in "all the students".', textbook: Det}
+  POS: {name: possessive ending, definition: "The possessive \"'s\" or \"'\"."}
+  PRP: {name: personal pronoun, definition: '"I", "she", "them".', textbook: N (or D) / Pron}
+  PRP$: {name: possessive pronoun, definition: '"my", "their".', textbook: Det}
+  RB: {name: adverb, definition: '"quickly", "very", "not".', textbook: Adv}
+  RBR: {name: comparative adverb, definition: '"faster".', textbook: Adv}
+  RBS: {name: superlative adverb, definition: '"fastest".', textbook: Adv}
+  RP: {name: particle, definition: '"up" in "pick up".', textbook: Prt}
+  SYM: {name: symbol, definition: '"%", "&", "+".'}
+  TO: {name: '"to"', definition: 'Infinitival or prepositional "to".', textbook: T or P}
+  UH: {name: interjection, definition: '"oh", "yes", "um".', textbook: Interj}
+  VB: {name: "verb, base form", definition: '"eat" in "can eat", "to eat".', textbook: V}
+  VBD: {name: "verb, past tense", definition: '"ate", "walked".', textbook: V}
+  VBG: {name: "verb, gerund or present participle", definition: '"eating".', textbook: V}
+  VBN: {name: "verb, past participle", definition: '"eaten", "written".', textbook: V}
+  VBP: {name: "verb, present tense, not third-person singular", definition: '"eat", "are".', textbook: V}
+  VBZ: {name: "verb, present tense, third-person singular", definition: '"eats", "is".', textbook: V}
+  WDT: {name: wh-determiner, definition: '"which", "that" (relative).', textbook: Det / C}
+  WP: {name: wh-pronoun, definition: '"who", "what".'}
+  WP$: {name: possessive wh-pronoun, definition: '"whose".'}
+  WRB: {name: wh-adverb, definition: '"when", "where", "how", "why".'}
+  HYPH: {name: hyphen, definition: A hyphen split off from a word (revised Penn Treebank).}
+  NFP: {name: superfluous punctuation, definition: 'Decorative or repeated punctuation such as "***".'}
+  ADD: {name: address, definition: An e-mail address or URL.}
+  AFX: {name: affix, definition: A separated affix ("pre-" in "pre- and post-war").}
+  GW: {name: goes with, definition: Part of a word wrongly split in the text.}
+  XX: {name: unknown, definition: A token the annotation could not tag.}
+  "``": {name: opening quotation mark, definition: Opening quotation mark.}
+  "''": {name: closing quotation mark, definition: Closing quotation mark.}
+  ",": {name: comma, definition: Comma.}
+  ".": {name: sentence-final punctuation, definition: '".", "?", "!".'}
+  ":": {name: colon or dash, definition: '":", ";", "—", "...".'}
+  -LRB-: {name: left bracket, definition: Opening parenthesis or bracket.}
+  -RRB-: {name: right bracket, definition: Closing parenthesis or bracket.}
+  $: {name: dollar sign, definition: Currency symbol "$".}
+  "#": {name: pound sign, definition: The "#" symbol.}

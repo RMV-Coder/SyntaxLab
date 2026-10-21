@@ -1,0 +1,112 @@
+# API Reference (v1)
+
+Base URL in development: `http://127.0.0.1:8710`. The machine-readable contract is the
+OpenAPI document at `/openapi.json` (interactive docs at `/docs`). The web client's TypeScript
+types are generated from it (`pnpm api:types`), and CI fails if they are stale.
+
+## Endpoints
+
+| Method | Path | Purpose |
+|---|---|---|
+| GET | `/health` | Liveness: the process serves HTTP |
+| GET | `/ready` | Readiness: configured models are loaded (503 until they are) |
+| GET | `/api/v1/languages` | Languages this deployment supports, with status and capabilities |
+| GET | `/api/v1/languages/{code}` | One language (code or alias): capabilities, schemes, limits, samples, notes |
+| POST | `/api/v1/parse` | Analyze a sentence |
+| GET | `/api/v1/schemes/{scheme_id}` | Curated explanations of the labels of an annotation scheme |
+
+Endpoints for comparison, learning and grammar parsing will be added with those features, and
+only then.
+
+## POST /api/v1/parse
+
+```json
+{ "language": "en", "text": "I saw the man with a telescope.", "structures": ["dependency"] }
+```
+
+- `language`: code or alias.
+- `structures` (optional): any of `dependency`, `constituency`. Omit it to get everything the
+  language supports. Requesting an unsupported structure returns **422
+  `unsupported_structure`**; it is never substituted.
+
+Response (abridged):
+
+```jsonc
+{
+  "language": { "code": "en", "name": "English" },
+  "text": "I saw the man with a telescope.",          // after Unicode NFC normalization
+  "sentences": [{
+    "text": "I saw the man with a telescope.",
+    "start_char": 0, "end_char": 31,
+    "tokens": [                                         // 1-based syntactic words
+      { "id": 1, "form": "I", "lemma": "I", "upos": "PRON", "xpos": "PRP",
+        "feats": { "Case": "Nom", "Number": "Sing", "Person": "1", "PronType": "Prs" },
+        "start_char": 0, "end_char": 1 }
+    ],
+    "multiword_tokens": [],                             // e.g. "don't" -> words 2-3
+    "dependency": { "scheme": "ud-2", "arcs": [ { "dependent": 1, "head": 2, "relation": "nsubj" } ] },
+    "constituency": {
+      "scheme": "ptb-revised", "root": "n0",
+      "nodes": [ { "id": "n0", "label": "ROOT", "children": ["n1"], "token_id": null, "span": [1, 8] } ]
+    }
+  }],
+  "provenance": {
+    "engine": "stanza", "engine_version": "1.15.0", "model": "stanza:en:default",
+    "components": [ { "capability": "dependency", "scheme": "ud-2",
+                      "component": "stanza/en/depparse/combined_charlm" } ],
+    "processing_ms": 1641.0, "cached": false
+  },
+  "notices": []
+}
+```
+
+Invariants, validated server-side before every response (`analysis/validate.py`):
+
+- Token ids are `1..n` in order. Multiword-token ranges are valid and do not overlap.
+- Dependency: every word has exactly one head in `0..n`, there is exactly one root, and there
+  are no cycles.
+- Constituency: one root, every other node has exactly one parent, there are no cycles, every
+  node is reachable, pre-terminals (`token_id` set) have no children, the yield covers words
+  `1..n` exactly once in order, and every `span` equals the recomputed span.
+
+A violation returns **500 `invalid_engine_output`**. The structure is never repaired.
+
+There is deliberately no confidence field.
+
+## Errors
+
+All errors share one shape:
+
+```json
+{ "error": { "code": "too_many_sentences", "message": "Found 2 sentences; analyze up to 1 at a time.",
+             "details": { "sentences": 2, "max_sentences": 1 } } }
+```
+
+| HTTP | `code` | When |
+|---|---|---|
+| 404 | `unsupported_language` | Unknown language code/alias (`details.supported` lists codes) |
+| 404 | `unknown_scheme` | No glossary for that scheme |
+| 413 | `payload_too_large` | Body over 16 KB |
+| 422 | `invalid_request` | Malformed JSON or fields (submitted values are never echoed) |
+| 422 | `empty_text`, `text_too_long`, `too_many_words`, `too_many_sentences`, `invalid_input` | Input limits; control or bidirectional-override characters |
+| 422 | `unsupported_structure` | Structure not supported by the language |
+| 429 | `rate_limited` | Per-client token bucket exhausted (`Retry-After`) |
+| 500 | `engine_failure`, `invalid_engine_output`, `internal_error` | Back-end failure; messages never contain internals |
+| 503 | `model_unavailable` | Models failed to load |
+| 503 | `overloaded` | Analysis queue full (`Retry-After: 5`) |
+| 504 | `analysis_timeout` | Analysis exceeded the timeout |
+
+## Limits (defaults; per-language overrides in `languages.yaml`)
+
+| Setting (`SYNTAXLAB_…`) | Default |
+|---|---|
+| `DEFAULT_MAX_CHARS` / `DEFAULT_MAX_WORDS` / `DEFAULT_MAX_SENTENCES` | 300 / 40 / 1 |
+| `MAX_BODY_BYTES` | 16384 |
+| `RATE_LIMIT_PER_MINUTE` / `RATE_LIMIT_BURST` | 60 / 10 (0 disables) |
+| `MAX_QUEUE` (pending analyses per language) | 8 |
+| `ANALYSIS_TIMEOUT_S` | 30 |
+| `CACHE_SIZE` (LRU entries per language) | 256 |
+| `CPU_THREADS` (torch intra-op threads) | number of CPUs |
+| `CORS_ORIGINS` | `["http://localhost:3000","http://127.0.0.1:3000"]` |
+| `TRUST_PROXY_HEADERS` | false (enable only behind a trusted proxy) |
+| `PRELOAD` | true (load models at startup) |
