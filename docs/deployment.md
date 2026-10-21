@@ -82,7 +82,6 @@ One-time setup:
    source is open, and a private Space's URL is not reachable by the web app.
 2. In **Settings → Variables**, add `SYNTAXLAB_CORS_ORIGINS` (see above). Spaces inject
    variables at runtime, and also pass them as build args, which this Dockerfile ignores.
-3. Replace `OWNER` in `deploy/huggingface/README.md` with the GitHub owner of this repository.
 
 Each deploy:
 

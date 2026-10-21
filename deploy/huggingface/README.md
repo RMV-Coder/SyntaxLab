@@ -11,7 +11,7 @@ short_description: Syntactic analysis API behind the SyntaxLab web app
 
 # SyntaxLab Parser API
 
-The analysis service behind [SyntaxLab](https://github.com/OWNER/SyntaxLab), an open-source
+The analysis service behind [SyntaxLab](https://github.com/RMV-Coder/SyntaxLab), an open-source
 app for learning syntax. It returns phrase-structure trees and dependency graphs from
 statistical parsers (Stanza, trained on Universal Dependencies treebanks), runs the Earley
 parser of the Algorithm Lab, and checks practice exercises.
