@@ -165,11 +165,8 @@ See `docs/research/*` and `implementation-plan.md`.
 - Stanza memory figures are Windows working-set values; re-measure as private bytes or USS.
 - `next/font` preloads italic and extended-Latin font files that are not needed at first paint
   (dev console warnings only).
-- CI workflow is written and linted but has not run yet (no remote repository).
-- The Docker image has not been built locally (Docker was not running). The CI `image` job
-  builds and smoke-tests it.
-- Nothing is deployed yet. That needs a GitHub repository, a Hugging Face account with a
-  paid plan (or another container host), and a Vercel project.
+- API host not chosen yet. The web app is live at https://syntaxlab-nine.vercel.app, but it
+  cannot analyze until `NEXT_PUBLIC_SYNTAXLAB_API_URL` points at a hosted API.
 - Occasional one-off E2E failure inside the Playwright runner under heavy local load (see
   Phase 8). It passes on retry, and CI allows one retry. Investigate if it shows up in CI.
 - A screen-reader pass by a person has not been done. Automated audits cover only part of

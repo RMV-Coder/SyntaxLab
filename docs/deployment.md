@@ -181,6 +181,16 @@ Shared CSS is 10.6 KB gzip. About 160 KB of each figure is the React and Next.js
 analyzer adds d3-zoom and the diagram code, and Radix Tooltip loads only on the two pages that
 use it.
 
-The API container (image size, cold start and latency on 2 vCPU) is **not measured yet**,
-because Docker was not available on the development machine. Dev-laptop figures are in
-[architecture.md §6](architecture.md#6-model-lifecycle-and-concurrency).
+API container, measured by the CI `image` job (GitHub-hosted runner, `--cpus 2 --memory 4g`,
+2026-10-21):
+
+| Measure | Value |
+|---|---|
+| Image size | 1.61 GB (torch CPU + Stanza + English models) |
+| Start to `/ready` (includes model load) | ≈ 11 s |
+| Memory after one parse | 860 MiB |
+| First parse, short sentence, end to end | ≈ 1 s |
+
+A single run on CI hardware, so treat these as indicative, not as a benchmark. Plan for at
+least 2 GB of memory. On a host that sleeps or scales to zero, the first request after idle
+waits for the start time above, plus the platform's own wake-up time.
