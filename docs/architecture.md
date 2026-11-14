@@ -215,8 +215,9 @@ Full reference in [api.md](api.md). Key decisions:
   `X-Forwarded-For` only from the proxies in `FORWARDED_ALLOW_IPS`; the image never trusts
   `*`, since that would let clients choose their own address and dodge the limit.
 - Security headers. The web app sends a static Content-Security-Policy (no nonces, so pages
-  stay prerendered; `connect-src` allows only the site and the API origin, `frame-ancestors
-  'none'`, `object-src 'none'`), plus `nosniff`, `Referrer-Policy` and `Permissions-Policy`.
+  stay prerendered; `connect-src` allows only the site and the API origin, `frame-ancestors`
+  limited to the site itself and the developer's portfolio, which embeds the analyzer, and
+  `object-src 'none'`), plus `nosniff`, `Referrer-Policy` and `Permissions-Policy`.
   The API sends `nosniff`, `no-referrer`, `X-Frame-Options` and explicit `Cache-Control`. An
   E2E test checks that the policy blocks nothing the app uses, PNG export included.
 - Glossaries are served only for schemes declared in configuration. Ids are pattern-checked,

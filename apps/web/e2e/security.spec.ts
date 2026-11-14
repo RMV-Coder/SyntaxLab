@@ -20,7 +20,10 @@ test("pages are served with security headers", async ({ page }) => {
   const csp = headers["content-security-policy"];
   expect(csp).toContain("default-src 'self'");
   expect(csp).toContain("connect-src 'self' http://api.syntaxlab.test");
-  expect(csp).toContain("frame-ancestors 'none'");
+  // Framed only by this site and the developer's portfolio, never by anyone else.
+  expect(csp).toContain("frame-ancestors 'self' https://raymondvaldepenas-dev.vercel.app");
+  expect(csp).not.toMatch(/frame-ancestors[^;]*\*/);
+  expect(headers["x-frame-options"]).toBeUndefined();
   expect(csp).toContain("object-src 'none'");
   expect(headers["x-content-type-options"]).toBe("nosniff");
   expect(headers["referrer-policy"]).toBe("strict-origin-when-cross-origin");
