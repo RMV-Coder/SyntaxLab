@@ -291,7 +291,9 @@ Space with a preview-scoped `NEXT_PUBLIC_SYNTAXLAB_API_URL`.
 ### What the web app sends
 
 Every page sends a static CSP (no nonces, so pages stay prerendered and cacheable), along with
-`X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options` and `Permissions-Policy`. They
+`X-Content-Type-Options`, `Referrer-Policy` and `Permissions-Policy`. The CSP's `frame-ancestors`
+lets only the site and the developer's portfolio frame it (more origins, space-separated, in
+`SYNTAXLAB_FRAME_ANCESTORS`); there is no `X-Frame-Options`, which can't name an origin. They
 are defined in `apps/web/next.config.ts`. `e2e/security.spec.ts` checks that the headers are
 present and that the policy blocks nothing the app uses, including PNG export (`blob:` and
 `data:` images).
