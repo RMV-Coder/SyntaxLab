@@ -105,15 +105,27 @@ SD card.
    ```
 4. **Tunnel.** In the Cloudflare dashboard, go to Zero Trust → Networks → Tunnels and create a
    tunnel of type Cloudflared. Copy its token into `CLOUDFLARE_TUNNEL_TOKEN` in `.env`. The token
-   is a secret: keep it only in that file on the Pi. Then add a public hostname, e.g.
-   `syntaxlab-api.myboardhub.com`, with service type `HTTP` and URL `api:7860`. Cloudflare creates
-   the DNS record itself.
+   is a secret: keep it only in that file on the Pi. Start the connector so Cloudflare sees it
+   (`docker compose up -d --no-deps cloudflared`); the dashboard enables **Continue** once it is
+   connected. Then add a published application route (older dashboards: "public hostname"), e.g.
+   `syntaxlab-api.myboardhub.com`, with Service URL **`http://api:7860`**: plain `http`, because
+   Cloudflare provides the HTTPS, and `api`, the container's name, not `localhost`. Cloudflare
+   creates the DNS record itself (a proxied CNAME); do not add one by hand.
 5. **Start.** `docker compose up -d --build`. The first build downloads the dependencies and
    models, so it takes several minutes. Then check from anywhere:
    `curl https://syntaxlab-api.myboardhub.com/ready` should show `"ready": true` for both
    languages.
 6. **Web app.** In Vercel, set `NEXT_PUBLIC_SYNTAXLAB_API_URL` to `https://<hostname>` for
    Production and redeploy.
+
+**UPS HAT (E).** `deploy/raspberry-pi/ups/` shuts the Pi down cleanly when it is on battery,
+discharging and at or below 10% (three readings in a row), and arms the HAT to power it on again
+when charging resumes. Install with `sudo bash deploy/raspberry-pi/ups/install.sh`; check with
+`python3 /usr/local/bin/syntaxlab-ups.py status` and `journalctl -u syntaxlab-ups`. The HAT must
+answer at I2C address `0x2d`: on one of two Pi 5 boards tested it did not (a pogo-pin contact
+problem), and that board also browned out under load and corrupted its SD card. Feed the HAT from
+a USB-C PD charger; with a 20 V charger it delivered about 36 W, enough to build the image while
+charging.
 
 **Updating:** `~/SyntaxLab/deploy/raspberry-pi/update.sh` pulls `main`, rebuilds, restarts, removes
 the old image, and waits for `/ready`.

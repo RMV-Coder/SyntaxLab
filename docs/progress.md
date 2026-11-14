@@ -192,8 +192,8 @@ See `docs/research/*` and `implementation-plan.md`.
 
 - Filipino teaching notes have not been reviewed by a Tagalog linguist or Filipino-language
   educator. The plan requires this before Phase 4 is called done.
-- API host: a Raspberry Pi 5 (8 GB, UPS HAT) at home behind a Cloudflare Tunnel
-  (`deploy/raspberry-pi/`). Not set up yet.
+- API host: a Raspberry Pi 5 (8 GB, Waveshare UPS HAT (E)) at home, behind a Cloudflare Tunnel at
+  https://syntaxlab-api.myboardhub.com. Live since 2026-11-15; the web app uses it.
 - The Docker image with Filipino has not been built yet. The CI `image` and `oracle-stack` jobs will
   build it on the next push, and report its size and memory.
 - Latency was measured only on a heavily loaded dev laptop (0.9–4.7 s per sentence). It must
@@ -201,8 +201,6 @@ See `docs/research/*` and `implementation-plan.md`.
 - Stanza memory figures are Windows working-set values; re-measure as private bytes or USS.
 - `next/font` preloads italic and extended-Latin font files that are not needed at first paint
   (dev console warnings only).
-- The API is not live yet; the live web app at https://syntaxlab-nine.vercel.app cannot analyze
-  until it is.
 - Occasional one-off E2E failure inside the Playwright runner under heavy local load (see
   Phase 8). It passes on retry, and CI allows one retry. Investigate if it shows up in CI.
 - A screen-reader pass by a person has not been done. Automated audits cover only part of
