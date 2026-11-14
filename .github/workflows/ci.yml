@@ -188,3 +188,60 @@ jobs:
           docker image ls syntaxlab-api
           docker stats --no-stream || true
           docker compose logs --tail 20
+
+  pi-stack:
+    name: Raspberry Pi stack (arm64, behind a proxy)
+    # deploy/raspberry-pi as the Pi runs it, minus the tunnel (which needs a real token).
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04-arm
+    defaults:
+      run:
+        working-directory: deploy/raspberry-pi
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure with a placeholder token
+        run: |
+          printf '%s\n' 'CLOUDFLARE_TUNNEL_TOKEN=placeholder' \
+            'SYNTAXLAB_CORS_ORIGINS=["https://syntaxlab-nine.vercel.app"]' > .env
+          docker compose config --quiet
+      - run: docker compose up -d --build api
+      - name: Wait for both languages to load
+        run: |
+          for i in $(seq 1 60); do
+            if docker compose exec -T api python -c "import urllib.request; print(urllib.request.urlopen('http://127.0.0.1:7860/ready', timeout=4).read().decode())"; then exit 0; fi
+            sleep 5
+          done
+          docker compose logs api
+          exit 1
+      - name: Clients are told apart by the address the proxy reports, not by forged entries
+        # Requests come from 127.0.0.1, a trusted proxy as cloudflared is. The leftmost
+        # X-Forwarded-For entries vary (forged); the proxy-appended entry stays the same.
+        run: |
+          docker compose exec -T api python - <<'PY'
+          import json, urllib.error, urllib.request
+
+          def parse(forwarded):
+              request = urllib.request.Request(
+                  "http://127.0.0.1:7860/api/v1/parse",
+                  json.dumps({"language": "tl", "text": "Gumising ang bata."}).encode(),
+                  {"Content-Type": "application/json", "X-Forwarded-For": forwarded},
+              )
+              try:
+                  with urllib.request.urlopen(request, timeout=60) as response:
+                      return response.status
+              except urllib.error.HTTPError as error:
+                  return error.code
+
+          codes = [parse(f"198.51.100.{i}, 203.0.113.7") for i in range(15)]
+          print("same client, forged prefixes:", codes)
+          assert 429 in codes, "forged X-Forwarded-For entries escaped the rate limit"
+          other = parse("198.51.100.99, 203.0.113.8")
+          print("another client:", other)
+          assert other == 200, "a different client was limited with the first one"
+          PY
+      - name: Image size and memory
+        if: always()
+        run: |
+          docker image ls syntaxlab-api
+          docker stats --no-stream || true
+          docker compose logs --tail 20 api

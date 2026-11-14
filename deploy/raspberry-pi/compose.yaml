@@ -1,0 +1,38 @@
+# SyntaxLab parser API on a Raspberry Pi 5 (64-bit OS), published through a Cloudflare Tunnel.
+#
+#   cp .env.example .env    # set CLOUDFLARE_TUNNEL_TOKEN and SYNTAXLAB_CORS_ORIGINS
+#   docker compose up -d --build
+#
+# The tunnel connects out to Cloudflare, so nothing on the home network accepts inbound
+# connections: no port forwarding, and it works behind CGNAT. Cloudflare serves HTTPS.
+# See docs/deployment.md, "Raspberry Pi with a Cloudflare Tunnel".
+
+services:
+  api:
+    build: ../../services/parser-api
+    image: syntaxlab-api:local
+    restart: unless-stopped
+    logging: &logging # bounded, so logs cannot fill the disk
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+    environment:
+      SYNTAXLAB_CORS_ORIGINS: ${SYNTAXLAB_CORS_ORIGINS:?set SYNTAXLAB_CORS_ORIGINS in .env}
+    # Not published: only cloudflared reaches it. cloudflared's address on this network is in
+    # the image's FORWARDED_ALLOW_IPS (private ranges), so client addresses for rate limiting
+    # come from the X-Forwarded-For header that Cloudflare sets.
+    expose:
+      - "7860"
+
+  cloudflared:
+    image: cloudflare/cloudflared:2026.10.7
+    restart: unless-stopped
+    logging: *logging
+    depends_on:
+      - api
+    command: tunnel --no-autoupdate run
+    environment:
+      # Created in the Cloudflare dashboard (Zero Trust > Networks > Tunnels). Its public
+      # hostname points at http://api:7860.
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:?set CLOUDFLARE_TUNNEL_TOKEN in .env}

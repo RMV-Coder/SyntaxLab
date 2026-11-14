@@ -4,7 +4,7 @@ SyntaxLab deploys as two independent pieces:
 
 | Piece | Where (decided) | Artifact |
 |---|---|---|
-| Parser API | Oracle Cloud Always Free Arm VM, Docker Compose behind Caddy | `deploy/oracle/`, `services/parser-api/Dockerfile` |
+| Parser API | Raspberry Pi 5 at home, Docker Compose behind a Cloudflare Tunnel | `deploy/raspberry-pi/`, `services/parser-api/Dockerfile` |
 | Web app | Vercel, live at https://syntaxlab-nine.vercel.app | `apps/web` (Next.js) |
 
 The web app is a static-first Next.js site. Every analysis comes from the API, called directly
@@ -70,7 +70,64 @@ each time. If the platform's proxies use public addresses, every request would l
 came from the proxy and share one rate-limit bucket. In that case list the proxy ranges the
 platform publishes.
 
-## 2. Oracle Cloud Always Free Arm VM (API, chosen)
+## 2. Raspberry Pi 5 with a Cloudflare Tunnel (API, chosen)
+
+`deploy/raspberry-pi/` runs the API image next to `cloudflared`. The tunnel connects **out** to
+Cloudflare, which serves `https://<hostname>` and sends requests back through it. Nothing on the
+home network accepts inbound connections, no router port is forwarded, the home IP is not
+published, and it works behind CGNAT. CI's `pi-stack` job runs this stack, without the tunnel,
+on an Arm64 runner. It checks that both languages load, and that forged `X-Forwarded-For` entries
+neither escape the rate limit nor make two clients share one.
+
+**Hardware.** A Pi 5 with 8 GB is comfortable: the API used about 0.84 GB with English in CI, and
+Filipino adds roughly 0.25 GB. An SD card works. Logs are capped at 30 MB per container so they
+cannot fill it, and an SSD would make builds and model loading faster. Parsing is slower than on a
+server CPU; English latency on a Pi 5 has not been measured.
+
+**Power.** A UPS HAT keeps the Pi running through short outages, and the containers restart on
+their own when the Pi boots (`restart: unless-stopped`, Docker enabled at boot). The Pi cannot
+serve while the home internet connection is down, and the UPS does not change that. Set the UPS
+to shut the Pi down cleanly before the battery runs out: losing power mid-write can corrupt an
+SD card.
+
+### Steps
+
+1. **OS.** With Raspberry Pi Imager, write **Raspberry Pi OS Lite (64-bit)** and enable SSH. On
+   the Pi, `uname -m` must print `aarch64`: the image has no 32-bit build.
+2. **Docker.** Install Docker Engine and the Compose plugin from Docker's own instructions for
+   Debian (https://docs.docker.com/engine/install/debian/), then
+   `sudo usermod -aG docker $USER` and log in again. `docker compose version` must work.
+3. **Code.**
+   ```bash
+   git clone https://github.com/RMV-Coder/SyntaxLab.git ~/SyntaxLab
+   cd ~/SyntaxLab/deploy/raspberry-pi
+   cp .env.example .env
+   ```
+4. **Tunnel.** In the Cloudflare dashboard, go to Zero Trust → Networks → Tunnels and create a
+   tunnel of type Cloudflared. Copy its token into `CLOUDFLARE_TUNNEL_TOKEN` in `.env`. The token
+   is a secret: keep it only in that file on the Pi. Then add a public hostname, e.g.
+   `syntaxlab-api.myboardhub.com`, with service type `HTTP` and URL `api:7860`. Cloudflare creates
+   the DNS record itself.
+5. **Start.** `docker compose up -d --build`. The first build downloads the dependencies and
+   models, so it takes several minutes. Then check from anywhere:
+   `curl https://syntaxlab-api.myboardhub.com/ready` should show `"ready": true` for both
+   languages.
+6. **Web app.** In Vercel, set `NEXT_PUBLIC_SYNTAXLAB_API_URL` to `https://<hostname>` for
+   Production and redeploy.
+
+**Updating:** `~/SyntaxLab/deploy/raspberry-pi/update.sh` pulls `main`, rebuilds, restarts, removes
+the old image, and waits for `/ready`.
+
+| Symptom | Check |
+|---|---|
+| `https://<hostname>` gives a Cloudflare 502/1033 error | `docker compose logs cloudflared`; the tunnel's hostname must point at `http://api:7860` |
+| `/ready` stays 503 | `docker compose logs api` (models still loading, or out of memory) |
+| CORS errors in the browser | `SYNTAXLAB_CORS_ORIGINS` in `.env` must list the exact web origin; then `docker compose up -d` |
+
+A subdomain of `myboardhub.com` carries the same trade-off described for Oracle below: it shares a
+registrable domain with the production myBoardHub app.
+
+## 2a. Oracle Cloud Always Free Arm VM (API, alternative)
 
 `deploy/oracle/` runs the API image behind [Caddy](https://caddyserver.com/), which gets and
 renews a Let's Encrypt certificate. HTTPS is required: the web app is served over HTTPS, and

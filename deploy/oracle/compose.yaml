@@ -10,6 +10,11 @@ services:
     build: ../../services/parser-api
     image: syntaxlab-api:local
     restart: unless-stopped
+    logging: &logging # bounded, so logs cannot fill the disk
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
     environment:
       SYNTAXLAB_CORS_ORIGINS: ${SYNTAXLAB_CORS_ORIGINS:?set SYNTAXLAB_CORS_ORIGINS in .env}
     # Not published: only Caddy reaches it. Caddy's address on this network is in the image's
@@ -20,6 +25,7 @@ services:
   caddy:
     image: caddy:2.11.6
     restart: unless-stopped
+    logging: *logging
     depends_on:
       - api
     ports:

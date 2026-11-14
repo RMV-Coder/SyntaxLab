@@ -192,6 +192,8 @@ See `docs/research/*` and `implementation-plan.md`.
 
 - Filipino teaching notes have not been reviewed by a Tagalog linguist or Filipino-language
   educator. The plan requires this before Phase 4 is called done.
+- API host: a Raspberry Pi 5 (8 GB, UPS HAT) at home behind a Cloudflare Tunnel
+  (`deploy/raspberry-pi/`). Not set up yet.
 - The Docker image with Filipino has not been built yet. The CI `image` and `oracle-stack` jobs will
   build it on the next push, and report its size and memory.
 - Latency was measured only on a heavily loaded dev laptop (0.9–4.7 s per sentence). It must
@@ -199,13 +201,8 @@ See `docs/research/*` and `implementation-plan.md`.
 - Stanza memory figures are Windows working-set values; re-measure as private bytes or USS.
 - `next/font` preloads italic and extended-Latin font files that are not needed at first paint
   (dev console warnings only).
-- The API is not live yet. Host chosen: Oracle Cloud Always Free Arm VM (`deploy/oracle/`,
-  steps in [deployment.md](deployment.md#2-oracle-cloud-always-free-arm-vm-api-chosen)).
-  The account, VM, DuckDNS hostname and VCN rules are manual steps. Until they are done, the
-  live web app at https://syntaxlab-nine.vercel.app cannot analyze.
-- Oracle may reclaim idle Always Free instances. The VM is sized (2 OCPU / 4 GB) so the
-  API's memory use stays above the 20% idle line. Check the memory metric after the first
-  week.
+- The API is not live yet; the live web app at https://syntaxlab-nine.vercel.app cannot analyze
+  until it is.
 - Occasional one-off E2E failure inside the Playwright runner under heavy local load (see
   Phase 8). It passes on retry, and CI allows one retry. Investigate if it shows up in CI.
 - A screen-reader pass by a person has not been done. Automated audits cover only part of
