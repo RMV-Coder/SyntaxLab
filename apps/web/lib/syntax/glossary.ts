@@ -28,11 +28,13 @@ export function lookupLabel(glossary: Glossary | null | undefined, label: string
 /** Conventional order of grammatical categories in an interlinear gloss. */
 const GLOSS_ORDER = [
   "Person",
+  "Clusivity",
   "Number",
   "Gender",
   "Case",
   "Definite",
   "PronType",
+  "Deixis",
   "Poss",
   "Reflex",
   "Tense",

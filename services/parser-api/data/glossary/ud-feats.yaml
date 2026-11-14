@@ -16,6 +16,9 @@ entries:
       Sing: {name: singular, gloss: SG}
       Plur: {name: plural, gloss: PL}
       Ptan: {name: 'plurale tantum (plural-only noun, e.g. "scissors")'}
+      Dual:
+        name: dual
+        gloss: DU
   Person:
     name: person
     definition: >-
@@ -38,6 +41,11 @@ entries:
       Gen: {name: genitive, gloss: GEN}
       Dat: {name: dative, gloss: DAT}
       Loc: {name: locative, gloss: LOC}
+    language_notes:
+      tl: >-
+        These values follow the form of the marker, not the role of the argument. Gen covers
+        ng whether it marks an actor, an undergoer or a possessor; Nom covers ang, whichever
+        role the voice of the verb selects.
   Gender:
     name: gender
     definition: Grammatical gender; in English visible only on third-person singular pronouns.
@@ -62,6 +70,11 @@ entries:
       Perf: {name: perfect, gloss: PRF}
       Imp: {name: imperfective, gloss: IPFV}
       Prog: {name: progressive, gloss: PROG}
+    language_notes:
+      tl: >-
+        The model only distinguishes Imp and Perf. The contemplative (kakain, 'will eat')
+        has no value of its own. Capitalized sentence-initial verbs can get the wrong
+        aspect.
   Mood:
     name: mood
     definition: The speaker's stance toward the proposition (statement, command, condition, ...).
@@ -93,6 +106,12 @@ entries:
       Cau: {name: causative, gloss: CAUS}
       Bfoc: {name: beneficiary focus, gloss: BFOC, gloss_standard: false}
       Lfoc: {name: location focus, gloss: LFOC, gloss_standard: false}
+    language_notes:
+      tl: >-
+        UD Tagalog annotates patient voice as Pass, which SyntaxLab shows as the treebank
+        has it. Calling it a passive is contested: the actor remains a core argument
+        (obj:agent), unlike the demoted agent of an English passive. Lfoc and Bfoc mark
+        location and beneficiary voice.
   Definite:
     name: definiteness
     definition: Whether the noun phrase refers to something identifiable to the hearer.
@@ -141,6 +160,12 @@ entries:
       Pos: {name: 'positive (base form)'}
       Cmp: {name: comparative, gloss: CMPR, gloss_standard: false}
       Sup: {name: superlative, gloss: SUPL, gloss_standard: false}
+      Abs:
+        name: absolute superlative
+      Equ:
+        name: equative
+        gloss: EQU
+        gloss_standard: false
   NumType:
     name: numeral type
     definition: The subclass of a numeral (cardinal, ordinal, ...).
@@ -150,6 +175,11 @@ entries:
       Ord: {name: 'ordinal (first, second)'}
       Mult: {name: 'multiplicative (twice)'}
       Frac: {name: 'fraction (half)'}
+      Dist:
+        name: distributive numeral
+        gloss: DISTR
+      Sets:
+        name: number of sets
   NumForm:
     name: numeral form
     definition: How a numeral is written (digits, words, Roman numerals).
@@ -183,3 +213,48 @@ entries:
       The part of speech that a fixed multiword expression has as a whole (e.g. "because of"
       behaves like an adposition).
     url: https://universaldependencies.org/u/feat/ExtPos.html
+  Clusivity:
+    name: clusivity
+    definition: >-
+      Whether a first-person plural pronoun includes the person spoken to. Tagalog distinguishes
+      tayo ("we, including you") from kami ("we, not including you").
+    url: https://universaldependencies.org/u/feat/Clusivity.html
+    values:
+      In:
+        name: inclusive
+        gloss: INCL
+      Ex:
+        name: exclusive
+        gloss: EXCL
+  Deixis:
+    name: deixis
+    definition: The relative distance of what a demonstrative points to.
+    url: https://universaldependencies.org/u/feat/Deixis.html
+    values:
+      Prox:
+        name: proximal (near the speaker)
+        gloss: PROX
+      Med:
+        name: medial
+        gloss: MED
+        gloss_standard: false
+      Remt:
+        name: remote
+        gloss: DIST
+  Polite:
+    name: politeness
+    definition: Whether a form marks a formal or polite register.
+    url: https://universaldependencies.org/u/feat/Polite.html
+    values:
+      Form:
+        name: formal
+        gloss: POL
+        gloss_standard: false
+  PartType:
+    name: type of particle
+    definition: The kind of function a particle has.
+    url: https://universaldependencies.org/u/feat/PartType.html
+    values:
+      Int:
+        name: interrogative
+        gloss: Q

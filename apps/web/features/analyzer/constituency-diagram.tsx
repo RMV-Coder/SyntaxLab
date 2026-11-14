@@ -125,7 +125,8 @@ export function ConstituencyDiagram({
         const emphasized = highlight.nodes.has(node.id);
         const token = node.kind === "preterminal" ? tokenById.get(node.tokenIds[0]) : undefined;
         const family = token ? posFamily(posGlossary, token.upos) : null;
-        const labelColor = node.kind === "preterminal" ? posColor(family) : theme.ink;
+        const labelColor =
+          node.kind === "preterminal" && !isSelected && !emphasized ? posColor(family) : theme.ink;
         const spec = node.kind === "phrase" ? DIAGRAM_TYPE.phraseLabel : DIAGRAM_TYPE.tagLabel;
         const labelWidth = Math.max(26, node.label.length * spec.size * 0.62 + 12);
         const wordsHighlighted = node.tokenIds.every((id) => highlight.tokens.has(id));

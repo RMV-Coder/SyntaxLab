@@ -8,7 +8,7 @@ export default function AboutPage() {
       <h1 className="font-data text-4xl font-bold text-ink">About SyntaxLab</h1>
       <p className="mt-5 text-lg text-ink-soft">
         SyntaxLab draws the grammatical structure of a sentence and explains every label in it.
-        It is built for students and teachers of English and linguistics, and for anyone curious
+        It is built for students and teachers of language and linguistics, and for anyone curious
         about how sentences are put together.
       </p>
 
@@ -33,11 +33,12 @@ export default function AboutPage() {
 
       <h2 className="mt-10 font-data text-2xl font-bold">Languages</h2>
       <p className="mt-3">
-        The language menu lists exactly what this server has installed and evaluated. English is
-        available today. Filipino (Tagalog) support has been researched but is not yet enabled:
-        its parser works only with dependency analyses, and its explanations need review by a
-        Filipino-language specialist before release. No language is ever silently analyzed with
-        another language&rsquo;s model.
+        The language menu lists exactly what this server has installed and evaluated. Each language
+        offers only what its models really produce. English has phrase-structure trees and word
+        relations. Filipino (Tagalog) has word relations, parts of speech and morphology, but no
+        phrase-structure trees: no parser or treebank for them exists. Its teaching notes are
+        marked as drafts until a Filipino-language specialist has reviewed them. No language is
+        ever silently analyzed with another language&rsquo;s model.
       </p>
 
       <h2 className="mt-10 font-data text-2xl font-bold">The Algorithm Lab</h2>

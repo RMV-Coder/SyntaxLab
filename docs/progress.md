@@ -3,12 +3,42 @@
 ## Current status
 
 **Phases 1–3 (English), 6 (Practice), 7 (Algorithm Lab) and 8 (production readiness) are
-complete and verified locally.** Going live needs accounts and decisions (repository, Hugging
-Face plan, Vercel project): see [deployment.md](deployment.md). Filipino is deferred by product
-decision; Compare follows once a second language is enabled. See the
+complete. Phase 4 (Filipino) is implemented and verified, except for the specialist review its
+plan requires.** The web app is live; the API host is being set up (see
+[deployment.md](deployment.md)). Compare is next now that a second language exists. See the
 [implementation plan](implementation-plan.md).
 
 ## Completed
+
+### 2026-11-04: Phase 4 (Filipino), branch `phase-4-filipino`
+
+- **Engine** (`engines/spacy_engine.py`), generic and added through the plug-in system. Model wheels
+  are verified by SHA-256 and unpacked, not installed. Downloads resume after a stall (one stalled
+  for 8 minutes during this work).
+- **Measured, not assumed** (`research/nlp-model-evaluation.md` §3.8, `scripts/evaluate_tagalog.py`):
+  - `md` over `lg`; hyphen rule adopted; lowercasing the first letter rejected.
+  - On grammar-book sentences (TRG, held out): UAS 93.6, LAS 76.8. On news: UAS 72.6, LAS 68.6.
+- **Found by testing the model rather than trusting Phase 0:**
+  - The parser does not find sentence boundaries: two sentences became one tree, silently.
+    `split_sentences` fixes this.
+  - Then "Dumating si Dr. Santos kahapon." was rejected as two sentences. Keeping abbreviations as
+    one token fixed that but made tokenization worse, because the treebank usually splits the
+    period. The final rule leaves tokens alone: false splits fell from 52 to 5 of 1,563, with no
+    change in token scores.
+  - A run of spaces became a word, tagged `ADV`. Whitespace is now collapsed, with offsets mapped back.
+  - The `tagger` only repeats POS and features, so it is not reported as XPOS.
+  - Phase 0 misread `meta.json`: TRG is held out from training, so it is a fair test. Corrected.
+  - TRG and NewsCrawl follow different conventions, which explains much of TRG's low LAS.
+  - YAML read the unquoted abbreviation `No` as `false`. Startup validation caught it.
+- **Glossaries:** definitions for everything the model can produce (`obj:agent`, `compound:redup`,
+  clusivity, deixis and others), enforced by a test that reads the model's own label inventory. Ten
+  Tagalog teaching notes, marked "Draft, pending review" in the UI.
+- **Web:** no language-specific code was needed for capabilities. Fixed what a second language
+  exposed: English placeholder and intro text, an in-flight result landing after a language
+  switch, a stale error after switching, and feature notes that were only in a hover title.
+- **Verified:** see [testing.md](testing.md). Also walked through in a real browser against the live
+  API. **Not verified:** the official CoNLL 2018 scorer was not run (auto mode blocked executing a
+  downloaded script), and no linguist has reviewed the notes.
 
 ### 2026-10-21: Phase 8 (production readiness), branch `phase-8-production`
 
@@ -160,6 +190,10 @@ See `docs/research/*` and `implementation-plan.md`.
 
 ## Known issues
 
+- Filipino teaching notes have not been reviewed by a Tagalog linguist or Filipino-language
+  educator. The plan requires this before Phase 4 is called done.
+- The Docker image with Filipino has not been built yet. The CI `image` and `oracle-stack` jobs will
+  build it on the next push, and report its size and memory.
 - Latency was measured only on a heavily loaded dev laptop (0.9–4.7 s per sentence). It must
   be measured on the deployment host.
 - Stanza memory figures are Windows working-set values; re-measure as private bytes or USS.
@@ -183,6 +217,6 @@ See `docs/research/*` and `implementation-plan.md`.
 
 1. Go live: push to GitHub (first CI run, including the image job), create the Space and
    the Vercel project, and measure on the host.
-2. Phase 4: Filipino (Tagalog) via a spaCy engine plug-in for calamanCy, when a reviewer is
-   available.
-3. Phase 5: Compare (meaningful once a second language is enabled).
+2. Specialist review of the Filipino teaching notes.
+3. Filipino practice exercises from treebank gold.
+4. Phase 5: Compare, now that a second language exists.

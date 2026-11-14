@@ -59,7 +59,32 @@ uv run syntaxlab-api check --language es --load
 Startup validation rejects inconsistent entries. Every structure the engine produces must name
 its scheme, and the config may not claim a scheme for a layer the engine does not produce.
 
-## Case 2: a different NLP back-end
+## Case 2: a spaCy pipeline
+
+The built-in `spacy` engine serves any spaCy pipeline that follows Universal Dependencies. Filipino
+(Tagalog) in `config/languages.yaml` is the worked example:
+
+```yaml
+engine: spacy
+engine_options:
+  model: tl_calamancy_md
+  version: 0.2.0
+  wheel_url: https://huggingface.co/ljvmiranda921/tl_calamancy_md/resolve/main/tl_calamancy_md-any-py3-none-any.whl
+  wheel_sha256: ed8e18e0...             # the download is rejected if this does not match
+  components: [trainable_lemmatizer, morphologizer, parser]   # capabilities follow this list
+  shared_components: [tok2vec]
+  keep_hyphenated_words: true           # optional, see the engine's docstring
+  split_sentences: true                 # optional, see the engine's docstring
+```
+
+The wheel is unpacked under `.models/spacy`, not installed, so a model package's own dependency
+pins cannot affect the API. Install the engine's library with `uv sync --extra spacy`.
+
+Check what the pipeline really does before trusting it. calamanCy's parser does not find
+sentence boundaries, and its `tagger` only repeats POS and features, so it is left out rather than
+reported as XPOS.
+
+## Case 3: a different NLP back-end
 
 Write an engine class (see `src/syntaxlab_api/engines/base.py` for the contract) in **any
 package**, and register it under the `syntaxlab.engines` entry-point group:
@@ -83,7 +108,7 @@ The engine contract, which is checked by `analysis/validate.py` on every respons
   documented and tested, and must be measured against gold data.
 - Back-end failures raise `EngineError`. The API reports them; there is no fallback.
 
-## Case 3: a new annotation scheme
+## Case 4: a new annotation scheme
 
 If the language's analyses follow a scheme without a glossary (for example a different
 constituency treebank), declare it under `schemes:` in `languages.yaml` and add
@@ -114,4 +139,6 @@ Follow `docs/research/` as the model:
 2. Evaluate it on held-out gold data and record the numbers and their conditions.
 3. Write the measured accuracy and known failure patterns into the entry's `notes`.
 4. Add gold-based regression tests (`tests/integration/`), never invented reference trees.
-5. Have teaching notes for language-specific labels reviewed by a specialist.
+5. Have teaching notes for language-specific labels reviewed by a specialist. Until then the
+   UI marks them "Draft, pending review". Set `teaching_notes_reviewed: true` in the language's
+   entry once they have been reviewed.

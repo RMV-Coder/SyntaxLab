@@ -1,7 +1,8 @@
 # SyntaxLab Architecture
 
-Status: **English analyzer (Phases 1–3), Practice (Phase 6) and Algorithm Lab (Phase 7)
-implemented.** Filipino and Compare are designed but not built. Last updated 2026-10-21.
+Status: **English and Filipino analyzer (Phases 1–4), Practice (Phase 6, English) and Algorithm
+Lab (Phase 7) implemented.** Filipino teaching notes await specialist review. Compare is designed
+but not built. Last updated 2026-11-04.
 
 ## 1. Principles that shape the architecture
 
@@ -57,6 +58,10 @@ class Engine(ABC):
   package can contribute one. A `module:Class` reference also works.
 - `StanzaEngine` is generic. Its capabilities follow its configured processor list, so the same
   class serves any Stanza language.
+- `SpacyEngine` is generic too. Its capabilities follow its `components` list. Model wheels are
+  verified by SHA-256 and unpacked under `.models/spacy` rather than installed, so a model package's
+  dependency pins cannot reach the API. Options cover segmentation only (hyphenated words, sentence
+  boundaries by punctuation, abbreviations); no option changes a tag, a head or a label.
 - The contract (faithful output, no derived structures, no fabricated alternatives or scores,
   `EngineError` on failure) is enforced by `analysis/validate.py` on every response and by the
   tests.
@@ -223,7 +228,7 @@ Full reference in [api.md](api.md). Key decisions:
 |---|---|---|
 | D1 | Backend on Python 3.12 (uv-managed) | Verified for every researched model. calamanCy's stale `spacy-transformers` pin blocks 3.14 for its transformer model |
 | D2 | Stanza for English dependency + constituency | Same tokenization for both views, UD labels, maintained. benepar is unmaintained since 2021 |
-| D3 | Filipino deferred (calamanCy researched, not enabled) | Per product decision. Research and tokenizer fix are documented for when it is enabled |
+| D3 | Filipino through calamanCy `md`, with segmentation fixes only | `md`, the hyphen rule and sentence boundaries were each chosen by measurement on gold data; lowercasing the first letter was measured and rejected (research/nlp-model-evaluation.md §3.8) |
 | D4 | No Filipino constituency | No treebank or parser exists, and Tagalog phrase structure is contested |
 | D5 | Earley (not CYK) for the future Algorithm Lab | Works on the student's grammar unchanged, with honest step explanations |
 | D6 | No database | Stateless MVP |
@@ -240,3 +245,5 @@ Full reference in [api.md](api.md). Key decisions:
 | D17 | Static CSP without nonces (`'unsafe-inline'` scripts) | Nonces force every page to render per request, losing prerendering. User text is never HTML, so inline-script injection has no entry point; `connect-src`, `object-src`, `frame-ancestors` still constrain the page |
 | D18 | Models baked into the API image | No runtime downloads; a cold start costs only the model load; the image is reproducible from `uv.lock` |
 | D19 | Client address resolved by uvicorn from trusted proxies only (`FORWARDED_ALLOW_IPS`, never `*`) | Rate limits keyed on a client-supplied header could be bypassed |
+| D20 | Own gold scorer (`analysis/ud_score.py`), following the CoNLL 2018 method | Lives in the repo, is unit-tested, and is shared by the evaluation script and regression tests. It reproduces calamanCy's published token F1, as a check |
+| D21 | Language-specific notes carry a review status (`teaching_notes_reviewed`) | SyntaxLab cannot self-certify Tagalog linguistics; until a specialist has reviewed them, the UI marks the notes as drafts |

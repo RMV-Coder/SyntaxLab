@@ -14,6 +14,9 @@ limitations recorded, and no unsupported claims.
   grammar validation, four preset grammars, and correctness checked against an independent
   oracle.
 
+- **Filipino (Tagalog) analyzer:** dependency, POS, lemma and morphology through calamanCy,
+  chosen and configured by measurement on gold treebanks, with gold regression tests. Teaching
+  notes are drafts until reviewed.
 - **Production readiness:** Docker image with baked-in models, deployment guide (Hugging
   Face Space, Vercel, alternatives), security headers, WCAG 2.2 AA audit in E2E, error
   boundaries.
@@ -25,10 +28,10 @@ limitations recorded, and no unsupported claims.
 
 ## Later
 
-- **Filipino (Tagalog):** dependency, POS and morphology via calamanCy v0.2.0. Evaluated in
-  [research/filipino-language-support.md](research/filipino-language-support.md). It needs the
-  tokenizer fix, an engine plug-in for spaCy, a capitalization experiment, and review of the
-  teaching notes by a Filipino-language specialist.
+- **Specialist review of the Filipino teaching notes.** A Tagalog linguist or Filipino-language
+  educator is needed before they stop being marked as drafts.
+- **Filipino practice exercises** from treebank gold. The treebanks disagree on conventions (*ang*
+  is `det` in NewsCrawl and `case` in TRG), so the exercises must use one convention, and say which.
 - **Compare:** side-by-side analyses of two sentences in different languages. Observations are
   limited to what the analyses actually show (word order, markers, features), with no claims of
   equivalence between labels.

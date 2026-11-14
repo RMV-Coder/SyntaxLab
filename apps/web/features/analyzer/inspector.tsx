@@ -1,7 +1,7 @@
 "use client";
 
 import { ExternalLink } from "lucide-react";
-import type { ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
 import type { Glossary, GlossaryEntry, LanguageDetail, ParseResponse, SentenceAnalysis } from "@/lib/api/types";
@@ -57,6 +57,21 @@ function Section({
   );
 }
 
+/** Whether the current language's teaching notes have been reviewed by a specialist. */
+const NotesReviewed = createContext(false);
+
+function LanguageNote({ note }: { note: string }) {
+  const reviewed = useContext(NotesReviewed);
+  return (
+    <div className="rounded-sm bg-muted p-2 text-sm leading-relaxed">
+      {reviewed ? null : (
+        <p className="mb-1 text-xs font-semibold text-ink-soft">Draft, pending review</p>
+      )}
+      <p>{note}</p>
+    </div>
+  );
+}
+
 function Definition({
   label,
   glossary,
@@ -108,7 +123,7 @@ function EntryText({
           correspondence is approximate.
         </p>
       ) : null}
-      {note ? <p className="rounded-sm bg-muted p-2">{note}</p> : null}
+      {note ? <LanguageNote note={note} /> : null}
       {entry.url ? (
         <a
           href={entry.url}
@@ -190,6 +205,16 @@ function TokenDetails({ sentence, id, glossaries, language, onSelect }: {
               );
             })}
           </dl>
+          {language
+            ? features.map(([feature]) => {
+                const note = glossaries.features?.entries[feature]?.language_notes?.[language];
+                return note ? (
+                  <div key={feature} className="mt-2">
+                    <LanguageNote note={note} />
+                  </div>
+                ) : null;
+              })
+            : null}
         </Section>
       ) : null}
 
@@ -403,6 +428,7 @@ export function Inspector({
 }: InspectorProps) {
   const lang = result?.language.code;
   return (
+    <NotesReviewed.Provider value={language?.teaching_notes_reviewed ?? false}>
     <div aria-live="polite" className="space-y-0">
       {!sentence ? (
         <p className="text-sm text-graphite">
@@ -443,5 +469,6 @@ export function Inspector({
         </Section>
       ) : null}
     </div>
+    </NotesReviewed.Provider>
   );
 }

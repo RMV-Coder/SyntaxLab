@@ -235,7 +235,7 @@ export function DependencyDiagram({
               dominantBaseline="central"
               fontSize={DIAGRAM_TYPE.tagLabel.size}
               fontWeight={DIAGRAM_TYPE.tagLabel.weight}
-              fill={posColor(family)}
+              fill={marked ? theme.ink : posColor(family)}
               style={SMALL_CAPS}
             >
               {token.upos ?? ""}

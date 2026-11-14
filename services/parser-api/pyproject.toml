@@ -19,6 +19,9 @@ stanza = [
     "stanza==1.15.0",
     "torch>=2.9",
 ]
+spacy = [
+    "spacy==3.8.16",
+]
 
 [project.scripts]
 syntaxlab-api = "syntaxlab_api.cli:main"
@@ -27,6 +30,7 @@ syntaxlab-api = "syntaxlab_api.cli:main"
 # a language then selects an engine by name in config/languages.yaml, with no code change here.
 [project.entry-points."syntaxlab.engines"]
 stanza = "syntaxlab_api.engines.stanza_engine:StanzaEngine"
+spacy = "syntaxlab_api.engines.spacy_engine:SpacyEngine"
 
 [dependency-groups]
 dev = [

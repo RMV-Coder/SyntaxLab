@@ -2,7 +2,7 @@
 
 import type { Glossary, SentenceAnalysis } from "@/lib/api/types";
 import { glossFeatures, posFamily } from "@/lib/syntax/glossary";
-import { posColor } from "@/lib/theme";
+import { posColor, theme } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
 import type { Highlight, Selection } from "./selection";
@@ -110,7 +110,12 @@ export function InterlinearStrip({
               <td
                 key={t.id}
                 className={cn(cell(t.id), "small-caps font-data font-bold")}
-                style={{ color: posColor(posFamily(posGlossary, t.upos)) }}
+                // Part-of-speech colours do not all reach 4.5:1 on a highlight; ink does.
+                style={{
+                  color: highlight.tokens.has(t.id)
+                    ? theme.ink
+                    : posColor(posFamily(posGlossary, t.upos)),
+                }}
               >
                 {t.upos ?? "—"}
               </td>

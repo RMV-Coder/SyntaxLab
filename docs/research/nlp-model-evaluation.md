@@ -92,7 +92,7 @@ available.
 | UD_Tagalog-TRG | 128 sents / 734 tokens (UD site, current) | CC BY-SA 4.0 | Grammar-book examples. In official UD releases (tags r2.14–r2.18) **[Verified]** |
 | UD_Tagalog-Ugnayan | 94 sents / 1,011 tokens | **CC BY-NC-SA 4.0** (non-commercial) **[Verified: README]**. Do not bundle into an MIT/Apache repo without a separate NC-licensed data directory | DepEd educational texts |
 | **UD_Tagalog-NewsCrawl** | 15,619 sents (train 12,495 / dev 1,561 / test 1,563) | CC BY-SA 4.0 **[Verified: README]** | Leipzig Tagalog news 2011. Manual lemma, UPOS, feats, deprels. **Not in an official UD release** (no tags, `not-to-release` marker, dev branch only) **[Verified 2026-10-21]** |
-| calamanCy v0.2.0 (`tl_calamancy_md/lg/trf`) | 214 MB / 482 MB / 1.7 GB wheels | MIT (HF model card tag) | spaCy pipelines trained on NewsCrawl + TRG + Ugnayan (+ TLUnified for NER). Released 2025-01-19 **[Verified: meta.json, README]** |
+| calamanCy v0.2.0 (`tl_calamancy_md/lg/trf`) | 214 MB / 482 MB / 1.7 GB wheels | MIT (HF model card tag) | spaCy pipelines. Parser and tagger trained on NewsCrawl train only; TRG and Ugnayan are used as test sets (+ TLUnified for NER). `meta.json` lists all of them as sources, which does not mean all were trained on. Released 2025-01-19 **[Verified: project.yml, 2026-11-04; corrected from an earlier reading of meta.json]** |
 | Stanza | none | | No `tl`, `fil`, or `ceb` entry in `resources_1.15.0.json` (286 entries) **[Verified]** |
 | Aquino et al. 2025 baselines | XLM-R large: UAS 86.9 / LAS 81.0 / UPOS 91.5 | | Paper results. No released checkpoint found in the HF `UD-Filipino` org via API **[Verified: API returned empty]** |
 
@@ -198,14 +198,77 @@ limitation for now.
 - Backend Python is **3.12**. It is verified for all three models, so trf stays a future option
   without a runtime change. 3.14 is verified for the lg path only.
 
-## 4. Open measurement items (Phase 2/4)
+### 3.8 Phase 4 experiments: raw text, one scorer **[Measured 2026-11-04]**
 
-- Memory of both adapters loaded together in one process, as private bytes. Windows
-  working-set figures above are lower bounds.
-- Latency on the actual deployment host (2 vCPU).
-- End-to-end Tagalog accuracy on raw text with the hyphen fix, using one consistent scorer.
-- Out-of-domain Filipino evaluation on short, textbook-style sentences. This requires a small
-  gold set reviewed by a Tagalog linguist; it does not exist yet.
+Method: `scripts/evaluate_tagalog.py` runs SyntaxLab's own engine on each gold sentence's raw
+text, and `syntaxlab_api/analysis/ud_score.py` scores it. That scorer is ours. It follows the
+CoNLL 2018 method (alignment by character offsets, F1 against gold syntactic words, punctuation
+included, LAS on the universal part of the relation) and is unit-tested on hand-worked cases. The
+official script was not run. As a check, ours reproduces calamanCy's published token F1 on
+NewsCrawl (95.01) and the earlier tokenizer measurement in §3.5 (97.72).
+
+Data: all of UD_Tagalog-TRG r2.18 (128 sentences, grammar-book examples, held out from training),
+and UD_Tagalog-NewsCrawl test at commit `5b96142` (1,563 sentences). F1 percentages.
+
+**`md`, each setting changed on its own:**
+
+| Treebank | Tokenizer | Sentences | Initial letter | Tokens | UPOS | UFeats | Lemma | UAS | LAS |
+|---|---|---|---|---|---|---|---|---|---|
+| TRG | default | parser | as written | 100.00 | 78.20 | 73.16 | 79.84 | 93.46 | 76.70 |
+| TRG | hyphen fix | parser | as written | 99.45 | 78.14 | 72.81 | 79.37 | 93.58 | 76.78 |
+| TRG | hyphen fix | parser | lowercased | 99.45 | 78.96 | 73.36 | 84.43 | 93.99 | 76.50 |
+| TRG | hyphen fix | punctuation | as written | 99.45 | 78.14 | 72.81 | 79.37 | 93.58 | 76.78 |
+| NewsCrawl | default | parser | as written | 95.01 | 82.37 | 82.77 | 81.09 | 68.54 | 64.89 |
+| NewsCrawl | hyphen fix | parser | as written | 97.72 | 84.52 | 84.91 | 82.56 | 72.60 | 68.64 |
+| NewsCrawl | hyphen fix | parser | lowercased | 97.72 | 84.34 | 84.91 | 82.26 | 72.49 | 68.46 |
+| NewsCrawl | hyphen fix | punctuation | as written | 97.72 | 84.52 | 84.91 | 82.56 | 72.14 | 68.20 |
+| NewsCrawl | hyphen fix | **punctuation + abbreviations (chosen)** | as written | 97.72 | 84.52 | 84.91 | 82.56 | 72.57 | 68.61 |
+
+**`md` vs `lg`, hyphen fix, punctuation without the abbreviation list, as written:**
+
+| Treebank | Model | UPOS | UFeats | Lemma | UAS | LAS | Full-label LAS | LAS, no punct. |
+|---|---|---|---|---|---|---|---|---|
+| TRG | md | 78.14 | 72.81 | 79.37 | 93.58 | 76.78 | 71.86 | 72.92 |
+| TRG | lg | 77.87 | 71.17 | 78.42 | 94.13 | 76.78 | 72.13 | 72.76 |
+| NewsCrawl | md | 84.52 | 84.91 | 82.56 | 72.14 | 68.20 | 67.50 | 67.63 |
+| NewsCrawl | lg | 84.33 | 84.52 | 82.26 | 71.48 | 67.62 | 66.87 | 67.04 |
+
+**Reading these numbers:**
+
+- **NewsCrawl scores are below the published ones (LAS 77.13) mainly because of the scoring.** Gold
+  has 2,132 multiword tokens, mostly the linker (*magandang* = *maganda* + *-ng*), which the model
+  never splits. Their words cannot align, which caps word F1 at 88.46 and counts against every
+  metric. The published figures come from `spacy evaluate`, which aligns differently and excludes
+  punctuation. Both are true under their own conditions.
+- **TRG LAS, UPOS and UFeats understate the model, because the treebanks differ.** TRG annotates
+  *ang* as `ADP`/`case`, and NewsCrawl (and so the model) as `DET`/`det`: `case` recall on TRG is
+  41%, with precision 99%. TRG also uses labels the model cannot produce (`nsubj:lfoc`, `iobj:patient`, `Voice=Ifoc`), and it
+  analyzes some sentences differently (*Hindi nakita ni Pedro si Juan*: *Pedro* as `nsubj`; the model
+  has `obj:agent`).
+  **UAS is the fairer measure on TRG, and 93.6 is the most relevant figure for
+  short classroom sentences.** No correction was applied; the raw scores are reported.
+- TRG is small (734 tokens), so differences of about a point or less between settings are noise.
+
+**[Decision]**
+
+| Question | Decision | Why |
+|---|---|---|
+| `md` or `lg` | **`md`** | Better on every NewsCrawl metric, tied on TRG LAS, 0.55 lower on TRG UAS (noise at this size). About a quarter of the memory (§3.4); `lg` also hit `MemoryError` while loading on the 7.7 GB development machine under load. Agrees with the published order |
+| Hyphen fix | **Adopt** | NewsCrawl UAS +4.06, LAS +3.75, 294 more sentences tokenized exactly. Costs 2 of 128 exact tokenizations on TRG, where it does not change parsing scores measurably |
+| Lowercase the first letter | **Reject** | The rule was to adopt it only if measured scores improve. TRG lemma +5.06, but LAS falls on both treebanks (TRG −0.28, NewsCrawl −0.18), and it would lowercase names. The capitalization weakness stays a documented limitation |
+| Sentence boundaries | **Split by punctuation, except after listed abbreviations** | The parser did not separate *Kumakain ng kanin ang bata. Nag-aral siya.*, so two sentences became one tree, silently. spaCy's plain `sentencizer` wrongly split 52 of 1,563 news sentences, nearly all at abbreviations (*Sec.*, *Sen.*, *Dr.*) and name initials. Keeping those as one token instead (5 false splits) made tokenization worse (97.39, 1,188 exact), because NewsCrawl usually splits the period off. So tokenization stays as it is, and a period after a listed word just does not end a sentence: 5 false splits (0.3%), token scores unchanged, UAS −0.03 and LAS −0.03 against no splitting. A false split gets an explicit "one sentence at a time" error rather than a wrong analysis |
+| `tagger` output | **Not used** | Its tags repeat POS and features (`VERB__Aspect=Perf\|Mood=Ind\|Voice=Act`). Reporting them as XPOS would present them as a treebank tag set |
+| Whitespace | **Collapse runs before analysis** | spaCy makes a run of spaces a token, and the parser attached one as `ADV`/`advmod` |
+
+The bundled regression fixtures (all of TRG, and every 8th NewsCrawl test sentence of 5-25 words)
+enforce thresholds below these scores in `tests/integration/test_filipino_models.py`.
+
+## 4. Open measurement items
+
+- Latency and memory on the deployment host with both languages (the CI `image` job reports
+  memory).
+- Filipino evaluation on sentences students actually type. TRG is the closest available proxy, but
+  no gold set reviewed for this purpose exists.
 
 ## References
 

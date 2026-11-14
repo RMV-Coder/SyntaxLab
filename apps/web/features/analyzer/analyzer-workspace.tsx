@@ -32,20 +32,35 @@ function ErrorMessage({ error, onRetry }: { error: ApiError; onRetry?: () => voi
   );
 }
 
-function EmptyState() {
+/** Describes only the analyses the selected language offers. */
+function EmptyState({ structures }: { structures: StructureKind[] | undefined }) {
+  const tree = !structures || structures.includes("constituency");
+  const graph = !structures || structures.includes("dependency");
   return (
     <div className="mx-auto flex h-full max-w-xl flex-col justify-center px-6 py-12">
       <p className="font-data text-3xl leading-snug text-ink">
         Type a sentence, or start from an example.
       </p>
       <p className="mt-4 leading-relaxed text-ink-soft">
-        SyntaxLab draws two complementary analyses. A <em>phrase-structure tree</em> groups words
-        into nested constituents such as noun and verb phrases. A <em>dependency graph</em> links
-        every word to the word it depends on and names the relation.
+        {tree && graph ? "SyntaxLab draws two complementary analyses. " : null}
+        {tree ? (
+          <>
+            A <em>phrase-structure tree</em> groups words into nested constituents such as noun and
+            verb phrases.{" "}
+          </>
+        ) : null}
+        {graph ? (
+          <>
+            A <em>dependency graph</em> links every word to the word it depends on and names the
+            relation.
+          </>
+        ) : null}
       </p>
       <p className="mt-3 leading-relaxed text-ink-soft">
-        Both come from trained parsers, not from rules written for your sentence, so they can be
-        wrong; the panel on the right always says which model produced what.
+        {tree && graph
+          ? "Both come from trained parsers, not from rules written for your sentence, so they can be wrong; "
+          : "It comes from a trained parser, not from rules written for your sentence, so it can be wrong; "}
+        the panel on the right always says which model produced what.
       </p>
     </div>
   );
@@ -112,7 +127,10 @@ export function AnalyzerWorkspace() {
           setPanel("diagram");
         })
         .catch((e: unknown) => {
-          if (e instanceof ApiError) setError(e);
+          if (e instanceof ApiError) {
+            setError(e);
+            setPanel("diagram"); // where the error is shown; on a phone it would be hidden
+          }
         })
         .finally(() => {
           if (request.current === controller) setBusy(false);
@@ -197,9 +215,12 @@ export function AnalyzerWorkspace() {
               structures={structures}
               busy={busy}
               onLanguageChange={(code) => {
+                request.current?.abort(); // a late result must not land on the new language
+                setBusy(false);
                 setLanguage(code);
                 setResult(null);
                 setSelection(null);
+                setError(null);
               }}
               onTextChange={setText}
               onStructuresChange={setStructures}
@@ -240,7 +261,7 @@ export function AnalyzerWorkspace() {
               onExpandAll={() => setCollapsed(new Set())}
             />
           ) : (
-            <EmptyState />
+            <EmptyState structures={detail?.structures} />
           )}
           {busy ? (
             <div

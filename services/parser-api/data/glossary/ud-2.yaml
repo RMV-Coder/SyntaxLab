@@ -1,5 +1,5 @@
 # Curated definitions: Universal Dependencies v2 relations (universal set + subtypes produced
-# by the English models). Source: https://universaldependencies.org/u/dep/ (paraphrased).
+# by the English and Tagalog models). Source: https://universaldependencies.org/u/dep/ (paraphrased).
 # Subtypes not listed here are explained through their base relation by the client.
 id: ud-2
 kind: dependency
@@ -17,6 +17,12 @@ entries:
       A nominal that is the syntactic subject of a clause. In English it is usually the noun
       phrase before the verb that agrees with it ("The child is eating").
     url: https://universaldependencies.org/u/dep/nsubj.html
+    language_notes:
+      tl: >-
+        In UD Tagalog, nsubj is the argument marked with ang, si or an ang-form pronoun,
+        whichever role it has in the event. With a patient-voice verb it is the patient: in
+        Binabasa ng titser ang diyaryo, ang diyaryo is nsubj, though the newspaper is what
+        gets read. It is not equivalent to the English subject.
   nsubj:pass:
     name: passive nominal subject
     definition: >-
@@ -40,6 +46,11 @@ entries:
       The nominal that is the direct object of a verb: typically the entity most directly
       affected by the event ("eating rice").
     url: https://universaldependencies.org/u/dep/obj.html
+    language_notes:
+      tl: >-
+        In UD Tagalog, obj is an undergoer not marked with ang, usually with ng, as in
+        Bumabasa ng diyaryo ang titser. The same ng also marks actors (obj:agent) and
+        possessors (nmod:poss), so the marker alone does not decide the relation.
   iobj:
     name: indirect object
     definition: >-
@@ -131,6 +142,11 @@ entries:
       An interjection or discourse particle that is not clearly linked to the structure of the
       sentence ("well", "um", emoticons).
     url: https://universaldependencies.org/u/dep/discourse.html
+    language_notes:
+      tl: >-
+        In UD Tagalog, ay in Ang bata ay kumakain is a discourse particle attached to the
+        fronted phrase; the predicate remains the root. It is not analyzed as a copula,
+        although introductory descriptions often compare it to one.
   aux:
     name: auxiliary
     definition: >-
@@ -153,6 +169,12 @@ entries:
       A function word that introduces a subordinate clause, such as a subordinating conjunction
       or infinitival "to" ("because she was tired", "to leave").
     url: https://universaldependencies.org/u/dep/mark.html
+    language_notes:
+      tl: >-
+        The linker na / -ng joins a modifier and what it modifies, and UD Tagalog annotates
+        it as mark. The treebank splits -ng from its host (magandang = maganda + -ng), but
+        this model's tokenizer does not, so the linker is not shown as a separate word
+        there.
   nmod:
     name: nominal modifier
     definition: >-
@@ -211,6 +233,11 @@ entries:
       A determiner attached to a nominal: articles, demonstratives, quantifiers
       ("the child", "this book").
     url: https://universaldependencies.org/u/dep/det.html
+    language_notes:
+      tl: >-
+        The model follows UD_Tagalog-NewsCrawl, where ang and si are det. Other treebanks
+        differ: UD_Tagalog-TRG analyzes ang as a case marker (case). Treat this as an
+        annotation choice.
   det:predet:
     name: predeterminer
     definition: A word that precedes the determiner in a noun phrase ("all the students").
@@ -227,6 +254,11 @@ entries:
       A preposition, postposition or case particle attached to the nominal it marks. In UD the
       preposition depends on the noun ("with → telescope"), not the other way round.
     url: https://universaldependencies.org/u/dep/case.html
+    language_notes:
+      tl: >-
+        In UD Tagalog, ng and sa are case markers attached to the phrase they introduce. ng
+        (Case=Gen) can mark an actor, an undergoer or a possessor; sa (Case=Loc) marks
+        locations and other oblique phrases.
   conj:
     name: conjunct
     definition: >-
@@ -297,3 +329,16 @@ entries:
     definition: >-
       A dependency the annotation (or parser) could not classify more precisely.
     url: https://universaldependencies.org/u/dep/dep.html
+  obj:agent:
+    name: agent (non-actor voice)
+    definition: >-
+      A subtype used in UD Tagalog: the actor of a clause whose verb is not in actor voice, marked
+      with ng or a ng-form pronoun. In Binabasa ng titser ang diyaryo ("The teacher is reading the
+      newspaper"), ng titser is obj:agent, and the newspaper is the nsubj.
+    url: https://universaldependencies.org/tl/index.html
+  compound:redup:
+    name: reduplication
+    definition: >-
+      A subtype for a repeated word or stem written as separate parts, where the repetition itself
+      adds meaning, such as intensity or distribution.
+    url: https://universaldependencies.org/u/dep/compound.html

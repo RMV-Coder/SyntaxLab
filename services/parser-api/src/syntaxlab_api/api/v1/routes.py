@@ -102,6 +102,7 @@ def get_language(code: str, registry: Registry) -> LanguageDetail:
         engine=cfg.engine,
         samples=[SampleSentence(text=s.text, note=s.note) for s in cfg.samples],
         notes=cfg.notes,
+        teaching_notes_reviewed=cfg.teaching_notes_reviewed,
         limits=LanguageLimits(
             max_chars=runtime.limits.max_chars,
             max_words=runtime.limits.max_words,

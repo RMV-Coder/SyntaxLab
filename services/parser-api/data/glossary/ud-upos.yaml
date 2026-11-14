@@ -113,6 +113,11 @@ entries:
       such as a subject and an object ("eat", "know", "arrive").
     url: https://universaldependencies.org/u/pos/VERB.html
     family: verbal
+    language_notes:
+      tl: >-
+        The model tags existential may and mayroon as VERB, matching the treebank. It also
+        often tags adjectival predicates such as Maganda ang babae as VERB, where the
+        treebank has ADJ: a known model error, shown as it is rather than corrected.
   X:
     name: other
     definition: >-

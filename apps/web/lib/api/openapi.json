@@ -2298,6 +2298,11 @@
             "type": "array",
             "title": "Notes"
           },
+          "teaching_notes_reviewed": {
+            "type": "boolean",
+            "title": "Teaching Notes Reviewed",
+            "description": "False: the language-specific glossary notes are a draft, pending review."
+          },
           "limits": {
             "$ref": "#/components/schemas/LanguageLimits"
           }
@@ -2315,6 +2320,7 @@
           "engine",
           "samples",
           "notes",
+          "teaching_notes_reviewed",
           "limits"
         ],
         "title": "LanguageDetail"

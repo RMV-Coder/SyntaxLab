@@ -1,0 +1,2448 @@
+# sent_id = 14061
+# text = Sa September list, ang 25 -anyos na shop o­wner, nagtuturo ng archery at 2007 Asian tit­list, ay nasa No.
+1	Sa	sa	ADP	_	Case=Loc	3	case	_	_
+2	September	September	PROPN	_	_	3	nmod	_	_
+3	list	list	NOUN	_	_	22	obl	_	SpaceAfter=No
+4	,	,	PUNCT	_	_	3	punct	_	_
+5	ang	ang	DET	_	Case=Nom	10	det	_	_
+6	25	25	NUM	_	NumType=Card	7	nummod	_	_
+7	-anyos	anyos	NOUN	_	_	10	nmod	_	_
+8	na	na	PART	_	_	7	case	_	_
+9	shop	shop	NOUN	_	_	10	nmod	_	_
+10	o­wner	owner	NOUN	_	_	22	nsubj	_	SpaceAfter=No
+11	,	,	PUNCT	_	_	12	punct	_	_
+12	nagtuturo	turo	VERB	_	Aspect=Imp|Mood=Ind|Voice=Act	10	acl:relcl	_	_
+13	ng	ng	ADP	_	Case=Gen	14	case	_	_
+14	archery	archery	NOUN	_	_	12	obj	_	_
+15	at	at	CCONJ	_	_	18	cc	_	_
+16	2007	2007	NUM	_	NumType=Card	18	nmod	_	_
+17	Asian	Asian	ADJ	_	_	18	amod	_	_
+18	tit­list	tit­list	NOUN	_	_	14	conj	_	SpaceAfter=No
+19	,	,	PUNCT	_	_	12	punct	_	_
+20	ay	ay	PART	_	_	10	discourse	_	_
+21	nasa	nasa	ADP	_	Case=Loc	22	case	_	_
+22	No	No	PROPN	_	_	0	root	_	SpaceAfter=No
+23	.	.	PUNCT	_	_	22	punct	_	_
+
+# sent_id = 14089
+# text = Pero ayoko siyang isipin.
+1	Pero	pero	CCONJ	_	_	2	cc	_	_
+2-3	ayoko	_	_	_	_	_	_	_	_
+2	ayo	ayaw	VERB	_	Polarity=Neg	0	root	_	_
+3	ko	ko	PRON	_	Case=Gen|Number=Sing|Person=2|PronType=Prs	2	obj:agent	_	_
+4-5	siyang	_	_	_	_	_	_	_	_
+4	siya	siya	PRON	_	Case=Nom|Number=Sing|Person=3|PronType=Prs	6	nsubj	_	_
+5	-ng	na	PART	_	_	6	mark	_	_
+6	isipin	isip	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	2	xcomp	_	SpaceAfter=No
+7	.	.	PUNCT	_	_	2	punct	_	_
+
+# sent_id = 14097
+# text = Saka tayong mga Filipino, conservative tayo.
+1	Saka	saka	CCONJ	_	_	5	cc	_	_
+2-3	tayong	_	_	_	_	_	_	_	_
+2	tayo	tayo	PRON	_	Case=Nom|Clusivity=In|Number=Plur|Person=1|PronType=Prs	5	det	_	_
+3	-ng	na	PART	_	_	2	case	_	_
+4	mga	mga	DET	_	Number=Plur	5	det	_	_
+5	Filipino	Filipino	PROPN	_	_	7	dislocated	_	SpaceAfter=No
+6	,	,	PUNCT	_	_	5	punct	_	_
+7	conservative	conservative	ADJ	_	_	0	root	_	_
+8	tayo	tayo	PRON	_	Case=Nom|Clusivity=In|Number=Plur|Person=1|PronType=Prs	7	nsubj	_	SpaceAfter=No
+9	.	.	PUNCT	_	_	7	punct	_	_
+
+# sent_id = 14105
+# text = Oh, ‘di ba, paganda nang paganda ang kuwento ng Full House.
+1	Oh	Oh	INTJ	_	_	6	discourse	_	SpaceAfter=No
+2	,	,	PUNCT	_	_	1	punct	_	_
+3	‘di	hindi	ADV	_	_	6	parataxis	_	_
+4	ba	ba	PART	_	PartType=Int	3	advmod	_	SpaceAfter=No
+5	,	,	PUNCT	_	_	3	punct	_	_
+6	paganda	ganda	VERB	_	_	0	root	_	_
+7	nang	nang	PART	_	_	8	case	_	_
+8	paganda	anda	VERB	_	_	6	compound:redup	_	_
+9	ang	ang	DET	_	Case=Nom	10	det	_	_
+10	kuwento	kuwento	NOUN	_	_	6	nsubj	_	_
+11	ng	ng	ADP	_	Case=Gen	12	case	_	_
+12	Full	_	PROPN	_	_	10	nmod:poss	_	_
+13	House	House	PROPN	_	_	12	flat	_	SpaceAfter=No
+14	.	.	PUNCT	_	_	6	punct	_	_
+
+# sent_id = 14113
+# text = Halos pareho nga ng kapalaran sina Jen at Val nang magsimula sa showbiz.
+1	Halos	Halos	ADV	_	_	2	advmod	_	_
+2	pareho	pareho	ADJ	_	_	0	root	_	_
+3	nga	nga	ADV	_	_	2	advmod	_	_
+4	ng	ng	ADP	_	Case=Gen	5	case	_	_
+5	kapalaran	palad	NOUN	_	_	2	obj	_	_
+6	sina	sina	DET	_	Case=Nom|Number=Plur	7	det	_	_
+7	Jen	Jen	PROPN	_	_	2	nsubj	_	_
+8	at	at	CCONJ	_	_	9	cc	_	_
+9	Val	Val	PROPN	_	_	7	conj	_	_
+10	nang	nang	SCONJ	_	_	11	mark	_	_
+11	magsimula	simula	VERB	_	Aspect=Imp|Mood=Pot|Voice=Act	2	advcl	_	_
+12	sa	sa	ADP	_	Case=Loc	13	case	_	_
+13	showbiz	showbiz	NOUN	_	_	11	obl	_	SpaceAfter=No
+14	.	.	PUNCT	_	_	2	punct	_	_
+
+# sent_id = 14121
+# text = Pero katulad ng pinakahuling insidente, kinukwestyon din ang mga nagdaang operasyon.
+1	Pero	pero	CCONJ	_	_	8	cc	_	_
+2	katulad	tulad	NOUN	_	_	8	obl	_	_
+3	ng	ng	ADP	_	Case=Gen	6	case	_	_
+4-5	pinakahuling	_	_	_	_	_	_	_	_
+4	pinakahuli	huli	ADJ	_	Degree=Sup	6	amod	_	_
+5	-ng	na	PART	_	_	4	case	_	_
+6	insidente	insidente	NOUN	_	_	2	nmod	_	SpaceAfter=No
+7	,	,	PUNCT	_	_	2	punct	_	_
+8	kinukwestyon	kuwestyon	VERB	_	Aspect=Imp|Mood=Ind|Voice=Pass	0	root	_	_
+9	din	din	ADV	_	_	8	advmod	_	_
+10	ang	ang	DET	_	Case=Nom	14	det	_	_
+11	mga	mga	DET	_	Number=Plur	14	det	_	_
+12-13	nagdaang	_	_	_	_	_	_	_	_
+12	nagdaa	daan	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	14	acl:relcl	_	_
+13	-ng	na	PART	_	_	12	mark	_	_
+14	operasyon	operasyon	NOUN	_	_	8	nsubj	_	SpaceAfter=No
+15	.	.	PUNCT	_	_	8	punct	_	_
+
+# sent_id = 14129
+# text = Eh dati nang walang ratings ‘yang Wowowee na ‘yan dahil patuloy na nilalampaso ng Eat Bulaga, ah.
+1	Eh	eh	PART	_	_	5	discourse	_	_
+2	dati	dati	ADV	_	_	5	advmod	_	_
+3-4	nang	_	_	_	_	_	_	_	_
+3	na	na	ADV	_	_	2	advmod	_	_
+4	-ng	na	PART	_	_	2	case	_	_
+5-6	walang	_	_	_	_	_	_	_	_
+5	wala	wala	VERB	_	Polarity=Neg	0	root	_	_
+6	-ng	na	PART	_	_	5	flat	_	_
+7	ratings	ratings	NOUN	_	_	5	obj	_	_
+8-9	‘yang	_	_	_	_	_	_	_	_
+8	‘ya	iyan	PRON	_	Case=Nom|Deixis=Med|PronType=Dem	10	det	_	_
+9	-ng	na	PART	_	_	8	case	_	_
+10	Wowowee	Wowowee	PROPN	_	_	5	nsubj	_	_
+11	na	na	PART	_	_	12	case	_	_
+12	‘yan	iyan	PRON	_	Case=Nom|Deixis=Med|PronType=Dem	10	nmod	_	_
+13	dahil	dahil	SCONJ	_	_	16	mark	_	_
+14	patuloy	tuloy	ADV	_	_	16	advmod	_	_
+15	na	na	PART	_	_	14	case	_	_
+16	nilalampaso	lampaso	VERB	_	Aspect=Imp|Mood=Ind|Voice=Pass	5	advcl	_	_
+17	ng	ng	ADP	_	Case=Gen	18	case	_	_
+18	Eat	Eat	PROPN	_	_	16	obj:agent	_	_
+19	Bulaga	Bulaga	PROPN	_	_	18	flat	_	SpaceAfter=No
+20	,	,	PUNCT	_	_	21	punct	_	_
+21	ah	ah	INTJ	_	_	16	discourse	_	SpaceAfter=No
+22	.	.	PUNCT	_	_	5	punct	_	_
+
+# sent_id = 14137
+# text = At saka kumbaga, ang saya dahil pagkatapos ng palaging trabaho, na hindi kami magkasama ngayon sa work, ‘di ba?
+1	At	at	CCONJ	_	_	6	cc	_	_
+2	saka	saka	CCONJ	_	_	1	fixed	_	_
+3	kumbaga	kumbaga	ADV	_	_	6	advmod	_	SpaceAfter=No
+4	,	,	PUNCT	_	_	3	punct	_	_
+5	ang	ang	DET	_	Case=Nom	6	det	_	_
+6	saya	saya	NOUN	_	_	0	root	_	_
+7	dahil	dahil	SCONJ	_	_	17	mark	_	_
+8	pagkatapos	tapos	VERB	_	_	12	case	_	_
+9	ng	ng	ADP	_	Case=Gen	8	fixed	_	_
+10-11	palaging	_	_	_	_	_	_	_	_
+10	palagi	lagi	ADV	_	_	12	amod	_	_
+11	-ng	na	PART	_	_	10	case	_	_
+12	trabaho	trabaho	NOUN	_	_	17	obl	_	SpaceAfter=No
+13	,	,	PUNCT	_	_	12	punct	_	_
+14	na	na	PART	_	_	17	mark	_	_
+15	hindi	hindi	ADV	_	Polarity=Neg	17	advmod	_	_
+16	kami	kami	PRON	_	Case=Nom|Clusivity=Ex|Number=Plur|Person=1|PronType=Prs	17	nsubj	_	_
+17	magkasama	sama	VERB	_	Aspect=Imp|Mood=Pot|Voice=Act	6	advcl	_	_
+18	ngayon	ngayon	ADV	_	_	17	advmod	_	_
+19	sa	sa	ADP	_	Case=Loc	20	case	_	_
+20	work	work	NOUN	_	_	17	obl	_	SpaceAfter=No
+21	,	,	PUNCT	_	_	22	punct	_	_
+22	‘di	hindi	ADV	_	_	6	acl:relcl	_	_
+23	ba	ba	PART	_	PartType=Int	22	discourse	_	SpaceAfter=No
+24	?	?	PUNCT	_	_	6	punct	_	_
+
+# sent_id = 14147
+# text = Sa Friday ang finale episode ng Zorro, pero two days lang na nagpahinga si Richard Gutierrez at sumabak na kaagad siya sa trabaho.
+1	Sa	sa	ADP	_	Case=Loc	2	case	_	_
+2	Friday	Friday	PROPN	_	_	0	root	_	_
+3	ang	ang	DET	_	Case=Nom	5	det	_	_
+4	finale	finale	NOUN	_	_	5	compound	_	_
+5	episode	episode	NOUN	_	_	2	nsubj	_	_
+6	ng	ng	ADP	_	Case=Gen	7	case	_	_
+7	Zorro	Zorro	PROPN	_	_	5	nmod	_	SpaceAfter=No
+8	,	,	PUNCT	_	_	14	punct	_	_
+9	pero	pero	CCONJ	_	_	14	cc	_	_
+10	two	two	NUM	_	NumType=Card	11	nummod	_	_
+11	days	day	NOUN	_	_	14	advcl	_	_
+12	lang	lang	ADV	_	_	11	advmod	_	_
+13	na	na	PART	_	_	11	mark	_	_
+14	nagpahinga	hinga	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	2	conj	_	_
+15	si	si	DET	_	Case=Nom|Number=Sing	16	det	_	_
+16	Richard	Richard	PROPN	_	_	14	nsubj	_	_
+17	Gutierrez	Gutierrez	PROPN	_	_	16	flat	_	_
+18	at	at	CCONJ	_	_	19	cc	_	_
+19	sumabak	sabak	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	14	conj	_	_
+20	na	na	ADV	_	_	19	advmod	_	_
+21	kaagad	agad	ADV	_	_	19	advmod	_	_
+22	siya	siya	PRON	_	Case=Nom|Number=Sing|Person=3|PronType=Prs	19	nsubj	_	_
+23	sa	sa	ADP	_	Case=Loc	24	case	_	_
+24	trabaho	trabaho	NOUN	_	_	19	obl	_	SpaceAfter=No
+25	.	.	PUNCT	_	_	2	punct	_	_
+
+# sent_id = 14190
+# text = Kay Glenna na ang perang iyon.
+1	Kay	kay	ADP	_	Case=Dat|Number=Sing	2	case	_	_
+2	Glenna	Glenna	PROPN	_	_	0	root	_	_
+3	na	na	ADV	_	_	2	advmod	_	_
+4	ang	ang	DET	_	Case=Nom	5	det	_	_
+5-6	perang	_	_	_	_	_	_	_	_
+5	pera	pera	NOUN	_	_	2	nsubj	_	_
+6	-ng	na	PART	_	_	7	case	_	_
+7	iyon	iyon	PRON	_	Case=Nom|Deixis=Remt|PronType=Dem	5	nmod	_	SpaceAfter=No
+8	.	.	PUNCT	_	_	2	punct	_	_
+
+# sent_id = 14198
+# text = Wala ring apoy masyado ang kanyang mga galaw.
+1	Wala	wala	VERB	_	Polarity=Neg	0	root	_	_
+2-3	ring	_	_	_	_	_	_	_	_
+2	rin	din	ADV	_	_	1	advmod	_	_
+3	-ng	na	PART	_	_	1	flat	_	_
+4	apoy	apoy	NOUN	_	_	1	obj	_	_
+5	masyado	masyado	ADV	_	_	1	advmod	_	_
+6	ang	ang	DET	_	Case=Nom	10	det	_	_
+7-8	kanyang	_	_	_	_	_	_	_	_
+7	kanya	kaniya	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs	10	nmod:poss	_	_
+8	-ng	na	PART	_	_	7	case	_	_
+9	mga	mga	DET	_	Number=Plur	10	det	_	_
+10	galaw	galaw	NOUN	_	_	1	nsubj	_	SpaceAfter=No
+11	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14206
+# text = ‘Yun nga lang, namatay ang nanay ko nang ako ay 9 years old.
+1	‘Yun	iyon	PRON	_	Case=Nom|Deixis=Remt|PronType=Dem	5	advcl	_	_
+2	nga	nga	ADV	_	_	1	advmod	_	_
+3	lang	lang	ADV	_	_	1	advmod	_	SpaceAfter=No
+4	,	,	PUNCT	_	_	1	punct	_	_
+5	namatay	patay	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	0	root	_	_
+6	ang	ang	DET	_	Case=Nom	7	det	_	_
+7	nanay	nanay	NOUN	_	_	5	nsubj	_	_
+8	ko	ko	PRON	_	Case=Gen|Number=Sing|Person=1|PronType=Prs	7	nmod:poss	_	_
+9	nang	nang	SCONJ	_	_	14	mark	_	_
+10	ako	ako	PRON	_	Case=Nom|Number=Sing|Person=1|PronType=Prs	14	nsubj	_	_
+11	ay	ay	PART	_	_	10	discourse	_	_
+12	9	9	NUM	_	NumType=Card	13	nummod	_	_
+13	years	years	NOUN	_	_	14	nmod	_	_
+14	old	old	ADJ	_	_	5	advcl	_	SpaceAfter=No
+15	.	.	PUNCT	_	_	5	punct	_	_
+
+# sent_id = 14214
+# text = Pero ‘pag nari­nig mo ‘yung cut, big­la mo maa-appreciate ‘yung buhay mo.
+1	Pero	pero	CCONJ	_	_	3	cc	_	_
+2	‘pag	kapag	SCONJ	_	_	3	mark	_	_
+3	nari­nig	dinig	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	11	advcl	_	_
+4	mo	mo	PRON	_	Case=Gen|Number=Sing|Person=2|PronType=Prs	3	obj:agent	_	_
+5-6	‘yung	_	_	_	_	_	_	_	_
+5	‘yun	iyon	PRON	_	Case=Nom|Deixis=Remt|PronType=Dem	7	det	_	_
+6	-ng	na	PART	_	_	5	case	_	_
+7	cut	cut	NOUN	_	_	3	nsubj	_	SpaceAfter=No
+8	,	,	PUNCT	_	_	3	punct	_	_
+9	big­la	big­la	ADV	_	_	11	advmod	_	_
+10	mo	mo	PRON	_	Case=Gen|Number=Sing|Person=2|PronType=Prs	11	obj:agent	_	_
+11	maa-appreciate	appreciate	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	0	root	_	_
+12-13	‘yung	_	_	_	_	_	_	_	_
+12	‘yun	iyon	PRON	_	Case=Nom|Deixis=Remt|PronType=Dem	14	det	_	_
+13	-ng	na	PART	_	_	12	case	_	_
+14	buhay	buhay	NOUN	_	_	11	nsubj	_	_
+15	mo	mo	PRON	_	Case=Gen|Number=Sing|Person=2|PronType=Prs	14	nmod:poss	_	SpaceAfter=No
+16	.	.	PUNCT	_	_	11	punct	_	_
+
+# sent_id = 14222
+# text = Isa sa mga araw na ito ay magri-release na rin ng warrant of arrest para kay Mrs. Kho.
+1	Isa	isa	NUM	_	NumType=Card	4	nummod	_	_
+2	sa	sa	ADP	_	Case=Loc	1	case	_	_
+3	mga	mga	DET	_	Number=Plur	4	det	_	_
+4	araw	araw	NOUN	_	_	8	obl	_	_
+5	na	na	PART	_	_	6	case	_	_
+6	ito	ito	PRON	_	Case=Nom|Deixis=Prox|PronType=Dem	4	nmod	_	_
+7	ay	ay	PART	_	_	4	discourse	_	_
+8	magri-release	release	VERB	_	Aspect=Imp|Mood=Pot|Voice=Act	0	root	_	_
+9	na	na	ADV	_	_	8	advmod	_	_
+10	rin	din	ADV	_	_	9	fixed	_	_
+11	ng	ng	ADP	_	Case=Gen	12	case	_	_
+12	warrant	warrant	NOUN	_	_	8	obj	_	_
+13	of	of	ADP	_	_	14	case	_	_
+14	arrest	arrest	NOUN	_	_	12	nmod	_	_
+15	para	para	ADP	_	_	17	case	_	_
+16	kay	kay	ADP	_	Case=Dat|Number=Sing	15	fixed	_	_
+17	Mrs	Mrs	PROPN	_	_	12	nmod	_	SpaceAfter=No
+18	.	.	PUNCT	_	_	17	punct	_	_
+19	Kho	Kho	PROPN	_	_	17	flat	_	SpaceAfter=No
+20	.	.	PUNCT	_	_	8	punct	_	_
+
+# sent_id = 14230
+# text = Lumalabas na ang pamilya Suarez ay dating taga Barangay Kamanikan, Gingoog City, Misamis Oriental.
+1	Lumalabas	labas	VERB	_	Aspect=Imp|Mood=Ind|Voice=Act	0	root	_	_
+2	na	na	PART	_	_	10	mark	_	_
+3	ang	ang	DET	_	Case=Nom	4	det	_	_
+4	pamilya	pamilya	NOUN	_	_	10	nsubj	_	_
+5	Suarez	Suarez	PROPN	_	_	4	nmod	_	_
+6	ay	ay	PART	_	_	4	discourse	_	_
+7-8	dating	_	_	_	_	_	_	_	_
+7	dati	dati	ADJ	_	_	10	amod	_	_
+8	-ng	na	PART	_	_	7	case	_	_
+9	taga	taga	X	_	_	10	compound	_	_
+10	Barangay	Barangay	PROPN	_	_	1	ccomp	_	_
+11	Kamanikan	Kamanik	PROPN	_	_	10	flat	_	SpaceAfter=No
+12	,	,	PUNCT	_	_	13	punct	_	_
+13	Gingoog	Gingoog	PROPN	_	_	11	appos	_	_
+14	City	City	PROPN	_	_	13	flat	_	SpaceAfter=No
+15	,	,	PUNCT	_	_	16	punct	_	_
+16	Misamis	Misamis	PROPN	_	_	13	appos	_	_
+17	Oriental	Oriental	PROPN	_	_	16	flat	_	SpaceAfter=No
+18	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14238
+# text = May nakapagsabi sa akin na kapag matagal nang walang komunikasyon ang mag-asawa ay pwede nang magpakasal sa iba.
+1	May	may	VERB	_	_	0	root	_	_
+2	nakapagsabi	sabi	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	1	xcomp	_	_
+3	sa	sa	ADP	_	Case=Loc	4	case	_	_
+4	akin	akin	PRON	_	Case=Gen|Number=Sing|Person=1|PronType=Prs	2	obl	_	_
+5	na	na	PART	_	_	19	mark	_	_
+6	kapag	kapag	SCONJ	_	_	10	mark	_	_
+7	matagal	tagal	VERB	_	_	10	advcl	_	_
+8-9	nang	_	_	_	_	_	_	_	_
+8	na	na	ADV	_	_	7	advmod	_	_
+9	-ng	na	PART	_	_	7	mark	_	_
+10-11	walang	_	_	_	_	_	_	_	_
+10	wala	wala	VERB	_	Polarity=Neg	19	advcl	_	_
+11	-ng	na	PART	_	_	10	flat	_	_
+12	komunikasyon	komunikasyon	NOUN	_	_	10	obj	_	_
+13	ang	ang	DET	_	Case=Nom	14	det	_	_
+14	mag-asawa	asawa	NOUN	_	_	10	nsubj	_	_
+15	ay	ay	PART	_	_	10	discourse	_	_
+16	pwede	pwede	ADV	_	_	19	advmod	_	_
+17-18	nang	_	_	_	_	_	_	_	_
+17	na	na	ADV	_	_	16	advmod	_	_
+18	-ng	na	PART	_	_	16	case	_	_
+19	magpakasal	kasal	VERB	_	Aspect=Imp|Mood=Pot|Voice=Act	1	ccomp	_	_
+20	sa	sa	ADP	_	Case=Loc	21	case	_	_
+21	iba	iba	NOUN	_	_	19	obl	_	SpaceAfter=No
+22	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14246
+# text = Pumangatlo si Rubens Barrichello ng Brawn GP habang ang katropa at championship leader na si Jenson Button ay pang-anim lang.
+1	Pumangatlo	tatlo	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	0	root	_	_
+2	si	si	DET	_	Case=Nom|Number=Sing	3	det	_	_
+3	Rubens	Rubens	PROPN	_	_	1	nsubj	_	_
+4	Barrichello	Barrichello	PROPN	_	_	3	flat	_	_
+5	ng	ng	ADP	_	Case=Gen	6	case	_	_
+6	Brawn	Brawn	PROPN	_	_	3	nmod	_	_
+7	GP	GP	PROPN	_	_	6	flat	_	_
+8	habang	habang	SCONJ	_	_	19	mark	_	_
+9	ang	ang	DET	_	Case=Nom	10	det	_	_
+10	katropa	tropa	NOUN	_	_	19	nsubj	_	_
+11	at	at	CCONJ	_	_	13	cc	_	_
+12	championship	championship	NOUN	_	_	13	compound	_	_
+13	leader	leader	NOUN	_	_	10	conj	_	_
+14	na	na	PART	_	_	16	case	_	_
+15	si	si	DET	_	Case=Nom|Number=Sing	16	det	_	_
+16	Jenson	Jenson	PROPN	_	_	10	nmod	_	_
+17	Button	Button	PROPN	_	_	16	flat	_	_
+18	ay	ay	PART	_	_	10	discourse	_	_
+19	pang-anim	anim	ADJ	_	NumType=Ord	1	advcl	_	_
+20	lang	lang	ADV	_	_	19	advmod	_	SpaceAfter=No
+21	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14284
+# text = Administration Sen. Edgardo Angara:
+1	Administration	administration	PROPN	_	_	0	root	_	_
+2	Sen	Sen	PROPN	_	_	1	flat	_	SpaceAfter=No
+3	.	.	PUNCT	_	_	2	punct	_	_
+4	Edgardo	Edgardo	PROPN	_	_	1	flat	_	_
+5	Angara	Angara	PROPN	_	_	1	flat	_	SpaceAfter=No
+6	:	:	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14298
+# text = Ang kanyang ina ang may kagagawan nito.
+1	Ang	ang	DET	_	Case=Nom	4	det	_	_
+2-3	kanyang	_	_	_	_	_	_	_	_
+2	kanya	kaniya	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs	4	nmod:poss	_	_
+3	-ng	na	PART	_	_	2	case	_	_
+4	ina	ina	NOUN	_	_	0	root	_	_
+5	ang	ang	DET	_	Case=Nom	6	det	_	_
+6	may	may	VERB	_	_	4	nsubj	_	_
+7	kagagawan	gawa	NOUN	_	_	6	obj	_	_
+8	nito	nito	PRON	_	Case=Gen|Deixis=Prox|PronType=Dem	7	nmod	_	SpaceAfter=No
+9	.	.	PUNCT	_	_	4	punct	_	_
+
+# sent_id = 14306
+# text = May letrang D sa kanyang pangalan as in Dirty Old Man?
+1	May	may	VERB	_	_	0	root	_	_
+2-3	letrang	_	_	_	_	_	_	_	_
+2	letra	letra	NOUN	_	_	4	nmod	_	_
+3	-ng	na	PART	_	_	2	case	_	_
+4	D	D	NOUN	_	_	1	obj	_	_
+5	sa	sa	ADP	_	Case=Loc	8	case	_	_
+6-7	kanyang	_	_	_	_	_	_	_	_
+6	kanya	kaniya	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs	8	nmod:poss	_	_
+7	-ng	na	PART	_	_	6	case	_	_
+8	pangalan	pangalan	NOUN	_	_	1	obl	_	_
+9	as	as	ADP	_	_	13	case	_	_
+10	in	in	ADP	_	_	9	fixed	_	_
+11	Dirty	Dirty	ADJ	_	_	13	amod	_	_
+12	Old	Old	ADJ	_	_	13	amod	_	_
+13	Man	Man	NOUN	_	_	4	nmod	_	SpaceAfter=No
+14	?	?	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14314
+# text = Itinanghal siyang MVP noong 2001 nang giyahan ang Sixers sa finals.
+1	Itinanghal	tanghal	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	0	root	_	_
+2-3	siyang	_	_	_	_	_	_	_	_
+2	siya	siya	PRON	_	Case=Nom|Number=Sing|Person=3|PronType=Prs	1	nsubj	_	_
+3	-ng	na	PART	_	_	4	mark	_	_
+4	MVP	MVP	PROPN	_	_	1	ccomp	_	_
+5-6	noong	_	_	_	_	_	_	_	_
+5	noon	noon	ADV	_	Case=Gen|Deixis=Remt|PronType=Dem	7	advmod	_	_
+6	-ng	na	PART	_	_	5	case	_	_
+7	2001	2001	NUM	_	_	1	obl	_	_
+8	nang	nang	SCONJ	_	_	9	mark	_	_
+9	giyahan	giya	VERB	_	Aspect=Imp|Mood=Ind|Voice=Lfoc	1	xcomp	_	_
+10	ang	ang	DET	_	Case=Nom	11	det	_	_
+11	Sixers	Sixers	PROPN	_	_	9	nsubj	_	_
+12	sa	sa	ADP	_	Case=Loc	13	case	_	_
+13	finals	finals	NOUN	_	_	9	obl	_	SpaceAfter=No
+14	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14322
+# text = Di na malalis ang kamaayo ni Manny, ang "Kamao ng Bayan", sa larangan sa boksing.
+1	Di	hindi	ADV	_	Polarity=Neg	3	advmod	_	_
+2	na	na	ADV	_	_	1	advmod	_	_
+3	malalis	lalis	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	0	root	_	_
+4	ang	ang	DET	_	Case=Nom	5	det	_	_
+5	kamaayo	ayo	NOUN	_	_	3	nsubj	_	_
+6	ni	ni	ADP	_	Case=Gen|Number=Sing	7	case	_	_
+7	Manny	Manny	PROPN	_	_	5	nmod:poss	_	SpaceAfter=No
+8	,	,	PUNCT	_	_	11	punct	_	_
+9	ang	ang	DET	_	Case=Nom	11	det	_	_
+10	"	"	PUNCT	_	_	9	punct	_	SpaceAfter=No
+11	Kamao	Kamao	NOUN	_	_	7	appos	_	_
+12	ng	ng	ADP	_	Case=Gen	13	case	_	_
+13	Bayan"	Bayan"	NOUN	_	_	11	nmod:poss	_	SpaceAfter=No
+14	,	,	PUNCT	_	_	16	punct	_	_
+15	sa	sa	ADP	_	Case=Loc	16	case	_	_
+16	larangan	larang	NOUN	_	_	5	nmod	_	_
+17	sa	sa	ADP	_	Case=Loc	18	case	_	_
+18	boksing	boksing	NOUN	_	_	16	nmod	_	SpaceAfter=No
+19	.	.	PUNCT	_	_	3	punct	_	_
+
+# sent_id = 14330
+# text = Hulaan ninyo kung sino ang kilalang young actress na dyowa na ngayon ng isang lady director.
+1	Hulaan	hula	VERB	_	Aspect=Imp|Mood=Pot|Voice=Lfoc	0	root	_	_
+2	ninyo	ninyo	PRON	_	Case=Gen|Number=Plur|Person=2|PronType=Prs	1	obj:agent	_	_
+3	kung	kung	SCONJ	_	_	4	mark	_	_
+4	sino	sino	ADV	_	Case=Nom|PronType=Int	1	ccomp	_	_
+5	ang	ang	DET	_	Case=Nom	9	det	_	_
+6-7	kilalang	_	_	_	_	_	_	_	_
+6	kilala	kilala	ADJ	_	_	9	amod	_	_
+7	-ng	na	PART	_	_	6	case	_	_
+8	young	young	ADJ	_	_	9	amod	_	_
+9	actress	actress	NOUN	_	_	4	nsubj	_	_
+10	na	na	PART	_	_	11	mark	_	_
+11	dyowa	dyowa	NOUN	_	_	9	nmod	_	_
+12	na	na	ADV	_	_	11	advmod	_	_
+13	ngayon	ngayon	ADV	_	_	11	advmod	_	_
+14	ng	ng	ADP	_	Case=Gen	18	case	_	_
+15-16	isang	_	_	_	_	_	_	_	_
+15	isa	isa	NUM	_	NumType=Card	18	nummod	_	_
+16	-ng	na	PART	_	_	15	case	_	_
+17	lady	lady	NOUN	_	_	18	nmod	_	_
+18	director	director	NOUN	_	_	11	nmod:poss	_	SpaceAfter=No
+19	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14338
+# text = Tandaan natin na habang hindi tayo nakamasid ay doon naman nila sinusunog at winawasak ang kinabukasan ng ating bayan.
+1	Tandaan	tanda	VERB	_	Aspect=Perf|Mood=Pot|Voice=Lfoc	0	root	_	_
+2	natin	natin	PRON	_	Case=Gen|Clusivity=In|Number=Plur|Person=1|PronType=Prs	1	obj:agent	_	_
+3	na	na	PART	_	_	12	mark	_	_
+4	habang	habang	SCONJ	_	_	7	mark	_	_
+5	hindi	hindi	ADV	_	Polarity=Neg	7	advmod	_	_
+6	tayo	tayo	PRON	_	Case=Nom|Clusivity=In|Number=Plur|Person=1|PronType=Prs	7	nsubj	_	_
+7	nakamasid	masid	VERB	_	Aspect=Imp|Mood=Ind|Voice=Act	12	advcl	_	_
+8	ay	ay	PART	_	_	7	discourse	_	_
+9	doon	doon	ADV	_	Case=Loc|Deixis=Remt|PronType=Dem	12	advmod	_	_
+10	naman	naman	ADV	_	_	9	advmod	_	_
+11	nila	nila	PRON	_	Case=Gen|Number=Plur|Person=3|PronType=Prs	12	obj:agent	_	_
+12	sinusunog	sunog	VERB	_	Aspect=Imp|Mood=Ind|Voice=Pass	1	ccomp	_	_
+13	at	at	CCONJ	_	_	14	cc	_	_
+14	winawasak	wasak	VERB	_	Aspect=Imp|Mood=Ind|Voice=Pass	12	conj	_	_
+15	ang	ang	DET	_	Case=Nom	16	det	_	_
+16	kinabukasan	bukas	NOUN	_	_	12	nsubj	_	_
+17	ng	ng	ADP	_	Case=Gen	20	case	_	_
+18-19	ating	_	_	_	_	_	_	_	_
+18	atin	atin	PRON	_	Case=Dat|Clusivity=In|Number=Plur|Person=1|PronType=Prs	20	nmod:poss	_	_
+19	-ng	na	PART	_	_	18	case	_	_
+20	bayan	bayan	PROPN	_	_	16	nmod:poss	_	SpaceAfter=No
+21	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14386
+# text = Iyak daw ako nang iyak.
+1	Iyak	iyak	NOUN	_	_	5	compound:redup	_	_
+2	daw	daw	ADV	_	_	1	advmod	_	_
+3	ako	ako	PRON	_	Case=Nom|Number=Sing|Person=1|PronType=Prs	5	nsubj	_	_
+4	nang	nang	PART	_	_	1	flat	_	_
+5	iyak	iyak	NOUN	_	_	0	root	_	SpaceAfter=No
+6	.	.	PUNCT	_	_	5	punct	_	_
+
+# sent_id = 14394
+# text = Patuloy naming hihintayin ang panig ng LTO.
+1	Patuloy	tuloy	ADV	_	_	4	advmod	_	_
+2-3	naming	_	_	_	_	_	_	_	_
+2	namin	namin	PRON	_	Case=Gen|Clusivity=Ex|Number=Plur|Person=1|PronType=Prs	4	obj:agent	_	_
+3	-ng	na	PART	_	_	1	case	_	_
+4	hihintayin	hintay	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	0	root	_	_
+5	ang	ang	DET	_	Case=Nom	6	det	_	_
+6	panig	panig	NOUN	_	_	4	nsubj	_	_
+7	ng	ng	ADP	_	Case=Gen	8	case	_	_
+8	LTO	LTO	PROPN	_	_	6	nmod:poss	_	SpaceAfter=No
+9	.	.	PUNCT	_	_	4	punct	_	_
+
+# sent_id = 14402
+# text = Jun, kapag isinabuhay mo ang lahat ng ito, ikaw ay panalo.
+1	Jun	Jun	PROPN	_	_	13	vocative	_	SpaceAfter=No
+2	,	,	PUNCT	_	_	1	punct	_	_
+3	kapag	kapag	SCONJ	_	_	4	mark	_	_
+4	isinabuhay	buhay	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	13	advcl	_	_
+5	mo	mo	PRON	_	Case=Gen|Number=Sing|Person=2|PronType=Prs	4	obj:agent	_	_
+6	ang	ang	DET	_	Case=Nom	7	det	_	_
+7	lahat	lahat	ADJ	_	_	4	nsubj	_	_
+8	ng	ng	ADP	_	Case=Gen	9	case	_	_
+9	ito	ito	PRON	_	Case=Nom|Deixis=Prox|PronType=Dem	7	nmod	_	SpaceAfter=No
+10	,	,	PUNCT	_	_	4	punct	_	_
+11	ikaw	ikaw	PRON	_	Case=Nom|Number=Sing|Person=2|PronType=Prs	13	nsubj	_	_
+12	ay	ay	PART	_	_	11	discourse	_	_
+13	panalo	panalo	NOUN	_	_	0	root	_	SpaceAfter=No
+14	.	.	PUNCT	_	_	13	punct	_	_
+
+# sent_id = 14410
+# text = At lutang na lutang naman ang husay ni Sid Lucero sa Funeraria episode.
+1	At	at	CCONJ	_	_	4	cc	_	_
+2	lutang	lutang	ADJ	_	_	4	compound:redup	_	_
+3	na	na	PART	_	_	2	flat	_	_
+4	lutang	lutang	ADJ	_	_	0	root	_	_
+5	naman	naman	ADV	_	_	4	advmod	_	_
+6	ang	ang	DET	_	Case=Nom	7	det	_	_
+7	husay	husay	NOUN	_	_	4	nsubj	_	_
+8	ni	ni	ADP	_	Case=Gen|Number=Sing	9	case	_	_
+9	Sid	Sid	PROPN	_	_	7	nmod:poss	_	_
+10	Lucero	Lucero	PROPN	_	_	9	flat	_	_
+11	sa	sa	ADP	_	Case=Loc	13	case	_	_
+12	Funeraria	Funeraria	PROPN	_	_	13	nmod	_	_
+13	episode	episode	NOUN	_	_	4	obl	_	SpaceAfter=No
+14	.	.	PUNCT	_	_	4	punct	_	_
+
+# sent_id = 14418
+# text = Akalain ba niyang ipapatong ni Monet sa mismong hita nito ang kanyang pilyong kamay?
+1	Akalain	akala	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	0	root	_	_
+2	ba	ba	PART	_	PartType=Int	1	advmod	_	_
+3-4	niyang	_	_	_	_	_	_	_	_
+3	niya	niya	PRON	_	Case=Gen|Number=Sing|Person=3|PronType=Prs	1	obj:agent	_	_
+4	-ng	na	PART	_	_	5	mark	_	_
+5	ipapatong	patong	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	1	ccomp	_	_
+6	ni	ni	ADP	_	Case=Gen|Number=Sing	7	case	_	_
+7	Monet	Monet	PROPN	_	_	5	obj:agent	_	_
+8	sa	sa	ADP	_	Case=Loc	11	case	_	_
+9-10	mismong	_	_	_	_	_	_	_	_
+9	mismo	mismo	ADV	_	_	11	advmod	_	_
+10	-ng	na	PART	_	_	9	case	_	_
+11	hita	hita	NOUN	_	_	5	obl	_	_
+12	nito	nito	PRON	_	Case=Gen|Deixis=Prox|PronType=Dem	11	nmod:poss	_	_
+13	ang	ang	DET	_	Case=Nom	18	det	_	_
+14-15	kanyang	_	_	_	_	_	_	_	_
+14	kanya	kaniya	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs	18	nmod:poss	_	_
+15	-ng	na	PART	_	_	14	case	_	_
+16-17	pilyong	_	_	_	_	_	_	_	_
+16	pilyo	pilyo	ADJ	_	_	18	amod	_	_
+17	-ng	na	PART	_	_	16	case	_	_
+18	kamay	kamay	NOUN	_	_	5	nsubj	_	SpaceAfter=No
+19	?	?	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14426
+# text = Hindi naman siguro hangal ang mga Kapampangan para huwag gamitin ang kanilang kukote sa pagboto.
+1	Hindi	hindi	ADV	_	Polarity=Neg	4	advmod	_	_
+2	naman	naman	ADV	_	_	1	advmod	_	_
+3	siguro	siguro	ADV	_	_	1	advmod	_	_
+4	hangal	hangal	ADJ	_	_	0	root	_	_
+5	ang	ang	DET	_	Case=Nom	7	det	_	_
+6	mga	mga	DET	_	Number=Plur	7	det	_	_
+7	Kapampangan	Kapampangan	PROPN	_	_	4	nsubj	_	_
+8	para	para	SCONJ	_	_	10	mark	_	_
+9	huwag	huwag	ADV	_	_	10	advmod	_	_
+10	gamitin	gamit	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	4	advcl	_	_
+11	ang	ang	DET	_	Case=Nom	14	det	_	_
+12-13	kanilang	_	_	_	_	_	_	_	_
+12	kanila	kanila	PRON	_	Case=Dat|Number=Plur|Person=3|PronType=Prs	14	nmod:poss	_	_
+13	-ng	na	PART	_	_	12	case	_	_
+14	kukote	kukote	NOUN	_	_	10	nsubj	_	_
+15	sa	sa	ADP	_	Case=Loc	16	case	_	_
+16	pagboto	boto	NOUN	_	_	10	obl	_	SpaceAfter=No
+17	.	.	PUNCT	_	_	4	punct	_	_
+
+# sent_id = 14434
+# text = Since na I.T. expertise ako ako mismo nag volunter mag set up at mag tutor ng basic pc operation sa anak nila.
+1	Since	since	SCONJ	_	_	5	mark	_	_
+2	na	na	PART	_	_	5	dep	_	_
+3	I.T	I.T	PROPN	_	_	5	nmod	_	SpaceAfter=No
+4	.	.	PUNCT	_	_	3	punct	_	_
+5	expertise	expertise	NOUN	_	_	7	advcl	_	_
+6	ako	ako	PRON	_	Case=Nom|Number=Sing|Person=1|PronType=Prs	5	nsubj	_	_
+7	ako	ako	PRON	_	Case=Nom|Number=Sing|Person=1|PronType=Prs	0	root	_	_
+8	mismo	mismo	ADV	_	_	7	advmod	_	_
+9	nag	nag	X	_	_	10	compound	_	_
+10	volunter	volunteer	NOUN	_	_	7	nsubj	_	_
+11	mag	mag	X	_	_	12	compound	_	_
+12	set	set	VERB	_	_	10	ccomp	_	_
+13	up	up	ADP	_	_	12	compound	_	_
+14	at	at	CCONJ	_	_	16	cc	_	_
+15	mag	mag	X	_	_	16	compound	_	_
+16	tutor	tutor	VERB	_	_	12	conj	_	_
+17	ng	ng	ADP	_	Case=Gen	20	case	_	_
+18	basic	basic	ADJ	_	_	20	amod	_	_
+19	pc	pc	NOUN	_	_	20	nmod	_	_
+20	operation	operation	NOUN	_	_	16	obj	_	_
+21	sa	sa	ADP	_	Case=Loc	22	case	_	_
+22	anak	anak	NOUN	_	_	16	obl	_	_
+23	nila	nila	PRON	_	Case=Gen|Number=Plur|Person=3|PronType=Prs	22	nmod:poss	_	SpaceAfter=No
+24	.	.	PUNCT	_	_	7	punct	_	_
+
+# sent_id = 14443
+# text = Puro espekulasyon pa rin ang lumalabas sa mga boxing websites hinggil sa labanang Manny Pacquiao at Floyd ‘Money’ Mayweather.
+1	Puro	puro	ADJ	_	_	2	amod	_	_
+2	espekulasyon	espekulasyon	NOUN	_	_	0	root	_	_
+3	pa	pa	ADV	_	_	2	advmod	_	_
+4	rin	din	ADV	_	_	3	fixed	_	_
+5	ang	ang	DET	_	Case=Nom	6	det	_	_
+6	lumalabas	labas	VERB	_	Aspect=Imp|Mood=Ind|Voice=Act	2	nsubj	_	_
+7	sa	sa	ADP	_	Case=Loc	10	case	_	_
+8	mga	mga	DET	_	Number=Plur	10	det	_	_
+9	boxing	boxing	NOUN	_	_	10	nmod	_	_
+10	websites	website	NOUN	_	_	6	obl	_	_
+11	hinggil	hinggil	ADP	_	_	13	case	_	_
+12	sa	sa	ADP	_	Case=Loc	11	fixed	_	_
+13-14	labanang	_	_	_	_	_	_	_	_
+13	labanan	laban	NOUN	_	_	6	obl	_	_
+14	-ng	na	PART	_	_	15	case	_	_
+15	Manny	Manny	PROPN	_	_	13	nmod	_	_
+16	Pacquiao	Pacquiao	PROPN	_	_	15	flat	_	_
+17	at	at	CCONJ	_	_	18	cc	_	_
+18	Floyd	Floyd	PROPN	_	_	15	conj	_	_
+19	‘Money’	Money	PROPN	_	_	18	flat	_	_
+20	Mayweather	mayweather	PROPN	_	_	18	flat	_	SpaceAfter=No
+21	.	.	PUNCT	_	_	2	punct	_	_
+
+# sent_id = 14461
+# text = magazine this year (magkasama sila ni Michael V sa ‘The Peter Pans’ category).
+1	magazine	magazine	NOUN	_	_	0	root	_	_
+2	this	this	PRON	_	_	3	nmod	_	_
+3	year	year	NOUN	_	_	1	nmod	_	_
+4	(magkasama	kasama	ADJ	_	_	1	parataxis	_	_
+5	sila	sila	PRON	_	Case=Nom|Number=Plur|Person=3|PronType=Prs	4	nsubj	_	_
+6	ni	ni	ADP	_	Case=Gen|Number=Sing	7	case	_	_
+7	Michael	Michael	PROPN	_	_	5	nmod	_	_
+8	V	V	PROPN	_	_	7	flat	_	_
+9	sa	sa	ADP	_	Case=Loc	13	case	_	_
+10	‘The	The	PROPN	_	_	13	nmod	_	_
+11	Peter	Peter	PROPN	_	_	10	flat	_	_
+12	Pans’	Pans	PROPN	_	_	10	flat	_	_
+13	category)	category	NOUN	_	_	4	obl	_	SpaceAfter=No
+14	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14493
+# text = Papaano naman ang dating kongresista?
+1	Papaano	paano	ADV	_	PronType=Int	0	root	_	_
+2	naman	naman	ADV	_	_	1	advmod	_	_
+3	ang	ang	DET	_	Case=Nom	6	det	_	_
+4-5	dating	_	_	_	_	_	_	_	_
+4	dati	dati	ADJ	_	_	6	amod	_	_
+5	-ng	na	PART	_	_	4	case	_	_
+6	kongresista	kongresista	NOUN	_	_	1	nsubj	_	SpaceAfter=No
+7	?	?	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14502
+# text = Pero hindi ko nagugustuhan ang ginagawa niya ngayon.
+1	Pero	pero	CCONJ	_	_	4	cc	_	_
+2	hindi	hindi	ADV	_	Polarity=Neg	4	advmod	_	_
+3	ko	ko	PRON	_	Case=Gen|Number=Sing|Person=1|PronType=Prs	4	obj:agent	_	_
+4	nagugustuhan	gusto	VERB	_	Aspect=Imp|Mood=Ind|Voice=Pass	0	root	_	_
+5	ang	ang	DET	_	Case=Nom	6	det	_	_
+6	ginagawa	gawa	VERB	_	Aspect=Imp|Mood=Ind|Voice=Pass	4	nsubj	_	_
+7	niya	niya	PRON	_	Case=Gen|Number=Sing|Person=3|PronType=Prs	6	obj:agent	_	_
+8	ngayon	ngayon	ADV	_	_	6	advmod	_	SpaceAfter=No
+9	.	.	PUNCT	_	_	4	punct	_	_
+
+# sent_id = 14512
+# text = Identified na po ang mga biktima, hindi po ang mga holdaper.
+1	Identified	Identified	ADJ	_	_	0	root	_	_
+2	na	na	ADV	_	_	1	advmod	_	_
+3	po	po	PART	_	Polite=Form	1	discourse	_	_
+4	ang	ang	DET	_	Case=Nom	6	det	_	_
+5	mga	mga	DET	_	Number=Plur	6	det	_	_
+6	biktima	biktima	NOUN	_	_	1	nsubj	_	SpaceAfter=No
+7	,	,	PUNCT	_	_	12	punct	_	_
+8	hindi	hindi	ADV	_	Polarity=Neg	12	advmod	_	_
+9	po	po	PART	_	Polite=Form	8	discourse	_	_
+10	ang	ang	DET	_	Case=Nom	12	det	_	_
+11	mga	mga	DET	_	Number=Plur	12	det	_	_
+12	holdaper	holdaper	NOUN	_	_	1	conj	_	SpaceAfter=No
+13	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14520
+# text = At ‘di lang ‘yon, ang relasyon ng mga magulang sa mga anak ay naaapektuhan rin.
+1	At	at	CCONJ	_	_	4	cc	_	_
+2	‘di	hindi	ADV	_	Polarity=Neg	4	advmod	_	_
+3	lang	lang	ADV	_	_	2	advmod	_	_
+4	‘yon	iyon	PRON	_	Case=Nom|Deixis=Remt|PronType=Dem	0	root	_	SpaceAfter=No
+5	,	,	PUNCT	_	_	15	punct	_	_
+6	ang	ang	DET	_	Case=Nom	7	det	_	_
+7	relasyon	relasyon	NOUN	_	_	15	nsubj	_	_
+8	ng	ng	ADP	_	Case=Gen	10	case	_	_
+9	mga	mga	DET	_	Number=Plur	10	det	_	_
+10	magulang	gulang	NOUN	_	_	7	nmod	_	_
+11	sa	sa	ADP	_	Case=Loc	13	case	_	_
+12	mga	mga	DET	_	Number=Plur	13	det	_	_
+13	anak	anak	NOUN	_	_	7	nmod	_	_
+14	ay	ay	PART	_	_	7	discourse	_	_
+15	naaapektuhan	apekto	VERB	_	Aspect=Imp|Mood=Ind|Voice=Pass	4	parataxis	_	_
+16	rin	din	ADV	_	_	15	advmod	_	SpaceAfter=No
+17	.	.	PUNCT	_	_	4	punct	_	_
+
+# sent_id = 14528
+# text = Si Elmer Ching III ang nangibabaw sa mini-sprint 600m swim, 16.8k bike , 3.2k run sa 1 : 18 : 30 .
+1	Si	si	DET	_	Case=Nom|Number=Sing	2	det	_	_
+2	Elmer	Elmer	PROPN	_	_	0	root	_	_
+3	Ching	Ching	PROPN	_	_	2	flat	_	_
+4	III	III	PROPN	_	_	2	flat	_	_
+5	ang	ang	DET	_	Case=Nom	6	det	_	_
+6	nangibabaw	babaw	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	2	nsubj	_	_
+7	sa	sa	ADP	_	Case=Loc	8	case	_	_
+8	mini-sprint	mini-sprint	NOUN	_	_	6	obl	_	_
+9	600m	600m	NOUN	_	_	8	flat	_	_
+10	swim	swim	NOUN	_	_	8	flat	_	SpaceAfter=No
+11	,	,	PUNCT	_	_	12	punct	_	_
+12	16.8k	16.8k	NOUN	_	_	13	nmod	_	_
+13	bike	bike	NOUN	_	_	8	list	_	_
+14	,	,	PUNCT	_	_	16	punct	_	_
+15	3.2k	3.2k	NOUN	_	NumType=Card	16	nmod	_	_
+16	run	run	NOUN	_	_	8	list	_	_
+17	sa	sa	ADP	_	Case=Loc	18	case	_	_
+18	1	1	NUM	_	NumType=Card	16	nmod	_	_
+19	:	:	PUNCT	_	_	20	punct	_	_
+20	18	18	NUM	_	NumType=Card	18	flat	_	_
+21	:	:	PUNCT	_	_	22	punct	_	_
+22	30	30	NUM	_	NumType=Card	18	flat	_	_
+23	.	.	PUNCT	_	_	2	punct	_	_
+
+# sent_id = 14536
+# text = ‘Yun lang, nagsawa si beauty queen sa piling ng kanyang Pinoy boyfriend kaya bumabu rin na ito sa lalake.
+1	‘Yun	iyon	PRON	_	Case=Nom|Deixis=Remt|PronType=Dem	0	root	_	_
+2	lang	lang	ADV	_	_	1	advmod	_	SpaceAfter=No
+3	,	,	PUNCT	_	_	4	punct	_	_
+4	nagsawa	sawa	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	1	parataxis	_	_
+5	si	si	DET	_	Case=Nom|Number=Sing	7	det	_	_
+6	beauty	beauty	NOUN	_	_	7	compound	_	_
+7	queen	queen	NOUN	_	_	4	nsubj	_	_
+8	sa	sa	ADP	_	Case=Loc	9	case	_	_
+9	piling	piling	NOUN	_	_	4	obl	_	_
+10	ng	ng	ADP	_	Case=Gen	14	case	_	_
+11-12	kanyang	_	_	_	_	_	_	_	_
+11	kanya	kaniya	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs	14	nmod:poss	_	_
+12	-ng	na	PART	_	_	11	case	_	_
+13	Pinoy	Pinoy	PROPN	_	_	14	nmod	_	_
+14	boyfriend	boyfriend	NOUN	_	_	9	nmod	_	_
+15	kaya	kaya	SCONJ	_	_	16	mark	_	_
+16	bumabu	babu	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	4	advcl	_	_
+17	rin	din	ADV	_	_	16	advmod	_	_
+18	na	na	ADV	_	_	16	advmod	_	_
+19	ito	ito	PRON	_	Case=Nom|Deixis=Prox|PronType=Dem	16	nsubj	_	_
+20	sa	sa	ADP	_	Case=Loc	21	case	_	_
+21	lalake	lalaki	NOUN	_	_	16	obl	_	SpaceAfter=No
+22	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14544
+# text = Sinamahan siya ni Phillip Salvador sa Comelec at nangako ang aktor na all-out ang pa­ngangampanya niya kay Sen.
+1	Sinamahan	sama	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	0	root	_	_
+2	siya	siya	PRON	_	Case=Nom|Number=Sing|Person=3|PronType=Prs	1	nsubj	_	_
+3	ni	ni	ADP	_	Case=Gen|Number=Sing	4	case	_	_
+4	Phillip	Phillip	PROPN	_	_	1	obj:agent	_	_
+5	Salvador	Salvador	PROPN	_	_	4	flat	_	_
+6	sa	sa	ADP	_	Case=Loc	7	case	_	_
+7	Comelec	COMELEC	PROPN	_	_	1	obl	_	_
+8	at	at	CCONJ	_	_	9	cc	_	_
+9	nangako	ako	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	1	conj	_	_
+10	ang	ang	DET	_	Case=Nom	11	det	_	_
+11	aktor	aktor	NOUN	_	_	9	nsubj	_	_
+12	na	na	PART	_	_	13	mark	_	_
+13	all-out	all-out	ADJ	_	_	9	ccomp	_	_
+14	ang	ang	DET	_	Case=Nom	15	det	_	_
+15	pa­ngangampanya	kampanya	NOUN	_	_	13	nsubj	_	_
+16	niya	niya	PRON	_	Case=Gen|Number=Sing|Person=3|PronType=Prs	15	nmod:poss	_	_
+17	kay	kay	ADP	_	Case=Dat|Number=Sing	18	case	_	_
+18	Sen	Sen	PROPN	_	_	15	nmod	_	SpaceAfter=No
+19	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14554
+# text = Ang simple at maliit na kapalpakan, lalo na ng gobyerno, sa panahon ng kagipitan ay tinatandaan at sinasabihan ng:
+1	Ang	ang	DET	_	Case=Nom	6	det	_	_
+2	simple	simple	ADJ	_	_	6	amod	_	_
+3	at	at	CCONJ	_	_	4	cc	_	_
+4	maliit	liit	VERB	_	_	2	conj	_	_
+5	na	na	PART	_	_	4	case	_	_
+6	kapalpakan	palpak	NOUN	_	_	18	nsubj	_	SpaceAfter=No
+7	,	,	PUNCT	_	_	11	punct	_	_
+8	lalo	lalo	ADV	_	_	11	advmod	_	_
+9	na	na	ADV	_	_	8	advmod	_	_
+10	ng	ng	ADP	_	Case=Gen	11	case	_	_
+11	gobyerno	gobyerno	NOUN	_	_	6	nmod:poss	_	SpaceAfter=No
+12	,	,	PUNCT	_	_	14	punct	_	_
+13	sa	sa	ADP	_	Case=Loc	14	case	_	_
+14	panahon	panahon	NOUN	_	_	18	obl	_	_
+15	ng	ng	ADP	_	Case=Gen	16	case	_	_
+16	kagipitan	gipit	NOUN	_	_	14	nmod	_	_
+17	ay	ay	PART	_	_	6	discourse	_	_
+18	tinatandaan	tanda	VERB	_	Aspect=Imp|Mood=Ind|Voice=Pass	0	root	_	_
+19	at	at	CCONJ	_	_	20	cc	_	_
+20	sinasabihan	sinasabi	VERB	_	Aspect=Imp|Mood=Ind|Voice=Lfoc	18	conj	_	_
+21	ng	ng	ADP	_	Case=Gen	20	dep	_	SpaceAfter=No
+22	:	:	PUNCT	_	_	18	punct	_	_
+
+# sent_id = 14601
+# text = Para siyang tumama sa mega lotto.
+1	Para	para	ADV	_	_	4	advmod	_	_
+2-3	siyang	_	_	_	_	_	_	_	_
+2	siya	siya	PRON	_	Case=Nom|Number=Sing|Person=3|PronType=Prs	4	nsubj	_	_
+3	-ng	na	PART	_	_	1	case	_	_
+4	tumama	tama	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	0	root	_	_
+5	sa	sa	ADP	_	Case=Loc	7	case	_	_
+6	mega	mega	NOUN	_	_	7	compound	_	_
+7	lotto	lotto	NOUN	_	_	4	obl	_	SpaceAfter=No
+8	.	.	PUNCT	_	_	4	punct	_	_
+
+# sent_id = 14609
+# text = Totoo po ba na hawak kayo sa leeg ng isang pulis?
+1	Totoo	totoo	ADJ	_	_	0	root	_	_
+2	po	po	PART	_	_	1	discourse	_	_
+3	ba	ba	PART	_	PartType=Int	1	advmod	_	_
+4	na	na	PART	_	_	5	mark	_	_
+5	hawak	hawak	NOUN	_	_	1	xcomp	_	_
+6	kayo	kayo	PRON	_	Case=Nom|Number=Plur|Person=2|PronType=Prs	5	nsubj	_	_
+7	sa	sa	ADP	_	Case=Loc	8	case	_	_
+8	leeg	leeg	NOUN	_	_	5	nmod	_	_
+9	ng	ng	ADP	_	Case=Gen	12	case	_	_
+10-11	isang	_	_	_	_	_	_	_	_
+10	isa	isa	NUM	_	NumType=Card	12	nummod	_	_
+11	-ng	na	PART	_	_	10	case	_	_
+12	pulis	pulis	NOUN	_	_	5	obj:agent	_	SpaceAfter=No
+13	?	?	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14617
+# text = Gustung-gusto ni Fabio ang kultura at kabutihan ng mga Pilipino.
+1-3	Gustung-gusto	_	_	_	_	_	_	_	_
+1	Gustu	Gusto	VERB	_	_	3	compound:redup	_	_
+2	-ng-	na	PART	_	_	1	mark	_	_
+3	gusto	gusto	VERB	_	_	0	root	_	_
+4	ni	ni	ADP	_	Case=Gen|Number=Sing	5	case	_	_
+5	Fabio	Fabio	PROPN	_	_	3	obj:agent	_	_
+6	ang	ang	DET	_	Case=Nom	7	det	_	_
+7	kultura	kultura	NOUN	_	_	3	nsubj	_	_
+8	at	at	CCONJ	_	_	9	cc	_	_
+9	kabutihan	buti	NOUN	_	_	7	conj	_	_
+10	ng	ng	ADP	_	Case=Gen	12	case	_	_
+11	mga	mga	DET	_	Number=Plur	12	det	_	_
+12	Pilipino	Pilipino	PROPN	_	_	7	nmod:poss	_	SpaceAfter=No
+13	.	.	PUNCT	_	_	3	punct	_	_
+
+# sent_id = 14625
+# text = Marami nga sa kasamahan niya sa Survivor Philippines ang gusto siyang manalo.
+1	Marami	dami	VERB	_	_	0	root	_	_
+2	nga	nga	ADV	_	_	1	advmod	_	_
+3	sa	sa	ADP	_	Case=Loc	4	case	_	_
+4	kasamahan	sama	NOUN	_	_	1	obl	_	_
+5	niya	niya	PRON	_	Case=Gen|Number=Sing|Person=3|PronType=Prs	4	nmod:poss	_	_
+6	sa	sa	ADP	_	Case=Loc	7	case	_	_
+7	Survivor	Survivor	PROPN	_	_	4	nmod	_	_
+8	Philippines	Philippines	PROPN	_	_	7	flat	_	_
+9	ang	ang	DET	_	Case=Nom	10	det	_	_
+10	gusto	gusto	VERB	_	_	1	nsubj	_	_
+11-12	siyang	_	_	_	_	_	_	_	_
+11	siya	siya	PRON	_	Case=Nom|Number=Sing|Person=3|PronType=Prs	10	nsubj	_	_
+12	-ng	na	PART	_	_	13	mark	_	_
+13	manalo	panalo	VERB	_	Aspect=Imp|Mood=Pot|Voice=Act	10	ccomp	_	SpaceAfter=No
+14	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14633
+# text = Sa kuwento, nakidnap si Chev Chelios ( ginampanan ni Jason Statham ) ng isang Chinese gang.
+1	Sa	sa	ADP	_	Case=Loc	2	obl	_	_
+2	kuwento	kuwento	NOUN	_	_	4	obl	_	SpaceAfter=No
+3	,	,	PUNCT	_	_	2	punct	_	_
+4	nakidnap	kidnap	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	0	root	_	_
+5	si	si	DET	_	Case=Nom|Number=Sing	6	det	_	_
+6	Chev	Chev	PROPN	_	_	4	nsubj	_	_
+7	Chelios	Chelios	PROPN	_	_	6	flat	_	_
+8	(	(	PUNCT	_	_	9	punct	_	_
+9	ginampanan	gampanan	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	6	appos	_	_
+10	ni	ni	ADP	_	_	11	case	_	_
+11	Jason	Jason	PROPN	_	_	9	obj:agent	_	_
+12	Statham	Statham	PROPN	_	_	11	flat	_	_
+13	)	)	PUNCT	_	_	9	punct	_	_
+14	ng	ng	ADP	_	_	18	case	_	_
+15-16	isang	_	_	_	_	_	_	_	_
+15	isa	isa	NUM	_	NumType=Card	18	nummod	_	_
+16	-ng	na	PART	_	_	15	case	_	_
+17	Chinese	Chinese	PROPN	_	_	18	nmod	_	_
+18	gang	gang	NOUN	_	_	4	obj:agent	_	SpaceAfter=No
+19	.	.	PUNCT	_	_	4	punct	_	_
+
+# sent_id = 14641
+# text = Ang ibig sabihin naman ng consistency ay hindi palaging nananalo, kundi palaging maganda ang nilalaro.
+1	Ang	ang	DET	_	Case=Nom	2	det	_	_
+2	ibig	ibig	VERB	_	_	11	nsubj	_	_
+3	sabihin	sabi	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	2	xcomp	_	_
+4	naman	naman	ADV	_	_	3	advmod	_	_
+5	ng	ng	ADP	_	Case=Gen	6	case	_	_
+6	consistency	consistency	NOUN	_	_	3	obj	_	_
+7	ay	ay	PART	_	_	2	discourse	_	_
+8	hindi	hindi	ADV	_	Polarity=Neg	11	advmod	_	_
+9-10	palaging	_	_	_	_	_	_	_	_
+9	palagi	lagi	ADV	_	_	11	advmod	_	_
+10	-ng	na	PART	_	_	9	case	_	_
+11	nananalo	panalo	VERB	_	Aspect=Imp|Mood=Ind|Voice=Act	0	root	_	SpaceAfter=No
+12	,	,	PUNCT	_	_	16	punct	_	_
+13	kundi	kundi	CCONJ	_	_	16	cc	_	_
+14-15	palaging	_	_	_	_	_	_	_	_
+14	palagi	lagi	ADV	_	_	16	advmod	_	_
+15	-ng	na	PART	_	_	14	case	_	_
+16	maganda	ganda	VERB	_	_	11	conj	_	_
+17	ang	ang	DET	_	Case=Nom	18	det	_	_
+18	nilalaro	laro	VERB	_	Aspect=Imp|Mood=Ind|Voice=Pass	16	nsubj	_	SpaceAfter=No
+19	.	.	PUNCT	_	_	11	punct	_	_
+
+# sent_id = 14649
+# text = Deretsahang inamin ni Ryan na nagalit siya nu’ng nabalitaan niyang ginamit ng The Buzz ang shout-out ng kanyang ina.
+1-2	Deretsahang	_	_	_	_	_	_	_	_
+1	Deretsaha	Deretsa	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	3	advcl	_	_
+2	-ng	na	PART	_	_	1	mark	_	_
+3	inamin	amin	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	0	root	_	_
+4	ni	ni	ADP	_	Case=Gen|Number=Sing	5	case	_	_
+5	Ryan	Ryan	PROPN	_	_	3	obj:agent	_	_
+6	na	na	PART	_	_	7	mark	_	_
+7	nagalit	galit	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	3	ccomp	_	_
+8	siya	siya	PRON	_	Case=Nom|Number=Sing|Person=3|PronType=Prs	7	nsubj	_	_
+9-10	nu’ng	_	_	_	_	_	_	_	_
+9	nu’n	noon	ADV	_	_	11	mark	_	_
+10	-ng	na	PART	_	_	9	fixed	_	_
+11	nabalitaan	balita	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	7	advcl	_	_
+12-13	niyang	_	_	_	_	_	_	_	_
+12	niya	niya	PRON	_	Case=Gen|Number=Sing|Person=3|PronType=Prs	11	obj:agent	_	_
+13	-ng	na	PART	_	_	14	mark	_	_
+14	ginamit	gamit	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	11	ccomp	_	_
+15	ng	ng	ADP	_	Case=Gen	16	case	_	_
+16	The	The	PROPN	_	_	14	obj:agent	_	_
+17	Buzz	Buzz	PROPN	_	_	16	flat	_	_
+18	ang	ang	DET	_	Case=Nom	19	det	_	_
+19	shout-out	shout-out	NOUN	_	_	14	nsubj	_	_
+20	ng	ng	ADP	_	Case=Gen	23	case	_	_
+21-22	kanyang	_	_	_	_	_	_	_	_
+21	kanya	kaniya	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs	23	nmod:poss	_	_
+22	-ng	na	PART	_	_	21	case	_	_
+23	ina	ina	NOUN	_	_	19	nmod:poss	_	SpaceAfter=No
+24	.	.	PUNCT	_	_	3	punct	_	_
+
+# sent_id = 14661
+# text = GULAT na gulat si Richard Gomez nang tanungin siya ng mga manunulat sa reaksiyon niya tungkol sa naging sakit umano ni Sharon Cuneta noon.
+1	GULAT	Gulat	ADJ	_	_	3	compound	_	_
+2	na	na	PART	_	_	1	mark	_	_
+3	gulat	gulat	ADJ	_	_	0	root	_	_
+4	si	si	DET	_	Case=Nom|Number=Sing	5	det	_	_
+5	Richard	Richard	PROPN	_	_	3	nsubj	_	_
+6	Gomez	Gomez	PROPN	_	_	5	flat	_	_
+7	nang	nang	SCONJ	_	_	8	mark	_	_
+8	tanungin	tanong	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	3	advcl	_	_
+9	siya	siya	PRON	_	Case=Nom|Number=Sing|Person=3|PronType=Prs	8	nsubj	_	_
+10	ng	ng	ADP	_	Case=Gen	12	case	_	_
+11	mga	mga	DET	_	Number=Plur	12	det	_	_
+12	manunulat	sulat	NOUN	_	_	8	obj:agent	_	_
+13	sa	sa	ADP	_	Case=Loc	14	case	_	_
+14	reaksiyon	reaksiyon	NOUN	_	_	8	obl	_	_
+15	niya	siya	PRON	_	Case=Gen|Number=Sing|Person=3|PronType=Prs	14	nmod:poss	_	_
+16	tungkol	tungkol	ADP	_	_	18	case	_	_
+17	sa	sa	ADP	_	Case=Loc	16	fixed	_	_
+18	naging	maging	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	14	nmod	_	_
+19	sakit	sakit	NOUN	_	_	18	xcomp	_	_
+20	umano	ano	ADV	_	_	19	advmod	_	_
+21	ni	ni	ADP	_	Case=Gen|Number=Sing	22	case	_	_
+22	Sharon	Sharon	PROPN	_	_	19	nmod:poss	_	_
+23	Cuneta	Cuneta	PROPN	_	_	22	flat	_	_
+24	noon	noon	ADV	_	Case=Gen|Deixis=Remt|PronType=Dem	19	advmod	_	SpaceAfter=No
+25	.	.	PUNCT	_	_	3	punct	_	_
+
+# sent_id = 14692
+# text = Jamby Madrigal ay mayroong 44,695 votes at panghuli si JC delos Reyes na nakakuha ng 42,694 votes.
+1	Jamby	Jamby	PROPN	_	_	4	dislocated	_	_
+2	Madrigal	Madrigal	PROPN	_	_	1	flat	_	_
+3	ay	ay	PART	_	_	1	discourse	_	_
+4-5	mayroong	_	_	_	_	_	_	_	_
+4	mayroo	mayroon	VERB	_	_	0	root	_	_
+5	-ng	na	PART	_	_	4	flat	_	_
+6	44,695	44,695	NUM	_	NumType=Card	7	nummod	_	_
+7	votes	votes	NOUN	_	_	4	obj	_	_
+8	at	at	CCONJ	_	_	9	cc	_	_
+9	panghuli	huli	NOUN	_	_	4	conj	_	_
+10	si	si	DET	_	Case=Nom|Number=Sing	11	det	_	_
+11	JC	JC	PROPN	_	_	9	nsubj	_	_
+12	delos	delos	PROPN	_	_	11	flat	_	_
+13	Reyes	Reyes	PROPN	_	_	11	flat	_	_
+14	na	na	PART	_	_	15	mark	_	_
+15	nakakuha	kuha	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	11	acl:relcl	_	_
+16	ng	ng	ADP	_	Case=Gen	18	case	_	_
+17	42,694	42,694	NUM	_	NumType=Card	18	nummod	_	_
+18	votes	votes	NOUN	_	_	15	obj	_	SpaceAfter=No
+19	.	.	PUNCT	_	_	4	punct	_	_
+
+# sent_id = 14708
+# text = Wala namang nasaktan sa naganap na lindol.
+1	Wala	wala	VERB	_	Polarity=Neg	0	root	_	_
+2-3	namang	_	_	_	_	_	_	_	_
+2	naman	naman	ADV	_	_	1	advmod	_	_
+3	-ng	na	PART	_	_	4	mark	_	_
+4	nasaktan	sakit	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	1	xcomp	_	_
+5	sa	sa	ADP	_	Case=Loc	8	case	_	_
+6	naganap	ganap	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	8	acl:relcl	_	_
+7	na	na	PART	_	_	6	mark	_	_
+8	lindol	lindol	NOUN	_	_	4	obl	_	SpaceAfter=No
+9	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14716
+# text = Ewan ko lang kung ilang carats kay Richard si Jewel, ha.
+1	Ewan	Ewan	ADJ	_	_	0	root	_	_
+2	ko	ko	PRON	_	Case=Gen|Number=Sing|Person=1|PronType=Prs	1	obj:agent	_	_
+3	lang	lang	ADV	_	_	1	advmod	_	_
+4	kung	kung	SCONJ	_	_	7	mark	_	_
+5-6	ilang	_	_	_	_	_	_	_	_
+5	ilan	ilan	NUM	_	PronType=Int	7	nummod	_	_
+6	-ng	na	PART	_	_	5	case	_	_
+7	carats	carats	NOUN	_	_	1	ccomp	_	_
+8	kay	kay	ADP	_	Case=Dat|Number=Sing	9	case	_	_
+9	Richard	Richard	PROPN	_	_	7	nmod	_	_
+10	si	si	DET	_	Case=Nom|Number=Sing	11	det	_	_
+11	Jewel	Jewel	PROPN	_	_	7	nsubj	_	SpaceAfter=No
+12	,	,	PUNCT	_	_	13	punct	_	_
+13	ha	ha	PART	_	_	1	discourse	_	SpaceAfter=No
+14	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14724
+# text = Hindi tayo dapat masiyahan sa kung ano lamang ang kaya nating ibigay.
+1	Hindi	hindi	ADV	_	Polarity=Neg	4	advmod	_	_
+2	tayo	tayo	PRON	_	Case=Nom|Clusivity=In|Number=Plur|Person=1|PronType=Prs	4	nsubj	_	_
+3	dapat	dapat	ADV	_	_	4	advmod	_	_
+4	masiyahan	saya	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	0	root	_	_
+5	sa	sa	ADP	_	Case=Loc	7	case	_	_
+6	kung	kung	SCONJ	_	_	7	mark	_	_
+7	ano	ano	PRON	_	Case=Nom|PronType=Int	4	obl	_	_
+8	lamang	lamang	ADV	_	_	7	advmod	_	_
+9	ang	ang	DET	_	Case=Nom	13	det	_	_
+10	kaya	kaya	ADV	_	_	13	advmod	_	_
+11-12	nating	_	_	_	_	_	_	_	_
+11	natin	natin	PRON	_	Case=Gen|Clusivity=In|Number=Plur|Person=1|PronType=Prs	13	obj:agent	_	_
+12	-ng	na	PART	_	_	10	case	_	_
+13	ibigay	bigay	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	7	nsubj	_	SpaceAfter=No
+14	.	.	PUNCT	_	_	4	punct	_	_
+
+# sent_id = 14732
+# text = Biro mo sa loob mismo ng kampo ni Noynoy, nilaglag si Mar at Noy-Bi ang kinampanya.
+1	Biro	Biro	NOUN	_	_	11	dislocated	_	_
+2	mo	mo	PRON	_	Case=Gen|Number=Sing|Person=2|PronType=Prs	1	nmod:poss	_	_
+3	sa	sa	ADP	_	Case=Loc	4	case	_	_
+4	loob	loob	NOUN	_	_	11	obl	_	_
+5	mismo	mismo	ADV	_	_	4	advmod	_	_
+6	ng	ng	ADP	_	Case=Gen	7	case	_	_
+7	kampo	kampo	NOUN	_	_	4	nmod	_	_
+8	ni	ni	ADP	_	Case=Gen|Number=Sing	9	case	_	_
+9	Noynoy	Noynoy	PROPN	_	_	7	nmod:poss	_	SpaceAfter=No
+10	,	,	PUNCT	_	_	4	punct	_	_
+11	nilaglag	laglag	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	0	root	_	_
+12	si	si	DET	_	Case=Nom|Number=Sing	13	det	_	_
+13	Mar	Mar	PROPN	_	_	11	nsubj	_	_
+14	at	at	CCONJ	_	_	15	cc	_	_
+15	Noy-Bi	Noy-Bi	PROPN	_	_	11	conj	_	_
+16	ang	ang	DET	_	Case=Nom	17	det	_	_
+17	kinampanya	kampanya	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	15	nsubj	_	SpaceAfter=No
+18	.	.	PUNCT	_	_	11	punct	_	_
+
+# sent_id = 14741
+# text = Sa advertisements lamang sa telebisyon ay nasa dalawang bilyon na ang ginagasta ni Manny Villar.
+1	Sa	sa	ADP	_	Case=Loc	2	case	_	_
+2	advertisements	advertisements	NOUN	_	_	10	obl	_	_
+3	lamang	lamang	ADV	_	_	2	advmod	_	_
+4	sa	sa	ADP	_	Case=Loc	5	case	_	_
+5	telebisyon	telebisyon	NOUN	_	_	2	nmod	_	_
+6	ay	ay	PART	_	_	2	discourse	_	_
+7	nasa	nasa	ADP	_	Case=Loc	10	case	_	_
+8-9	dalawang	_	_	_	_	_	_	_	_
+8	dalawa	dalawa	NUM	_	NumType=Card	10	compound	_	_
+9	-ng	na	PART	_	_	8	case	_	_
+10	bilyon	bilyon	NUM	_	_	0	root	_	_
+11	na	na	ADV	_	_	10	advmod	_	_
+12	ang	ang	DET	_	Case=Nom	13	det	_	_
+13	ginagasta	gasta	VERB	_	Aspect=Imp|Mood=Ind|Voice=Pass	10	nsubj	_	_
+14	ni	ni	ADP	_	Case=Gen|Number=Sing	15	case	_	_
+15	Manny	Manny	PROPN	_	_	13	obj:agent	_	_
+16	Villar	Villar	PROPN	_	_	15	flat	_	SpaceAfter=No
+17	.	.	PUNCT	_	_	10	punct	_	_
+
+# sent_id = 14749
+# text = Maliban sa mga namatay, umaabot na sa 50 katao na kasalukuyang nilalapatan ng lunas sa iba't ibang pagamutan.
+1	Maliban	liban	VERB	_	_	6	advcl	_	_
+2	sa	sa	ADP	_	Case=Loc	4	case	_	_
+3	mga	mga	DET	_	Number=Plur	4	det	_	_
+4	namatay	patay	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	1	obl	_	SpaceAfter=No
+5	,	,	PUNCT	_	_	1	punct	_	_
+6	umaabot	abot	VERB	_	Aspect=Imp|Mood=Ind|Voice=Act	0	root	_	_
+7	na	na	ADV	_	_	6	advmod	_	_
+8	sa	sa	ADP	_	Case=Loc	10	case	_	_
+9	50	50	NUM	_	NumType=Card	10	nummod	_	_
+10	katao	tao	NOUN	_	_	6	obl	_	_
+11	na	na	PART	_	_	14	mark	_	_
+12-13	kasalukuyang	_	_	_	_	_	_	_	_
+12	kasalukuyan	salukoy	ADV	_	_	14	advmod	_	_
+13	-ng	na	PART	_	_	12	mark	_	_
+14	nilalapatan	lapat	VERB	_	Aspect=Imp|Mood=Ind|Voice=Lfoc	10	acl:relcl	_	_
+15	ng	ng	ADP	_	Case=Gen	16	case	_	_
+16	lunas	lunas	NOUN	_	_	14	obj	_	_
+17	sa	sa	ADP	_	Case=Loc	22	case	_	_
+18-19	iba't	_	_	_	_	_	_	_	_
+18	iba	iba	ADJ	_	_	20	compound:redup	_	_
+19	't	at	CCONJ	_	_	18	flat	_	_
+20-21	ibang	_	_	_	_	_	_	_	_
+20	iba	iba	ADJ	_	_	22	amod	_	_
+21	-ng	na	PART	_	_	20	case	_	_
+22	pagamutan	gamot	NOUN	_	_	14	obl	_	SpaceAfter=No
+23	.	.	PUNCT	_	_	6	punct	_	_
+
+# sent_id = 14759
+# text = May bagong website nga palang ginawa sina Rolex Semana (ng Vienna) at Leah Aranas (ng Dubai) para sa Dingdong Dantes fanatics.
+1	May	may	VERB	_	_	0	root	_	_
+2-3	bagong	_	_	_	_	_	_	_	_
+2	bago	bago	ADJ	_	_	4	amod	_	_
+3	-ng	na	PART	_	_	1	flat	_	_
+4	website	website	NOUN	_	_	1	obj	_	_
+5	nga	nga	ADV	_	_	1	advmod	_	_
+6-7	palang	_	_	_	_	_	_	_	_
+6	pala	pala	ADV	_	_	1	advmod	_	_
+7	-ng	na	PART	_	_	8	mark	_	_
+8	ginawa	gawa	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	1	ccomp	_	_
+9	sina	sina	DET	_	Case=Nom|Number=Plur	10	det	_	_
+10	Rolex	Rolex	PROPN	_	_	8	nsubj	_	_
+11	Semana	Semana	PROPN	_	_	10	flat	_	_
+12	(ng	(ng	ADP	_	_	13	case	_	_
+13	Vienna)	Vienna	PROPN	_	_	10	nmod	_	_
+14	at	at	CCONJ	_	_	15	cc	_	_
+15	Leah	Leah	PROPN	_	_	10	conj	_	_
+16	Aranas	Aranas	PROPN	_	_	15	flat	_	_
+17	(ng	(ng	ADP	_	_	18	case	_	_
+18	Dubai)	Dubai)	PROPN	_	_	15	nmod	_	_
+19	para	para	SCONJ	_	_	23	case	_	_
+20	sa	sa	ADP	_	Case=Loc	19	fixed	_	_
+21	Dingdong	Dingdong	PROPN	_	_	23	nmod	_	_
+22	Dantes	Dantes	PROPN	_	_	21	flat	_	_
+23	fanatics	fanatics	NOUN	_	_	8	obl	_	SpaceAfter=No
+24	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14802
+# text = Ito ang suhestiyon ni Sen.
+1	Ito	ito	PRON	_	Case=Nom|Deixis=Prox|PronType=Dem	0	root	_	_
+2	ang	ang	DET	_	Case=Nom	3	det	_	_
+3	suhestiyon	suhestiyon	NOUN	_	_	1	nsubj	_	_
+4	ni	ni	ADP	_	Case=Gen|Number=Sing	5	case	_	_
+5	Sen	Sen	PROPN	_	_	3	nmod:poss	_	SpaceAfter=No
+6	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14812
+# text = Hindi ko alam kung magkakaroon.
+1	Hindi	hindi	ADV	_	Polarity=Neg	3	advmod	_	_
+2	ko	ko	PRON	_	Case=Gen|Number=Sing|Person=1|PronType=Prs	3	obj:agent	_	_
+3	alam	alam	NOUN	_	_	0	root	_	_
+4	kung	kung	SCONJ	_	_	5	mark	_	_
+5	magkakaroon	mayroon	VERB	_	Aspect=Imp|Mood=Pot|Voice=Act	3	ccomp	_	SpaceAfter=No
+6	.	.	PUNCT	_	_	3	punct	_	_
+
+# sent_id = 14820
+# text = Pakiwari ni Rebecca, si Maita ay ‘La Traidora’!
+1	Pakiwari	pakiwari	NOUN	_	_	0	root	_	_
+2	ni	ni	ADP	_	Case=Gen|Number=Sing	3	case	_	_
+3	Rebecca	Rebecca	PROPN	_	_	1	nmod:poss	_	SpaceAfter=No
+4	,	,	PUNCT	_	_	8	punct	_	_
+5	si	si	DET	_	Case=Nom|Number=Sing	6	det	_	_
+6	Maita	Maita	PROPN	_	_	8	nsubj	_	_
+7	ay	ay	PART	_	_	6	discourse	_	_
+8	‘La	La	PROPN	_	_	1	parataxis	_	_
+9	Traidora’	Traidora	PROPN	_	_	8	flat	_	SpaceAfter=No
+10	!	!	PUNCT	_	_	8	punct	_	_
+
+# sent_id = 14828
+# text = At nagtutulungan kami palagi sa mga eksena na ginagawa namin.
+1	At	at	CCONJ	_	_	2	cc	_	_
+2	nagtutulungan	tulong	VERB	_	Aspect=Imp|Mood=Ind|Voice=Act	0	root	_	_
+3	kami	kami	PRON	_	Case=Nom|Clusivity=Ex|Number=Plur|Person=1|PronType=Prs	2	nsubj	_	_
+4	palagi	lagi	ADV	_	_	2	advmod	_	_
+5	sa	sa	ADP	_	Case=Loc	7	case	_	_
+6	mga	mga	DET	_	Number=Plur	7	det	_	_
+7	eksena	eksena	NOUN	_	_	2	obl	_	_
+8	na	na	PART	_	_	9	mark	_	_
+9	ginagawa	gawa	VERB	_	Aspect=Imp|Mood=Ind|Voice=Pass	7	acl:relcl	_	_
+10	namin	namin	PRON	_	Case=Gen|Clusivity=Ex|Number=Plur|Person=1|PronType=Prs	9	obj:agent	_	SpaceAfter=No
+11	.	.	PUNCT	_	_	2	punct	_	_
+
+# sent_id = 14836
+# text = Una, iniwanan nila ang kanilang tinayong kumpanya sa tubig - ang Maynilad.
+1	Una	una	ADV	_	_	3	advmod	_	SpaceAfter=No
+2	,	,	PUNCT	_	_	1	punct	_	_
+3	iniwanan	iwan	VERB	_	Aspect=Perf|Mood=Ind|Voice=Lfoc	0	root	_	_
+4	nila	nila	PRON	_	Case=Gen|Number=Plur|Person=3|PronType=Prs	3	obj:agent	_	_
+5	ang	ang	DET	_	Case=Nom	10	det	_	_
+6-7	kanilang	_	_	_	_	_	_	_	_
+6	kanila	kanila	PRON	_	Case=Dat|Number=Plur|Person=3|PronType=Prs	10	nmod:poss	_	_
+7	-ng	na	PART	_	_	6	case	_	_
+8-9	tinayong	_	_	_	_	_	_	_	_
+8	tinayo	tayo	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	10	acl:relcl	_	_
+9	-ng	na	PART	_	_	8	mark	_	_
+10	kumpanya	kumpanya	NOUN	_	_	3	nsubj	_	_
+11	sa	sa	ADP	_	Case=Loc	12	case	_	_
+12	tubig	tubig	NOUN	_	_	10	nmod	_	_
+13	-	-	PUNCT	_	_	15	punct	_	_
+14	ang	ang	DET	_	Case=Nom	15	det	_	_
+15	Maynilad	Maynilad	PROPN	_	_	10	appos	_	SpaceAfter=No
+16	.	.	PUNCT	_	_	3	punct	_	_
+
+# sent_id = 14844
+# text = Malaking factor na dapat tignan sa karerang ito ang malayong distansyang 2,000 meters.
+1-2	Malaking	_	_	_	_	_	_	_	_
+1	Malaki	laki	VERB	_	_	3	amod	_	_
+2	-ng	na	PART	_	_	1	case	_	_
+3	factor	factor	NOUN	_	_	0	root	_	_
+4	na	na	PART	_	_	6	mark	_	_
+5	dapat	dapat	ADV	_	_	6	advmod	_	_
+6	tignan	tigin	VERB	_	Aspect=Imp|Mood=Pot|Voice=Lfoc	3	acl:relcl	_	_
+7	sa	sa	ADP	_	Case=Loc	8	case	_	_
+8-9	karerang	_	_	_	_	_	_	_	_
+8	karera	karera	NOUN	_	_	6	obl	_	_
+9	-ng	na	PART	_	_	10	case	_	_
+10	ito	ito	PRON	_	Case=Nom|Deixis=Prox|PronType=Dem	8	nmod	_	_
+11	ang	ang	DET	_	Case=Nom	14	det	_	_
+12-13	malayong	_	_	_	_	_	_	_	_
+12	malayo	layo	VERB	_	_	14	amod	_	_
+13	-ng	na	PART	_	_	12	case	_	_
+14-15	distansyang	_	_	_	_	_	_	_	_
+14	distansya	distansya	NOUN	_	_	6	nsubj	_	_
+15	-ng	na	PART	_	_	17	case	_	_
+16	2,000	2,000	NUM	_	NumType=Card	17	nummod	_	_
+17	meters	meter	NOUN	_	_	14	nmod	_	SpaceAfter=No
+18	.	.	PUNCT	_	_	3	punct	_	_
+
+# sent_id = 14852
+# text = Ngunit ang talagang tahimik ngunit masipag nagtatrabaho para sa team ay si pointguard Mark Barroca.
+1	Ngunit	ngunit	CCONJ	_	_	5	cc	_	_
+2	ang	ang	DET	_	Case=Nom	5	det	_	_
+3-4	talagang	_	_	_	_	_	_	_	_
+3	talaga	talaga	ADV	_	_	5	advmod	_	_
+4	-ng	na	PART	_	_	3	case	_	_
+5	tahimik	tahimik	ADJ	_	_	15	nsubj	_	_
+6	ngunit	ngunit	CCONJ	_	_	8	cc	_	_
+7	masipag	sipag	VERB	_	_	8	advcl	_	_
+8	nagtatrabaho	trabaho	VERB	_	Aspect=Imp|Mood=Ind|Voice=Act	5	conj	_	_
+9	para	para	SCONJ	_	_	11	case	_	_
+10	sa	sa	ADP	_	Case=Loc	9	fixed	_	_
+11	team	team	NOUN	_	_	8	obl	_	_
+12	ay	ay	PART	_	_	5	discourse	_	_
+13	si	si	DET	_	Case=Nom|Number=Sing	15	det	_	_
+14	pointguard	pointguard	NOUN	_	_	15	nmod	_	_
+15	Mark	Mark	PROPN	_	_	0	root	_	_
+16	Barroca	Barroca	PROPN	_	_	15	flat	_	SpaceAfter=No
+17	.	.	PUNCT	_	_	15	punct	_	_
+
+# sent_id = 14860
+# text = Sa pagsira kay Noynoy may kandidatong nagsabi na sumasabit lang naman daw siya sa reputasyon ng kanyang magulang.
+1	Sa	sa	ADP	_	Case=Loc	2	case	_	_
+2	pagsira	sira	NOUN	_	_	5	obl	_	_
+3	kay	kay	ADP	_	Case=Dat|Number=Sing	4	case	_	_
+4	Noynoy	Noynoy	PROPN	_	_	2	nmod	_	_
+5	may	may	VERB	_	_	0	root	_	_
+6-7	kandidatong	_	_	_	_	_	_	_	_
+6	kandidato	kandidato	NOUN	_	_	5	obj	_	_
+7	-ng	na	PART	_	_	8	mark	_	_
+8	nagsabi	sabi	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	6	acl:relcl	_	_
+9	na	na	ADV	_	_	10	mark	_	_
+10	sumasabit	sabit	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	8	ccomp	_	_
+11	lang	lang	ADV	_	_	10	advmod	_	_
+12	naman	naman	ADV	_	_	10	advmod	_	_
+13	daw	daw	ADV	_	_	10	advmod	_	_
+14	siya	siya	PRON	_	Case=Nom|Number=Sing|Person=3|PronType=Prs	10	nsubj	_	_
+15	sa	sa	ADP	_	Case=Loc	16	case	_	_
+16	reputasyon	reputasyon	NOUN	_	_	10	obl	_	_
+17	ng	ng	ADP	_	Case=Gen	20	case	_	_
+18-19	kanyang	_	_	_	_	_	_	_	_
+18	kanya	kanya	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs	20	nmod:poss	_	_
+19	-ng	na	PART	_	_	18	case	_	_
+20	magulang	magulang	NOUN	_	_	16	nmod:poss	_	SpaceAfter=No
+21	.	.	PUNCT	_	_	5	punct	_	_
+
+# sent_id = 14869
+# text = Kahabag-habag pagmasdan ang batang babaeng pulubi na ito na patuloy pa ring namamalimos sa kabila ng malakas na buhos ng ulan.
+1	Kahabag-habag	habag	ADJ	_	_	0	root	_	_
+2	pagmasdan	masdan	NOUN	_	_	1	xcomp	_	_
+3	ang	ang	DET	_	Case=Nom	4	det	_	_
+4-5	batang	_	_	_	_	_	_	_	_
+4	bata	bata	NOUN	_	_	2	nsubj	_	_
+5	-ng	na	PART	_	_	6	case	_	_
+6-7	babaeng	_	_	_	_	_	_	_	_
+6	babae	babae	ADJ	_	_	4	nmod	_	_
+7	-ng	na	PART	_	_	8	case	_	_
+8	pulubi	pulubi	NOUN	_	_	4	nmod	_	_
+9	na	na	PART	_	_	10	case	_	_
+10	ito	ito	PRON	_	Case=Nom|Deixis=Prox|PronType=Dem	4	nmod	_	_
+11	na	na	PART	_	_	15	mark	_	_
+12	patuloy	tuloy	ADV	_	_	15	advmod	_	_
+13	pa	pa	ADV	_	_	12	advmod	_	_
+14	ring	din	ADV	_	_	13	fixed	_	_
+15	namamalimos	limos	VERB	_	Aspect=Imp|Mood=Ind|Voice=Act	4	acl:relcl	_	_
+16	sa	sa	ADP	_	Case=Loc	17	case	_	_
+17	kabila	kabila	NOUN	_	_	15	obl	_	_
+18	ng	ng	ADP	_	_	21	case	_	_
+19	malakas	lakas	VERB	_	_	21	amod	_	_
+20	na	na	PART	_	_	19	case	_	_
+21	buhos	buhos	NOUN	_	_	17	nmod	_	_
+22	ng	ng	ADP	_	Case=Gen	23	case	_	_
+23	ulan	ulan	NOUN	_	_	21	nmod	_	SpaceAfter=No
+24	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14911
+# text = Bagay na bagay po sa kanya.
+1	Bagay	bagay	ADJ	_	_	3	compound:redup	_	_
+2	na	na	PART	_	_	1	flat	_	_
+3	bagay	bagay	ADJ	_	_	0	root	_	_
+4	po	po	PART	_	Polite=Form	3	discourse	_	_
+5	sa	sa	ADP	_	Case=Loc	6	case	_	_
+6	kanya	kanya	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs	3	obl	_	SpaceAfter=No
+7	.	.	PUNCT	_	_	3	punct	_	_
+
+# sent_id = 14919
+# text = Ayaw lang intindihin ni Archbishop Arguelles.
+1	Ayaw	ayaw	VERB	_	_	0	root	_	_
+2	lang	lang	ADV	_	_	1	advmod	_	_
+3	intindihin	intindi	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	1	xcomp	_	_
+4	ni	ni	ADP	_	Case=Gen|Number=Sing	5	case	_	_
+5	Archbishop	Archbishop	PROPN	_	_	1	obj:agent	_	_
+6	Arguelles	Arguelles	PROPN	_	_	5	flat	_	SpaceAfter=No
+7	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14927
+# text = Mahapdi man sa unang tikim, sa sarap… mata mo'y titirik din!
+1	Mahapdi	hapdi	VERB	_	_	0	root	_	_
+2	man	man	ADV	_	_	1	advmod	_	_
+3	sa	sa	ADP	_	Case=Loc	6	case	_	_
+4-5	unang	_	_	_	_	_	_	_	_
+4	una	una	ADJ	_	NumType=Ord	6	amod	_	_
+5	-ng	na	PART	_	_	4	case	_	_
+6	tikim	tikim	NOUN	_	_	1	obl	_	SpaceAfter=No
+7	,	,	PUNCT	_	_	14	punct	_	_
+8	sa	sa	ADP	_	Case=Loc	9	case	_	_
+9	sarap	sarap	NOUN	_	_	14	obl	_	SpaceAfter=No
+10	…	…	PUNCT	_	_	9	punct	_	_
+11	mata	mata	NOUN	_	_	14	nsubj	_	_
+12-13	mo'y	_	_	_	_	_	_	_	_
+12	mo	mo	PRON	_	Case=Gen|Number=Sing|Person=2|PronType=Prs	11	nmod:poss	_	_
+13	'y	ay	PART	_	_	12	discourse	_	_
+14	titirik	tirik	VERB	_	Aspect=Imp|Mood=Pot|Voice=Act	1	parataxis	_	_
+15	din	din	ADV	_	_	14	advmod	_	SpaceAfter=No
+16	!	!	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14935
+# text = Si Allan Paule ay nasa "Magkaribal" at sa kasunod na teleserye na "Rubi".
+1	Si	si	DET	_	Case=Nom|Number=Sing	2	det	_	_
+2	Allan	Allan	PROPN	_	_	7	nsubj	_	_
+3	Paule	Paule	PROPN	_	_	2	flat	_	_
+4	ay	ay	PART	_	_	2	discourse	_	_
+5	nasa	nasa	ADP	_	Case=Loc	7	case	_	_
+6	"	"	PUNCT	_	_	7	punct	_	SpaceAfter=No
+7	Magkaribal	Magkaribal	PROPN	_	_	0	root	_	SpaceAfter=No
+8	"	"	PUNCT	_	_	7	punct	_	_
+9	at	at	CCONJ	_	_	13	cc	_	_
+10	sa	sa	ADP	_	Case=Loc	13	case	_	_
+11	kasunod	sunod	ADJ	_	_	13	amod	_	_
+12	na	na	PART	_	_	11	case	_	_
+13	teleserye	teleserye	NOUN	_	_	7	obl	_	_
+14	na	na	PART	_	_	16	case	_	_
+15	"	"	PUNCT	_	_	16	punct	_	SpaceAfter=No
+16	Rubi	Rubi	PROPN	_	_	13	nmod	_	SpaceAfter=No
+17	"	"	PUNCT	_	_	16	punct	_	SpaceAfter=No
+18	.	.	PUNCT	_	_	7	punct	_	_
+
+# sent_id = 14943
+# text = Ang mga ito ay kapwa nasakote sa Hong Kong International Airport noong nakaraang taon.
+1	Ang	ang	DET	_	Case=Nom	3	det	_	_
+2	mga	mga	DET	_	Number=Plur	3	det	_	_
+3	ito	ito	PRON	_	Case=Nom|Deixis=Prox|PronType=Dem	6	nsubj	_	_
+4	ay	ay	PART	_	_	3	discourse	_	_
+5	kapwa	kapwa	ADV	_	_	6	advmod	_	_
+6	nasakote	sakote	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	0	root	_	_
+7	sa	sa	ADP	_	Case=Loc	8	case	_	_
+8	Hong	Hong	PROPN	_	_	6	obl	_	_
+9	Kong	Kong	PROPN	_	_	8	flat	_	_
+10	International	International	PROPN	_	_	8	flat	_	_
+11	Airport	Airport	PROPN	_	_	8	flat	_	_
+12-13	noong	_	_	_	_	_	_	_	_
+12	noon	noon	ADV	_	Case=Gen|Deixis=Remt|PronType=Dem	16	advmod	_	_
+13	-ng	na	PART	_	_	12	case	_	_
+14-15	nakaraang	_	_	_	_	_	_	_	_
+14	nakaraan	daan	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	16	acl:relcl	_	_
+15	-ng	na	PART	_	_	14	mark	_	_
+16	taon	taon	NOUN	_	_	6	obl	_	SpaceAfter=No
+17	.	.	PUNCT	_	_	6	punct	_	_
+
+# sent_id = 14951
+# text = May sawa factor na si Jake Cuenca dahil lagi niya itong ginagawa sa mga nakaraang show ng Bench.
+1	May	may	VERB	_	_	0	root	_	_
+2	sawa	sawa	NOUN	_	_	3	nmod	_	_
+3	factor	factor	NOUN	_	_	1	obj	_	_
+4	na	na	PART	_	_	1	advmod	_	_
+5	si	si	DET	_	Case=Nom|Number=Sing	6	det	_	_
+6	Jake	Jake	PROPN	_	_	1	nsubj	_	_
+7	Cuenca	Cuenca	PROPN	_	_	6	flat	_	_
+8	dahil	dahil	SCONJ	_	_	13	mark	_	_
+9	lagi	lagi	ADV	_	_	13	advmod	_	_
+10	niya	niya	PRON	_	Case=Gen|Number=Sing|Person=3|PronType=Prs	13	obj:agent	_	_
+11-12	itong	_	_	_	_	_	_	_	_
+11	ito	ito	PRON	_	Case=Nom|Deixis=Prox|PronType=Dem	13	nsubj	_	_
+12	-ng	na	PART	_	_	9	case	_	_
+13	ginagawa	gawa	VERB	_	Aspect=Imp|Mood=Ind|Voice=Pass	1	advcl	_	_
+14	sa	sa	ADP	_	Case=Loc	18	case	_	_
+15	mga	mga	DET	_	Number=Plur	18	det	_	_
+16-17	nakaraang	_	_	_	_	_	_	_	_
+16	nakaraan	daan	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	18	acl:relcl	_	_
+17	-ng	na	PART	_	_	16	mark	_	_
+18	show	show	NOUN	_	_	13	obl	_	_
+19	ng	ng	ADP	_	Case=Gen	20	case	_	_
+20	Bench	Bench	PROPN	_	_	18	nmod:poss	_	SpaceAfter=No
+21	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14959
+# text = Naligalig ang bading dahil natatakot siyang malantad sa publiko ang relasyon nila at masira ang kanyang image.
+1	Naligalig	ligalig	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	0	root	_	_
+2	ang	ang	DET	_	Case=Nom	3	det	_	_
+3	bading	bading	NOUN	_	_	1	nsubj	_	_
+4	dahil	dahil	SCONJ	_	_	5	mark	_	_
+5	natatakot	takot	VERB	_	Aspect=Imp|Mood=Ind|Voice=Pass	1	advcl	_	_
+6-7	siyang	_	_	_	_	_	_	_	_
+6	siya	siya	PRON	_	Case=Nom|Number=Sing|Person=3|PronType=Prs	5	nsubj	_	_
+7	-ng	na	PART	_	_	8	mark	_	_
+8	malantad	lantad	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	5	ccomp	_	_
+9	sa	sa	ADP	_	Case=Loc	10	case	_	_
+10	publiko	publiko	NOUN	_	_	8	obl	_	_
+11	ang	ang	DET	_	Case=Nom	12	det	_	_
+12	relasyon	relasyon	NOUN	_	_	8	nsubj	_	_
+13	nila	nila	PRON	_	Case=Gen|Number=Plur|Person=3|PronType=Prs	12	nmod:poss	_	_
+14	at	at	CCONJ	_	_	15	cc	_	_
+15	masira	sira	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	8	conj	_	_
+16	ang	ang	DET	_	Case=Nom	19	det	_	_
+17-18	kanyang	_	_	_	_	_	_	_	_
+17	kanya	kanya	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs	19	nmod:poss	_	_
+18	-ng	na	PART	_	_	17	case	_	_
+19	image	image	NOUN	_	_	15	nsubj	_	SpaceAfter=No
+20	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 14971
+# text = Gayunpaman, hindi kasama ang Makati City sa maagang suspensyon ng number coding dahil sa Huwebes pa nila ipatutupad ang suspensyon.
+1	Gayunpaman	gayon	ADV	_	_	4	advmod	_	SpaceAfter=No
+2	,	,	PUNCT	_	_	1	punct	_	_
+3	hindi	hindi	ADV	_	Polarity=Neg	4	advmod	_	_
+4	kasama	sama	NOUN	_	_	0	root	_	_
+5	ang	ang	DET	_	Case=Nom	6	det	_	_
+6	Makati	Makati	PROPN	_	_	4	nsubj	_	_
+7	City	City	PROPN	_	_	6	flat	_	_
+8	sa	sa	ADP	_	Case=Loc	11	case	_	_
+9-10	maagang	_	_	_	_	_	_	_	_
+9	maaga	aga	VERB	_	_	11	amod	_	_
+10	-ng	na	PART	_	_	9	case	_	_
+11	suspensyon	suspensyon	NOUN	_	_	4	nmod	_	_
+12	ng	ng	ADP	_	Case=Gen	14	case	_	_
+13	number	number	NOUN	_	_	14	nmod	_	_
+14	coding	coding	NOUN	_	_	11	nmod	_	_
+15	dahil	dahil	SCONJ	_	_	20	mark	_	_
+16	sa	sa	ADP	_	Case=Loc	17	case	_	_
+17	Huwebes	Huwebes	PROPN	_	_	20	obl	_	_
+18	pa	pa	ADV	_	_	17	advmod	_	_
+19	nila	nila	PRON	_	Case=Gen|Number=Plur|Person=3|PronType=Prs	20	obj:agent	_	_
+20	ipatutupad	tupad	VERB	_	Aspect=Imp|Mood=Pot|Voice=Cau	4	advcl	_	_
+21	ang	ang	DET	_	Case=Nom	22	det	_	_
+22	suspensyon	suspensyon	NOUN	_	_	20	nsubj	_	SpaceAfter=No
+23	.	.	PUNCT	_	_	4	punct	_	_
+
+# sent_id = 15019
+# text = Maganda raw ang samahan nila.
+1	Maganda	ganda	VERB	_	_	0	root	_	_
+2	raw	daw	ADV	_	_	1	advmod	_	_
+3	ang	ang	DET	_	Case=Nom	4	det	_	_
+4	samahan	sama	NOUN	_	_	1	nsubj	_	_
+5	nila	nila	PRON	_	Case=Gen|Number=Plur|Person=3|PronType=Prs	4	nmod:poss	_	SpaceAfter=No
+6	.	.	PUNCT	_	_	1	punct	_	SpacesAfter=\n
+
+# sent_id = 15027
+# text = Nasasaktan din kami katulad ng karaniwang tao.
+1	Nasasaktan	sakit	VERB	_	Aspect=Imp|Mood=Ind|Voice=Pass	0	root	_	_
+2	din	din	ADV	_	_	1	advmod	_	_
+3	kami	kami	PRON	_	Case=Nom|Clusivity=Ex|Number=Plur|Person=1|PronType=Prs	1	nsubj	_	_
+4	katulad	tulad	NOUN	_	_	8	case	_	_
+5	ng	ng	ADP	_	Case=Gen	4	fixed	_	_
+6-7	karaniwang	_	_	_	_	_	_	_	_
+6	karaniwan	karaniwan	ADJ	_	_	8	amod	_	_
+7	-ng	na	PART	_	_	6	case	_	_
+8	tao	tao	NOUN	_	_	1	advcl	_	SpaceAfter=No
+9	.	.	PUNCT	_	_	1	punct	_	SpacesAfter=\n
+
+# sent_id = 15035
+# text = Kung sa palagay ninyo mali ang sinulat ko, sulatan ninyo ako.
+1	Kung	kung	SCONJ	_	_	5	mark	_	_
+2	sa	sa	ADP	_	Case=Loc	3	case	_	_
+3	palagay	lagay	NOUN	_	_	5	obl	_	_
+4	ninyo	ninyo	PRON	_	Case=Gen|Number=Plur|Person=2|PronType=Prs	3	nmod:poss	_	_
+5	mali	mali	ADJ	_	_	10	advcl	_	_
+6	ang	ang	DET	_	Case=Nom	7	det	_	_
+7	sinulat	sulat	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	5	nsubj	_	_
+8	ko	ko	PRON	_	Case=Gen|Number=Sing|Person=1|PronType=Prs	7	obj:agent	_	SpaceAfter=No
+9	,	,	PUNCT	_	_	5	punct	_	_
+10	sulatan	sulat	VERB	_	Aspect=Imp|Mood=Pot|Voice=Lfoc	0	root	_	_
+11	ninyo	ninyo	PRON	_	Case=Gen|Number=Plur|Person=2|PronType=Prs	10	obj:agent	_	_
+12	ako	ako	PRON	_	Case=Nom|Number=Sing|Person=1|PronType=Prs	10	nsubj	_	SpaceAfter=No
+13	.	.	PUNCT	_	_	10	punct	_	SpacesAfter=\n
+
+# sent_id = 15044
+# text = Sana, hindi pa maging burado today sina April Boy Regino at Kaye Abad, ha!
+1	Sana	sana	ADV	_	_	5	advmod	_	SpaceAfter=No
+2	,	,	PUNCT	_	_	1	punct	_	_
+3	hindi	hindi	ADV	_	Polarity=Neg	5	advmod	_	_
+4	pa	pa	ADV	_	_	3	advmod	_	_
+5	maging	maging	VERB	_	_	0	root	_	_
+6	burado	burado	ADJ	_	_	5	xcomp	_	_
+7	today	today	ADV	_	_	5	advmod	_	_
+8	sina	sina	DET	_	Case=Nom|Number=Plur	9	det	_	_
+9	April	April	PROPN	_	_	5	nsubj	_	_
+10	Boy	Boy	PROPN	_	_	9	flat	_	_
+11	Regino	Regino	PROPN	_	_	9	flat	_	_
+12	at	at	CCONJ	_	_	13	cc	_	_
+13	Kaye	Kaye	PROPN	_	_	9	conj	_	_
+14	Abad	Abad	PROPN	_	_	13	flat	_	SpaceAfter=No
+15	,	,	PUNCT	_	_	16	punct	_	_
+16	ha	ha	PART	_	_	5	discourse	_	SpaceAfter=No
+17	!	!	PUNCT	_	_	5	punct	_	SpacesAfter=\n
+
+# sent_id = 15052
+# text = Ang u­nang phase ay magsisimu­la na sa susunod na buwan at matatapos sa Disyembre 2015.
+1	Ang	ang	DET	_	Case=Nom	4	det	_	_
+2-3	u­nang	_	_	_	_	_	_	_	_
+2	u­na	una	ADJ	_	NumType=Ord	4	amod	_	_
+3	-ng	na	PART	_	_	2	case	_	_
+4	phase	phase	NOUN	_	_	6	nsubj	_	_
+5	ay	ay	PART	_	_	4	discourse	_	_
+6	magsisimu­la	simula	VERB	_	Aspect=Imp|Mood=Pot|Voice=Act	0	root	_	_
+7	na	na	ADV	_	_	6	advmod	_	_
+8	sa	sa	ADP	_	Case=Loc	11	case	_	_
+9	susunod	sunod	VERB	_	Aspect=Imp|Mood=Pot|Voice=Act	11	acl:relcl	_	_
+10	na	na	PART	_	_	9	mark	_	_
+11	buwan	buwan	NOUN	_	_	6	obl	_	_
+12	at	at	CCONJ	_	_	13	cc	_	_
+13	matatapos	tapos	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	6	conj	_	_
+14	sa	sa	ADP	_	Case=Loc	15	case	_	_
+15	Disyembre	Disyembre	PROPN	_	_	13	obl	_	_
+16	2015	2015	NUM	_	NumType=Card	15	nmod	_	SpaceAfter=No
+17	.	.	PUNCT	_	_	6	punct	_	SpacesAfter=\n
+
+# sent_id = 15060
+# text = Hanggang kahapon nang nakausap namin si Mikaela ay hindi pa rin daw niya nakikita ang kanyang anak.
+1	Hanggang	hanggang	ADP	_	_	2	mark	_	_
+2	kahapon	hapon	ADV	_	_	14	advcl	_	_
+3	nang	nang	ADV	_	_	4	mark	_	_
+4	nakausap	usap	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	2	advcl	_	_
+5	namin	namin	PRON	_	Case=Gen|Clusivity=Ex|Number=Plur|Person=1|PronType=Prs	4	obj:agent	_	_
+6	si	si	DET	_	Case=Nom|Number=Sing	7	det	_	_
+7	Mikaela	Mikaela	PROPN	_	_	4	nsubj	_	_
+8	ay	ay	PART	_	_	2	discourse	_	_
+9	hindi	hindi	ADV	_	Polarity=Neg	14	advmod	_	_
+10	pa	pa	ADV	_	_	9	advmod	_	_
+11	rin	din	ADV	_	_	9	advmod	_	_
+12	daw	daw	ADV	_	_	9	advmod	_	_
+13	niya	niya	PRON	_	Case=Gen|Number=Sing|Person=3|PronType=Prs	14	obj:agent	_	_
+14	nakikita	kita	VERB	_	Aspect=Imp|Mood=Ind|Voice=Pass	0	root	_	_
+15	ang	ang	DET	_	Case=Nom	18	det	_	_
+16-17	kanyang	_	_	_	_	_	_	_	_
+16	kanya	kaniya	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs	18	nmod:poss	_	_
+17	-ng	na	PART	_	_	16	case	_	_
+18	anak	anak	NOUN	_	_	14	nsubj	_	SpaceAfter=No
+19	.	.	PUNCT	_	_	14	punct	_	SpacesAfter=\n
+
+# sent_id = 15068
+# text = The first time ay nu’ng dapat ay kasama ako ng ikakasal pa lang noon sa Las Vegas na Alma Moreno at Joey Marquez.
+1	The	The	DET	_	_	3	det	_	_
+2	first	first	ADJ	_	NumType=Ord	3	amod	_	_
+3	time	time	NOUN	_	_	9	nsubj	_	_
+4	ay	ay	PART	_	_	3	discourse	_	_
+5-6	nu’ng	_	_	_	_	_	_	_	_
+5	nu’n	noon	ADV	_	_	9	advmod	_	_
+6	-ng	na	PART	_	_	5	case	_	_
+7	dapat	dapat	ADV	_	_	9	advmod	_	_
+8	ay	ay	PART	_	_	7	discourse	_	_
+9	kasama	sama	NOUN	_	_	0	root	_	_
+10	ako	ako	PRON	_	Case=Nom|Number=Sing|Person=1|PronType=Prs	9	nsubj	_	_
+11	ng	ng	ADP	_	Case=Gen	20	case	_	_
+12	ikakasal	kasal	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	20	acl:relcl	_	_
+13	pa	pa	ADV	_	_	12	advmod	_	_
+14	lang	lang	ADV	_	_	12	advmod	_	_
+15	noon	noon	ADV	_	Case=Gen|Deixis=Remt|PronType=Dem	12	advmod	_	_
+16	sa	sa	ADP	_	Case=Loc	17	case	_	_
+17	Las	Las	PROPN	_	_	12	obl	_	_
+18	Vegas	Vegas	PROPN	_	_	17	flat	_	_
+19	na	na	PART	_	_	12	mark	_	_
+20	Alma	Alma	PROPN	_	_	9	nmod:poss	_	_
+21	Moreno	Moreno	PROPN	_	_	20	flat	_	_
+22	at	at	CCONJ	_	_	23	cc	_	_
+23	Joey	Joey	PROPN	_	_	20	conj	_	_
+24	Marquez	Marquez	PROPN	_	_	23	flat	_	SpaceAfter=No
+25	.	.	PUNCT	_	_	9	punct	_	SpacesAfter=\n
+
+# sent_id = 15077
+# text = Minalas namang madamay si Lito na dumaraan lamang sa nasabing bisinidad galing sa eskuwelahan at papauwi na sa kanilang tirahan.
+1	Minalas	Malas	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	0	root	_	_
+2-3	namang	_	_	_	_	_	_	_	_
+2	naman	naman	ADV	_	_	1	advmod	_	_
+3	-ng	na	PART	_	_	4	mark	_	_
+4	madamay	damay	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	1	xcomp	_	_
+5	si	si	DET	_	Case=Nom|Number=Sing	6	det	_	_
+6	Lito	Lito	PROPN	_	_	4	nsubj	_	_
+7	na	na	PART	_	_	8	mark	_	_
+8	dumaraan	daan	VERB	_	Aspect=Imp|Mood=Ind|Voice=Act	6	acl:relcl	_	_
+9	lamang	lamang	ADV	_	_	8	advmod	_	_
+10	sa	sa	ADP	_	Case=Loc	13	case	_	_
+11-12	nasabing	_	_	_	_	_	_	_	_
+11	nasabi	sabi	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	13	acl:relcl	_	_
+12	-ng	na	PART	_	_	11	mark	_	_
+13	bisinidad	bisinidad	NOUN	_	_	8	obl	_	_
+14	galing	galing	NOUN	_	_	8	advcl	_	_
+15	sa	sa	ADP	_	Case=Loc	16	case	_	_
+16	eskuwelahan	eskuwela	NOUN	_	_	14	obl	_	_
+17	at	at	CCONJ	_	_	18	cc	_	_
+18	papauwi	uwi	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	8	conj	_	_
+19	na	na	ADV	_	_	18	advmod	_	_
+20	sa	sa	ADP	_	Case=Loc	23	case	_	_
+21-22	kanilang	_	_	_	_	_	_	_	_
+21	kanila	kanila	PRON	_	Case=Dat|Number=Plur|Person=3|PronType=Prs	23	nmod:poss	_	_
+22	-ng	na	PART	_	_	21	case	_	_
+23	tirahan	tira	NOUN	_	_	18	obl	_	SpaceAfter=No
+24	.	.	PUNCT	_	_	1	punct	_	SpacesAfter=\n
+
+# sent_id = 15119
+# text = Ana sa Maynila, Taguig at Pateros.
+1	Ana	Ana	PROPN	_	_	0	root	_	_
+2	sa	sa	ADP	_	Case=Loc	3	case	_	_
+3	Maynila	Maynila	PROPN	_	_	1	nmod	_	SpaceAfter=No
+4	,	,	PUNCT	_	_	5	punct	_	_
+5	Taguig	Taguig	PROPN	_	_	3	conj	_	_
+6	at	at	CCONJ	_	_	7	cc	_	_
+7	Pateros	Pateros	PROPN	_	_	3	conj	_	SpaceAfter=No
+8	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15127
+# text = Umpisahan sa mga pwedeng magawa o doable ‘ika nga.
+1	Umpisahan	Umpisa	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	0	root	_	_
+2	sa	sa	ADP	_	Case=Loc	6	case	_	_
+3	mga	mga	DET	_	Number=Plur	6	det	_	_
+4-5	pwedeng	_	_	_	_	_	_	_	_
+4	pwede	pwede	ADV	_	_	6	advmod	_	_
+5	-ng	na	PART	_	_	4	case	_	_
+6	magawa	gawa	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	1	obl	_	_
+7	o	o	CCONJ	_	_	8	cc	_	_
+8	doable	doable	ADJ	_	_	6	conj	_	_
+9	‘ika	wika	NOUN	_	_	1	parataxis	_	_
+10	nga	nga	ADV	_	_	9	advmod	_	SpaceAfter=No
+11	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15135
+# text = Bumaba ang offer ni banker at naging saradong 1 million na lang.
+1	Bumaba	Baba	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	0	root	_	_
+2	ang	ang	DET	_	Case=Nom	3	det	_	_
+3	offer	offer	NOUN	_	_	1	nsubj	_	_
+4	ni	ni	ADP	_	Case=Gen|Number=Sing	5	case	_	_
+5	banker	banker	NOUN	_	_	3	nmod:poss	_	_
+6	at	at	CCONJ	_	_	7	cc	_	_
+7	naging	maging	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	1	conj	_	_
+8-9	saradong	_	_	_	_	_	_	_	_
+8	sarado	sarado	ADJ	_	_	11	amod	_	_
+9	-ng	na	PART	_	NumType=Card	8	case	_	_
+10	1	1	NUM	_	NumType=Card	11	compound	_	_
+11	million	million	NUM	_	NumType=Card	7	xcomp	_	_
+12	na	na	ADV	_	_	7	advmod	_	_
+13	lang	lang	ADV	_	_	7	advmod	_	SpaceAfter=No
+14	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15143
+# text = Hindi lang illegal recruitment Tayong mga Pilipino ay napakadaling makalimot.
+1	Hindi	hindi	ADV	_	Polarity=Neg	4	advmod	_	_
+2	lang	lang	ADV	_	_	1	advmod	_	_
+3	illegal	illegal	ADJ	_	_	4	amod	_	_
+4	recruitment	recruitment	NOUN	_	_	0	root	_	_
+5-6	Tayong	_	_	_	_	_	_	_	_
+5	Tayo	tayo	PRON	_	Case=Nom|Clusivity=In|Number=Plur|Person=1|PronType=Prs	12	nsubj	_	_
+6	-ng	na	PART	_	_	8	case	_	_
+7	mga	mga	DET	_	Number=Plur	8	det	_	_
+8	Pilipino	Pilipino	PROPN	_	_	5	nmod	_	_
+9	ay	ay	PART	_	_	5	discourse	_	_
+10-11	napakadaling	_	_	_	_	_	_	_	_
+10	napakadali	dali	ADJ	_	Degree=Abs	12	advcl	_	_
+11	-ng	na	PART	_	_	10	mark	_	_
+12	makalimot	limot	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	4	parataxis	_	SpaceAfter=No
+13	.	.	PUNCT	_	_	4	punct	_	_
+
+# sent_id = 15151
+# text = ‘Yun pala, salin din ito sa Tagalog ng bansag ni Jesus sa dalawa sa kanyang mga apostoles.
+1	‘Yun	iyon	PRON	_	Case=Nom|Deixis=Remt|PronType=Dem	0	root	_	_
+2	pala	pala	ADV	_	_	1	advmod	_	SpaceAfter=No
+3	,	,	PUNCT	_	_	4	punct	_	_
+4	salin	salin	NOUN	_	_	1	parataxis	_	_
+5	din	din	ADV	_	_	4	advmod	_	_
+6	ito	ito	PRON	_	Case=Nom|Deixis=Prox|PronType=Dem	4	nsubj	_	_
+7	sa	sa	ADP	_	Case=Loc	8	case	_	_
+8	Tagalog	Tagalog	PROPN	_	_	4	obl	_	_
+9	ng	ng	ADP	_	Case=Gen	10	case	_	_
+10	bansag	bansag	NOUN	_	_	4	nmod	_	_
+11	ni	ni	ADP	_	Case=Gen|Number=Sing	12	case	_	_
+12	Jesus	Jesus	PROPN	_	_	10	nmod:poss	_	_
+13	sa	sa	ADP	_	Case=Loc	14	case	_	_
+14	dalawa	dalawa	NUM	_	NumType=Card	10	nmod	_	_
+15	sa	sa	ADP	_	Case=Loc	19	case	_	_
+16-17	kanyang	_	_	_	_	_	_	_	_
+16	kanya	kaniya	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs	19	nmod:poss	_	_
+17	-ng	na	PART	_	_	16	case	_	_
+18	mga	mga	DET	_	Number=Plur	19	det	_	_
+19	apostoles	apostoles	NOUN	_	_	14	nmod	_	SpaceAfter=No
+20	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15159
+# text = Kasama sa larawan ang kanyang vice-mayor na si Isko Moreno na muling nahalal din sa naturang posisyon.
+1	Kasama	sama	NOUN	_	_	0	root	_	_
+2	sa	sa	ADP	_	Case=Loc	3	case	_	_
+3	larawan	larawan	NOUN	_	_	1	nmod	_	_
+4	ang	ang	DET	_	Case=Nom	7	det	_	_
+5-6	kanyang	_	_	_	_	_	_	_	_
+5	kanya	kaniya	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs	7	nmod:poss	_	_
+6	-ng	na	PART	_	_	5	case	_	_
+7	vice-mayor	vice-mayor	NOUN	_	_	1	nsubj	_	_
+8	na	na	PART	_	_	10	case	_	_
+9	si	si	DET	_	Case=Nom|Number=Sing	10	det	_	_
+10	Isko	Isko	PROPN	_	_	7	nmod	_	_
+11	Moreno	Moreno	PROPN	_	_	10	flat	_	_
+12	na	na	PART	_	_	15	mark	_	_
+13-14	muling	_	_	_	_	_	_	_	_
+13	muli	muli	ADV	_	_	15	advmod	_	_
+14	-ng	na	PART	_	_	13	case	_	_
+15	nahalal	halal	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	10	acl:relcl	_	_
+16	din	din	ADV	_	_	15	advmod	_	_
+17	sa	sa	ADP	_	Case=Loc	20	case	_	_
+18-19	naturang	_	_	_	_	_	_	_	_
+18	naturan	turan	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	20	acl:relcl	_	_
+19	-ng	na	PART	_	_	18	mark	_	_
+20	posisyon	posisyon	NOUN	_	_	15	obl	_	SpaceAfter=No
+21	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15168
+# text = Hindi naman makaiwas ang mga motorista sa mataas na baha dahil wala nang atrasan oras na makapasok sa makipot na daan.
+1	Hindi	hindi	ADV	_	Polarity=Neg	3	advmod	_	_
+2	naman	naman	ADV	_	_	1	advmod	_	_
+3	makaiwas	iwas	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	0	root	_	_
+4	ang	ang	DET	_	Case=Nom	6	det	_	_
+5	mga	mga	DET	_	Number=Plur	6	det	_	_
+6	motorista	motorista	NOUN	_	_	3	nsubj	_	_
+7	sa	sa	ADP	_	Case=Loc	10	case	_	_
+8	mataas	taas	VERB	_	_	10	amod	_	_
+9	na	na	PART	_	_	8	case	_	_
+10	baha	baha	NOUN	_	_	3	obl	_	_
+11	dahil	dahil	SCONJ	_	_	12	mark	_	_
+12	wala	wala	VERB	_	Polarity=Neg	3	advcl	_	_
+13-14	nang	_	_	_	_	_	_	_	_
+13	na	na	ADV	_	_	12	advmod	_	_
+14	-ng	na	PART	_	_	12	flat	_	_
+15	atrasan	atras	NOUN	_	_	12	obj	_	_
+16	oras	oras	NOUN	_	_	12	obl	_	_
+17	na	na	PART	_	_	18	mark	_	_
+18	makapasok	pasok	VERB	_	Aspect=Imp|Mood=Pot|Voice=Act	16	acl:relcl	_	_
+19	sa	sa	ADP	_	Case=Loc	22	case	_	_
+20	makipot	kipot	VERB	_	_	22	amod	_	_
+21	na	na	PART	_	_	20	case	_	_
+22	daan	daan	NOUN	_	_	18	obl	_	SpaceAfter=No
+23	.	.	PUNCT	_	_	3	punct	_	_
+
+# sent_id = 15215
+# text = Ayaw ni "Rubi" ng ganyan.
+1	Ayaw	ayaw	VERB	_	Polarity=Neg	0	root	_	_
+2	ni	ni	ADP	_	Case=Gen|Number=Sing	4	case	_	_
+3	"	"	PUNCT	_	_	4	punct	_	SpaceAfter=No
+4	Rubi	Rubi	PROPN	_	_	1	obj:agent	_	SpaceAfter=No
+5	"	"	PUNCT	_	_	4	punct	_	_
+6	ng	ng	ADP	_	Case=Gen	7	case	_	_
+7	ganyan	ganyan	PRON	_	Deixis=Med|PronType=Dem	1	obj	_	SpaceAfter=No
+8	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15223
+# text = Ngayon pa lang, 2-1 favorite na si Pacquiao.
+1	Ngayon	ngayon	ADV	_	_	6	obl	_	_
+2	pa	pa	ADV	_	_	1	advmod	_	_
+3	lang	lang	ADV	_	_	2	advmod	_	SpaceAfter=No
+4	,	,	PUNCT	_	_	1	punct	_	_
+5	2-1	2-1	NUM	_	NumType=Card	6	nummod	_	_
+6	favorite	favorite	NOUN	_	_	0	root	_	_
+7	na	na	ADV	_	_	6	advmod	_	_
+8	si	si	DET	_	Case=Nom|Number=Sing	9	det	_	_
+9	Pacquiao	Pacquiao	PROPN	_	_	6	nsubj	_	SpaceAfter=No
+10	.	.	PUNCT	_	_	6	punct	_	_
+
+# sent_id = 15231
+# text = Buong Senado ang dapat i-censured… sa sobrang pamumulitika?
+1-2	Buong	_	_	_	_	_	_	_	_
+1	Buo	buo	ADJ	_	_	3	amod	_	_
+2	-ng	na	PART	_	_	1	case	_	_
+3	Senado	Senado	PROPN	_	_	0	root	_	_
+4	ang	ang	DET	_	Case=Nom	6	det	_	_
+5	dapat	dapat	ADV	_	_	6	advmod	_	_
+6	i-censured	censured	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	3	nsubj	_	SpaceAfter=No
+7	…	…	PUNCT	_	_	11	punct	_	_
+8	sa	sa	ADP	_	Case=Loc	11	case	_	_
+9-10	sobrang	_	_	_	_	_	_	_	_
+9	sobra	sobra	ADJ	_	_	11	amod	_	_
+10	-ng	na	PART	_	_	9	case	_	_
+11	pamumulitika	pulitika	NOUN	_	_	6	obl	_	SpaceAfter=No
+12	?	?	PUNCT	_	_	3	punct	_	_
+
+# sent_id = 15239
+# text = Nadulas ang waitress at nawalan ito ng malay nang makita niya ang aktor.
+1	Nadulas	dulas	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	0	root	_	_
+2	ang	ang	DET	_	Case=Nom	3	det	_	_
+3	waitress	waitress	NOUN	_	_	1	nsubj	_	_
+4	at	at	CCONJ	_	_	5	cc	_	_
+5	nawalan	wala	VERB	_	Aspect=Perf|Mood=Ind|Voice=Lfoc	1	conj	_	_
+6	ito	ito	PRON	_	Case=Nom|Deixis=Prox|PronType=Dem	5	nsubj	_	_
+7	ng	ng	ADP	_	Case=Gen	8	case	_	_
+8	malay	malay	NOUN	_	_	5	obj	_	_
+9	nang	nang	PART	_	_	10	mark	_	_
+10	makita	kita	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	1	advcl	_	_
+11	niya	niya	PRON	_	Case=Gen|Number=Sing|Person=3|PronType=Prs	10	obj:agent	_	_
+12	ang	ang	DET	_	Case=Nom	13	det	_	_
+13	aktor	aktor	NOUN	_	_	10	nsubj	_	SpaceAfter=No
+14	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15247
+# text = Ani Kabalu, limang rebelde ang nasawi at lima pa ang sugatan sa naturang engkuwentro.
+1	Ani	ani	VERB	_	_	0	root	_	_
+2	Kabalu	Kabalu	PROPN	_	_	1	obj:agent	_	SpaceAfter=No
+3	,	,	PUNCT	_	_	6	punct	_	_
+4-5	limang	_	_	_	_	_	_	_	_
+4	lima	lima	NUM	_	NumType=Card	6	nummod	_	_
+5	-ng	na	PART	_	_	4	case	_	_
+6	rebelde	rebelde	NOUN	_	_	1	parataxis	_	_
+7	ang	ang	DET	_	Case=Nom	8	det	_	_
+8	nasawi	sawi	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	6	nsubj	_	_
+9	at	at	CCONJ	_	_	10	cc	_	_
+10	lima	lima	NUM	_	NumType=Card	6	conj	_	_
+11	pa	pa	ADV	_	_	10	advmod	_	_
+12	ang	ang	DET	_	Case=Nom	13	det	_	_
+13	sugatan	sugat	ADJ	_	_	10	nsubj	_	_
+14	sa	sa	ADP	_	Case=Loc	17	case	_	_
+15-16	naturang	_	_	_	_	_	_	_	_
+15	natura	turan	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	17	acl:relcl	_	_
+16	-ng	na	PART	_	_	15	mark	_	_
+17	engkuwentro	engkuwentro	NOUN	_	_	13	obl	_	SpaceAfter=No
+18	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15255
+# text = Upang mawala ang pagdududa Ako po ay 22 years old, may trabaho, programmer.
+1	Upang	upang	SCONJ	_	_	2	mark	_	_
+2	mawala	wala	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	10	advcl	_	_
+3	ang	ang	DET	_	Case=Nom	4	det	_	_
+4	pagdududa	duda	NOUN	_	_	2	nsubj	_	_
+5	Ako	ako	PRON	_	Case=Nom|Number=Sing|Person=1|PronType=Prs	10	nsubj	_	_
+6	po	po	PART	_	_	5	discourse	_	_
+7	ay	ay	PART	_	_	5	discourse	_	_
+8	22	22	NUM	_	NumType=Card	9	nummod	_	_
+9	years	years	NOUN	_	_	10	obl	_	_
+10	old	old	ADJ	_	_	0	root	_	SpaceAfter=No
+11	,	,	PUNCT	_	_	12	punct	_	_
+12	may	may	VERB	_	_	10	conj	_	_
+13	trabaho	trabaho	NOUN	_	_	12	obj	_	SpaceAfter=No
+14	,	,	PUNCT	_	_	15	punct	_	_
+15	programmer	programmer	NOUN	_	_	10	conj	_	SpaceAfter=No
+16	.	.	PUNCT	_	_	10	punct	_	_
+
+# sent_id = 15263
+# text = Hindi gaanong malalaki ang mga gusali at limitado hanggang alas-siyete ng gabi ang operasyon ng mall nila doon.
+1	Hindi	hindi	ADV	_	Polarity=Neg	4	advmod	_	_
+2-3	gaanong	_	_	_	_	_	_	_	_
+2	gaano	gaano	ADV	_	PronType=Int	4	advmod	_	_
+3	-ng	na	PART	_	_	2	case	_	_
+4	malalaki	laki	VERB	_	_	0	root	_	_
+5	ang	ang	DET	_	Case=Nom	7	det	_	_
+6	mga	mga	DET	_	Number=Plur	7	det	_	_
+7	gusali	gusali	NOUN	_	_	4	nsubj	_	_
+8	at	at	CCONJ	_	_	9	cc	_	_
+9	limitado	limit	ADJ	_	_	4	conj	_	_
+10	hanggang	hanggang	ADP	_	_	11	case	_	_
+11	alas-siyete	alas-siyete	NUM	_	NumType=Card	9	obl	_	_
+12	ng	ng	ADP	_	Case=Gen	13	case	_	_
+13	gabi	gabi	NOUN	_	_	11	nmod	_	_
+14	ang	ang	DET	_	Case=Nom	15	det	_	_
+15	operasyon	operasyon	NOUN	_	_	9	nsubj	_	_
+16	ng	ng	ADP	_	Case=Gen	17	case	_	_
+17	mall	mall	NOUN	_	_	15	nmod	_	_
+18	nila	nila	PRON	_	Case=Gen|Number=Plur|Person=3|PronType=Prs	17	nmod:poss	_	_
+19	doon	doon	PRON	_	Case=Loc|Deixis=Remt|PronType=Dem	17	nmod	_	SpaceAfter=No
+20	.	.	PUNCT	_	_	4	punct	_	_
+
+# sent_id = 15273
+# text = Nagkausap na sila ni Alfred Vargas na makakalaban niya sa pagtakbo at nagkaintindihan daw sila kahit magkalaban sila ng partido.
+1	Nagkausap	usap	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	0	root	_	_
+2	na	na	ADV	_	_	1	advmod	_	_
+3	sila	sila	PRON	_	Case=Nom|Number=Plur|Person=3|PronType=Prs	1	nsubj	_	_
+4	ni	ni	ADP	_	Case=Gen|Number=Sing	5	case	_	_
+5	Alfred	Alfred	PROPN	_	_	3	nmod	_	_
+6	Vargas	Vargas	PROPN	_	_	5	flat	_	_
+7	na	na	PART	_	_	8	mark	_	_
+8	makakalaban	laban	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	1	ccomp	_	_
+9	niya	niya	PRON	_	Case=Gen|Number=Sing|Person=3|PronType=Prs	8	obj:agent	_	_
+10	sa	sa	ADP	_	Case=Loc	11	case	_	_
+11	pagtakbo	takbo	NOUN	_	_	8	obl	_	_
+12	at	at	CCONJ	_	_	13	cc	_	_
+13	nagkaintindihan	intindi	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	1	conj	_	_
+14	daw	daw	ADV	_	_	13	advmod	_	_
+15	sila	sila	PRON	_	Case=Nom|Number=Plur|Person=3|PronType=Prs	13	nsubj	_	_
+16	kahit	kahit	SCONJ	_	_	17	mark	_	_
+17	magkalaban	laban	VERB	_	_	13	advcl	_	_
+18	sila	sila	PRON	_	Case=Nom|Number=Plur|Person=3|PronType=Prs	17	nsubj	_	_
+19	ng	ng	ADP	_	Case=Gen	20	case	_	_
+20	partido	partido	NOUN	_	_	18	nmod	_	SpaceAfter=No
+21	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15316
+# text = So, parang wala sa akin.
+1	So	So	ADV	_	_	5	advmod	_	SpaceAfter=No
+2	,	,	PUNCT	_	_	1	punct	_	_
+3-4	parang	_	_	_	_	_	_	_	_
+3	para	para	ADV	_	_	5	advmod	_	_
+4	-ng	na	PART	_	_	3	case	_	_
+5	wala	wala	VERB	_	Polarity=Neg	0	root	_	_
+6	sa	sa	ADP	_	Case=Loc	7	case	_	_
+7	akin	akin	PRON	_	Case=Dat|Number=Sing|Person=1|PronType=Prs	5	obl	_	SpaceAfter=No
+8	.	.	PUNCT	_	_	5	punct	_	_
+
+# sent_id = 15324
+# text = Pero, ‘yon nga -- numbers game ang labanan.
+1	Pero	pero	CCONJ	_	_	8	cc	_	SpaceAfter=No
+2	,	,	PUNCT	_	_	1	punct	_	_
+3	‘yon	iyon	PRON	_	Case=Nom|Deixis=Remt|PronType=Dem	8	parataxis	_	_
+4	nga	nga	ADV	_	_	3	advmod	_	_
+5	-	-	PUNCT	_	_	3	punct	_	SpaceAfter=No
+6	-	-	PUNCT	_	_	3	punct	_	_
+7	numbers	numbers	NOUN	_	_	8	compound	_	_
+8	game	game	NOUN	_	_	0	root	_	_
+9	ang	ang	DET	_	Case=Nom	10	det	_	_
+10	labanan	laban	NOUN	_	_	8	nsubj	_	SpaceAfter=No
+11	.	.	PUNCT	_	_	8	punct	_	_
+
+# sent_id = 15332
+# text = Hindi lang namin sure kung sa tulong pa rin ba ito ni Dra.
+1	Hindi	hindi	ADV	_	Polarity=Neg	4	advmod	_	_
+2	lang	lang	ADV	_	_	1	advmod	_	_
+3	namin	namin	PRON	_	Case=Gen|Clusivity=Ex|Number=Plur|Person=1|PronType=Prs	4	obj:agent	_	_
+4	sure	sure	VERB	_	_	0	root	_	_
+5	kung	kung	SCONJ	_	_	7	mark	_	_
+6	sa	sa	ADP	_	Case=Loc	7	case	_	_
+7	tulong	tulong	NOUN	_	_	4	ccomp	_	_
+8	pa	pa	ADV	_	_	7	advmod	_	_
+9	rin	din	ADV	_	_	8	fixed	_	_
+10	ba	ba	PART	_	PartType=Int	7	discourse	_	_
+11	ito	ito	PRON	_	Case=Nom|Deixis=Prox|PronType=Dem	7	nsubj	_	_
+12	ni	ni	ADP	_	Case=Gen|Number=Sing	13	case	_	_
+13	Dra	Dra	PROPN	_	_	7	nmod:poss	_	SpaceAfter=No
+14	.	.	PUNCT	_	_	4	punct	_	_
+
+# sent_id = 15340
+# text = Gumawa ng listahan ng mga dapat baguhin sa pang-araw-araw na pamumuhay.
+1	Gumawa	gawa	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	0	root	_	_
+2	ng	ng	ADP	_	Case=Gen	3	case	_	_
+3	listahan	lista	NOUN	_	_	1	obj	_	_
+4	ng	ng	ADP	_	Case=Gen	7	mark	_	_
+5	mga	mga	DET	_	Number=Plur	7	det	_	_
+6	dapat	dapat	ADV	_	_	7	advmod	_	_
+7	baguhin	bago	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	3	acl:relcl	_	_
+8	sa	sa	ADP	_	Case=Loc	11	case	_	_
+9	pang-araw-araw	araw	NOUN	_	_	11	nmod	_	_
+10	na	na	PART	_	_	9	case	_	_
+11	pamumuhay	buhay	NOUN	_	_	7	obl	_	SpaceAfter=No
+12	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15348
+# text = All set na ang pagsa­sapelikula ng bagong version ng Ang Panday ni Sen.Bong Revilla.
+1	All	all	ADV	_	_	2	advmod	_	_
+2	set	set	ADJ	_	_	0	root	_	_
+3	na	na	ADV	_	_	2	advmod	_	_
+4	ang	ang	DET	_	Case=Nom	5	det	_	_
+5	pagsa­sapelikula	pelikula	NOUN	_	_	2	nsubj	_	_
+6	ng	ng	ADP	_	Case=Gen	9	case	_	_
+7-8	bagong	_	_	_	_	_	_	_	_
+7	bago	bago	ADJ	_	_	9	amod	_	_
+8	-ng	na	PART	_	_	7	case	_	_
+9	version	version	NOUN	_	_	5	nmod	_	_
+10	ng	ng	ADP	_	Case=Gen	12	case	_	_
+11	Ang	ang	DET	_	Case=Nom	12	det	_	_
+12	Panday	Panday	NOUN	_	_	9	nmod	_	_
+13	ni	ni	ADP	_	Case=Gen|Number=Sing	14	case	_	_
+14	Sen.Bong	Sen.Bong	PROPN	_	_	12	nmod:poss	_	_
+15	Revilla	Revilla	PROPN	_	_	14	flat	_	SpaceAfter=No
+16	.	.	PUNCT	_	_	2	punct	_	_
+
+# sent_id = 15356
+# text = Sa edad niya, pabagu-bago pa ang kanyang isip, hindi pa malinaw sa kanya kung ano ang gusto niya.
+1	Sa	sa	ADP	_	Case=Loc	2	case	_	_
+2	edad	edad	NOUN	_	_	5	obl	_	_
+3	niya	niya	PRON	_	Case=Gen|Number=Sing|Person=3|PronType=Prs	2	nmod:poss	_	SpaceAfter=No
+4	,	,	PUNCT	_	_	2	punct	_	_
+5	pabagu-bago	bago	VERB	_	_	0	root	_	_
+6	pa	pa	ADV	_	_	5	advmod	_	_
+7	ang	ang	DET	_	Case=Nom	10	det	_	_
+8-9	kanyang	_	_	_	_	_	_	_	_
+8	kanya	kanya	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs	10	nmod:poss	_	_
+9	-ng	na	PART	_	_	8	case	_	_
+10	isip	isip	NOUN	_	_	5	nsubj	_	SpaceAfter=No
+11	,	,	PUNCT	_	_	14	punct	_	_
+12	hindi	hindi	ADV	_	Polarity=Neg	14	advmod	_	_
+13	pa	pa	ADV	_	_	12	advmod	_	_
+14	malinaw	linaw	VERB	_	_	5	parataxis	_	_
+15	sa	sa	ADP	_	Case=Loc	16	case	_	_
+16	kanya	kanya	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs	14	obl	_	_
+17	kung	kung	SCONJ	_	_	18	mark	_	_
+18	ano	ano	PRON	_	Case=Nom|PronType=Int	14	ccomp	_	_
+19	ang	ang	DET	_	Case=Nom	20	det	_	_
+20	gusto	gusto	NOUN	_	_	18	nsubj	_	_
+21	niya	niya	PRON	_	Case=Gen|Number=Sing|Person=3|PronType=Prs	20	nmod:poss	_	SpaceAfter=No
+22	.	.	PUNCT	_	_	5	punct	_	_
+
+# sent_id = 15364
+# text = Halimbawa -- sino ba ang tumatao sa Commission on Appointments na dinadaanan ng isang ipo-promote na opis­yal.
+1	Halimbawa	halimbawa	NOUN	_	_	4	dislocated	_	_
+2	-	-	PUNCT	_	_	1	punct	_	SpaceAfter=No
+3	-	-	PUNCT	_	_	1	punct	_	_
+4	sino	sino	PRON	_	Case=Nom|PronType=Int	0	root	_	_
+5	ba	ba	PART	_	PartType=Int	4	discourse	_	_
+6	ang	ang	DET	_	Case=Nom	7	det	_	_
+7	tumatao	tao	VERB	_	Aspect=Imp|Mood=Ind|Voice=Act	4	nsubj	_	_
+8	sa	sa	ADP	_	Case=Loc	9	case	_	_
+9	Commission	Commission	PROPN	_	_	7	obl	_	_
+10	on	on	PROPN	_	_	9	flat	_	_
+11	Appointments	appointment	PROPN	_	_	9	flat	_	_
+12	na	na	PART	_	_	13	mark	_	_
+13	dinadaanan	daan	VERB	_	Aspect=Imp|Mood=Ind|Voice=Lfoc	9	acl:relcl	_	_
+14	ng	ng	ADP	_	Case=Gen	19	case	_	_
+15-16	isang	_	_	_	_	_	_	_	_
+15	isa	isa	NUM	_	NumType=Card	19	nummod	_	_
+16	-ng	na	PART	_	_	15	case	_	_
+17	ipo-promote	promote	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	19	acl:relcl	_	_
+18	na	na	PART	_	_	17	mark	_	_
+19	opis­yal	opis­yal	NOUN	_	_	13	obj:agent	_	SpaceAfter=No
+20	.	.	PUNCT	_	_	4	punct	_	_
+
+# sent_id = 15373
+# text = Dahil lubos na nagustuhan ng televiewers ang every Wednesday na iba -'t ibang karakter ni JC kaya sa comedy naman siya isinabak.
+1	Dahil	dahil	SCONJ	_	_	4	mark	_	_
+2	lubos	lubos	ADV	_	_	4	advmod	_	_
+3	na	na	PART	_	_	2	case	_	_
+4	nagustuhan	gusto	VERB	_	Aspect=Perf|Mood=Ind|Voice=Lfoc	0	root	_	_
+5	ng	ng	ADP	_	Case=Gen	6	case	_	_
+6	televiewers	televiewers	NOUN	_	_	4	obj:agent	_	_
+7	ang	ang	DET	_	Case=Nom	15	det	_	_
+8	every	every	ADV	_	_	9	advmod	_	_
+9	Wednesday	Wednesday	PROPN	_	_	15	nmod	_	_
+10	na	na	PART	_	_	9	case	_	_
+11	iba	iba	ADJ	_	_	15	amod	_	_
+12	-'t	at	CCONJ	_	_	13	cc	_	_
+13-14	ibang	_	_	_	_	_	_	_	_
+13	iba	iba	ADJ	_	_	11	conj	_	_
+14	-ng	na	PART	_	_	11	case	_	_
+15	karakter	karakter	NOUN	_	_	4	nsubj	_	_
+16	ni	ni	ADP	_	Case=Gen|Number=Sing	17	case	_	_
+17	JC	JC	PROPN	_	_	15	nmod:poss	_	_
+18	kaya	kaya	SCONJ	_	_	23	mark	_	_
+19	sa	sa	ADP	_	Case=Loc	20	case	_	_
+20	comedy	comedy	NOUN	_	_	23	obl	_	_
+21	naman	naman	ADV	_	_	20	advmod	_	_
+22	siya	siya	PRON	_	Case=Nom|Number=Sing|Person=3|PronType=Prs	23	nsubj	_	_
+23	isinabak	sabak	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	4	advcl	_	SpaceAfter=No
+24	.	.	PUNCT	_	_	4	punct	_	_
+
+# sent_id = 15388
+# text = Hindi dumating sa preskon si Secretary Puno pero abalang-abala sa pag-aasikaso ang kanyang mga staff sa pangunguna ni Undersecretary Brian Simsuan ng DILG.
+1	Hindi	hindi	ADV	_	Polarity=Neg	2	advmod	_	_
+2	dumating	dating	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	0	root	_	_
+3	sa	sa	ADP	_	Case=Loc	4	case	_	_
+4	preskon	preskon	NOUN	_	_	2	obl	_	_
+5	si	si	DET	_	Case=Nom|Number=Sing	6	det	_	_
+6	Secretary	Secretary	PROPN	_	_	2	nsubj	_	_
+7	Puno	Puno	PROPN	_	_	6	flat	_	_
+8	pero	pero	CCONJ	_	_	9	cc	_	_
+9	abalang-abala	abala	ADJ	_	_	2	conj	_	_
+10	sa	sa	ADP	_	Case=Loc	11	case	_	_
+11	pag-aasikaso	asikaso	NOUN	_	_	9	obl	_	_
+12	ang	ang	DET	_	Case=Nom	16	det	_	_
+13-14	kanyang	_	_	_	_	_	_	_	_
+13	kanya	kanya	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs	16	nmod:poss	_	_
+14	-ng	na	PART	_	_	13	case	_	_
+15	mga	mga	DET	_	Number=Plur	16	det	_	_
+16	staff	staff	NOUN	_	_	9	nsubj	_	_
+17	sa	sa	ADP	_	Case=Loc	18	case	_	_
+18	pangunguna	una	NOUN	_	_	9	obl	_	_
+19	ni	ni	ADP	_	Case=Gen|Number=Sing	20	case	_	_
+20	Undersecretary	Undersecretary	PROPN	_	_	18	nmod	_	_
+21	Brian	Brian	PROPN	_	_	20	flat	_	_
+22	Simsuan	Simsuan	PROPN	_	_	20	flat	_	_
+23	ng	ng	ADP	_	Case=Gen	24	case	_	_
+24	DILG	DILG	PROPN	_	Abbr=Yes	20	nmod	_	SpaceAfter=No
+25	.	.	PUNCT	_	_	2	punct	_	_
+
+# sent_id = 15422
+# text = Nagbakasakali ang ating mountaineer.
+1	Nagbakasakali	bakasakali	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	0	root	_	_
+2	ang	ang	DET	_	Case=Nom	5	det	_	_
+3-4	ating	_	_	_	_	_	_	_	_
+3	ati	atin	PRON	_	Case=Dat|Clusivity=In|Number=Plur|Person=1|PronType=Prs	5	nmod:poss	_	_
+4	-ng	na	PART	_	_	3	case	_	_
+5	mountaineer	mountaineer	NOUN	_	_	1	nsubj	_	SpaceAfter=No
+6	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15430
+# text = Parang sina Rafael at Jon lang yata ang na-kiss ko!
+1	Parang	parang	ADV	_	_	3	advmod	_	_
+2	sina	sina	DET	_	Case=Nom|Number=Plur	3	det	_	_
+3	Rafael	Rafael	PROPN	_	_	0	root	_	_
+4	at	at	CCONJ	_	_	5	cc	_	_
+5	Jon	Jon	PROPN	_	_	3	conj	_	_
+6	lang	lang	ADV	_	_	3	advmod	_	_
+7	yata	yata	ADV	_	_	3	advmod	_	_
+8	ang	ang	DET	_	Case=Nom	9	det	_	_
+9	na-kiss	kiss	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	3	nsubj	_	_
+10	ko	ko	PRON	_	Case=Gen|Number=Sing|Person=1|PronType=Prs	9	obj:agent	_	SpaceAfter=No
+11	!	!	PUNCT	_	_	3	punct	_	_
+
+# sent_id = 15439
+# text = Kailangan ang mahabang panahon upang lubusang mabura ito sa isip.
+1	Kailangan	kailangan	VERB	_	_	0	root	_	_
+2	ang	ang	DET	_	Case=Nom	5	det	_	_
+3-4	mahabang	_	_	_	_	_	_	_	_
+3	mahaba	haba	ADJ	_	_	5	amod	_	_
+4	-ng	na	PART	_	_	3	case	_	_
+5	panahon	panahon	NOUN	_	_	1	nsubj	_	_
+6	upang	upang	SCONJ	_	_	9	mark	_	_
+7-8	lubusang	_	_	_	_	_	_	_	_
+7	lubusa	lubos	ADV	_	_	9	advmod	_	_
+8	-ng	na	PART	_	_	7	case	_	_
+9	mabura	bura	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	1	advcl	_	_
+10	ito	ito	PRON	_	Case=Nom|Deixis=Prox|PronType=Dem	9	nsubj	_	_
+11	sa	sa	ADP	_	Case=Loc	12	case	_	_
+12	isip	isip	NOUN	_	_	9	obl	_	SpaceAfter=No
+13	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15447
+# text = May babaeng sakay si Landry nang maganap ang insidente at hindi naman nasaktan.
+1	May	may	VERB	_	_	0	root	_	_
+2-3	babaeng	_	_	_	_	_	_	_	_
+2	babae	babae	NOUN	_	_	4	nmod	_	_
+3	-ng	na	PART	_	_	2	case	_	_
+4	sakay	sakay	NOUN	_	_	1	obj	_	_
+5	si	si	DET	_	Case=Nom|Number=Sing	6	det	_	_
+6	Landry	Landry	PROPN	_	_	1	nsubj	_	_
+7	nang	nang	SCONJ	_	_	8	mark	_	_
+8	maganap	ganap	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	1	advcl	_	_
+9	ang	ang	DET	_	Case=Nom	10	det	_	_
+10	insidente	insidente	NOUN	_	_	8	nsubj	_	_
+11	at	at	CCONJ	_	_	14	cc	_	_
+12	hindi	hindi	ADV	_	Polarity=Neg	14	advmod	_	_
+13	naman	naman	ADV	_	_	12	advmod	_	_
+14	nasaktan	sakit	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	1	conj	_	SpaceAfter=No
+15	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15455
+# text = Hindi naman masagot si Wendy ang mga tanong sa kanya kung valid ba ang kasal nila ni Bruce.
+1	Hindi	hindi	ADV	_	Polarity=Neg	3	advmod	_	_
+2	naman	naman	ADV	_	_	1	advmod	_	_
+3	masagot	sagot	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	0	root	_	_
+4	si	ni	ADP	_	Case=Nom|Number=Sing	5	case	_	_
+5	Wendy	Wendy	PROPN	_	_	3	obj:agent	_	_
+6	ang	ang	DET	_	Case=Nom	8	det	_	_
+7	mga	mga	DET	_	Number=Plur	8	det	_	_
+8	tanong	tanong	NOUN	_	_	3	nsubj	_	_
+9	sa	sa	ADP	_	Case=Loc	10	case	_	_
+10	kanya	kaniya	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs	8	nmod	_	_
+11	kung	kung	SCONJ	_	_	12	mark	_	_
+12	valid	valid	ADJ	_	_	3	advcl	_	_
+13	ba	ba	PART	_	PartType=Int	12	advmod	_	_
+14	ang	ang	DET	_	Case=Nom	15	det	_	_
+15	kasal	kasal	NOUN	_	_	12	nsubj	_	_
+16	nila	nila	PRON	_	Case=Gen|Number=Plur|Person=3|PronType=Prs	15	nmod:poss	_	_
+17	ni	ni	ADP	_	Case=Gen|Number=Sing	18	case	_	_
+18	Bruce	Bruce	PROPN	_	_	16	nmod	_	SpaceAfter=No
+19	.	.	PUNCT	_	_	3	punct	_	_
+
+# sent_id = 15463
+# text = Kinumpleto ni Acuna ang three-point play at inagaw ng UE ang trangko 69-68 may limang minuto pa sa laro.
+1	Kinumpleto	kumpleto	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	0	root	_	_
+2	ni	ni	ADP	_	Case=Gen|Number=Sing	3	case	_	_
+3	Acuna	Acuna	PROPN	_	_	1	obj:agent	_	_
+4	ang	ang	DET	_	Case=Nom	6	det	_	_
+5	three-point	three-point	NOUN	_	_	6	nmod	_	_
+6	play	play	NOUN	_	_	1	nsubj	_	_
+7	at	at	CCONJ	_	_	8	cc	_	_
+8	inagaw	agaw	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	1	conj	_	_
+9	ng	ng	ADP	_	Case=Gen	10	case	_	_
+10	UE	UE	PROPN	_	Abbr=Yes	8	obj:agent	_	_
+11	ang	ang	DET	_	Case=Nom	12	det	_	_
+12	trangko	trangko	NOUN	_	_	8	nsubj	_	_
+13	69-68	69-68	NUM	_	NumType=Card	12	flat	_	_
+14	may	may	VERB	_	_	1	parataxis	_	_
+15-16	limang	_	_	_	_	_	_	_	_
+15	lima	lima	NUM	_	NumType=Card	17	nummod	_	_
+16	-ng	na	PART	_	_	15	case	_	_
+17	minuto	minuto	NOUN	_	_	14	obj	_	_
+18	pa	pa	ADV	_	_	14	advmod	_	_
+19	sa	sa	ADP	_	Case=Loc	20	case	_	_
+20	laro	laro	NOUN	_	_	14	obl	_	SpaceAfter=No
+21	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15471
+# text = Dagdag-pasaring pa nito kay Aquino, mukhang may prejudgment o hinusgahan na agad ng una si Pangulong Arroyo sa usapin.
+1	Dagdag-pasaring	Dagdag-pasaring	NOUN	_	_	9	obl	_	_
+2	pa	pa	ADV	_	_	1	advmod	_	_
+3	nito	nito	PRON	_	Case=Gen|Deixis=Prox|PronType=Dem	1	nmod	_	_
+4	kay	kay	ADP	_	Case=Dat|Number=Sing	5	case	_	_
+5	Aquino	Aquino	PROPN	_	_	1	nmod	_	SpaceAfter=No
+6	,	,	PUNCT	_	_	1	punct	_	_
+7-8	mukhang	_	_	_	_	_	_	_	_
+7	mukha	mukha	ADV	_	_	9	advmod	_	_
+8	-ng	na	PART	_	_	7	case	_	_
+9	may	may	VERB	_	_	0	root	_	_
+10	prejudgment	prejudgment	NOUN	_	_	9	obj	_	_
+11	o	o	CCONJ	_	_	12	cc	_	_
+12	hinusgahan	husga	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	9	conj	_	_
+13	na	na	ADV	_	_	12	advmod	_	_
+14	agad	agad	ADV	_	_	12	advmod	_	_
+15	ng	ng	ADP	_	Case=Gen	16	case	_	_
+16	una	una	NOUN	_	NumType=Ord	12	obj:agent	_	_
+17	si	si	DET	_	Case=Nom|Number=Sing	18	det	_	_
+18-19	Pangulong	_	_	_	_	_	_	_	_
+18	Pangulo	Pangulo	PROPN	_	_	12	nsubj	_	_
+19	-ng	na	PART	_	_	18	flat	_	_
+20	Arroyo	Arroyo	PROPN	_	_	18	flat	_	_
+21	sa	sa	ADP	_	Case=Loc	22	case	_	_
+22	usapin	usap	NOUN	_	_	12	obl	_	SpaceAfter=No
+23	.	.	PUNCT	_	_	9	punct	_	_
+
+# sent_id = 15481
+# text = Kasalukuyan nang nag-iimbestiga ang pulisya para matukoy ang baril na ginamit sa mga biktima at kung sino ang nasa likod ng pamamaslang.
+1	Kasalukuyan	kasalukuyan	ADV	_	_	3	advmod	_	_
+2	nang	nang	ADV	_	_	1	advmod	_	_
+3	nag-iimbestiga	imbestiga	VERB	_	Aspect=Imp|Mood=Ind|Voice=Act	0	root	_	_
+4	ang	ang	DET	_	Case=Nom	5	det	_	_
+5	pulisya	pulisya	NOUN	_	_	3	nsubj	_	_
+6	para	para	SCONJ	_	_	7	mark	_	_
+7	matukoy	tukoy	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	3	advcl	_	_
+8	ang	ang	DET	_	Case=Nom	9	det	_	_
+9	baril	baril	NOUN	_	_	7	nsubj	_	_
+10	na	na	PART	_	_	11	mark	_	_
+11	ginamit	gamit	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	9	acl:relcl	_	_
+12	sa	sa	ADP	_	Case=Loc	14	case	_	_
+13	mga	mga	DET	_	Number=Plur	14	det	_	_
+14	biktima	biktima	NOUN	_	_	11	obl	_	_
+15	at	at	CCONJ	_	_	17	cc	_	_
+16	kung	kung	SCONJ	_	_	17	mark	_	_
+17	sino	sino	PRON	_	Case=Nom|PronType=Int	7	conj	_	_
+18	ang	ang	DET	_	Case=Nom	20	det	_	_
+19	nasa	nasa	ADP	_	Case=Loc	20	case	_	_
+20	likod	likod	NOUN	_	_	17	nsubj	_	_
+21	ng	ng	ADP	_	Case=Gen	22	case	_	_
+22	pamamaslang	paslang	NOUN	_	_	20	nmod:poss	_	SpaceAfter=No
+23	.	.	PUNCT	_	_	3	punct	_	_
+
+# sent_id = 15525
+# text = Tamang pagba-budget ang solusyon d’yan.
+1-2	Tamang	_	_	_	_	_	_	_	_
+1	Tama	Tama	ADJ	_	_	3	amod	_	_
+2	-ng	na	PART	_	_	1	case	_	_
+3	pagba-budget	budget	NOUN	_	_	0	root	_	_
+4	ang	ang	DET	_	Case=Nom	5	det	_	_
+5	solusyon	solusyon	NOUN	_	_	3	nsubj	_	_
+6	d’yan	diyan	PRON	_	Case=Loc|Deixis=Med|PronType=Dem	5	nmod	_	SpaceAfter=No
+7	.	.	PUNCT	_	_	3	punct	_	_
+
+# sent_id = 15533
+# text = Ayoko munang isipin ‘yan kasi medyo focus ako sa work.
+1-2	Ayoko	_	_	_	_	_	_	_	_
+1	Ayo	ayaw	VERB	_	Polarity=Neg	0	root	_	_
+2	ko	ko	PRON	_	_	1	obj:agent	_	_
+3-4	munang	_	_	_	_	_	_	_	_
+3	muna	muna	ADV	_	_	1	advmod	_	_
+4	-ng	na	PART	_	_	5	mark	_	_
+5	isipin	isip	VERB	_	Aspect=Imp|Mood=Pot|Voice=Pass	1	xcomp	_	_
+6	‘yan	iyan	PRON	_	Case=Nom|Deixis=Med|PronType=Dem	5	nsubj	_	_
+7	kasi	kasi	SCONJ	_	_	9	mark	_	_
+8	medyo	medyo	ADV	_	_	9	advmod	_	_
+9	focus	focus	NOUN	_	_	1	advcl	_	_
+10	ako	ako	PRON	_	Case=Nom|Number=Sing|Person=1|PronType=Prs	9	nsubj	_	_
+11	sa	sa	ADP	_	Case=Loc	12	case	_	_
+12	work	work	NOUN	_	_	9	nmod	_	SpaceAfter=No
+13	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15541
+# text = Kung nasaan ang husband niya, nandoon ang asawa niya at nakasuporta!
+1	Kung	kung	SCONJ	_	_	2	mark	_	_
+2	nasaan	saan	VERB	_	PronType=Int	7	advcl	_	_
+3	ang	ang	DET	_	Case=Nom	4	det	_	_
+4	husband	husband	NOUN	_	_	2	nsubj	_	_
+5	niya	niya	PRON	_	Case=Gen|Number=Sing|Person=3|PronType=Prs	4	nmod:poss	_	SpaceAfter=No
+6	,	,	PUNCT	_	_	2	punct	_	_
+7	nandoon	doon	VERB	_	Deixis=Remt|PronType=Dem	0	root	_	_
+8	ang	ang	DET	_	Case=Nom	9	det	_	_
+9	asawa	asawa	NOUN	_	_	7	nsubj	_	_
+10	niya	niya	PRON	_	Case=Gen|Number=Sing|Person=3|PronType=Prs	9	nmod:poss	_	_
+11	at	at	CCONJ	_	_	12	cc	_	_
+12	nakasuporta	suporta	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	7	conj	_	SpaceAfter=No
+13	!	!	PUNCT	_	_	7	punct	_	_
+
+# sent_id = 15549
+# text = Matalino na ngayon ang mga botante at alam nila ang kapasidad ng isang kandidato.
+1	Matalino	talino	VERB	_	_	0	root	_	_
+2	na	na	ADV	_	_	1	advmod	_	_
+3	ngayon	ngayon	ADV	_	_	1	advmod	_	_
+4	ang	ang	DET	_	Case=Nom	6	det	_	_
+5	mga	mga	DET	_	Number=Plur	6	det	_	_
+6	botante	botante	NOUN	_	_	1	nsubj	_	_
+7	at	at	CCONJ	_	_	8	cc	_	_
+8	alam	alam	VERB	_	_	1	conj	_	_
+9	nila	nila	PRON	_	Case=Gen|Number=Plur|Person=3|PronType=Prs	8	obj:agent	_	_
+10	ang	ang	DET	_	Case=Nom	11	det	_	_
+11	kapasidad	kapasidad	NOUN	_	_	8	nsubj	_	_
+12	ng	ng	ADP	_	Case=Gen	15	case	_	_
+13-14	isang	_	_	_	_	_	_	_	_
+13	isa	isa	NUM	_	NumType=Card	15	nummod	_	_
+14	-ng	na	PART	_	_	13	case	_	_
+15	kandidato	kandidato	NOUN	_	_	11	nmod:poss	_	SpaceAfter=No
+16	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15557
+# text = Nadamay sa nabanggit na sunog ang may 10 pang kabahayan na pawang yari sa mga light materials.
+1	Nadamay	damay	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	0	root	_	_
+2	sa	sa	ADP	_	Case=Loc	5	case	_	_
+3	nabanggit	banggit	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	5	acl:relcl	_	_
+4	na	na	PART	_	_	3	mark	_	_
+5	sunog	sunog	NOUN	_	_	1	obl	_	_
+6	ang	ang	DET	_	Case=Nom	11	det	_	_
+7	may	may	VERB	_	_	1	nsubj	_	_
+8	10	10	NUM	_	NumType=Card	11	nummod	_	_
+9-10	pang	_	_	_	_	_	_	_	_
+9	pa	pa	ADV	_	_	7	advmod	_	_
+10	-ng	na	PART	_	_	8	case	_	_
+11	kabahayan	bahay	NOUN	_	_	7	obj	_	_
+12	na	na	PART	_	_	15	case	_	_
+13-14	pawang	_	_	_	_	_	_	_	_
+13	pawa	pawa	ADV	_	_	15	advmod	_	_
+14	-ng	na	PART	_	_	13	case	_	_
+15	yari	yari	NOUN	_	_	11	nmod	_	_
+16	sa	sa	ADP	_	Case=Loc	19	case	_	_
+17	mga	mga	DET	_	Number=Plur	19	det	_	_
+18	light	light	ADJ	_	_	19	amod	_	_
+19	materials	materials	NOUN	_	_	15	nmod	_	SpaceAfter=No
+20	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15565
+# text = Sa panig nina Direk carlo at Donna Villa, malaking karangalan sa kanila ang mabigyan ng ganitong pagkilala.
+1	Sa	sa	ADP	_	Case=Loc	2	case	_	_
+2	panig	panig	NOUN	_	_	12	obl	_	_
+3	nina	nina	ADP	_	Case=Gen|Number=Plur	4	case	_	_
+4	Direk	Direk	PROPN	_	_	2	nmod:poss	_	_
+5	carlo	carlo	PROPN	_	_	4	flat	_	_
+6	at	at	CCONJ	_	_	7	cc	_	_
+7	Donna	Donna	PROPN	_	_	4	conj	_	_
+8	Villa	Villa	PROPN	_	_	7	flat	_	SpaceAfter=No
+9	,	,	PUNCT	_	_	2	punct	_	_
+10-11	malaking	_	_	_	_	_	_	_	_
+10	malaki	laki	VERB	_	_	12	amod	_	_
+11	-ng	na	PART	_	_	10	case	_	_
+12	karangalan	dangal	NOUN	_	_	0	root	_	_
+13	sa	sa	ADP	_	Case=Loc	14	case	_	_
+14	kanila	kanila	PRON	_	Case=Dat|Number=Plur|Person=3|PronType=Prs	12	nmod	_	_
+15	ang	ang	DET	_	Case=Nom	16	det	_	_
+16	mabigyan	bigay	VERB	_	Aspect=Imp|Mood=Ind|Voice=Lfoc	12	nsubj	_	_
+17	ng	ng	ADP	_	Case=Gen	20	case	_	_
+18-19	ganitong	_	_	_	_	_	_	_	_
+18	ganito	ganito	ADV	_	Deixis=Prox|PronType=Dem	20	advmod	_	_
+19	-ng	na	PART	_	_	18	case	_	_
+20	pagkilala	kilala	NOUN	_	_	16	obj	_	SpaceAfter=No
+21	.	.	PUNCT	_	_	12	punct	_	_
+
+# sent_id = 15573
+# text = Sinabi ni Gordon na ang mga deputies ay rumesponde sa ulat na mayroong nakasakay sa bisikleta at nagwawasiwas ng baril.
+1	Sinabi	sabi	VERB	_	Aspect=Perf|Mood=Ind|Voice=Pass	0	root	_	_
+2	ni	ni	ADP	_	Case=Gen|Number=Sing	3	case	_	_
+3	Gordon	Gordon	PROPN	_	_	1	obj:agent	_	_
+4	na	na	PART	_	_	9	mark	_	_
+5	ang	ang	DET	_	Case=Nom	7	det	_	_
+6	mga	mga	DET	_	Number=Plur	7	det	_	_
+7	deputies	deputies	NOUN	_	_	9	nsubj	_	_
+8	ay	ay	PART	_	_	7	discourse	_	_
+9	rumesponde	responde	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	1	ccomp	_	_
+10	sa	sa	ADP	_	Case=Loc	11	case	_	_
+11	ulat	ulat	NOUN	_	_	9	obl	_	_
+12	na	na	PART	_	_	13	mark	_	_
+13-14	mayroong	_	_	_	_	_	_	_	_
+13	mayroon	mayroon	VERB	_	_	11	acl:relcl	_	_
+14	-ng	na	PART	_	_	15	mark	_	_
+15	nakasakay	sakay	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	13	ccomp	_	_
+16	sa	sa	ADP	_	Case=Loc	17	case	_	_
+17	bisikleta	bisikleta	NOUN	_	_	15	obl	_	_
+18	at	at	CCONJ	_	_	19	cc	_	_
+19	nagwawasiwas	wasiwas	VERB	_	Aspect=Imp|Mood=Ind|Voice=Act	15	conj	_	_
+20	ng	ng	ADP	_	Case=Gen	21	case	_	_
+21	baril	baril	NOUN	_	_	19	obj	_	SpaceAfter=No
+22	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = 15610
+# text = Nagbulsa si Pucay ng $3,900, at $3,400 naman kay Lascuna na tumapos sa 38th place sa likod ng 11-over 299.
+1	Nagbulsa	bulsa	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	0	root	_	_
+2	si	si	DET	_	Case=Nom|Number=Sing	3	det	_	_
+3	Pucay	Pucay	PROPN	_	_	1	nsubj	_	_
+4	ng	ng	ADP	_	Case=Gen	5	case	_	_
+5	$3,900	$3,900	NUM	_	NumType=Card	1	obj	_	SpaceAfter=No
+6	,	,	PUNCT	_	_	8	punct	_	_
+7	at	at	CCONJ	_	_	8	cc	_	_
+8	$3,400	$3,400	NUM	_	NumType=Card	5	conj	_	_
+9	naman	naman	ADV	_	_	8	advmod	_	_
+10	kay	kay	ADP	_	Case=Dat|Number=Sing	11	case	_	_
+11	Lascuna	Lascuna	PROPN	_	_	8	orphan	_	_
+12	na	na	PART	_	_	13	mark	_	_
+13	tumapos	tapos	VERB	_	Aspect=Perf|Mood=Ind|Voice=Act	11	acl:relcl	_	_
+14	sa	sa	ADP	_	Case=Loc	16	case	_	_
+15	38th	38th	ADJ	_	NumType=Ord	16	amod	_	_
+16	place	place	NOUN	_	_	13	obl	_	_
+17	sa	sa	ADP	_	Case=Loc	18	case	_	_
+18	likod	likod	NOUN	_	_	13	obl	_	_
+19	ng	ng	ADP	_	Case=Gen	20	case	_	_
+20	11-	11	NUM	_	NumType=Card	18	nmod	_	SpaceAfter=No
+21	over	over	ADP	_	_	22	case	_	_
+22	299	299	NUM	_	NumType=Card	18	nmod	_	SpaceAfter=No
+23	.	.	PUNCT	_	_	1	punct	_	_

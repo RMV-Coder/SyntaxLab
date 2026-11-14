@@ -60,7 +60,8 @@ for one developer pairing with me. They are estimates, not commitments.
 2. Phase reordering approved (Algorithm Lab engine before Learn).
 3. License: MIT for code. Bundled treebank data stays CC BY-SA 4.0 in its own directory.
 4. Hosting: Hugging Face Spaces (Docker) for the API, Vercel for the web app.
-5. Tagalog reviewer: deferred together with Filipino.
+5. Tagalog reviewer: still needed. Filipino was started on 2026-11-04 at the owner's request, with
+   teaching notes marked as drafts until reviewed.
 6. Git repository initialized on `main`.
 7. **New requirement:** adding a language must not need code changes. This is implemented as
    YAML configuration plus engine plug-ins, and covered by tests.

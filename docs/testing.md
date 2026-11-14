@@ -1,16 +1,16 @@
 # Testing
 
-Results below are from the last local run (2026-10-21, Windows 11, CPU only).
+Results below are from the last local run (2026-11-04, Windows 11, CPU only).
 
 ## Layers
 
 | Layer | Tool | Location | Needs models | Count |
 |---|---|---|---|---|
-| Backend unit (validators, normalization, config, glossaries, input, rate limiting, grammars, Earley, exercises and answer checking) | pytest | `services/parser-api/tests/unit` | no | 185 |
-| Backend HTTP (every error code, back-pressure, caching, readiness, CORS, security and cache headers, extensibility, Algorithm Lab, Practice) | pytest + TestClient | `services/parser-api/tests/api` | no | 53 |
-| Linguistic regression | pytest `-m models` | `services/parser-api/tests/integration` | yes | 5 |
+| Backend unit (validators, normalization, spaCy engine and model installation, gold scorer, config, glossaries, input, rate limiting, grammars, Earley, exercises and answer checking) | pytest | `services/parser-api/tests/unit` | no | 254 |
+| Backend HTTP (every error code, back-pressure, caching, readiness, CORS, security and cache headers, extensibility, Algorithm Lab, Practice) | pytest + TestClient | `services/parser-api/tests/api` | no | 55 |
+| Linguistic regression, English and Filipino | pytest `-m models` | `services/parser-api/tests/integration` | yes | 20 |
 | Frontend unit (layouts, glossary lookup, selection, export, API client, Lab replay and explanations, tree builder, feedback wording, progress) | Vitest + jsdom | `apps/web/**/*.test.ts` | no | 69 |
-| End-to-end (desktop and mobile), including the accessibility audit and security headers | Playwright | `apps/web/e2e` | no¹ | 30 × 2 viewports |
+| End-to-end (desktop and mobile), including the accessibility audit and security headers | Playwright | `apps/web/e2e` | no¹ | 40 × 2 viewports |
 
 ¹ E2E runs the real Next.js app. API calls are answered with **responses recorded from the
 real parser** (`apps/web/e2e/fixtures`), so the suite is deterministic and needs no models. The
@@ -52,6 +52,7 @@ exactly the right labelled spans.
 and AA. It audits every page in the states that matter, on desktop and phone sizes:
 
 - the Analyzer when empty, with a node selected, and in the dependency view;
+- the Analyzer in Filipino, empty and with a word and its draft teaching notes selected;
 - the Lab with a grammar loaded, in the middle of a replay, and at the outcome;
 - the Practice list and one exercise of each kind;
 - About.
@@ -63,6 +64,10 @@ these issues, all now fixed:
 - low contrast on inactive views and on text over the highlighter;
 - dependency tokens whose accessible name did not include their visible text;
 - scrollable side panels that the keyboard could not reach.
+- part-of-speech colours under 4.5:1 on the highlighter, now ink on any highlight.
+
+The audit disables CSS transitions first. Otherwise axe can sample a button mid-transition, which
+caused an intermittent failure.
 
 Automated checks cover part of WCAG. Keyboard paths (tree and graph navigation, Lab
 shortcuts) have their own E2E tests. A screen-reader pass by a person has not been done yet.
@@ -101,6 +106,24 @@ prepositional_phrase      49            2  0.975  0.946  0.933
 question                  12            0  0.964  0.982  0.964
 simple_declarative        14            0  0.972  0.991  0.981
 ```
+
+### Filipino
+
+`tests/integration/test_filipino_models.py` scores the real model on gold treebanks, with every
+reference analysis copied unchanged from the treebank:
+
+| Fixture | Sentences | Tokens | UPOS | UAS | LAS | Minimums enforced (Tokens / UPOS / UAS / LAS) |
+|---|---|---|---|---|---|---|
+| `tl_trg_regression.conllu` (all of UD_Tagalog-TRG, grammar-book examples, held out) | 128 | 99.5 | 78.1 | 93.6 | 76.8 | 98 / 74 / 90 / 73 |
+| `tl_newscrawl_regression.conllu` (subset of the NewsCrawl test split) | 122 | 96.9 | 84.1 | 74.3 | 71.0 | 94 / 80 / 66 / 62 |
+
+It also reads the model's own label inventory and requires a curated definition for every relation,
+POS tag and feature value it can produce. The scorer (`analysis/ud_score.py`) is unit-tested on cases
+worked out by hand, and reproduces calamanCy's published token F1 on NewsCrawl (95.01). The official
+CoNLL 2018 script itself has not been run on these results.
+
+SyntaxLab has no Tagalog test sentences of its own: an invented reference analysis would need a
+linguist to validate it (research/filipino-language-support.md §8).
 
 ## Running
 

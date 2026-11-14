@@ -1,6 +1,6 @@
 # Filipino / Tagalog Language Support
 
-Status: Phase 0 research. Last updated 2026-10-21.
+Status: Phase 0 research, with Phase 4 decisions added. Last updated 2026-11-04.
 Legend: **[Verified]** · **[Measured]** · **[Literature]** · **[Assumption]** · **[Decision]**
 (see `parsing-strategies.md`). Measurement conditions are in `nlp-model-evaluation.md` §1.
 
@@ -57,7 +57,8 @@ Verified from NewsCrawl test data (1,563 sentences) and the model's label invent
 
 ## 5. Measured behaviour on targeted constructions
 
-`tl_calamancy_lg` 0.2.0, raw text. ✓ = consistent with NewsCrawl conventions.
+`tl_calamancy_lg` 0.2.0, raw text (Phase 0; the app now uses `md`). ✓ = consistent with NewsCrawl
+conventions.
 
 | Sentence | Result |
 |---|---|
@@ -91,9 +92,8 @@ fixtures until reviewed (see §8).
 
 **[Decision] D (hybrid), with strict limits on the rule layer:**
 
-1. The rule layer may **only** change tokenization so that it matches the treebank the model was
-   trained on (the hyphen fix). Every rule is unit-tested, and its effect is measured against
-   gold.
+1. The rule layer may **only** change segmentation (the hyphen fix, sentence boundaries by
+   punctuation). Every rule is unit-tested, and its effect is measured against gold.
 2. Rules **never** override POS, features, heads, or labels. If the model says *Maganda* is a
    VERB, the UI shows VERB. Known systematic error patterns are documented on the capability
    page, and may be surfaced as **warnings**, e.g. "sentence-initial capitalised verbs may get
@@ -102,24 +102,26 @@ fixtures until reviewed (see §8).
    for the learning features. Option C stays limited to the Algorithm Lab, as a
    clearly-labelled toy grammar.
 
-**Experiments queued for Phase 4** (each must be measured, not assumed):
+**Phase 4 experiments** are measured in `nlp-model-evaluation.md` §3.8. Outcomes:
 
-- Lowercasing the sentence-initial token for analysis only, keeping the original form for
-  display. This may fix the capitalization sensitivity. It is a modification of input, so it
-  is only adopted if it improves the measured scores and is disclosed in provenance.
-- A linker MWT layer that displays *magandang* as *maganda* + *-ng*. This is only possible if
-  it can be done without altering parser output, and is likely deferred.
-- md vs. lg on raw text with the fix, using one scorer.
+- Lowercasing the sentence-initial token: **rejected.** Lemmas improve on grammar-book sentences,
+  but LAS falls on both treebanks.
+- md vs. lg on raw text with the fix, using one scorer: **md.**
+- Sentence splitting by punctuation, with a list of abbreviations: **adopted.** It was not
+  anticipated in Phase 0: the parser does not find sentence boundaries. It is segmentation, like the
+  tokenizer fix, and never changes a label or head that the parser assigns within a sentence.
+- A linker MWT layer that displays *magandang* as *maganda* + *-ng*: **deferred.** It remains
+  a documented limitation.
 
 ## 7. Capabilities to expose (MVP)
 
 | Capability | Filipino (Tagalog) | Basis |
 |---|---|---|
-| Tokenization | Yes, with documented hyphen normalization | Measured F1 97.7 vs gold surface tokens |
+| Tokenization | Yes, with documented hyphen normalization | Measured F1 97.7 (news), 99.5 (grammar-book) vs gold surface tokens |
 | UPOS | Yes | Official 95.0. Ours 92.5 (gold tokens) |
 | Morphological features | Yes: Voice, Aspect, Mood, Case, Person, Number, … | UFeats exact 94.9 |
 | Lemma | Yes, with capitalization caveat | 86–90 |
-| Dependency (UD) | Yes | LAS 76.5 official |
+| Dependency (UD) | Yes | `md`: UAS 93.6, LAS 76.8 on grammar-book sentences; UAS 72.6, LAS 68.6 on news (ours, §3.8); LAS 77.1 on news (published, different conditions) |
 | Constituency | **No** | No resource exists |
 | Alternative analyses | **No** | Greedy parser, single output |
 | Code-switching | **No** (warning only) | Not evaluated |
@@ -131,7 +133,8 @@ SyntaxLab cannot self-certify Tagalog linguistic correctness. Before Phase 4 is 
 - Regression fixtures come from **gold treebank sentences** (TRG for textbook style, NewsCrawl
   test for news). They are annotated by the treebank authors, not invented by us.
 - Tagalog teaching notes in the glossary (§4 column 3) need review by a Tagalog linguist or
-  Filipino-language educator. Until then they are marked "Draft, pending review" in the UI.
+  Filipino-language educator. Until then they are marked "Draft, pending review" in the UI. When
+  that review is done, set `teaching_notes_reviewed: true` for `tl` in `languages.yaml`.
 
 ## References
 

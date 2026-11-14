@@ -36,9 +36,29 @@ What SyntaxLab's analyses can and cannot tell you. The research behind this page
 
 ## Filipino (Tagalog)
 
-Not yet enabled. Evaluated limitations are documented in
-[research/filipino-language-support.md](research/filipino-language-support.md):
+The evidence is in [research/filipino-language-support.md](research/filipino-language-support.md)
+and [research/nlp-model-evaluation.md](research/nlp-model-evaluation.md) §3.8.
 
-- There is no constituency parser.
-- UD labels such as `nsubj` carry a Tagalog-specific meaning (the *ang*-phrase).
-- There are known errors on capitalized verbs and adjectival predicates.
+- **No phrase-structure trees.** No parser or treebank for them exists, and SyntaxLab does not
+  derive trees from dependencies.
+- **Standard written Filipino/Tagalog only.** The model was trained on Manila news prose. Nothing
+  is claimed for Taglish or other code-switching, social-media text, older literary Tagalog, or
+  regional varieties. Mixed text is not detected: it is analyzed anyway, and the result is
+  unreliable.
+- **UD labels have Tagalog-specific meanings.** `nsubj` is the *ang*-phrase, whichever role it has
+  in the event, so it is the patient of a patient-voice verb. Patient voice is annotated `Pass`,
+  and calling it a passive is contested. Teaching notes say this, and are marked as drafts until a
+  Filipino-language specialist has reviewed them.
+- **The treebanks disagree with each other.** The model follows UD_Tagalog-NewsCrawl (*ang* is
+  `det`). UD_Tagalog-TRG, a set of grammar-book examples, has *ang* as `case`, and differs on other
+  points too. A label can therefore differ from another reference without being an error.
+- **Known errors, shown as they are.** Capitalized first words can get an unreliable lemma and
+  aspect (*Kumakain* as `Aspect=Perf`, *Bili* as a lemma). Adjectival predicates can be tagged
+  VERB (*Maganda ang babae*). Lowercasing the first letter was measured and rejected, because it
+  lowers parsing scores.
+- **Attachment is much less reliable on long sentences.** Heads are right for about 94% of words in
+  short grammar-book sentences and about 73% in news prose.
+- **The linker is not split.** *magandang* stays one word, although the treebank analyzes it as
+  *maganda* + *-ng*.
+- **Sentence boundaries come from punctuation.** Common titles and initials are recognized. Another
+  abbreviation can be mistaken for the end of a sentence, and then the API reports two sentences.

@@ -54,6 +54,10 @@ class LanguageConfig(_Model):
     limits: LimitsConfig = Field(default_factory=LimitsConfig)
     samples: list[SampleConfig] = Field(default_factory=list)
     notes: list[str] = Field(default_factory=list)
+    teaching_notes_reviewed: bool = Field(
+        default=False,
+        description="True once a specialist has reviewed this language's glossary notes.",
+    )
 
     @field_validator("aliases")
     @classmethod

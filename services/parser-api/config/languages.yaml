@@ -66,3 +66,76 @@ languages:
         ambiguous sentences they can choose different readings (e.g. in "I don't like the man
         with a telescope" the dependency model attaches "telescope" to the verb, while the
         constituency model attaches the PP to "the man"). Neither view is derived from the other.
+
+  - code: tl
+    name: Filipino (Tagalog)
+    native_name: Filipino
+    aliases: [fil, tgl]
+    engine: spacy
+    engine_options:
+      # Choice and settings measured in docs/research/nlp-model-evaluation.md, section 3.8.
+      model: tl_calamancy_md
+      version: 0.2.0
+      wheel_url: https://huggingface.co/ljvmiranda921/tl_calamancy_md/resolve/main/tl_calamancy_md-any-py3-none-any.whl
+      wheel_sha256: ed8e18e09b7ac2664d97b05d0b66e638e4be20f2f2a96efea8a58693278d6b29
+      components: [trainable_lemmatizer, morphologizer, parser]
+      shared_components: [tok2vec]
+      keep_hyphenated_words: true   # UD Tagalog keeps nag-aral whole
+      split_sentences: true         # the parser does not find boundaries by itself
+      abbreviations: [            # a period after these ends no sentence
+        G, Gng, Bb, Mr, Mrs, Ms, Dr, Dra, Atty, Engr, Prof, Hon, Fr, Sr, Jr,
+        Pres, Sen, Sec, Rep, Gov, Gen, Col, Maj, Capt, Lt, Sgt, Supt, Insp,
+        St, Inc, Corp, Co, Ltd, "No", Nos, vs, Int,
+        Ene, Peb, Abr, Hun, Hul, Ago, Okt, Nob, Dis, Jan, Feb, Apr, Jun, Jul, Aug, Sep, Oct, Nov, Dec,
+        A, B, C, D, E, F, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z,
+      ]
+    schemes:
+      pos: ud-upos
+      morphology: ud-feats
+      dependency: ud-2
+    # Sample sentences and translations: UD_Tagalog-TRG (CC BY-SA 4.0), from Schachter & Otanes
+    # (1972). Attribution: tests/fixtures/ud/README.md.
+    samples:
+      - text: Binili ng mangingisda ang bangka.
+        note: >-
+          "The fisherman bought the boat." Patient voice: the boat takes ang, and the fisherman is
+          the agent (obj:agent).
+      - text: Bumili ng bangka ang mangingisda.
+        note: >-
+          "The fisherman bought a boat." Actor voice: now the fisherman takes ang. Compare with the
+          sentence above.
+      - text: Binabasa ng titser ang diyaryo.
+        note: '"The teacher is reading the newspaper." Patient voice, imperfective aspect.'
+      - text: Nagluluto na ng pagkain ang nanay.
+        note: '"Mother is cooking some food now." Actor voice, with the particle na.'
+      - text: Mayroong libro ang bata.
+        note: '"The child has a book." Mayroon expresses possession and existence.'
+      - text: Nasa kusina ang mesa.
+        note: '"The table is in the kitchen." A predicate without a verb.'
+    notes:
+      - >-
+        Analyses come from calamanCy v0.2.0 (tl_calamancy_md), trained on UD_Tagalog-NewsCrawl,
+        which is Manila news prose. They can be wrong. Validity is claimed only for standard written
+        Filipino/Tagalog: not for Taglish or code-switching, social-media text, older literary
+        Tagalog, or regional varieties.
+      - >-
+        Measured on raw text, punctuation included. Grammar-book sentences (UD_Tagalog-TRG, held
+        out from training): UAS 93.6, LAS 76.8. News sentences (UD_Tagalog-NewsCrawl test): UAS 72.6,
+        LAS 68.6. On news the published figure is LAS 77.1, excluding punctuation and with a
+        different word alignment. On grammar-book sentences LAS is held down by a difference
+        between treebanks: TRG labels ang as case, while this model learned det.
+      - >-
+        There are no phrase-structure trees for Filipino: no parser or treebank for them exists.
+        SyntaxLab does not derive trees from dependencies.
+      - >-
+        The linker -ng is not split from its word (magandang stays one word), although the
+        treebank analyzes it as maganda + -ng.
+      - >-
+        Known errors, shown as they are, not corrected: capitalized first words can get an unreliable
+        lemma and aspect (Kumakain as Aspect=Perf), and adjectival predicates can be tagged as VERB
+        (Maganda ang babae).
+      - >-
+        Sentence boundaries are found by punctuation, because this parser does not find them.
+        Common titles and initials are recognized, but another abbreviation with a period can be
+        mistaken for the end of a sentence.
+      - The parser returns a single analysis even for ambiguous sentences.

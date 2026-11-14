@@ -19,12 +19,12 @@ ENV UV_COMPILE_BYTECODE=1 \
 WORKDIR /app
 # Dependencies first (cached unless the lockfile changes).
 COPY pyproject.toml uv.lock README.md ./
-RUN uv sync --locked --no-dev --extra stanza --no-install-project
+RUN uv sync --locked --no-dev --extra stanza --extra spacy --no-install-project
 # Then the application itself.
 COPY src ./src
 COPY config ./config
 COPY data ./data
-RUN uv sync --locked --no-dev --extra stanza
+RUN uv sync --locked --no-dev --extra stanza --extra spacy
 
 # Bake the models for every configured language into the image.
 ENV SYNTAXLAB_MODELS_DIR=/app/.models

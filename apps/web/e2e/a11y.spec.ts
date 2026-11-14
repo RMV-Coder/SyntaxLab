@@ -5,6 +5,8 @@ import { mockApi, mockLabApi, mockLearnApi } from "./support";
 
 /** WCAG 2.0/2.1/2.2 level A and AA rules. Every violation fails the test. */
 async function audit(page: Page, name: string) {
+  // Measure the colours elements settle on: axe can otherwise sample a button mid-transition.
+  await page.addStyleTag({ content: "* { transition: none !important; animation: none !important; }" });
   const results = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
     .analyze();
@@ -34,6 +36,20 @@ test("analyzer: empty and with an analysis", async ({ page }) => {
   await audit(page, "analyzer (constituency, node selected)");
   await page.getByRole("button", { name: "Word relations", exact: true }).click();
   await audit(page, "analyzer (dependency)");
+});
+
+test("analyzer: Filipino, with a draft teaching note open", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("combobox", { name: "Language" }).click();
+  await page.getByRole("option", { name: "Filipino (Tagalog)" }).click();
+  await expect(page.getByText("Binili ng mangingisda ang bangka.")).toBeVisible();
+  await audit(page, "analyzer (Filipino, empty)");
+  if ((page.viewportSize()?.width ?? 1280) < 1024) return; // panels are tested on desktop
+  await page.getByRole("textbox", { name: "Sentence" }).fill("Binili ng mangingisda ang bangka.");
+  await page.getByRole("button", { name: "Analyze", exact: true }).click();
+  await page.getByTestId("diagram-canvas").getByRole("button", { name: /^Binili/ }).click();
+  await expect(page.getByText("Draft, pending review").first()).toBeVisible();
+  await audit(page, "analyzer (Filipino, word selected)");
 });
 
 test("algorithm lab: replay and outcome", async ({ page }) => {

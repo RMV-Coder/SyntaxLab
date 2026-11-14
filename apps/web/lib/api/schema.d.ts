@@ -800,6 +800,11 @@ export interface components {
             samples: components["schemas"]["SampleSentence"][];
             /** Notes */
             notes: string[];
+            /**
+             * Teaching Notes Reviewed
+             * @description False: the language-specific glossary notes are a draft, pending review.
+             */
+            teaching_notes_reviewed: boolean;
             limits: components["schemas"]["LanguageLimits"];
         };
         /** LanguageLimits */

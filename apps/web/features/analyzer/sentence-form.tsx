@@ -73,7 +73,7 @@ export function SentenceForm({
     <form onSubmit={submit} className="space-y-5" aria-busy={busy}>
       <div className="space-y-1.5">
         <Label htmlFor={ids.language}>Language</Label>
-        <Select value={language ?? undefined} onValueChange={onLanguageChange} disabled={!languages.length}>
+        <Select value={language ?? ""} onValueChange={onLanguageChange} disabled={!languages.length}>
           <SelectTrigger id={ids.language} className="w-full bg-sheet">
             <SelectValue placeholder="Loading languages…" />
           </SelectTrigger>
@@ -81,7 +81,7 @@ export function SentenceForm({
             {languages.map((l) => (
               <SelectItem key={l.code} value={l.code}>
                 {l.name}
-                {l.native_name && l.native_name !== l.name ? ` (${l.native_name})` : ""}
+                {l.native_name && !l.name.includes(l.native_name) ? ` (${l.native_name})` : ""}
               </SelectItem>
             ))}
           </SelectContent>
@@ -115,7 +115,7 @@ export function SentenceForm({
           rows={4}
           spellCheck={false}
           lang={detail?.code}
-          placeholder="The child is eating rice."
+          placeholder={detail?.samples[0]?.text}
           aria-invalid={Boolean(error)}
           aria-describedby={`${ids.hint}${error ? ` ${ids.error}` : ""}`}
           className="w-full resize-y rounded-md border border-input bg-sheet px-3 py-2.5 font-data text-lg leading-snug text-ink placeholder:text-graphite/70 focus-visible:outline-2 focus-visible:outline-ink"

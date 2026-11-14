@@ -68,6 +68,9 @@ class LanguageDetail(LanguageSummary):
     engine: str
     samples: list[SampleSentence] = Field(default_factory=list)
     notes: list[str] = Field(default_factory=list)
+    teaching_notes_reviewed: bool = Field(
+        description="False: the language-specific glossary notes are a draft, pending review."
+    )
     limits: LanguageLimits
 
 

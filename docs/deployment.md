@@ -108,7 +108,10 @@ From Oracle's Always Free documentation (checked 2026-10-22):
 2. **Hostname.** Get a free subdomain at [duckdns.org](https://www.duckdns.org) (sign in with
    GitHub or Google), e.g. `syntaxlab-api.duckdns.org`. `duckdns.org` is on the Public Suffix
    List, so Let's Encrypt rate limits apply per subdomain. sslip.io and nip.io are not, and
-   share limits with every other user. A domain you own works the same way.
+   share limits with every other user. A domain you own works the same way. If its DNS is on
+   Cloudflare, create the `A` record as **DNS only** (grey cloud). Proxying it would put
+   Cloudflare's edge in front of Caddy: the HTTP certificate challenge can fail, and every
+   visitor would arrive from Cloudflare addresses and share one rate-limit bucket.
 3. **Create the instance** (Compute → Instances → Create):
    - Image: **Canonical Ubuntu 24.04**. Shape: **VM.Standard.A1.Flex**, **2 OCPUs, 4 GB**.
    - Networking: a public subnet with **Assign a public IPv4 address** checked.
@@ -262,7 +265,8 @@ analyzer adds d3-zoom and the diagram code, and Radix Tooltip loads only on the 
 use it.
 
 API container, measured by the CI `image` job (GitHub-hosted runner, `--cpus 2 --memory 4g`,
-2026-10-21):
+2026-10-21, **English only**; Filipino adds the spaCy libraries and a 225 MB model, about 250 MB of
+memory):
 
 | Measure | Value |
 |---|---|

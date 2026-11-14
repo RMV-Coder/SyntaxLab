@@ -1,0 +1,156 @@
+{
+  "language": {
+    "code": "tl",
+    "name": "Filipino (Tagalog)"
+  },
+  "text": "Binili ng mangingisda ang bangka.",
+  "sentences": [
+    {
+      "text": "Binili ng mangingisda ang bangka.",
+      "start_char": 0,
+      "end_char": 33,
+      "tokens": [
+        {
+          "id": 1,
+          "form": "Binili",
+          "lemma": "Bili",
+          "upos": "VERB",
+          "xpos": null,
+          "feats": {
+            "Aspect": "Perf",
+            "Mood": "Ind",
+            "Voice": "Pass"
+          },
+          "start_char": 0,
+          "end_char": 6
+        },
+        {
+          "id": 2,
+          "form": "ng",
+          "lemma": "ng",
+          "upos": "ADP",
+          "xpos": null,
+          "feats": {
+            "Case": "Gen"
+          },
+          "start_char": 7,
+          "end_char": 9
+        },
+        {
+          "id": 3,
+          "form": "mangingisda",
+          "lemma": "mangingisda",
+          "upos": "NOUN",
+          "xpos": null,
+          "feats": {},
+          "start_char": 10,
+          "end_char": 21
+        },
+        {
+          "id": 4,
+          "form": "ang",
+          "lemma": "ang",
+          "upos": "DET",
+          "xpos": null,
+          "feats": {
+            "Case": "Nom"
+          },
+          "start_char": 22,
+          "end_char": 25
+        },
+        {
+          "id": 5,
+          "form": "bangka",
+          "lemma": "bangka",
+          "upos": "NOUN",
+          "xpos": null,
+          "feats": {},
+          "start_char": 26,
+          "end_char": 32
+        },
+        {
+          "id": 6,
+          "form": ".",
+          "lemma": ".",
+          "upos": "PUNCT",
+          "xpos": null,
+          "feats": {},
+          "start_char": 32,
+          "end_char": 33
+        }
+      ],
+      "multiword_tokens": [],
+      "dependency": {
+        "scheme": "ud-2",
+        "arcs": [
+          {
+            "dependent": 1,
+            "head": 0,
+            "relation": "root"
+          },
+          {
+            "dependent": 2,
+            "head": 3,
+            "relation": "case"
+          },
+          {
+            "dependent": 3,
+            "head": 1,
+            "relation": "obj:agent"
+          },
+          {
+            "dependent": 4,
+            "head": 5,
+            "relation": "det"
+          },
+          {
+            "dependent": 5,
+            "head": 1,
+            "relation": "nsubj"
+          },
+          {
+            "dependent": 6,
+            "head": 1,
+            "relation": "punct"
+          }
+        ]
+      },
+      "constituency": null
+    }
+  ],
+  "provenance": {
+    "engine": "spacy",
+    "engine_version": "3.8.16",
+    "model": "spacy:tl_calamancy_md:0.2.0",
+    "components": [
+      {
+        "capability": "tokenization",
+        "scheme": null,
+        "component": "spacy/tl_calamancy_md/0.2.0/tokenizer"
+      },
+      {
+        "capability": "lemma",
+        "scheme": null,
+        "component": "spacy/tl_calamancy_md/0.2.0/trainable_lemmatizer"
+      },
+      {
+        "capability": "pos",
+        "scheme": "ud-upos",
+        "component": "spacy/tl_calamancy_md/0.2.0/morphologizer"
+      },
+      {
+        "capability": "morphology",
+        "scheme": "ud-feats",
+        "component": "spacy/tl_calamancy_md/0.2.0/morphologizer"
+      },
+      {
+        "capability": "dependency",
+        "scheme": "ud-2",
+        "component": "spacy/tl_calamancy_md/0.2.0/parser"
+      }
+    ],
+    "processing_ms": 197.7,
+    "cached": false
+  },
+  "notices": []
+}

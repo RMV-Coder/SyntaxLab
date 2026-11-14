@@ -33,7 +33,7 @@ docs/                     architecture, API, research, guides
 ```bash
 pnpm install
 cd services/parser-api
-uv sync --extra stanza                      # API + Stanza engine + dev tools
+uv sync --extra stanza --extra spacy        # API + Stanza and spaCy engines + dev tools
 uv run syntaxlab-api download-models        # into services/parser-api/.models (git-ignored)
 uv run syntaxlab-api check --load           # validate config and load models once
 cd ../..

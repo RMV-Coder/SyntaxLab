@@ -14,6 +14,7 @@ const PARSES: Record<string, string> = {
   "The child is eating rice.": "parse-child",
   "I saw the man with a telescope.": "parse-telescope",
   "Did the students not read the book that the professor recommended?": "parse-question",
+  "Binili ng mangingisda ang bangka.": "parse-tl-patient",
 };
 
 const json = (route: Route, body: string, status = 200) =>
@@ -22,6 +23,7 @@ const json = (route: Route, body: string, status = 200) =>
 export async function mockApi(page: Page, options: { parseDelayMs?: number } = {}) {
   await page.route(`${API}/api/v1/languages`, (route) => json(route, fixture("languages")));
   await page.route(`${API}/api/v1/languages/en`, (route) => json(route, fixture("language-en")));
+  await page.route(`${API}/api/v1/languages/tl`, (route) => json(route, fixture("language-tl")));
   await page.route(`${API}/api/v1/schemes/*`, (route) => {
     const id = route.request().url().split("/").pop()!;
     return json(route, fixture(`scheme-${id}`));

@@ -5,8 +5,8 @@ language-independent analysis. See [`docs/architecture.md`](../../docs/architect
 [`docs/api.md`](../../docs/api.md).
 
 ```bash
-uv sync --extra stanza                 # Python 3.12 is installed automatically by uv
-uv run syntaxlab-api download-models   # ~430 MB for English
+uv sync --extra stanza --extra spacy   # Python 3.12 is installed automatically by uv
+uv run syntaxlab-api download-models   # ~430 MB for English, ~225 MB for Filipino
 uv run uvicorn syntaxlab_api.main:create_app --factory --reload
 uv run pytest                          # unit + API tests (no models needed)
 uv run pytest -m models                # integration tests against real models

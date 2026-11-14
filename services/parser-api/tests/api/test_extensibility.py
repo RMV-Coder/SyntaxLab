@@ -39,7 +39,7 @@ def test_new_stanza_language_from_yaml_only(tmp_path: Path) -> None:
     }
     with client_for(tmp_path, [spanish]) as client:
         codes = [lang["code"] for lang in client.get("/api/v1/languages").json()["languages"]]
-        assert codes == ["en", "es"]
+        assert codes == ["en", "tl", "es"]
         detail = client.get("/api/v1/languages/es").json()
         assert detail["native_name"] == "Español"
         assert detail["structures"] == ["dependency"]  # no constituency processor configured
@@ -65,15 +65,42 @@ def test_new_engine_plugs_in_by_reference(tmp_path: Path) -> None:
     # Any importable Engine subclass can serve a language; here the test engine stands in for
     # a third-party package that would normally register itself as an entry point.
     toy = {
-        "code": "tl",
-        "name": "Filipino (Tagalog)",
-        "aliases": ["fil"],
+        "code": "ceb",
+        "name": "Cebuano",
+        "aliases": ["bisaya"],
         "engine": "tests.support.engines:WhitespaceTestEngine",
         "engine_options": {"structures": ["dependency"]},
         "schemes": {"dependency": "ud-2"},
     }
     with client_for(tmp_path, [toy]) as client:
-        assert client.get("/api/v1/languages/fil").json()["code"] == "tl"
-        body = client.post("/api/v1/parse", json={"language": "fil", "text": "a b c"}).json()
-        assert body["language"]["code"] == "tl"
+        assert client.get("/api/v1/languages/bisaya").json()["code"] == "ceb"
+        body = client.post("/api/v1/parse", json={"language": "bisaya", "text": "a b c"}).json()
+        assert body["language"]["code"] == "ceb"
         assert body["provenance"]["engine"] == "whitespace-test"
+
+
+def test_filipino_is_described_by_configuration_alone(tmp_path: Path) -> None:
+    with client_for(tmp_path, []) as client:
+        detail = client.get("/api/v1/languages/tl").json()
+        assert client.get("/api/v1/languages/fil").json()["code"] == "tl"  # alias
+    assert detail["engine"] == "spacy"
+    assert detail["structures"] == ["dependency"]
+    assert {c["capability"] for c in detail["capabilities"]} == {
+        "tokenization",
+        "pos",
+        "morphology",
+        "lemma",
+        "dependency",
+    }
+    assert detail["teaching_notes_reviewed"] is False  # until a specialist has reviewed them
+    assert detail["samples"]
+
+
+def test_filipino_refuses_a_tree_rather_than_faking_one(tmp_path: Path) -> None:
+    with client_for(tmp_path, []) as client:
+        response = client.post(
+            "/api/v1/parse",
+            json={"language": "tl", "text": "Gumising ang bata.", "structures": ["constituency"]},
+        )
+    assert response.status_code == 422
+    assert response.json()["error"]["code"] == "unsupported_structure"

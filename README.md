@@ -9,10 +9,10 @@ Every analysis comes from an identified, evaluated parser. Nothing is generated 
 and nothing is hand-drawn for particular sentences. When a model can't do something, the
 interface says so instead of substituting something else.
 
-> **Status:** English analysis and visualization, practice exercises, and the Algorithm Lab
-> (Earley parser) are implemented and tested. Each page is audited for WCAG 2.2 AA (axe), and
-> the production setup is ready to deploy. Filipino (Tagalog) and comparison are researched or
-> planned. See [Roadmap](docs/roadmap.md) and [Progress](docs/progress.md).
+> **Status:** English and Filipino (Tagalog) analysis, practice exercises (English), and the
+> Algorithm Lab (Earley parser) are implemented and tested. Filipino teaching notes are drafts
+> until a specialist reviews them. Each page is audited for WCAG 2.2 AA (axe), and the production
+> setup is ready to deploy. See [Roadmap](docs/roadmap.md) and [Progress](docs/progress.md).
 
 ## Features (implemented)
 
@@ -49,13 +49,18 @@ interface says so instead of substituting something else.
 
 | Capability | English | Filipino (Tagalog) |
 |---|---|---|
-| Tokenization, POS, lemma, morphology | ✅ Stanza 1.15 | 🔬 researched, not enabled |
-| Dependency (Universal Dependencies v2) | ✅ LAS 89.7 on UD EWT test¹ | 🔬 calamanCy v0.2.0 evaluated, LAS 76.5–77.1 |
+| Tokenization, POS, lemma, morphology | ✅ Stanza 1.15 | ✅ calamanCy v0.2.0 (spaCy) |
+| Dependency (Universal Dependencies v2) | ✅ LAS 89.7 on UD EWT test¹ | ✅ UAS 93.6, LAS 76.8 on grammar-book sentences; UAS 72.6, LAS 68.6 on news² |
 | Constituency (Penn Treebank) | ✅ F1 ≈ 93 (published) | ❌ no parser or treebank exists |
 | Alternative analyses | ❌ parsers return one analysis | ❌ |
+| Practice exercises | ✅ | ❌ not yet |
 
 ¹ Measured by us; conditions in [nlp-model-evaluation.md](docs/research/nlp-model-evaluation.md).
 On a gold regression set of 74 categorized EWT sentences: UPOS 97.6, UAS 95.5, LAS 94.1.
+
+² Measured by us on raw text, punctuation included (§3.8 of the same document). Grammar-book LAS is
+held down by a difference between treebanks, and news scores by a linker the tokenizer does not
+split. The published figure for news is LAS 77.1, under different conditions.
 
 ## Architecture
 
@@ -65,7 +70,7 @@ Next.js 16 app (React 19, TypeScript, Tailwind 4, shadcn/ui, D3 zoom)
         ▼
 FastAPI parser API (Python 3.12)
    language registry ── config/languages.yaml
-   engines (plug-ins) ── stanza (built in) │ any package via entry points
+   engines (plug-ins) ── stanza, spacy (built in) │ any package via entry points
    validation of every parse (trees, spans, arcs) · glossaries per annotation scheme
    per-language worker thread · bounded queue · timeout · LRU cache · rate limit
 ```
@@ -79,7 +84,7 @@ Python 3.12 for you).
 
 ```bash
 pnpm install
-cd services/parser-api && uv sync --extra stanza && uv run syntaxlab-api download-models && cd ../..
+cd services/parser-api && uv sync --extra stanza --extra spacy && uv run syntaxlab-api download-models && cd ../..
 pnpm dev:api     # parser API on http://127.0.0.1:8710 (models load in ~10–80 s)
 pnpm dev:web     # web app on http://localhost:3000
 ```
@@ -112,7 +117,11 @@ What is covered, and how: [docs/testing.md](docs/testing.md)
   (e.g. PP attachment).
 - Penn Treebank labels (`NN`, `VBD`, `SBAR`) differ from introductory textbook categories.
   Explanations give the closest textbook category as a reading aid only.
-- Parsing runs on CPU: expect about 1–5 s per sentence.
+- Parsing runs on CPU: expect about 1–5 s per sentence in English, and well under a second in
+  Filipino.
+- Filipino covers standard written Filipino/Tagalog, not Taglish or code-switching. The parser
+  makes known errors, such as tagging adjectival predicates as VERB, which are shown rather than
+  corrected.
 
 Full list: [docs/linguistic-limitations.md](docs/linguistic-limitations.md)
 
