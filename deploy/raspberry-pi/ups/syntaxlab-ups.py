@@ -94,6 +94,7 @@ def monitor() -> int:
     strikes = 0
     on_battery = None
     last_summary = 0.0
+    last_problem = None  # log a problem once, not on every poll (SD card wear)
     log(
         f"Watching the UPS: shutdown at {SHUTDOWN_PERCENT}% on battery, after {CONFIRMATIONS} "
         f"readings {POLL_S} s apart{' (dry run)' if DRY_RUN else ''}."
@@ -102,15 +103,24 @@ def monitor() -> int:
         try:
             r = read(bus)
         except OSError as error:
-            log(f"Cannot read the UPS: {error}")
+            problem = f"Cannot read the UPS: {error}"
+            if problem != last_problem:
+                log(problem + " (logged once until it changes)")
+                last_problem = problem
             strikes = 0
             time.sleep(POLL_S)
             continue
         if not plausible(r):
-            log(f"Ignoring an implausible reading: {json.dumps(r)}")
+            problem = "implausible readings"
+            if problem != last_problem:
+                log(f"Ignoring an implausible reading: {json.dumps(r)}")
+                last_problem = problem
             strikes = 0
             time.sleep(POLL_S)
             continue
+        if last_problem is not None:
+            log("UPS readings are back.")
+            last_problem = None
         now_on_battery = int(r["input_mv"]) < INPUT_PRESENT_MV  # type: ignore[call-overload]
         if now_on_battery != on_battery:
             state = "ON BATTERY" if now_on_battery else "on input power"
