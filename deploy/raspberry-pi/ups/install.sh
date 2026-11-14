@@ -22,7 +22,8 @@ if [ ! -f /etc/default/syntaxlab-ups ]; then
     '# UPS_DRY_RUN=1' > /etc/default/syntaxlab-ups
 fi
 systemctl daemon-reload
-systemctl enable --now syntaxlab-ups
+systemctl enable syntaxlab-ups
+systemctl restart syntaxlab-ups   # picks up a new version when run again
 
 echo "== Checks"
 i2cdetect -y 1 | sed -n '1p;4p'   # the HAT answers at 0x2d
